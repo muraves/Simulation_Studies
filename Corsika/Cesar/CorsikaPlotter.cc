@@ -140,7 +140,7 @@ main (int argc, char **argv)
 							"id:e:x:y:w:Px:Py:XvsY");
 		  }
 		        if ((id==5) || (id==6)) {
-                  obsLevel[level].data->Fill(id, e, x, y, w, Px, Py);
+                  obsLevel[level].data->Fill(id, e, x, y, w, Px, Py, 57.29578*atan(Py/Px));
                   obsLevel[level].x  += x*w;
                   obsLevel[level].y  += y*w;
                   obsLevel[level].x2 += x*x*w;
@@ -151,7 +151,8 @@ main (int argc, char **argv)
                   << " x=" << x
                   << " y=" << y
                   << " Px=" << Px
-                  << " Py=" << Py 
+                  << " Py=" << Py
+                  << " Angle=" << 57.29578*atan(Py/Px)
                   << "\n"; 
                                   
 

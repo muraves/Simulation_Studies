@@ -127,8 +127,10 @@ main (int argc, char **argv)
                   const double e  = iPart.GetKinEnergy();
                   const double x  = iPart.GetX();
                   const double y  = iPart.GetY();
+//                  const double z  = iPart.GetZ(); is in the ground baby, z=0 always jejeje
                   const double Px  = iPart.GetPx();
                   const double Py  = iPart.GetPy();
+                  const double Pz  = iPart.GetPz();
 
 		  if (obsLevel.count(level)==0) {
 		    cout << " detected new obs-level " << level 
@@ -156,8 +158,11 @@ main (int argc, char **argv)
           cout << "    particle id: " << id
           << " x=" << x
           << " y=" << y
-          << " Px=" << Py
-          << " Py=" << Px
+          << " Px=" << Px
+          << " Py=" << Py
+          << " Pz=" << Pz
+          << " e=" << Py/Px
+          << " Angle=" << 57.29578*atan(Py/Px) 
           << "\n";
 			  }
                 }
