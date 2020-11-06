@@ -161,9 +161,11 @@ main (int argc, char **argv)
           << " Px=" << Px
           << " Py=" << Py
           << " Pz=" << Pz
-          << " e=" << Py/Px
-          << " Angle=" << 57.29578*atan(Py/Px) 
-          << "\n";
+          << " Pr=" << sqrt(Px*Px + Py*Py)
+          << " Pz/Pr=" << Pz/sqrt(Px*Px + Py*Py)
+          << " Angle=" << 57.29578*atan(Pz/sqrt(Px*Px+Py*Py)) 
+          << "\n"; 
+     
 			  }
                 }
                 

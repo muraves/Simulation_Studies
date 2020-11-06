@@ -85,7 +85,7 @@ main (int argc, char **argv)
         ostringstream tTitle, tName;
         tTitle << "Data at level " << iObsLevel;
         tName << "data_" << iObsLevel;
-        emptyLevel.data = new TNtupleD(tName.str().c_str(), tTitle.str().c_str(), "id:e:x:y:w:Px:Py:XvsY");
+        emptyLevel.data = new TNtupleD(tName.str().c_str(), tTitle.str().c_str(), "id:e:x:y:w:Px:Py:Elevation_Angle");
         /*
           emptyLevel.xEl  = 0;
           emptyLevel.yEl  = 0;
@@ -126,6 +126,7 @@ main (int argc, char **argv)
                   const double y  = iPart.GetY();
                   const double Px  = iPart.GetPx();
                   const double Py  = iPart.GetPy();
+                  const double Pz  = iPart.GetPz();
                 
 		  if (obsLevel.count(level)==0) {
 		    cout << " detected new obs-level " << level 
@@ -137,10 +138,10 @@ main (int argc, char **argv)
 		    obsLevel[level] = emptyLevel;
 		    obsLevel[level].data = new TNtupleD(tName.str().c_str(), 
 							tTitle.str().c_str(),
-							"id:e:x:y:w:Px:Py:XvsY");
+							"id:e:x:y:w:Px:Py:Elevation_Angle");
 		  }
 		        if ((id==5) || (id==6)) {
-                  obsLevel[level].data->Fill(id, e, x, y, w, Px, Py, 57.29578*atan(Py/Px));
+                  obsLevel[level].data->Fill(id, e, x, y, w, Px, Py, 57.29578*atan(Pz/sqrt(Px*Px+Py*Py)));
                   obsLevel[level].x  += x*w;
                   obsLevel[level].y  += y*w;
                   obsLevel[level].x2 += x*x*w;
@@ -152,7 +153,10 @@ main (int argc, char **argv)
                   << " y=" << y
                   << " Px=" << Px
                   << " Py=" << Py
-                  << " Angle=" << 57.29578*atan(Py/Px)
+                  << " Pz=" << Pz
+                  << " Pr=" << sqrt(Px*Px + Py*Py)
+                  << " Pz/Pr=" << Pz/sqrt(Px*Px + Py*Py)
+                  << " Angle=" << 57.29578*atan(Pz/sqrt(Px*Px+Py*Py)) 
                   << "\n"; 
                                   
 
