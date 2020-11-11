@@ -1,7 +1,5 @@
 # MuravesSim
-#
-# Michael Tytgat
-#
+### Michael Tytgat
 
 prerequisites:
 * Geant4
@@ -10,17 +8,17 @@ prerequisites:
 
 Modify CMakeLists.txt to specify CRY_PATH according to your local setup
 
-To compile:
-mkdir build
-cd build
-ccmake ..
-press "configure", "generate and exit"
-make
+To compile:<br>
+*mkdir build* <br>
+*cd build* <br>
+*ccmake ..* <br>
+press "configure", "generate and exit" <br>
+*make*
 
-To run:
-./MuravesSim --generator CRY/PartGun/GPS --inputfile <macro>
+To run: <br>
+*./MuravesSim --generator CRY/PartGun/GPS --inputfile \<macro\>*
 
-Output:
+Output: <br>
 MuravesSim.root
 
 
