@@ -21,7 +21,7 @@ using namespace std;
 
 // to hold data of one observation level
 struct ObsLevel {
-  TNtupleD* data;
+  TNtupleD* His_mouns1;
   double x;
   double y;
   double x2;
@@ -84,8 +84,8 @@ main (int argc, char **argv)
         ObsLevel emptyLevel;
         ostringstream tTitle, tName;
         tTitle << "Data at level " << iObsLevel;
-        tName << "data_" << iObsLevel;
-        emptyLevel.data = new TNtupleD(tName.str().c_str(), tTitle.str().c_str(), "id:e:x:y:w:Px:Py:Elevation_Angle");
+        tName << "His_mouns1_" << iObsLevel;
+        emptyLevel.His_mouns1 = new TNtupleD(tName.str().c_str(), tTitle.str().c_str(), "id:e:x:y:Px:Py:Pz:Elevation_Angle");
         /*
           emptyLevel.xEl  = 0;
           emptyLevel.yEl  = 0;
@@ -134,30 +134,49 @@ main (int argc, char **argv)
 		    ObsLevel emptyLevel;
 		    ostringstream tTitle, tName;
 		    tTitle << "Data at level " << level;
-		    tName << "data_" << level;
+		    tName << "His_mouns1_" << level;
 		    obsLevel[level] = emptyLevel;
-		    obsLevel[level].data = new TNtupleD(tName.str().c_str(), 
+		    obsLevel[level].His_mouns1 = new TNtupleD(tName.str().c_str(), 
 							tTitle.str().c_str(),
 							"id:e:x:y:w:Px:Py:Elevation_Angle");
 		  }
 		        if ((id==5) || (id==6)) {
-                  obsLevel[level].data->Fill(id, e, x, y, w, Px, Py, 57.29578*atan(Pz/sqrt(Px*Px+Py*Py)));
+					
+					if (iPart.GetX()<(15000))
+						{
+							
+					
+			 cout << "    particle id: " << id
+                  << " x=" << x
+                  << " y=" << y
+                  << "\n"; 
+							if (iPart.GetX()>(-15000)){
+							
+								if (iPart.GetY()<(15000)){
+									if (iPart.GetY()>(-15000)){
+										obsLevel[level].His_mouns1->Fill(id, e, x, y, Px, Py, Pz, 57.29578*atan(Pz/sqrt(Px*Px+Py*Py)));
+										}
+									}
+			  }
+		  }
                   obsLevel[level].x  += x*w;
                   obsLevel[level].y  += y*w;
                   obsLevel[level].x2 += x*x*w;
                   obsLevel[level].y2 += y*y*w;
                   obsLevel[level].w  += w;
-                  
-                  cout << "    particle id: " << id
-                  << " x=" << x
-                  << " y=" << y
-                  << " Px=" << Px
-                  << " Py=" << Py
-                  << " Pz=" << Pz
-                  << " Pr=" << sqrt(Px*Px + Py*Py)
-                  << " Pz/Pr=" << Pz/sqrt(Px*Px + Py*Py)
-                  << " Angle=" << 57.29578*atan(Pz/sqrt(Px*Px+Py*Py)) 
-                  << "\n"; 
+
+
+
+                  //cout << "    particle id: " << id
+                  //<< " x=" << x
+                  //<< " y=" << y
+                  //<< " Px=" << Px
+                  //<< " Py=" << Py
+                  //<< " Pz=" << Pz
+                  //<< " Pr=" << sqrt(Px*Px + Py*Py)
+                  //<< " Pz/Pr=" << Pz/sqrt(Px*Px + Py*Py)
+                  //<< " Angle=" << 57.29578*atan(Pz/sqrt(Px*Px+Py*Py)) 
+                  //<< "\n"; 
                                   
 
 			  }
@@ -192,11 +211,11 @@ main (int argc, char **argv)
            ++iLevel) {
         
         cout << "   observation level: " << iLevel->first 
-	     << " with " << iLevel->second.data->GetEntries() << " particles "
-	     << iLevel->second.data->GetName()
+	     << " with " << iLevel->second.His_mouns1->GetEntries() << " particles "
+	     << iLevel->second.His_mouns1->GetName()
 	     << "\n";
         
-	iLevel->second.data->Write();
+	iLevel->second.His_mouns1->Write();
         
         /*
           cout << "    particle id: " << iPId->first
