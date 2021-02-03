@@ -3,7 +3,7 @@
 
 | #   | File Name         | Short Description         | Owner       |
 |-----|-------------------|---------------------------|-------------|
-| 1.  |*simTrackFit.C*    |Routine to perform 4 points track fitting  | [Samip Basnet] (mailto:samip.basnet@uclouvain.be) |
+| 1.  |*simTrackFit.C*    |Routine to perform 4 points track fitting  | [Samip Basnet](mailto:samip.basnet@uclouvain.be)  |
 | 2.  |                   |                                           |                                                   |
 | 3.  |                   |                                           |                                                   |
 | 4.  |                   |                                           |                                                   |
