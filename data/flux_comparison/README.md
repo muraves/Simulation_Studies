@@ -1,4 +1,4 @@
-###Some notes on the content of this folder 
+### Some notes on the content of this folder 
 
 * In the excel file, there are two sheets, each containing different fits to the Bonechi *et. al.* flux data. In the first sheet, the differential flux data is compared with a parameterization function contained in Bonechi's thesis (see *tesi\_bonechi.pdf*; it's in Italian but the relevant information can be found in __Section 6.4__ onwards). The second one uses Reyna's scaling law, which is described in more detail in *reyna\_scaling.pdf*.
 
