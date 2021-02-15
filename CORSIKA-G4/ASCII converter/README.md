@@ -20,7 +20,7 @@ Steps for converting CORSIKA generated binary files to ASCII files
                accordingly)<br/>
       line 18: Path to the folder which contains the binary files  
                
-6. Run the code 
+6. Run the code (if you are using spyder, command to run: spyder configfile.py )
 
 Result:  A folder named "g4_ascii" will be created in the same directory in which you can find all the binary files converted to the ASCII format
       
