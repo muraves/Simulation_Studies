@@ -1,4 +1,4 @@
-# Binary file (CORSIKA) to ASCII converter 
+# Binary file to ASCII converter 
 ### Amrutha Samalan
 
 prerequisites:
