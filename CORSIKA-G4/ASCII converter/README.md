@@ -12,7 +12,7 @@ Steps for converting CORSIKA generated binary files to ASCII files
 1. Generate datafiles in binary format
 2. Keep all these files in a single folder. An example folder is uploaded (binary_files_flujo_central_europe-60sec).
 3. Add the path of the CORSIKA's utils folder in you bash script (example: export PATH=/home/amrutha/CORSIKA/dpmjet/src/utils:$PATH). This is necessary for running the executable file ('readcsk2asci') from any location.
-4. Download the python script (configfile.py)
+4. Download the Python script (configfile.py)
 5. In the Python code, specify the parameters required for the conversion <br/>
       line 12: Name of the config file you want to create (example name is given)<br/>
       line 14: Total no of showers generated or required to convert<br/>
