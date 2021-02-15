@@ -17,7 +17,9 @@ Steps for converting CORSIKA generated binary files to ASCII files
       line 12: Name of the config file you want to create (example name is given)<br/>
       line 14: Total no of showers generated or required to convert<br/>
       line 16: No of showers of each binary file which required to be converted (an example is given, preferably a constant number. Otherwise, code need be changed 
-               accordingly)
+               accordingly)<br/>
+      line 18: Path to the folder which contains the binary file  
+               
 6. Run the code 
 
 Result:  A folder named "g4_ascii" will be created in the same directory in which you can find all the binary files converted to the ASCII format
