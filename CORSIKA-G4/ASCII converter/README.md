@@ -18,7 +18,7 @@ Steps for converting CORSIKA generated binary files to ASCII files
       line 14: Total no of showers generated or required to convert<br/>
       line 16: No of showers of each binary file which required to be converted (an example is given, preferably a constant number. Otherwise, code need be changed 
                accordingly)<br/>
-      line 18: Path to the folder which contains the binary file  
+      line 18: Path to the folder which contains the binary files  
                
 6. Run the code 
 
