@@ -13,9 +13,9 @@ Steps for converting CORSIKA generated binary files to ASCII files
 2. Keep all these files in a single folder. An example folder is uploaded (binary_files_flujo_central_europe-60sec).
 3. Add the path of the CORSIKA's utils folder in you bash script (example: export PATH=/home/amrutha/CORSIKA/dpmjet/src/utils:$PATH). This is necessary for running the executable file ('readcsk2asci') from any location.
 4. Download the python script (configfile.py)
-5. In the Python code, specify the parameters required for the conversion
-      line 12: Name of the config file you want to create (Example name is given)
-      line 14: Total no of showers generated or required to convert
+5. In the Python code, specify the parameters required for the conversion <br/>
+      line 12: Name of the config file you want to create (Example name is given)<br/>
+      line 14: Total no of showers generated or required to convert<br/>
       line 16: No of showers of each binary file which required to be converted (an example is given, preferably a constant number. Otherwise, code need be changed 
                accordingly)
 6. Run the code 
