@@ -4,6 +4,6 @@
 
 * A preliminary results comparing vertical flux between CRY and Bonechi parameterization is shown in *CRY\_v\_BonechiData_flux\_comparison\_arbNorm.png*. It should be noted that an arbitrary normalization was used for producing these comparison plots at various angles.
 
-* The CRY flux (with proper normalization) are available in *CRY\_flux\_w\_proper\_normalization.root*. You can access total flux for cosmic muons(also separated for $\mu^{+}$ and $\mu^{-}$) as well as fluxes for theta bins of 10 degress, ranging from 0 to 90 degrees. Note: the binning was performed with log-x axis so please, be sure to set the x-axis to log to see the histograms better.
+* The CRY flux (with proper normalization) are available in *CRY\_flux\_w\_proper\_normalization.root*. You can access total flux for cosmic muons(also separated for &mu;</sup>+ and &mu;</sup>-) as well as fluxes for theta bins of 10 degress, ranging from 0 to 90 degrees. Note: the binning was performed with log-x axis so please, be sure to set the x-axis to log to see the histograms better.
   
 
