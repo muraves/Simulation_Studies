@@ -80,7 +80,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //static const char *routineName = "[MuravesDetector::Construct] ";
 
   float xySafety = 0.1 * mm; //  XY shift to separate bars apart
-  float zSafety = 10 * cm; //  Z shift to separate layers apart
+  //float zSafety = 10 * cm; //  Z shift to separate layers apart
+  float zSafety = 5.4 * cm; //  Z shift to separate layers apart
   // Get nist material manager
   G4NistManager* nist = G4NistManager::Instance();
 
