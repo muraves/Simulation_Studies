@@ -59,7 +59,7 @@ void ROOTManager::Init()
   ROOTTree->Branch("ScintHitStation", &ROOTTreeStruct.ScintHitStation, "ScintHitStation[NScintHit]/I");
   ROOTTree->Branch("ScintHitModule", &ROOTTreeStruct.ScintHitModule, "ScintHitModule[NScintHit]/I");
   ROOTTree->Branch("ScintHitBar", &ROOTTreeStruct.ScintHitBar, "ScintHitBar[NScintHit]/I");
-    
+  ROOTTree->Branch("ScintHitPDG", &ROOTTreeStruct.ScintHitPDG, "ScintHitPDG[NScintHit]/I");
 }
 
 void ROOTManager::Save()

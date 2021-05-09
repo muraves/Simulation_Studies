@@ -58,6 +58,7 @@ void ScintbarHit::Print()
 	 << ", Edep: " << fEdep/MeV << " (MeV), "
 	 << ", pos: " << fPos
 	 << ", Track ID: " << fTrackID
+	 << ", PDG code: " << fPDGcode
 	 << G4endl;
 }
 
@@ -75,6 +76,7 @@ const std::map<G4String,G4AttDef>* ScintbarHit::GetAttDefs() const
     (*store)["Energy"] = G4AttDef("Energy", "Energy deposit", "Physics", "G4BestUnit", "G4double" );
     (*store)["Pos"] = G4AttDef("Pos", "Position", "Physics", "G4BestUnit", "G4ThreeVector" );
     (*store)["TrackID"] = G4AttDef("TrackID", "Track ID", "Physics", "", "G4int" );
+    (*store)["PDGcode"] = G4AttDef("PDGcode", "PDG code", "Physics", "", "G4int" );
     
   }
   
@@ -92,6 +94,7 @@ std::vector<G4AttValue>* ScintbarHit::CreateAttValues() const
   values->push_back( G4AttValue( "Energy", G4BestUnit(fEdep,"Energy"),""));
   values->push_back( G4AttValue( "Pos", G4BestUnit(fPos,"Length"),""));
   values->push_back( G4AttValue( "TrackID", G4UIcommand::ConvertToString(fTrackID),""));
+  values->push_back( G4AttValue( "PDGcode", G4UIcommand::ConvertToString(fPDGcode),""));
   
   return values;
 }

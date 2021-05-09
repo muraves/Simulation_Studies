@@ -34,6 +34,7 @@ class ROOTManager
     Int_t ScintHitStation[MaxNScintHit];
     Int_t ScintHitModule[MaxNScintHit];
     Int_t ScintHitBar[MaxNScintHit];
+    Int_t ScintHitPDG[MaxNScintHit];
 
   };
 

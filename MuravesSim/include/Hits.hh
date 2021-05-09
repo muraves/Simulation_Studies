@@ -55,6 +55,9 @@ public:
 
   void SetTrackID( G4int id ) { fTrackID = id; };
   G4int GetTrackID() const { return fTrackID; };
+
+  void SetPDGcode( G4int c ) { fPDGcode = c; };
+  G4int GetPDGcode() const { return fPDGcode; };
   
 private:
   G4int fStationID;
@@ -63,6 +66,7 @@ private:
   G4double fEdep;
   G4ThreeVector fPos;
   G4int fTrackID;
+  G4int fPDGcode;
 };
 
 typedef G4THitsCollection<ScintbarHit> ScintbarHitsCollection;

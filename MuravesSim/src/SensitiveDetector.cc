@@ -39,7 +39,7 @@ G4bool ScintbarSD::ProcessHits( G4Step *step, G4TouchableHistory* history )
   auto prestep = step->GetPreStepPoint();
   auto touchable = step->GetPreStepPoint()->GetTouchable();
   auto track = step->GetTrack();
-  
+    
   G4cout << "Hit Phys.Vol: " << prestep->GetPhysicalVolume()->GetName() << G4endl;
   G4cout << "particle: " << track->GetDefinition()->GetPDGEncoding() << G4endl;
   G4cout << "parent: " << track->GetParentID() << G4endl;
@@ -85,7 +85,8 @@ G4bool ScintbarSD::ProcessHits( G4Step *step, G4TouchableHistory* history )
   hit->SetModuleID(ModuleNo);
   hit->SetStationID(StationNo);
   hit->SetTrackID(track->GetTrackID());
-
+  hit->SetPDGcode(track->GetDefinition()->GetPDGEncoding());
+  
   G4cout << "BarCopyNo: " << BarCopyNo << G4endl;
   hit->Print();
   

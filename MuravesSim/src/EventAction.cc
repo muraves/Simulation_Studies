@@ -104,6 +104,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
     myrootmanager->ROOTTreeStruct.ScintHitStation[myrootmanager->ROOTTreeStruct.NScintHit] = (Int_t)hit->GetStationID();
     myrootmanager->ROOTTreeStruct.ScintHitModule[myrootmanager->ROOTTreeStruct.NScintHit] = (Int_t)hit->GetModuleID();
     myrootmanager->ROOTTreeStruct.ScintHitBar[myrootmanager->ROOTTreeStruct.NScintHit] = (Int_t)hit->GetBarID();
+    myrootmanager->ROOTTreeStruct.ScintHitPDG[myrootmanager->ROOTTreeStruct.NScintHit] = (Int_t)hit->GetPDGcode();
     
     hit->Print();
     G4cout << "primary ID = "
