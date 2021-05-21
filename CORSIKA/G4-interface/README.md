@@ -2,7 +2,7 @@
 ### Amrutha Samalan
 
 prerequisites:
-* COSRIKA
+* CORSIKA
 * FORTRAN compiler (eg: gfortran)
 * Inside the CORSIKA installed folder, in the subdirectory /src/utils, FORTRAN routines for different tasks are available. Run any of the compilation link  listed (gfortran -O0 -fbounds-check readcsk2asci.f -o readcsk2asci) inside the file readcsk2asci.f. This will create an executable "readcsk2asci" inside the folder (Refer slides for images).
 
