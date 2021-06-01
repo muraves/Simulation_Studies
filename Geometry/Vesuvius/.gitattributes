@@ -1,0 +1,2 @@
+vesuvio_Lidar_EGM2008_5000x3600.grd filter=lfs diff=lfs merge=lfs -text
+vesuvio_Lidar_EGM2008_5000x3600.xyz.zip filter=lfs diff=lfs merge=lfs -text
