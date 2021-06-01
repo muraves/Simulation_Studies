@@ -1,1 +1,34 @@
-DTM files
+DTM of Vesuvius
+
+This directory contains the DTM of Vesuvius at 1m resolution, cut on a regular
+grid 5000x3600 pixels. The quotes are referred to the EGM2008 geoid (ie: they
+are referred to the mean sea level).
+
+Two formats are provided:
+
+File: vesuvio_Lidar_EGM2008_5000x3600.grd
+Format Golden Surfer Binary Grid (version 6)
+http://surferhelp.goldensoftware.com/topics/surfer_6_grid_file_format.htm
+
+File: vesuvio_Lidar_EGM2008_5000x3600.xyz.zip
+Ascii file (x, y, z), coordinates UTM WGS84 zone 33T, quotes in meters above
+sea level, zipped.
+
+The DTM was realized after a Lidar flight in 2009 (sparse points with quotes
+referred to the WGS84 ellipsoid).
+
+The original Lidar DTM was resampled on a regular grid after a Delaunay
+triangulation, with quotes referred to the EGM2008 geoid (by G.Macedonio).
+
+The DTM can be cited as: "1-m-grid Digital Terrain Model (DTM) produced by
+processing of a very high-resolution airborne LiDAR data set acquired in 2009
+by the Province of Naples Council in the framework of the CECOSCA Project
+(Vilardo et al, 2013)."
+
+or, more simply:
+"Digital Terrain Model (DTM) of Vesuvius crater (Vilardo et al, 2013)"
+
+The cited reference is:
+Vilardo G., Ventura G., Bellucci Sessa E. and C. Terranova (2013). Morphometry
+of the Campi Flegrei caldera (Southern Italy). Journal of Maps, 9 (4),
+635-640. DOI: 10.1080/17445647.2013.842508.
