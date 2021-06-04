@@ -32,3 +32,21 @@ The cited reference is:
 Vilardo G., Ventura G., Bellucci Sessa E. and C. Terranova (2013). Morphometry
 of the Campi Flegrei caldera (Southern Italy). Journal of Maps, 9 (4),
 635-640. DOI: 10.1080/17445647.2013.842508.
+
+NOTE:
+The DTM files exceed the maximum size of 50MB allowed in github.
+To overcome this limit, git provides a tool named Git Large File Storage (Git LFS).
+Actually, the large files are stored on a different storage system and the git repository stores just the pointer to that file.
+This method is mostly transparent to the user, but requires the installation of a simple software for managing these files.
+
+If you use the web for accessing the Vesuvius DTMs you will find the label "Stored with GIT LFS" near the "download" button.
+
+The installation of git-lfs is very simple under Linux:
+
+$ apt install git-lfs
+$ cd <your directory containing the muraves/Simulation_Studies>
+$ git lfs install
+> Git LFS Initialized      # <- This is returned if the installation is correct
+Then, you work as usual.
+
+For other systems, please refer to: https://docs.github.com/en/github/managing-large-files/versioning-large-files/installing-git-large-file-storage
