@@ -43,10 +43,13 @@ If you use the web for accessing the Vesuvius DTMs you will find the label "Stor
 
 The installation of git-lfs is very simple under Linux:
 
-$ apt install git-lfs
+$ sudo apt install git-lfs
 $ cd <your directory containing the muraves/Simulation_Studies>
 $ git lfs install
 > Git LFS Initialized      # <- This is returned if the installation is correct
 Then, you work as usual.
 
 For other systems, please refer to: https://docs.github.com/en/github/managing-large-files/versioning-large-files/installing-git-large-file-storage
+
+After the installation of git-lfs you can download the DTM with the command:
+$ git lfs pull
