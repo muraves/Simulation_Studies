@@ -1,1 +1,1 @@
-The tutorial is in the Results folder
+PUMAS-TURTLE tutorials is available at the Results folder.
