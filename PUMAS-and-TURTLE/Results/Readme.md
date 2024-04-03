@@ -13,7 +13,7 @@ Standard rock density is set to 2.65E+03 kg/m3. The final energy range fed into 
 1. use: TURTLE/example-projection.c to run the DEM file and location coordinate of the MURAVES in the DEM file. \
    get: 2D overview prjected map of DEM, and Geodetic Coordinate of the MURAVES experiment. 
 2. use: TURTLE/example-stepper.c with the projected map and MURAVES coordinate. \
-   get: Rockthickness map of the Mt. Vesuvius at the observation point MURAVES, in Azimuth and Elevation angle. \
+   get: Rockthickness map of the Mt. Vesuviusat the observation point MURAVES, in Azimuth and Elevation angle. \
 
 ### In PUMAS:
 use: PUMAS/geomentry.c with the Rockthickness map file. \
