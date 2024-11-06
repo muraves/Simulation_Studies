@@ -20,3 +20,6 @@ use: PUMAS/geomentry.c with the Rockthickness map file. \
 define: medium rock+air; backward mode; finally energy range; energy loss mode and so on. \
 get: flux in Azimuth and Elevation angle. 
 
+
+...
+
