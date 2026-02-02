@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/exampleB5.dir/exampleB5.cc.o"
+  "CMakeFiles/exampleB5.dir/exampleB5.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/ActionInitialization.cc.o"
+  "CMakeFiles/exampleB5.dir/src/ActionInitialization.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/CellParameterisation.cc.o"
+  "CMakeFiles/exampleB5.dir/src/CellParameterisation.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/DetectorConstruction.cc.o"
+  "CMakeFiles/exampleB5.dir/src/DetectorConstruction.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/DriftChamberHit.cc.o"
+  "CMakeFiles/exampleB5.dir/src/DriftChamberHit.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/DriftChamberSD.cc.o"
+  "CMakeFiles/exampleB5.dir/src/DriftChamberSD.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/EmCalorimeterHit.cc.o"
+  "CMakeFiles/exampleB5.dir/src/EmCalorimeterHit.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/EmCalorimeterSD.cc.o"
+  "CMakeFiles/exampleB5.dir/src/EmCalorimeterSD.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/EventAction.cc.o"
+  "CMakeFiles/exampleB5.dir/src/EventAction.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/HadCalorimeterHit.cc.o"
+  "CMakeFiles/exampleB5.dir/src/HadCalorimeterHit.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/HadCalorimeterSD.cc.o"
+  "CMakeFiles/exampleB5.dir/src/HadCalorimeterSD.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.o"
+  "CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.o"
+  "CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/MagneticField.cc.o"
+  "CMakeFiles/exampleB5.dir/src/MagneticField.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction.cc.o"
+  "CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction.cc.o.d"
+  "CMakeFiles/exampleB5.dir/src/RunAction.cc.o"
+  "CMakeFiles/exampleB5.dir/src/RunAction.cc.o.d"
+  "exampleB5"
+  "exampleB5.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/exampleB5.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
