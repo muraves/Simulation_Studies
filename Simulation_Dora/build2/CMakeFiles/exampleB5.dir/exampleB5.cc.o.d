@@ -1464,4 +1464,6 @@ CMakeFiles/exampleB5.dir/exampleB5.cc.o: \
   /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qversiontagging.h \
   /usr/local/include/Geant4/G4UIsession.hh \
   /usr/local/include/Geant4/G4coutDestination.hh \
-  /usr/local/include/Geant4/G4UIbatch.hh
+  /usr/local/include/Geant4/G4UIbatch.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/MuravesMessenger.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PhysicsList.hh

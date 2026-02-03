@@ -26,12 +26,12 @@
 /// \file HodoscopeSD.hh
 /// \brief Definition of the B5::HodoscopeSD class
 
-#ifndef B5HodoscopeSD_h
-#define B5HodoscopeSD_h 1
+#ifndef ScintbarSD_h
+#define ScintbarSD_h 1
 
 #include "G4VSensitiveDetector.hh"
 
-#include "HodoscopeHit.hh"
+#include "ScintBarHit.hh"
 
 #include "globals.hh"
 
@@ -44,17 +44,18 @@ namespace B5
 
 /// Hodoscope sensitive detector
 
-class HodoscopeSD : public G4VSensitiveDetector
+class ScintbarSD : public G4VSensitiveDetector
 {
   public:
-    HodoscopeSD(G4String name);
-    ~HodoscopeSD() override = default;
+    ScintbarSD(G4String name);
+    virtual ~ScintbarSD();
 
-    void Initialize(G4HCofThisEvent* HCE) override;
-    G4bool ProcessHits(G4Step* step, G4TouchableHistory* ROhist) override;
+    virtual void Initialize( G4HCofThisEvent *hitcollection ) override;
+    virtual G4bool ProcessHits( G4Step *step, G4TouchableHistory *history ) override;
+    virtual void EndOfEvent( G4HCofThisEvent* hitCollection ) override;
 
   private:
-    HodoscopeHitsCollection* fHitsCollection = nullptr;
+    ScintbarHitsCollection* fHitsCollection = nullptr;
     G4int fHCID = -1;
 };
 

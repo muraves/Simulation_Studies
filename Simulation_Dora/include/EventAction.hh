@@ -40,13 +40,6 @@
 
 class G4Event;
 
-// named constants
-const G4int kEm = 0;
-const G4int kHad = 1;
-const G4int kH1 = 0;
-const G4int kH2 = 1;
-const G4int kDim = 2;
-
 namespace B5
 {
 
@@ -58,25 +51,12 @@ class EventAction : public G4UserEventAction
     EventAction();
     ~EventAction() override = default;
 
-    void BeginOfEventAction(const G4Event*) override;
-    void EndOfEventAction(const G4Event*) override;
-
-    std::vector<G4double>& GetEmCalEdep() { return fCalEdep[kEm]; }
-    std::vector<G4double>& GetHadCalEdep() { return fCalEdep[kHad]; }
+    virtual void BeginOfEventAction(const G4Event*) override;
+    virtual void EndOfEventAction(const G4Event*) override;
 
   private:
     // hit collections Ids
-    std::array<G4int, kDim> fHodHCID = {-1, -1};
-    std::array<G4int, kDim> fDriftHCID = {-1, -1};
-    std::array<G4int, kDim> fCalHCID = {-1, -1};
-    // histograms Ids
-    std::array<std::array<G4int, kDim>, kDim> fDriftHistoID{{{{-1, -1}}, {{-1, -1}}}};
-    // std::array<T, N> is an aggregate that contains a C array.
-    // To initialize it, we need outer braces for the class itself
-    // and inner braces for the C array
-    // energy deposit in calorimeters cells
-    std::array<std::vector<G4double>, kDim> fCalEdep{
-      {std::vector<G4double>(kNofEmCells, 0.), std::vector<G4double>(kNofHadCells, 0.)}};
+    G4int fScintbarsHCID;
 };
 
 }  // namespace B5

@@ -1150,8 +1150,8 @@ CMakeFiles/exampleB5.dir/src/DetectorConstruction.cc.o: \
   /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/EmCalorimeterHit.hh \
   /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/HadCalorimeterSD.hh \
   /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/HadCalorimeterHit.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/HodoscopeSD.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/HodoscopeHit.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/ScintBarSD.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/ScintBarHit.hh \
   /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/MagneticField.hh \
   /usr/local/include/Geant4/G4MagneticField.hh \
   /usr/local/include/Geant4/G4Field.hh \
@@ -1337,4 +1337,6 @@ CMakeFiles/exampleB5.dir/src/DetectorConstruction.cc.o: \
   /usr/local/include/Geant4/G4DisplacedSolid.hh \
   /usr/local/include/Geant4/G4VBooleanProcessor.hh \
   /usr/local/include/Geant4/G4BooleanSolid.icc \
-  /usr/local/include/Geant4/G4SubtractionSolid.hh
+  /usr/local/include/Geant4/G4SubtractionSolid.hh \
+  /usr/local/include/Geant4/G4VPrimitiveScorer.hh \
+  /usr/local/include/Geant4/G4MultiFunctionalDetector.hh

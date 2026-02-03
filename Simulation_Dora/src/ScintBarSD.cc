@@ -26,9 +26,9 @@
 /// \file HodoscopeSD.cc
 /// \brief Implementation of the B5::HodoscopeSD class
 
-#include "HodoscopeSD.hh"
+#include "ScintBarSD.hh"
 
-#include "HodoscopeHit.hh"
+#include "ScintBarHit.hh"
 
 #include "G4AffineTransform.hh"
 #include "G4HCofThisEvent.hh"
@@ -43,63 +43,91 @@ namespace B5
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-HodoscopeSD::HodoscopeSD(G4String name) : G4VSensitiveDetector(name)
+ScintbarSD::ScintbarSD(G4String name) : G4VSensitiveDetector(name), fHitsCollection(0), fHCID(-1)
 {
-  collectionName.insert("hodoscopeColl");
+  collectionName.insert("ScintbarsColl");
 }
+
+ScintbarSD::~ScintbarSD() {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void HodoscopeSD::Initialize(G4HCofThisEvent* hce)
+void ScintbarSD::Initialize(G4HCofThisEvent* hce)
 {
-  fHitsCollection = new HodoscopeHitsCollection(SensitiveDetectorName, collectionName[0]);
+  fHitsCollection = new ScintbarHitsCollection(SensitiveDetectorName, collectionName[0]);
   if (fHCID < 0) {
     fHCID = G4SDManager::GetSDMpointer()->GetCollectionID(fHitsCollection);
   }
   hce->AddHitsCollection(fHCID, fHitsCollection);
+  //G4cout << "Initialize ScintbarSD hitcoll ID: " << fHCID << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-G4bool HodoscopeSD::ProcessHits(G4Step* step, G4TouchableHistory*)
+G4bool ScintbarSD::ProcessHits(G4Step* step, G4TouchableHistory* history)
 {
-  auto edep = step->GetTotalEnergyDeposit();
-  if (edep == 0.) return true;
+  // geometry info from PreStepPoint
+  auto prestep = step->GetPreStepPoint();
+  auto touchable = step->GetPreStepPoint()->GetTouchable();
+  auto track = step->GetTrack();
+    
+  //G4cout << "Hit Phys.Vol: " << prestep->GetPhysicalVolume()->GetName() << G4endl;
+  //G4cout << "particle: " << track->GetDefinition()->GetPDGEncoding() << G4endl;
+  //G4cout << "parent: " << track->GetParentID() << G4endl;
+  
+  G4ThreeVector pos = prestep->GetPosition();
+  
+  G4double edep = step->GetTotalEnergyDeposit();
+  if ( edep == 0. ) return true;
 
-  auto preStepPoint = step->GetPreStepPoint();
-  auto touchable = preStepPoint->GetTouchable();
-  auto copyNo = touchable->GetVolume()->GetCopyNo();
-  auto hitTime = preStepPoint->GetGlobalTime();
+  // StationNo X0: 0; Y0: 8;
+  //           X1: 1; Y1: 9;
+  //           X2: 2; Y2: 10;
+  //           X3: 3; Y3: 11;
+  G4int BarCopyNo = touchable->GetVolume()->GetCopyNo();
+  G4int BarNo = (BarCopyNo & 0xFF);
+  G4int ModuleNo = (BarCopyNo >> 8) & 0xF; 
+  G4int StationNo = (BarCopyNo >> 12) & 0xF;
 
-  // check if this finger already has a hit
-  auto ix = -1;
-  for (std::size_t i = 0; i < fHitsCollection->entries(); ++i) {
-    if ((*fHitsCollection)[i]->GetID() == copyNo) {
-      ix = i;
-      break;
-    }
-  }
-
-  if (ix >= 0) {
-    // if it has, then take the earlier time
-    if ((*fHitsCollection)[ix]->GetTime() > hitTime) {
-      (*fHitsCollection)[ix]->SetTime(hitTime);
-    }
-  }
-  else {
-    // if not, create a new hit and set it to the collection
-    auto hit = new HodoscopeHit(copyNo, hitTime);
-    auto physical = touchable->GetVolume();
-    hit->SetLogV(physical->GetLogicalVolume());
-    auto transform = touchable->GetHistory()->GetTopTransform();
+  //auto StationNo = touchable->GetVolume(1)->GetCopyNo();
+  //auto ModuleNo = touchable->GetCopyNumber(3);
+  //auto hitID = kNofHadRows*columnNo+rowNo;
+  //auto hit = (*fHitsCollection)[hitID];
+  
+  /*
+  // check if it is first touch
+  if ( hit->GetStationID() < 0 ) {
+    hit->SetColumnID(columnNo);
+    hit->SetRowID(rowNo);
+    auto depth = touchable->GetHistory()->GetDepth();
+    auto transform = touchable->GetHistory()->GetTransform(depth-2);
     transform.Invert();
     hit->SetRot(transform.NetRotation());
     hit->SetPos(transform.NetTranslation());
-    fHitsCollection->insert(hit);
   }
+  // add energy deposition
+  hit->AddEdep(edep);
+  */
+
+  auto hit = new ScintbarHit();
+  hit->SetEdep(edep);
+  hit->SetPos(pos);
+  hit->SetBarID(BarNo);
+  hit->SetModuleID(ModuleNo);
+  hit->SetStationID(StationNo);
+  hit->SetTrackID(track->GetTrackID());
+  hit->SetPDGcode(track->GetDefinition()->GetPDGEncoding());
+  
+  //G4cout << "BarCopyNo: " << BarCopyNo << G4endl;
+  hit->Print();
+  
+  fHitsCollection->insert(hit);
+
   return true;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+void ScintbarSD::EndOfEvent( G4HCofThisEvent *hitCollection ) {}
 
 }  // namespace B5

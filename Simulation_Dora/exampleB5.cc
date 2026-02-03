@@ -36,11 +36,15 @@
 #include "G4UIExecutive.hh"
 #include "G4UImanager.hh"
 #include "G4VisExecutive.hh"
+#include "MuravesMessenger.hh"
+#include "PhysicsList.hh"
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 int main(int argc, char** argv)
 {
+  auto theMessenger = new MuravesMessenger();
   // Detect interactive mode (if no arguments) and define UI session
   //
   G4UIExecutive* ui = nullptr;
@@ -59,9 +63,11 @@ int main(int argc, char** argv)
   // Mandatory user initialization classes
   runManager->SetUserInitialization(new B5::DetectorConstruction);
 
-  auto physicsList = new FTFP_BERT;
+  /*auto physicsList = new FTFP_BERT;
   physicsList->RegisterPhysics(new G4StepLimiterPhysics());
-  runManager->SetUserInitialization(physicsList);
+  runManager->SetUserInitialization(physicsList);*/
+
+  runManager->SetUserInitialization(new PhysicsList);
 
   // User action initialization
   runManager->SetUserInitialization(new B5::ActionInitialization());

@@ -54,16 +54,6 @@
 /gui/addButton gun "pi+" "/gun/particle pi+"
 /gui/addButton gun "neutron" "/gun/particle neutron"
 /gui/addButton gun "proton" "/gun/particle proton"
-/B5/generator/randomizePrimary false
-/gui/addMenu field Field
-/gui/addButton field "off" "/B5/field/value 0   tesla"
-/gui/addButton field "0.2 tesla" "/B5/field/value 0.2 tesla"
-/gui/addButton field "2.0 tesla" "/B5/field/value 2.0 tesla"
-/gui/addMenu viewer Viewer
-/gui/addButton viewer "Set style surface" "/vis/viewer/set/style surface"
-/gui/addButton viewer "Set style wireframe" "/vis/viewer/set/style wireframe"
-/gui/addButton viewer "Refresh viewer" "/vis/viewer/refresh"
-/gui/addButton viewer "Update viewer (interaction or end-of-file)" "/vis/viewer/update"
-/gui/addButton viewer "Flush viewer (= refresh + update)" "/vis/viewer/flush"
-/gui/addButton viewer "Update scene" "/vis/scene/notifyHandlers"
-/gui/addIcon "Run beam on" user_icon "/run/beamOn 1" run.png
+/run/beamOn 10
+/analysis/h1/getVector
+/analysis/h2/getVector

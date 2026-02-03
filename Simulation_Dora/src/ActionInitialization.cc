@@ -30,10 +30,23 @@
 
 #include "EventAction.hh"
 #include "PrimaryGeneratorAction.hh"
+#include "PrimaryGeneratorAction_PG.hh"
+#include "PrimaryGeneratorAction_GPS.hh"
 #include "RunAction.hh"
+#include "EventAction.hh"
+#include "TrackingAction.hh"
+#include "MuravesMessenger.hh"
 
 namespace B5
 {
+ActionInitialization::ActionInitialization()
+ : G4VUserActionInitialization()
+{}
+
+
+ActionInitialization::~ActionInitialization()
+{}
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -47,12 +60,20 @@ void ActionInitialization::BuildForMaster() const
 
 void ActionInitialization::Build() const
 {
-  SetUserAction(new PrimaryGeneratorAction);
+  auto generator = MuravesMessenger::Instance()->GetPrimaryGenerator();
+  if ( generator == "PG" )
+    SetUserAction(new PrimaryGeneratorAction_PG());
+  else if ( generator == "GPS" )
+    SetUserAction(new PrimaryGeneratorAction_GPS());
+  //else if ( generator == "CRY" )
+     //SetUserAction(new PrimaryGeneratorAction_CRY(""));
 
-  auto eventAction = new EventAction;
-  SetUserAction(eventAction);
+  auto theEventAction = new EventAction;
+  SetUserAction(theEventAction);
 
-  SetUserAction(new RunAction(eventAction));
+  SetUserAction(new RunAction(theEventAction));
+
+  SetUserAction(new TrackingAction());
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -33,7 +33,7 @@
 #include "DriftChamberSD.hh"
 #include "EmCalorimeterSD.hh"
 #include "HadCalorimeterSD.hh"
-#include "HodoscopeSD.hh"
+#include "ScintBarSD.hh"
 #include "MagneticField.hh"
 
 #include "G4Box.hh"
@@ -59,6 +59,7 @@
 #include "G4GenericTrap.hh"
 #include "G4IntersectionSolid.hh"
 #include "G4SubtractionSolid.hh"
+#include "G4VPrimitiveScorer.hh"
 
 namespace B5
 {
@@ -119,7 +120,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
     // Option to switch on/off checking of volumes overlaps
     //
-    G4bool checkOverlaps = true;
+    G4bool checkOverlaps = false;
 
     //     
     // World
@@ -250,7 +251,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     vertices.push_back(G4TwoVector(-_barBase / 2, -_barHeight / 2.)); //6
     vertices.push_back(G4TwoVector(0, _barHeight / 2.)); //7
 
-    G4LogicalVolume *barLog = NULL;
+    //G4LogicalVolume *barLog = NULL;
     if (_detType == "triangular") {
         G4GenericTrap* triangSolid = new G4GenericTrap("triangSolid",
                 _barLength / 2,
@@ -496,41 +497,62 @@ float zPosStationY[] = {zPosStation0, zPosStation1, zPosStation2, zPosStation3};
 	//zPosStation -= _stationSpacing;
       }
 
+      //construct Lead block
+      G4Material* lead_mat = nist->FindOrBuildMaterial("G4_Pb");
+      G4ThreeVector posLead = G4ThreeVector(0*cm, -(25)*cm, (zPosStation0 + (96.2*cm)));
+
+      G4Box *leadSolid = 
+          new G4Box("LeadBlock",
+                  (130/2)*cm,
+                  (120/2)*cm,
+                  (60/2)*cm);
+
+      G4LogicalVolume *leadLog = 
+          new G4LogicalVolume(leadSolid, 
+                  lead_mat, 
+                  "LeadBlock",
+                  NULL,
+                  NULL,
+                  NULL,
+                  false);
+      new G4PVPlacement(0,                       //no rotation
+              posLead,                    //at position
+              leadLog,             //its logical volume
+              "LeadBlock",                //its name
+              logicWorld,                //its mother  volume
+              false,                   //no boolean operation
+              0,                       //copy number
+              checkOverlaps);          //overlaps checking
+
 
   /*G4RotationMatrix* rot = new G4RotationMatrix();
   rot->rotateZ(180*deg); 
   G4ThreeVector shift(0.5*_barBase, 0, 0);
   new G4PVPlacement(rot, shift, barLogical, "barPhysical2", worldLogical, false, 0, checkOverlaps);*/
 
+  fScoringVolume=barLog;
   // visualization attributes ------------------------------------------------
 
-  G4VisAttributes invisible(G4VisAttributes::GetInvisible());
-  G4VisAttributes invisibleBlue(false, G4Colour::Blue());
-  G4VisAttributes invisibleGreen(false, G4Colour::Green());
-  G4VisAttributes invisibleYellow(false, G4Colour::Yellow());
-  G4VisAttributes blue(G4Colour::Blue());
-  G4VisAttributes cgray(G4Colour::Gray());
-  auto green = new G4VisAttributes(G4Colour(0.0, 1.0, 0.0, 0.4));
-  G4VisAttributes red(G4Colour::Red());
-  //G4VisAttributes yellow(G4Colour::Yellow());
-   auto yellow = new G4VisAttributes(G4Colour(1.0, 1.0, 0.0, 0.4));
+      G4VisAttributes* whitecol = new G4VisAttributes(G4Colour(1.0,1.0,1.0));
+      G4VisAttributes* pinkcol = new G4VisAttributes(G4Colour(0.6,0.0,0.6));
+      G4VisAttributes* graycol = new G4VisAttributes(G4Colour(0.9,0.9,0.9));
+      G4VisAttributes* cyancol = new G4VisAttributes(G4Colour(0.0,1.0,1.0,0.3));
+      G4VisAttributes* redcol = new G4VisAttributes(G4Colour(0.5,0.0,0.0));
+      G4VisAttributes* darkgraycol = new G4VisAttributes(G4Colour(0.8,0.8,0.8));
+      G4VisAttributes* orangecol = new G4VisAttributes(G4Colour(0.8,0.5,0.));
+      G4VisAttributes* yellowcol = new G4VisAttributes(G4Colour(1.0,1.0,0.));
+      G4VisAttributes* greencol = new G4VisAttributes(G4Colour(0.,1.0,0.,0.4));
+      G4VisAttributes* bluecol = new G4VisAttributes(G4Colour(0.,0.,0.8));
 
-  //worldLogical->SetVisAttributes(invisible);
+      logicAlFoil->SetVisAttributes(bluecol);
+      logicAlShell->SetVisAttributes(cyancol);
+      logicTEC->SetVisAttributes(greencol);
 
-  //barLogical->SetVisAttributes(red);
-  auto barVis = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.4)); // RGBA
-barVis->SetForceSolid(true);   // ← fill the volume
-// barVis->SetForceWireframe(false); // optional, solid is default
+     
+  //auto barVis = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.4)); // RGBA
+//barVis->SetForceSolid(true);   // ← fill the volume
 
-barLog->SetVisAttributes(barVis);
-
-green->SetForceSolid(true); 
-logicAlFoil->SetVisAttributes(green);
-
-//yellow->SetForceSolid(true); 
-logicAlShell->SetVisAttributes(yellow);
-
-  // return the world physical volume ----------------------------------------
+  // always return the world physical volume ----------------------------------------
 
   return physWorld;
 }
@@ -539,34 +561,41 @@ logicAlShell->SetVisAttributes(yellow);
 
 void DetectorConstruction::ConstructSDandField()
 {
-  // sensitive detectors -----------------------------------------------------
-  auto sdManager = G4SDManager::GetSDMpointer();
-  G4String SDname;
-
-  auto hodoscope1 = new HodoscopeSD(SDname = "/hodoscope1");
-  sdManager->AddNewDetector(hodoscope1);
-  //fHodoscope1Logical->SetSensitiveDetector(hodoscope1);
-
-  auto hodoscope2 = new HodoscopeSD(SDname = "/hodoscope2");
-  sdManager->AddNewDetector(hodoscope2);
-  //fHodoscope2Logical->SetSensitiveDetector(hodoscope2);
-
-  auto chamber1 = new DriftChamberSD(SDname = "/chamber1");
-  sdManager->AddNewDetector(chamber1);
-  //fWirePlane1Logical->SetSensitiveDetector(chamber1);
-
-  auto chamber2 = new DriftChamberSD(SDname = "/chamber2");
-  sdManager->AddNewDetector(chamber2);
-  //fWirePlane2Logical->SetSensitiveDetector(chamber2);
-
-  auto emCalorimeter = new EmCalorimeterSD(SDname = "/EMcalorimeter");
-  sdManager->AddNewDetector(emCalorimeter);
-  //fCellLogical->SetSensitiveDetector(emCalorimeter);
-
-  auto hadCalorimeter = new HadCalorimeterSD(SDname = "/HadCalorimeter");
-  sdManager->AddNewDetector(hadCalorimeter);
+  // sensitive detector example-----------------------------------------------------
+  //auto sdManager = G4SDManager::GetSDMpointer();
+  //G4String SDname;
+  //auto hadCalorimeter = new HadCalorimeterSD(SDname = "/HadCalorimeter");
+  //sdManager->AddNewDetector(hadCalorimeter);
   //fHadCalScintiLogical->SetSensitiveDetector(hadCalorimeter);
 
+  //G4SDManager::GetSDMpointer()->SetVerboseLevel(1);
+  //G4String SDname;
+  
+  /*
+    // approach with scorers
+  // declare scintillator  as a MultiFunctionalDetector scorer
+  //  
+  //G4MultiFunctionalDetector* barScint = new G4MultiFunctionalDetector("stationX1bar25");
+  G4MultiFunctionalDetector* barScint = new G4MultiFunctionalDetector("Scintbars");
+  G4SDManager::GetSDMpointer()->AddNewDetector(barScint);
+  G4VPrimitiveScorer* Edep = new G4PSEnergyDeposit("Edep");
+  barScint->RegisterPrimitive(Edep);
+  SetSensitiveDetector("BARSH2E",barScint);
+  */
+  
+  
+  // approach with hits
+  //auto Scintbars = new ScintbarSD(SDname="/Scintbars");
+  //G4SDManager::GetSDMpointer()->AddNewDetector(Scintbars);
+  //fScoringVolume->SetSensitiveDetector(Scintbars);
+  //GetScoringVolume()->SetSensitiveDetector(Scintbars);
+  //logicalVolume->SetSensitiveDetector(Scintbars);
+
+  auto sdManager = G4SDManager::GetSDMpointer();
+  G4String SDname;
+  auto Scintbars = new ScintbarSD(SDname="/Scintbars");
+  sdManager->AddNewDetector(Scintbars);
+  barLog->SetSensitiveDetector(Scintbars);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

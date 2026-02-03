@@ -77,6 +77,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     G4LogicalVolume* fHadCalScintiLogical = nullptr;
     G4LogicalVolume* fMagneticLogical = nullptr;
 
+    G4LogicalVolume* barLog = nullptr;
+
     G4double fArmAngle = 30. * CLHEP::deg;
     G4RotationMatrix* fArmRotation = nullptr;
     G4VPhysicalVolume* fSecondArmPhys = nullptr;

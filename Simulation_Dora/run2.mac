@@ -10,7 +10,7 @@
 #
 #  turn off randomization 
 #
-/B5/generator/randomizePrimary FALSE
+#/B5/generator/randomizePrimary FALSE
 /B5/generator/sigmaMomentum 0. 
 /B5/generator/sigmaAngle 0.
 /run/verbose 1

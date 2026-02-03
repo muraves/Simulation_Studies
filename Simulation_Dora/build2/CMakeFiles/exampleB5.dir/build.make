@@ -226,38 +226,10 @@ CMakeFiles/exampleB5.dir/src/HadCalorimeterSD.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/HadCalorimeterSD.cc.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/HadCalorimeterSD.cc -o CMakeFiles/exampleB5.dir/src/HadCalorimeterSD.cc.s
 
-CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.o: CMakeFiles/exampleB5.dir/flags.make
-CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/HodoscopeHit.cc
-CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.o: CMakeFiles/exampleB5.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.o -MF CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.o.d -o CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/HodoscopeHit.cc
-
-CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/HodoscopeHit.cc > CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.i
-
-CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/HodoscopeHit.cc -o CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.s
-
-CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.o: CMakeFiles/exampleB5.dir/flags.make
-CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/HodoscopeSD.cc
-CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.o: CMakeFiles/exampleB5.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.o -MF CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.o.d -o CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/HodoscopeSD.cc
-
-CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/HodoscopeSD.cc > CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.i
-
-CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/HodoscopeSD.cc -o CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.s
-
 CMakeFiles/exampleB5.dir/src/MagneticField.cc.o: CMakeFiles/exampleB5.dir/flags.make
 CMakeFiles/exampleB5.dir/src/MagneticField.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/MagneticField.cc
 CMakeFiles/exampleB5.dir/src/MagneticField.cc.o: CMakeFiles/exampleB5.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/exampleB5.dir/src/MagneticField.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/exampleB5.dir/src/MagneticField.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/exampleB5.dir/src/MagneticField.cc.o -MF CMakeFiles/exampleB5.dir/src/MagneticField.cc.o.d -o CMakeFiles/exampleB5.dir/src/MagneticField.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/MagneticField.cc
 
 CMakeFiles/exampleB5.dir/src/MagneticField.cc.i: cmake_force
@@ -267,6 +239,34 @@ CMakeFiles/exampleB5.dir/src/MagneticField.cc.i: cmake_force
 CMakeFiles/exampleB5.dir/src/MagneticField.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/MagneticField.cc.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/MagneticField.cc -o CMakeFiles/exampleB5.dir/src/MagneticField.cc.s
+
+CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.o: CMakeFiles/exampleB5.dir/flags.make
+CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/MuravesMessenger.cc
+CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.o: CMakeFiles/exampleB5.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.o -MF CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.o.d -o CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/MuravesMessenger.cc
+
+CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/MuravesMessenger.cc > CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.i
+
+CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/MuravesMessenger.cc -o CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.s
+
+CMakeFiles/exampleB5.dir/src/PhysicsList.cc.o: CMakeFiles/exampleB5.dir/flags.make
+CMakeFiles/exampleB5.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PhysicsList.cc
+CMakeFiles/exampleB5.dir/src/PhysicsList.cc.o: CMakeFiles/exampleB5.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/exampleB5.dir/src/PhysicsList.cc.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/exampleB5.dir/src/PhysicsList.cc.o -MF CMakeFiles/exampleB5.dir/src/PhysicsList.cc.o.d -o CMakeFiles/exampleB5.dir/src/PhysicsList.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PhysicsList.cc
+
+CMakeFiles/exampleB5.dir/src/PhysicsList.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/exampleB5.dir/src/PhysicsList.cc.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PhysicsList.cc > CMakeFiles/exampleB5.dir/src/PhysicsList.cc.i
+
+CMakeFiles/exampleB5.dir/src/PhysicsList.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/PhysicsList.cc.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PhysicsList.cc -o CMakeFiles/exampleB5.dir/src/PhysicsList.cc.s
 
 CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction.cc.o: CMakeFiles/exampleB5.dir/flags.make
 CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction.cc
@@ -282,10 +282,52 @@ CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction.cc.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction.cc -o CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction.cc.s
 
+CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.o: CMakeFiles/exampleB5.dir/flags.make
+CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_GPS.cc
+CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.o: CMakeFiles/exampleB5.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.o -MF CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.o.d -o CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_GPS.cc
+
+CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_GPS.cc > CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.i
+
+CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_GPS.cc -o CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.s
+
+CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.o: CMakeFiles/exampleB5.dir/flags.make
+CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_PG.cc
+CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.o: CMakeFiles/exampleB5.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.o -MF CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.o.d -o CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_PG.cc
+
+CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_PG.cc > CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.i
+
+CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_PG.cc -o CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.s
+
+CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.o: CMakeFiles/exampleB5.dir/flags.make
+CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/RNGWrapper.cc
+CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.o: CMakeFiles/exampleB5.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.o -MF CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.o.d -o CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/RNGWrapper.cc
+
+CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/RNGWrapper.cc > CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.i
+
+CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/RNGWrapper.cc -o CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.s
+
 CMakeFiles/exampleB5.dir/src/RunAction.cc.o: CMakeFiles/exampleB5.dir/flags.make
 CMakeFiles/exampleB5.dir/src/RunAction.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/RunAction.cc
 CMakeFiles/exampleB5.dir/src/RunAction.cc.o: CMakeFiles/exampleB5.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/exampleB5.dir/src/RunAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/exampleB5.dir/src/RunAction.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/exampleB5.dir/src/RunAction.cc.o -MF CMakeFiles/exampleB5.dir/src/RunAction.cc.o.d -o CMakeFiles/exampleB5.dir/src/RunAction.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/RunAction.cc
 
 CMakeFiles/exampleB5.dir/src/RunAction.cc.i: cmake_force
@@ -295,6 +337,48 @@ CMakeFiles/exampleB5.dir/src/RunAction.cc.i: cmake_force
 CMakeFiles/exampleB5.dir/src/RunAction.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/RunAction.cc.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/RunAction.cc -o CMakeFiles/exampleB5.dir/src/RunAction.cc.s
+
+CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.o: CMakeFiles/exampleB5.dir/flags.make
+CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarHit.cc
+CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.o: CMakeFiles/exampleB5.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.o -MF CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.o.d -o CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarHit.cc
+
+CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarHit.cc > CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.i
+
+CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarHit.cc -o CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.s
+
+CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.o: CMakeFiles/exampleB5.dir/flags.make
+CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarSD.cc
+CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.o: CMakeFiles/exampleB5.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.o -MF CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.o.d -o CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarSD.cc
+
+CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarSD.cc > CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.i
+
+CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarSD.cc -o CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.s
+
+CMakeFiles/exampleB5.dir/src/TrackingAction.cc.o: CMakeFiles/exampleB5.dir/flags.make
+CMakeFiles/exampleB5.dir/src/TrackingAction.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/TrackingAction.cc
+CMakeFiles/exampleB5.dir/src/TrackingAction.cc.o: CMakeFiles/exampleB5.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/exampleB5.dir/src/TrackingAction.cc.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/exampleB5.dir/src/TrackingAction.cc.o -MF CMakeFiles/exampleB5.dir/src/TrackingAction.cc.o.d -o CMakeFiles/exampleB5.dir/src/TrackingAction.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/TrackingAction.cc
+
+CMakeFiles/exampleB5.dir/src/TrackingAction.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/exampleB5.dir/src/TrackingAction.cc.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/TrackingAction.cc > CMakeFiles/exampleB5.dir/src/TrackingAction.cc.i
+
+CMakeFiles/exampleB5.dir/src/TrackingAction.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/exampleB5.dir/src/TrackingAction.cc.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/TrackingAction.cc -o CMakeFiles/exampleB5.dir/src/TrackingAction.cc.s
 
 # Object files for target exampleB5
 exampleB5_OBJECTS = \
@@ -309,11 +393,17 @@ exampleB5_OBJECTS = \
 "CMakeFiles/exampleB5.dir/src/EventAction.cc.o" \
 "CMakeFiles/exampleB5.dir/src/HadCalorimeterHit.cc.o" \
 "CMakeFiles/exampleB5.dir/src/HadCalorimeterSD.cc.o" \
-"CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.o" \
-"CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.o" \
 "CMakeFiles/exampleB5.dir/src/MagneticField.cc.o" \
+"CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.o" \
+"CMakeFiles/exampleB5.dir/src/PhysicsList.cc.o" \
 "CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction.cc.o" \
-"CMakeFiles/exampleB5.dir/src/RunAction.cc.o"
+"CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.o" \
+"CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.o" \
+"CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.o" \
+"CMakeFiles/exampleB5.dir/src/RunAction.cc.o" \
+"CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.o" \
+"CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.o" \
+"CMakeFiles/exampleB5.dir/src/TrackingAction.cc.o"
 
 # External object files for target exampleB5
 exampleB5_EXTERNAL_OBJECTS =
@@ -329,11 +419,17 @@ exampleB5: CMakeFiles/exampleB5.dir/src/EmCalorimeterSD.cc.o
 exampleB5: CMakeFiles/exampleB5.dir/src/EventAction.cc.o
 exampleB5: CMakeFiles/exampleB5.dir/src/HadCalorimeterHit.cc.o
 exampleB5: CMakeFiles/exampleB5.dir/src/HadCalorimeterSD.cc.o
-exampleB5: CMakeFiles/exampleB5.dir/src/HodoscopeHit.cc.o
-exampleB5: CMakeFiles/exampleB5.dir/src/HodoscopeSD.cc.o
 exampleB5: CMakeFiles/exampleB5.dir/src/MagneticField.cc.o
+exampleB5: CMakeFiles/exampleB5.dir/src/MuravesMessenger.cc.o
+exampleB5: CMakeFiles/exampleB5.dir/src/PhysicsList.cc.o
 exampleB5: CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction.cc.o
+exampleB5: CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_GPS.cc.o
+exampleB5: CMakeFiles/exampleB5.dir/src/PrimaryGeneratorAction_PG.cc.o
+exampleB5: CMakeFiles/exampleB5.dir/src/RNGWrapper.cc.o
 exampleB5: CMakeFiles/exampleB5.dir/src/RunAction.cc.o
+exampleB5: CMakeFiles/exampleB5.dir/src/ScintBarHit.cc.o
+exampleB5: CMakeFiles/exampleB5.dir/src/ScintBarSD.cc.o
+exampleB5: CMakeFiles/exampleB5.dir/src/TrackingAction.cc.o
 exampleB5: CMakeFiles/exampleB5.dir/build.make
 exampleB5: /usr/local/lib/libG4Tree.dylib
 exampleB5: /usr/local/lib/libG4FR.dylib
@@ -378,7 +474,7 @@ exampleB5: /usr/local/lib/libG4global.dylib
 exampleB5: /usr/local/lib/libG4clhep.dylib
 exampleB5: /usr/local/lib/libG4ptl.2.3.3.dylib
 exampleB5: CMakeFiles/exampleB5.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable exampleB5"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Linking CXX executable exampleB5"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/exampleB5.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

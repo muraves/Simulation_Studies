@@ -28,22 +28,20 @@
 
 #include "EventAction.hh"
 
-#include "Constants.hh"
-#include "DriftChamberHit.hh"
-#include "EmCalorimeterHit.hh"
-#include "HadCalorimeterHit.hh"
-#include "HodoscopeHit.hh"
+//#include "Analysis.hh"
+//#include "ROOTManager.hh"
+#include "TrackingAction.hh"
 
-#include "G4AnalysisManager.hh"
 #include "G4Event.hh"
-#include "G4HCofThisEvent.hh"
-#include "G4ParticleDefinition.hh"
-#include "G4PrimaryParticle.hh"
-#include "G4PrimaryVertex.hh"
 #include "G4RunManager.hh"
+#include "G4EventManager.hh"
+#include "G4HCofThisEvent.hh"
+#include "G4VHitsCollection.hh"
 #include "G4SDManager.hh"
 #include "G4SystemOfUnits.hh"
-#include "G4VHitsCollection.hh"
+#include "G4ios.hh"
+#include "ScintBarHit.hh"
+#include "G4AnalysisManager.hh"
 
 using std::array;
 using std::vector;
@@ -80,6 +78,8 @@ namespace B5
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 EventAction::EventAction()
+: G4UserEventAction(),
+    fScintbarsHCID(-1)
 {
   // set printing per each event
   G4RunManager::GetRunManager()->SetPrintProgress(1);
@@ -89,33 +89,14 @@ EventAction::EventAction()
 
 void EventAction::BeginOfEventAction(const G4Event*)
 {
-  // Find hit collections and histogram Ids by names (just once)
-  // and save them in the data members of this class
-
-  if (fHodHCID[0] == -1) {
-    auto sdManager = G4SDManager::GetSDMpointer();
-    auto analysisManager = G4AnalysisManager::Instance();
-
-    // hits collections names
-    array<G4String, kDim> hHCName = {{"hodoscope1/hodoscopeColl", "hodoscope2/hodoscopeColl"}};
-    array<G4String, kDim> dHCName = {{"chamber1/driftChamberColl", "chamber2/driftChamberColl"}};
-    array<G4String, kDim> cHCName = {
-      {"EMcalorimeter/EMcalorimeterColl", "HadCalorimeter/HadCalorimeterColl"}};
-
-    // histograms names
-    array<array<G4String, kDim>, kDim> histoName = {
-      {{{"Chamber1", "Chamber2"}}, {{"Chamber1 XY", "Chamber2 XY"}}}};
-
-    for (G4int iDet = 0; iDet < kDim; ++iDet) {
-      // hit collections IDs
-      fHodHCID[iDet] = sdManager->GetCollectionID(hHCName[iDet]);
-      fDriftHCID[iDet] = sdManager->GetCollectionID(dHCName[iDet]);
-      fCalHCID[iDet] = sdManager->GetCollectionID(cHCName[iDet]);
-      // histograms IDs
-      fDriftHistoID[kH1][iDet] = analysisManager->GetH1Id(histoName[kH1][iDet]);
-      fDriftHistoID[kH2][iDet] = analysisManager->GetH2Id(histoName[kH2][iDet]);
-    }
+  // Find hit collections by names (just once)
+  if ( fScintbarsHCID == -1 ) {
+    auto SDManager = G4SDManager::GetSDMpointer();
+    fScintbarsHCID = SDManager->GetCollectionID("Scintbars/ScintbarsColl");
   }
+  //G4cout << "BeginOfEventAction fScintbarsHCID: " << fScintbarsHCID << G4endl;
+  
+  TrackingAction::Instance()->ResetParents();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -128,111 +109,51 @@ void EventAction::EndOfEventAction(const G4Event* event)
 
   // Get analysis manager
   auto analysisManager = G4AnalysisManager::Instance();
+  auto mytracking = TrackingAction::Instance();
 
-  // Drift chambers hits
-  for (G4int iDet = 0; iDet < kDim; ++iDet) {
-    auto hc = GetHC(event, fDriftHCID[iDet]);
-    if (!hc) return;
+  G4int eventID = event->GetEventID();
+  G4int nGenPart = 0;
+  G4int nScintHit = 0;
+ 
+  auto hc = GetHC(event, fScintbarsHCID);
+  if ( !hc ) return;
+  
+  auto nhit = hc->GetSize();
+  G4cout << "Nhit: " << nhit << G4endl;
+  
+  for ( unsigned long i = 0; i < nhit; i++ ) {
+    auto hit = static_cast<ScintbarHit*>(hc->GetHit(i));
+    auto pos = hit->GetPos();
 
-    auto nhit = hc->GetSize();
-    analysisManager->FillH1(fDriftHistoID[kH1][iDet], nhit);
-    // columns 0, 1
-    analysisManager->FillNtupleIColumn(iDet, nhit);
-
-    for (unsigned long i = 0; i < nhit; ++i) {
-      auto hit = static_cast<DriftChamberHit*>(hc->GetHit(i));
-      auto localPos = hit->GetLocalPos();
-      analysisManager->FillH2(fDriftHistoID[kH2][iDet], localPos.x(), localPos.y());
-    }
-  }
-
-  // Em/Had Calorimeters hits
-  array<G4int, kDim> totalCalHit = {{0, 0}};
-  array<G4double, kDim> totalCalEdep = {{0., 0.}};
-
-  for (G4int iDet = 0; iDet < kDim; ++iDet) {
-    auto hc = GetHC(event, fCalHCID[iDet]);
-    if (!hc) return;
-
-    totalCalHit[iDet] = 0;
-    totalCalEdep[iDet] = 0.;
-    for (unsigned long i = 0; i < hc->GetSize(); ++i) {
-      G4double edep = 0.;
-      // The EM and Had calorimeter hits are of different types
-      if (iDet == 0) {
-        auto hit = static_cast<EmCalorimeterHit*>(hc->GetHit(i));
-        edep = hit->GetEdep();
-      }
-      else {
-        auto hit = static_cast<HadCalorimeterHit*>(hc->GetHit(i));
-        edep = hit->GetEdep();
-      }
-      if (edep > 0.) {
-        totalCalHit[iDet]++;
-        totalCalEdep[iDet] += edep;
-      }
-      fCalEdep[iDet][i] = edep;
-    }
-    // columns 2, 3
-    analysisManager->FillNtupleDColumn(iDet + 2, totalCalEdep[iDet]);
-  }
-
-  // Hodoscopes hits
-  for (G4int iDet = 0; iDet < kDim; ++iDet) {
-    auto hc = GetHC(event, fHodHCID[iDet]);
-    if (!hc) return;
-
-    for (unsigned int i = 0; i < hc->GetSize(); ++i) {
-      auto hit = static_cast<HodoscopeHit*>(hc->GetHit(i));
-      // columns 4, 5
-      analysisManager->FillNtupleDColumn(iDet + 4, hit->GetTime());
-    }
+    //analysisManager->FillNtupleIColumn(8, mytracking->GetPrimary(hit->GetTrackID()));
+    analysisManager->FillNtupleIColumn(8, hit->GetTrackID());
+    analysisManager->FillNtupleDColumn(9, hit->GetEdep());
+    analysisManager->FillNtupleDColumn(10, pos.x());
+    analysisManager->FillNtupleDColumn(11, pos.y());
+    analysisManager->FillNtupleDColumn(12, pos.z());
+    analysisManager->FillNtupleIColumn(13, hit->GetStationID());
+    analysisManager->FillNtupleIColumn(14, hit->GetModuleID());
+    analysisManager->FillNtupleIColumn(15, hit->GetBarID());
+    analysisManager->FillNtupleIColumn(16, hit->GetPDGcode());
   }
   analysisManager->AddNtupleRow();
 
-  //
-  // Print diagnostics
-  //
-
-  auto printModulo = G4RunManager::GetRunManager()->GetPrintProgress();
-  if (printModulo == 0 || event->GetEventID() % printModulo != 0) return;
-
-  auto primary = event->GetPrimaryVertex(0)->GetPrimary(0);
-  G4cout << G4endl << ">>> Event " << event->GetEventID()
-         << " >>> Simulation truth : " << primary->GetG4code()->GetParticleName() << " "
-         << primary->GetMomentum() << G4endl;
-
-  // Hodoscopes
-  for (G4int iDet = 0; iDet < kDim; ++iDet) {
-    auto hc = GetHC(event, fHodHCID[iDet]);
-    if (!hc) return;
-    G4cout << "Hodoscope " << iDet + 1 << " has " << hc->GetSize() << " hits." << G4endl;
-    for (unsigned int i = 0; i < hc->GetSize(); ++i) {
-      hc->GetHit(i)->Print();
-    }
-  }
-
-  // Drift chambers
-  for (G4int iDet = 0; iDet < kDim; ++iDet) {
-    auto hc = GetHC(event, fDriftHCID[iDet]);
-    if (!hc) return;
-    G4cout << "Drift Chamber " << iDet + 1 << " has " << hc->GetSize() << " hits." << G4endl;
-    for (auto layer = 0; layer < kNofChambers; ++layer) {
-      for (unsigned int i = 0; i < hc->GetSize(); i++) {
-        auto hit = static_cast<DriftChamberHit*>(hc->GetHit(i));
-        if (hit->GetLayerID() == layer) hit->Print();
-      }
-    }
-  }
-
-  // Calorimeters
-  array<G4String, kDim> calName = {{"EM", "Hadron"}};
-  for (G4int iDet = 0; iDet < kDim; ++iDet) {
-    G4cout << calName[iDet] << " Calorimeter has " << totalCalHit[iDet] << " hits."
-           << " Total Edep is " << totalCalEdep[iDet] / MeV << " (MeV)" << G4endl;
+  analysisManager->FillNtupleIColumn(0, eventID);
+  for ( int i = 0; i < event->GetNumberOfPrimaryVertex(); i++ ) {
+    for ( int q = 0; q < event->GetPrimaryVertex(i)->GetNumberOfParticle(); q++ ) {
+                
+      auto primary = event->GetPrimaryVertex(i)->GetPrimary(q);
+                 
+      analysisManager->FillNtupleIColumn(1, primary->GetTrackID());
+      analysisManager->FillNtupleIColumn(2, primary->GetG4code()->GetPDGEncoding());
+      analysisManager->FillNtupleDColumn(4, primary->GetTotalEnergy());
+      analysisManager->FillNtupleDColumn(5, primary->GetMomentumDirection().theta());
+      analysisManager->FillNtupleDColumn(6, primary->GetMomentumDirection().phi());
+        
+    }    
+    analysisManager->AddNtupleRow(0);
   }
 }
-
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 }  // namespace B5

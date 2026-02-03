@@ -49,38 +49,38 @@ RunAction::RunAction(EventAction* eventAction) : fEventAction(eventAction)
   // Default settings
   analysisManager->SetNtupleMerging(true);
   // Note: merging ntuples is available only with Root output
-  analysisManager->SetFileName("B5");
+  analysisManager->SetFileName("MuravesSim"); 
 
-  // Book histograms, ntuple
-
-  // Creating 1D histograms
-  analysisManager->CreateH1("Chamber1", "Drift Chamber 1 # Hits", 50, 0., 50);  // h1 Id = 0
-  analysisManager->CreateH1("Chamber2", "Drift Chamber 2 # Hits", 50, 0., 50);  // h1 Id = 1
-
-  // Creating 2D histograms
-  analysisManager->CreateH2("Chamber1 XY", "Drift Chamber 1 X vs Y",  // h2 Id = 0
-                            50, -1000., 1000, 50, -300., 300.);
-  analysisManager->CreateH2("Chamber2 XY", "Drift Chamber 2 X vs Y",  // h2 Id = 1
-                            50, -1500., 1500, 50, -300., 300.);
-
-  // Creating ntuple
+  // Creating ntuple (tuple ID = 0)
   if (fEventAction) {
-    analysisManager->CreateNtuple("B5", "Hits");
-    analysisManager->CreateNtupleIColumn("Dc1Hits");  // column Id = 0
-    analysisManager->CreateNtupleIColumn("Dc2Hits");  // column Id = 1
-    analysisManager->CreateNtupleDColumn("ECEnergy");  // column Id = 2
-    analysisManager->CreateNtupleDColumn("HCEnergy");  // column Id = 3
-    analysisManager->CreateNtupleDColumn("Time1");  // column Id = 4
-    analysisManager->CreateNtupleDColumn("Time2");  // column Id = 5
-    analysisManager  // column Id = 6
-      ->CreateNtupleDColumn("ECEnergyVector", fEventAction->GetEmCalEdep());
-    analysisManager  // column Id = 7
-      ->CreateNtupleDColumn("HCEnergyVector", fEventAction->GetHadCalEdep());
+    analysisManager->CreateNtuple("Muraves", "MuravesSim");
+
+    // --- Event-level ---
+    analysisManager->CreateNtupleIColumn("Event"); // column Id = 0
+    // --- Particle-generation-level ---
+    analysisManager->CreateNtupleIColumn("NGenPart"); // column Id = 1
+    analysisManager->CreateNtupleIColumn("GenPartID");  // column Id = 2
+    analysisManager->CreateNtupleIColumn("GenPartPDG");  // column Id = 3
+    analysisManager->CreateNtupleDColumn("GenPartE"); // column Id = 4   
+    analysisManager->CreateNtupleDColumn("GenPartTheta"); // column Id = 5  
+    analysisManager->CreateNtupleDColumn("GenPartPhi"); // column Id = 6
+    // --- Hit-level ---
+    analysisManager->CreateNtupleIColumn("NScintHit"); // column Id = 7
+    analysisManager->CreateNtupleIColumn("ScintHitPrimaryID"); // column Id = 8
+    analysisManager->CreateNtupleDColumn("ScintHitE"); // column Id = 9
+    analysisManager->CreateNtupleDColumn("ScintHitPosX"); // column Id = 10
+    analysisManager->CreateNtupleDColumn("ScintHitPosY"); // column Id = 11
+    analysisManager->CreateNtupleDColumn("ScintHitPosZ"); // column Id = 12
+    analysisManager->CreateNtupleIColumn("ScintHitStation"); // column Id = 13
+    analysisManager->CreateNtupleIColumn("ScintHitModule"); // column Id = 14
+    analysisManager->CreateNtupleIColumn("ScintHitBar"); // column Id = 15
+    analysisManager->CreateNtupleIColumn("ScintHitPDG"); // column Id = 16
+  
     analysisManager->FinishNtuple();
   }
 
   // Set ntuple output file
-  analysisManager->SetNtupleFileName(0, "B5ntuple");
+  analysisManager->SetNtupleFileName(0, "MuravesSim_ntuple");
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
