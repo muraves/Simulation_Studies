@@ -47,6 +47,8 @@
 //#include "time.h"
 //#include <chrono>
 
+#include "MuravesSim.hh"
+B5::DetectorConstruction* theDetector;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -124,8 +126,8 @@ int main(int argc, char** argv)
   // UserInitialization classes
   //---------------------------
   //DetectorConstruction* theDetector = new DetectorConstruction("scintillator");
-  //theDetector = new DetectorConstruction("Muraves");
-  theRunManager->SetUserInitialization(new B5::DetectorConstruction("Muraves"));
+  theDetector = new B5::DetectorConstruction("Muraves");
+  theRunManager->SetUserInitialization(theDetector);
 
   // ************** CHECK PHYSICS LIST FROM CRY GEANT4 EXAMPLE, it doesn't fully work at the moment ***********************
   //PhysicsList* thePhysicsList = new PhysicsList;   

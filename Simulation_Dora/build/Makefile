@@ -489,6 +489,30 @@ src/PrimaryGeneratorAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction.cc.s
 .PHONY : src/PrimaryGeneratorAction.cc.s
 
+src/PrimaryGeneratorAction_CRY.o: src/PrimaryGeneratorAction_CRY.cc.o
+.PHONY : src/PrimaryGeneratorAction_CRY.o
+
+# target to build an object file
+src/PrimaryGeneratorAction_CRY.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_CRY.cc.o
+.PHONY : src/PrimaryGeneratorAction_CRY.cc.o
+
+src/PrimaryGeneratorAction_CRY.i: src/PrimaryGeneratorAction_CRY.cc.i
+.PHONY : src/PrimaryGeneratorAction_CRY.i
+
+# target to preprocess a source file
+src/PrimaryGeneratorAction_CRY.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_CRY.cc.i
+.PHONY : src/PrimaryGeneratorAction_CRY.cc.i
+
+src/PrimaryGeneratorAction_CRY.s: src/PrimaryGeneratorAction_CRY.cc.s
+.PHONY : src/PrimaryGeneratorAction_CRY.s
+
+# target to generate assembly for a file
+src/PrimaryGeneratorAction_CRY.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_CRY.cc.s
+.PHONY : src/PrimaryGeneratorAction_CRY.cc.s
+
 src/PrimaryGeneratorAction_GPS.o: src/PrimaryGeneratorAction_GPS.cc.o
 .PHONY : src/PrimaryGeneratorAction_GPS.o
 
@@ -536,6 +560,30 @@ src/PrimaryGeneratorAction_PG.s: src/PrimaryGeneratorAction_PG.cc.s
 src/PrimaryGeneratorAction_PG.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_PG.cc.s
 .PHONY : src/PrimaryGeneratorAction_PG.cc.s
+
+src/PrimaryGeneratorMessenger.o: src/PrimaryGeneratorMessenger.cc.o
+.PHONY : src/PrimaryGeneratorMessenger.o
+
+# target to build an object file
+src/PrimaryGeneratorMessenger.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorMessenger.cc.o
+.PHONY : src/PrimaryGeneratorMessenger.cc.o
+
+src/PrimaryGeneratorMessenger.i: src/PrimaryGeneratorMessenger.cc.i
+.PHONY : src/PrimaryGeneratorMessenger.i
+
+# target to preprocess a source file
+src/PrimaryGeneratorMessenger.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorMessenger.cc.i
+.PHONY : src/PrimaryGeneratorMessenger.cc.i
+
+src/PrimaryGeneratorMessenger.s: src/PrimaryGeneratorMessenger.cc.s
+.PHONY : src/PrimaryGeneratorMessenger.s
+
+# target to generate assembly for a file
+src/PrimaryGeneratorMessenger.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorMessenger.cc.s
+.PHONY : src/PrimaryGeneratorMessenger.cc.s
 
 src/RNGWrapper.o: src/RNGWrapper.cc.o
 .PHONY : src/RNGWrapper.o
@@ -711,12 +759,18 @@ help:
 	@echo "... src/PrimaryGeneratorAction.o"
 	@echo "... src/PrimaryGeneratorAction.i"
 	@echo "... src/PrimaryGeneratorAction.s"
+	@echo "... src/PrimaryGeneratorAction_CRY.o"
+	@echo "... src/PrimaryGeneratorAction_CRY.i"
+	@echo "... src/PrimaryGeneratorAction_CRY.s"
 	@echo "... src/PrimaryGeneratorAction_GPS.o"
 	@echo "... src/PrimaryGeneratorAction_GPS.i"
 	@echo "... src/PrimaryGeneratorAction_GPS.s"
 	@echo "... src/PrimaryGeneratorAction_PG.o"
 	@echo "... src/PrimaryGeneratorAction_PG.i"
 	@echo "... src/PrimaryGeneratorAction_PG.s"
+	@echo "... src/PrimaryGeneratorMessenger.o"
+	@echo "... src/PrimaryGeneratorMessenger.i"
+	@echo "... src/PrimaryGeneratorMessenger.s"
 	@echo "... src/RNGWrapper.o"
 	@echo "... src/RNGWrapper.i"
 	@echo "... src/RNGWrapper.s"

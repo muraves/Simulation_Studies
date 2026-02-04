@@ -32,6 +32,7 @@
 #include "PrimaryGeneratorAction.hh"
 #include "PrimaryGeneratorAction_PG.hh"
 #include "PrimaryGeneratorAction_GPS.hh"
+#include "PrimaryGeneratorAction_CRY.hh"
 #include "RunAction.hh"
 #include "EventAction.hh"
 #include "TrackingAction.hh"
@@ -65,8 +66,8 @@ void ActionInitialization::Build() const
     SetUserAction(new PrimaryGeneratorAction_PG());
   else if ( generator == "GPS" )
     SetUserAction(new PrimaryGeneratorAction_GPS());
-  //else if ( generator == "CRY" )
-     //SetUserAction(new PrimaryGeneratorAction_CRY(""));
+  else if ( generator == "CRY" )
+     SetUserAction(new PrimaryGeneratorAction_CRY("cmd-dora.file"));
 
   auto theEventAction = new EventAction;
   SetUserAction(theEventAction);

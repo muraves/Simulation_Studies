@@ -17,21 +17,34 @@ file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cc)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 
 #----------------------------------------------------------------------------
-# Add the executable, use our local headers, and link it to the Geant4 libraries
-#
-add_executable(MuravesSim MuravesSim.cc ${sources} ${headers})
-target_include_directories(MuravesSim PRIVATE include)
-target_link_libraries(MuravesSim PRIVATE ${Geant4_LIBRARIES})
 
-#----------------------------------------------------------------------------
-#
 # CRY stuff
 #
 #set(CRY_PATH /home/michael/muography/simulations/CRY/cry_v1.7)
-#set(CRY_LIB -L${CRY_PATH}/lib libCRY.a) 
-#include_directories(${CRY_PATH}/src)
+set(CRY_PATH /Users/dorageeraerts/Documents/PhD/software/cry)
+set(CRY_LIB -L${CRY_PATH}/lib libCRY.a) 
+include_directories(${CRY_PATH}/src)
 
 #----------------------------------------------------------------------------
+# Add the executable, use our local headers, and link it to the Geant4 libraries
+#
+add_executable(MuravesSim MuravesSim.cc ${sources} ${headers})
+target_include_directories(MuravesSim PRIVATE include ${CMAKE_CURRENT_SOURCE_DIR}/CRY)
+target_link_libraries(MuravesSim PRIVATE ${CRY_LIB} ${Geant4_LIBRARIES})
+
+#----------------------------------------------------------------------------
+
+# For Mac arm64, ensure proper architecture flags
+#if(APPLE)
+    #set_target_properties(MuravesSim PROPERTIES
+        #MACOSX_RPATH ON
+        #ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+        #RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    #)
+#endif()
+
+#----------------------------------------------------------------------------
+
 # Copy all scripts to the build directory, i.e. the directory in which we
 # build B5. This is so that we can run the executable directly because it
 # relies on these scripts being in the current working directory.

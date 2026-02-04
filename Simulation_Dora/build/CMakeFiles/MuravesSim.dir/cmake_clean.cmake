@@ -29,10 +29,14 @@ file(REMOVE_RECURSE
   "CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction.cc.o"
   "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction.cc.o.d"
+  "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_CRY.cc.o"
+  "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_CRY.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_GPS.cc.o"
   "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_GPS.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_PG.cc.o"
   "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_PG.cc.o.d"
+  "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorMessenger.cc.o"
+  "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorMessenger.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/RNGWrapper.cc.o"
   "CMakeFiles/MuravesSim.dir/src/RNGWrapper.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/RunAction.cc.o"
@@ -43,8 +47,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o"
   "CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o.d"
-  "MuravesSim"
-  "MuravesSim.pdb"
+  "bin/MuravesSim"
+  "bin/MuravesSim.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

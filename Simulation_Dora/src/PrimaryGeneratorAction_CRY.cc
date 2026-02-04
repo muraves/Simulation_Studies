@@ -8,7 +8,7 @@
 #include <iomanip>
 #include "PrimaryGeneratorAction_CRY.hh"
 #include "DetectorConstruction.hh"
-#include "MuravesSim.hh"
+#include "../MuravesSim.hh"
 
 using namespace std;
 using namespace CLHEP;
@@ -223,6 +223,6 @@ void PrimaryGeneratorAction_CRY::GeneratePrimaries(G4Event* anEvent)
     //G4cout << "Particle energy readback: " << particleGun->GetParticleEnergy() << G4endl;
     delete (*vect)[j];   // not sure we need to do this ...
   }
-
+  G4cout << "CRY particle generated" << endl;
   delete _rotX;
 }
