@@ -1,9 +1,8 @@
-CMakeFiles/exampleB5.dir/exampleB5.cc.o: \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/exampleB5.cc \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/ActionInitialization.hh \
-  /usr/local/include/Geant4/G4VUserActionInitialization.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/DetectorConstruction.hh \
-  /usr/local/include/Geant4/G4VUserDetectorConstruction.hh \
+CMakeFiles/MuravesSim.dir/src/HadCalorimeterSD.cc.o: \
+  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/HadCalorimeterSD.cc \
+  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/HadCalorimeterSD.hh \
+  /usr/local/include/Geant4/G4VSensitiveDetector.hh \
+  /usr/local/include/Geant4/G4CollectionNameVector.hh \
   /usr/local/include/Geant4/globals.hh \
   /usr/local/include/Geant4/G4ios.hh \
   /usr/local/include/Geant4/G4Types.hh \
@@ -976,11 +975,18 @@ CMakeFiles/exampleB5.dir/exampleB5.cc.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/iomanip \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/map \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__tree \
-  /usr/local/include/Geant4/G4RotationMatrix.hh \
+  /usr/local/include/Geant4/G4HCofThisEvent.hh \
+  /usr/local/include/Geant4/G4Allocator.hh \
+  /usr/local/include/Geant4/G4AllocatorPool.hh \
+  /usr/local/include/Geant4/G4VHitsCollection.hh \
+  /usr/local/include/Geant4/G4Step.hh \
   /usr/local/include/Geant4/G4ThreeVector.hh \
   /usr/local/include/Geant4/CLHEP/Vector/ThreeVector.h \
   /usr/local/include/Geant4/CLHEP/Utility/defs.h \
   /usr/local/include/Geant4/CLHEP/Vector/ThreeVector.icc \
+  /usr/local/include/Geant4/G4VPhysicalVolume.hh \
+  /usr/local/include/Geant4/geomdefs.hh \
+  /usr/local/include/Geant4/G4RotationMatrix.hh \
   /usr/local/include/Geant4/CLHEP/Vector/Rotation.h \
   /usr/local/include/Geant4/CLHEP/Vector/RotationInterfaces.h \
   /usr/local/include/Geant4/CLHEP/Vector/LorentzVector.h \
@@ -997,6 +1003,9 @@ CMakeFiles/exampleB5.dir/exampleB5.cc.o: \
   /usr/local/include/Geant4/CLHEP/Vector/RotationZ.h \
   /usr/local/include/Geant4/CLHEP/Vector/RotationZ.icc \
   /usr/local/include/Geant4/CLHEP/Vector/Rotation.icc \
+  /usr/local/include/Geant4/G4GeomSplitter.hh \
+  /usr/local/include/Geant4/geomwdefs.hh \
+  /usr/local/include/Geant4/G4AutoLock.hh \
   /usr/local/include/Geant4/G4Threading.hh \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/chrono \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__chrono/calendar.h \
@@ -1029,101 +1038,10 @@ CMakeFiles/exampleB5.dir/exampleB5.cc.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__stop_token/stop_source.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__thread/thread.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__thread/this_thread.h \
-  /usr/local/include/Geant4/FTFP_BERT.hh \
-  /usr/local/include/Geant4/G4VModularPhysicsList.hh \
-  /usr/local/include/Geant4/G4VPhysicsConstructor.hh \
-  /usr/local/include/Geant4/G4ParticleTable.hh \
-  /usr/local/include/Geant4/G4ParticleDefinition.hh \
-  /usr/local/include/Geant4/G4PDefManager.hh \
-  /usr/local/include/Geant4/G4AutoLock.hh \
-  /usr/local/include/Geant4/pwdefs.hh \
-  /usr/local/include/Geant4/G4ParticleDefinition.icc \
-  /usr/local/include/Geant4/G4ParticleTableIterator.hh \
-  /usr/local/include/Geant4/G4ParticleTable.icc \
-  /usr/local/include/Geant4/G4PhysicsListHelper.hh \
-  /usr/local/include/Geant4/G4PhysicsListOrderingParameter.hh \
-  /usr/local/include/Geant4/G4ThreadLocalSingleton.hh \
-  /usr/local/include/Geant4/G4Cache.hh \
-  /usr/local/include/Geant4/G4CacheDetails.hh \
-  /usr/local/include/Geant4/G4Backtrace.hh \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/cxxabi.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__cxxabi_config.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/execinfo.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/os/base.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/os/availability.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/uuid/uuid.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_uuid_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/unistd.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_posix_vdisable.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/select.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_select.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/gethostuuid.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/cfenv \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/fenv.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/fenv.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/csignal \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/signal.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/regex \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/set \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/list \
-  /usr/local/include/Geant4/G4VUPLSplitter.hh \
-  /usr/local/include/Geant4/rundefs.hh \
-  /usr/local/include/Geant4/G4VUserPhysicsList.hh \
-  /usr/local/include/Geant4/G4PhysicsModelCatalog.hh \
-  /usr/local/include/Geant4/G4ProductionCutsTable.hh \
-  /usr/local/include/Geant4/G4MaterialCutsCouple.hh \
-  /usr/local/include/Geant4/G4ProductionCuts.hh \
-  /usr/local/include/Geant4/G4MCCIndexConversionTable.hh \
-  /usr/local/include/Geant4/G4Region.hh \
-  /usr/local/include/Geant4/G4GeomSplitter.hh \
-  /usr/local/include/Geant4/geomwdefs.hh \
-  /usr/local/include/Geant4/G4Region.icc \
-  /usr/local/include/Geant4/G4RunManagerFactory.hh \
-  /usr/local/include/Geant4/G4MTRunManager.hh \
-  /usr/local/include/Geant4/G4MTBarrier.hh \
-  /usr/local/include/Geant4/G4Profiler.hh \
-  /usr/local/include/Geant4/G4Profiler.icc \
-  /usr/local/include/Geant4/PTL/Globals.hh \
-  /usr/local/include/Geant4/PTL/Types.hh \
-  /usr/local/include/Geant4/PTL/Utility.hh \
-  /usr/local/include/Geant4/G4RNGHelper.hh \
-  /usr/local/include/Geant4/G4RunManager.hh \
-  /usr/local/include/Geant4/G4Event.hh \
-  /usr/local/include/Geant4/evtdefs.hh \
-  /usr/local/include/Geant4/G4Allocator.hh \
-  /usr/local/include/Geant4/G4AllocatorPool.hh \
-  /usr/local/include/Geant4/G4PrimaryVertex.hh \
-  /usr/local/include/Geant4/G4PrimaryParticle.hh \
-  /usr/local/include/Geant4/G4HCofThisEvent.hh \
-  /usr/local/include/Geant4/G4VHitsCollection.hh \
-  /usr/local/include/Geant4/G4DCofThisEvent.hh \
-  /usr/local/include/Geant4/G4VDigiCollection.hh \
-  /usr/local/include/Geant4/G4TrajectoryContainer.hh \
-  /usr/local/include/Geant4/G4VTrajectory.hh \
-  /usr/local/include/Geant4/G4VUserEventInformation.hh \
-  /usr/local/include/Geant4/G4EventManager.hh \
-  /usr/local/include/Geant4/G4StackManager.hh \
-  /usr/local/include/Geant4/G4UserStackingAction.hh \
-  /usr/local/include/Geant4/G4ClassificationOfNewTrack.hh \
-  /usr/local/include/Geant4/G4StackedTrack.hh \
-  /usr/local/include/Geant4/G4TrackStack.hh \
-  /usr/local/include/Geant4/G4SmartTrackStack.hh \
-  /usr/local/include/Geant4/G4SubEventTrackStack.hh \
-  /usr/local/include/Geant4/G4SubEvent.hh \
-  /usr/local/include/Geant4/G4Track.hh \
-  /usr/local/include/Geant4/trkdefs.hh \
-  /usr/local/include/Geant4/G4LogicalVolume.hh \
-  /usr/local/include/Geant4/G4VPhysicalVolume.hh \
-  /usr/local/include/Geant4/geomdefs.hh \
   /usr/local/include/Geant4/G4VPhysicalVolume.icc \
-  /usr/local/include/Geant4/G4LogicalVolume.icc \
-  /usr/local/include/Geant4/G4DynamicParticle.hh \
-  /usr/local/include/Geant4/G4ElectronOccupancy.hh \
-  /usr/local/include/Geant4/G4Log.hh \
-  /usr/local/include/Geant4/G4LorentzVector.hh \
-  /usr/local/include/Geant4/G4ParticleMomentum.hh \
-  /usr/local/include/Geant4/G4DynamicParticle.icc \
-  /usr/local/include/Geant4/G4TrackStatus.hh \
+  /usr/local/include/Geant4/G4StepPoint.hh \
+  /usr/local/include/Geant4/G4SteppingControl.hh \
+  /usr/local/include/Geant4/G4StepStatus.hh \
   /usr/local/include/Geant4/G4TouchableHandle.hh \
   /usr/local/include/Geant4/G4VTouchable.hh \
   /usr/local/include/Geant4/G4TouchableHistory.hh \
@@ -1146,9 +1064,12 @@ CMakeFiles/exampleB5.dir/exampleB5.cc.o: \
   /usr/local/include/Geant4/G4NavigationLevel.icc \
   /usr/local/include/Geant4/G4NavigationHistoryPool.hh \
   /usr/local/include/Geant4/G4NavigationHistory.icc \
+  /usr/local/include/Geant4/G4LogicalVolume.hh \
+  /usr/local/include/Geant4/G4Region.hh \
+  /usr/local/include/Geant4/G4Region.icc \
+  /usr/local/include/Geant4/G4LogicalVolume.icc \
   /usr/local/include/Geant4/G4TouchableHistory.icc \
   /usr/local/include/Geant4/G4ReferenceCountedHandle.hh \
-  /usr/local/include/Geant4/G4VUserTrackInformation.hh \
   /usr/local/include/Geant4/G4Material.hh \
   /usr/local/include/Geant4/G4Element.hh \
   /usr/local/include/Geant4/G4ElementTable.hh \
@@ -1181,6 +1102,7 @@ CMakeFiles/exampleB5.dir/exampleB5.cc.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/path_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/u8path.h \
+  /usr/local/include/Geant4/G4Log.hh \
   /usr/local/include/Geant4/G4PhysicsVectorType.hh \
   /usr/local/include/Geant4/G4PhysicsVector.icc \
   /usr/local/include/Geant4/G4MaterialTable.hh \
@@ -1188,291 +1110,37 @@ CMakeFiles/exampleB5.dir/exampleB5.cc.o: \
   /usr/local/include/Geant4/G4OrderedTable.hh \
   /usr/local/include/Geant4/G4DataVector.hh \
   /usr/local/include/Geant4/G4DataVector.icc \
-  /usr/local/include/Geant4/G4Track.icc \
-  /usr/local/include/Geant4/G4Step.hh \
-  /usr/local/include/Geant4/G4StepPoint.hh \
-  /usr/local/include/Geant4/G4SteppingControl.hh \
-  /usr/local/include/Geant4/G4StepStatus.hh \
   /usr/local/include/Geant4/G4StepPoint.icc \
   /usr/local/include/Geant4/G4TrackVector.hh \
+  /usr/local/include/Geant4/G4Profiler.hh \
+  /usr/local/include/Geant4/G4Profiler.icc \
+  /usr/local/include/Geant4/PTL/Globals.hh \
+  /usr/local/include/Geant4/PTL/Types.hh \
+  /usr/local/include/Geant4/PTL/Utility.hh \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/set \
   /usr/local/include/Geant4/G4Step.icc \
-  /usr/local/include/Geant4/G4PrimaryTransformer.hh \
-  /usr/local/include/Geant4/G4TrackingManager.hh \
-  /usr/local/include/Geant4/G4SteppingManager.hh \
-  /usr/local/include/Geant4/G4Navigator.hh \
-  /usr/local/include/Geant4/G4NormalNavigation.hh \
-  /usr/local/include/Geant4/G4VNavigation.hh \
-  /usr/local/include/Geant4/G4VSolid.hh \
-  /usr/local/include/Geant4/G4VSolid.icc \
-  /usr/local/include/Geant4/G4AuxiliaryNavServices.hh \
-  /usr/local/include/Geant4/G4AuxiliaryNavServices.icc \
-  /usr/local/include/Geant4/G4NormalNavigation.icc \
-  /usr/local/include/Geant4/G4VoxelNavigation.hh \
-  /usr/local/include/Geant4/G4NavigationLogger.hh \
-  /usr/local/include/Geant4/G4BlockingList.hh \
-  /usr/local/include/Geant4/G4BlockingList.icc \
-  /usr/local/include/Geant4/G4SmartVoxelProxy.hh \
-  /usr/local/include/Geant4/G4SmartVoxelProxy.icc \
-  /usr/local/include/Geant4/G4SmartVoxelNode.hh \
-  /usr/local/include/Geant4/G4SmartVoxelNode.icc \
-  /usr/local/include/Geant4/G4SmartVoxelHeader.hh \
-  /usr/local/include/Geant4/G4SmartVoxelHeader.icc \
-  /usr/local/include/Geant4/G4VoxelNavigation.icc \
-  /usr/local/include/Geant4/G4ParameterisedNavigation.hh \
-  /usr/local/include/Geant4/G4VPVParameterisation.hh \
-  /usr/local/include/Geant4/G4VVolumeMaterialScanner.hh \
-  /usr/local/include/Geant4/G4ParameterisedNavigation.icc \
-  /usr/local/include/Geant4/G4ReplicaNavigation.hh \
-  /usr/local/include/Geant4/G4ReplicaNavigation.icc \
-  /usr/local/include/Geant4/G4RegularNavigation.hh \
-  /usr/local/include/Geant4/G4VExternalNavigation.hh \
-  /usr/local/include/Geant4/G4Navigator.icc \
-  /usr/local/include/Geant4/G4NoProcess.hh \
-  /usr/local/include/Geant4/G4VProcess.hh \
-  /usr/local/include/Geant4/Randomize.hh \
-  /usr/local/include/Geant4/CLHEP/Random/Randomize.h \
-  /usr/local/include/Geant4/CLHEP/Random/DualRand.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandomEngine.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandomEngine.icc \
-  /usr/local/include/Geant4/CLHEP/Random/JamesRandom.h \
-  /usr/local/include/Geant4/CLHEP/Random/MixMaxRng.h \
-  /usr/local/include/Geant4/CLHEP/Random/MTwistEngine.h \
-  /usr/local/include/Geant4/CLHEP/Random/RanecuEngine.h \
-  /usr/local/include/Geant4/CLHEP/Random/RanluxEngine.h \
-  /usr/local/include/Geant4/CLHEP/Random/Ranlux64Engine.h \
-  /usr/local/include/Geant4/CLHEP/Random/RanluxppEngine.h \
-  /usr/local/include/Geant4/CLHEP/Random/RanshiEngine.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandBinomial.h \
-  /usr/local/include/Geant4/CLHEP/Random/Random.h \
-  /usr/local/include/Geant4/CLHEP/Random/Random.icc \
-  /usr/local/include/Geant4/CLHEP/Utility/memory.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandBinomial.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandBreitWigner.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandFlat.h \
-  /usr/local/include/Geant4/CLHEP/Utility/thread_local.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandFlat.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandBreitWigner.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandChiSquare.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandChiSquare.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandExponential.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandExponential.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandExpZiggurat.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandBit.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandBit.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandGamma.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandGamma.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandGauss.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandGauss.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandGaussQ.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandGaussQ.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandGaussZiggurat.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandGeneral.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandGeneral.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandLandau.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandLandau.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandPoissonQ.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandPoisson.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandPoisson.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandPoissonQ.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandStudentT.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandStudentT.icc \
-  /usr/local/include/Geant4/G4PhysicsTable.hh \
-  /usr/local/include/Geant4/G4PhysicsTable.icc \
-  /usr/local/include/Geant4/G4VParticleChange.hh \
-  /usr/local/include/Geant4/G4VParticleChange.icc \
-  /usr/local/include/Geant4/G4ForceCondition.hh \
-  /usr/local/include/Geant4/G4GPILSelection.hh \
-  /usr/local/include/Geant4/G4ParticleChange.hh \
-  /usr/local/include/Geant4/G4ParticleChange.icc \
-  /usr/local/include/Geant4/G4ProcessType.hh \
-  /usr/local/include/Geant4/G4ProcessManager.hh \
-  /usr/local/include/Geant4/G4ProcessVector.hh \
-  /usr/local/include/Geant4/G4ProcessVector.icc \
-  /usr/local/include/Geant4/G4ProcessManager.icc \
-  /usr/local/include/Geant4/G4UserSteppingAction.hh \
-  /usr/local/include/Geant4/G4VSteppingVerbose.hh \
-  /usr/local/include/Geant4/trkgdefs.hh \
-  /usr/local/include/Geant4/G4TrackingMessenger.hh \
-  /usr/local/include/Geant4/G4UImessenger.hh \
-  /usr/local/include/Geant4/G4UIdirectory.hh \
-  /usr/local/include/Geant4/G4UIcommand.hh \
-  /usr/local/include/Geant4/G4ApplicationState.hh \
-  /usr/local/include/Geant4/G4UIparameter.hh \
-  /usr/local/include/Geant4/G4UItokenNum.hh \
-  /usr/local/include/Geant4/G4UserTrackingAction.hh \
-  /usr/local/include/Geant4/G4RunManagerKernel.hh \
-  /usr/local/include/Geant4/G4TaskRunManager.hh \
-  /usr/local/include/Geant4/G4TBBTaskGroup.hh \
-  /usr/local/include/Geant4/PTL/TaskGroup.hh \
-  /usr/local/include/Geant4/PTL/AutoLock.hh \
-  /usr/local/include/Geant4/PTL/Threading.hh \
-  /usr/local/include/Geant4/PTL/Config.hh \
-  /usr/local/include/Geant4/PTL/JoinFunction.hh \
-  /usr/local/include/Geant4/PTL/Task.hh \
-  /usr/local/include/Geant4/PTL/VTask.hh \
-  /usr/local/include/Geant4/PTL/ThreadData.hh \
-  /usr/local/include/Geant4/PTL/ThreadPool.hh \
-  /usr/local/include/Geant4/PTL/VUserTaskQueue.hh \
-  /usr/local/include/Geant4/G4TaskGroup.hh \
-  /usr/local/include/Geant4/G4TaskManager.hh \
-  /usr/local/include/Geant4/PTL/TaskManager.hh \
-  /usr/local/include/Geant4/PTL/TaskRunManager.hh \
-  /usr/local/include/Geant4/G4ThreadPool.hh \
-  /usr/local/include/Geant4/G4VUserTaskQueue.hh \
-  /usr/local/include/Geant4/G4StepLimiterPhysics.hh \
-  /usr/local/include/Geant4/G4SteppingVerbose.hh \
-  /usr/local/include/Geant4/G4UIExecutive.hh \
-  /usr/local/include/Geant4/G4VUIshell.hh \
-  /usr/local/include/Geant4/G4UImanager.hh \
-  /usr/local/include/Geant4/G4UIcommandStatus.hh \
-  /usr/local/include/Geant4/G4VStateDependent.hh \
-  /usr/local/include/Geant4/icomsdefs.hh \
-  /usr/local/include/Geant4/G4UIterminal.hh \
-  /usr/local/include/Geant4/G4VBasicShell.hh \
-  /usr/local/include/Geant4/G4UIsession.hh \
-  /usr/local/include/Geant4/G4coutDestination.hh \
-  /usr/local/include/Geant4/G4UItcsh.hh \
-  /usr/local/include/Geant4/G4UIcommandTree.hh \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/termios.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/termios.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/ttycom.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/ioccom.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/ttydefaults.h \
-  /usr/local/include/Geant4/G4VisExecutive.hh \
-  /usr/local/include/Geant4/G4VisManager.hh \
-  /usr/local/include/Geant4/G4VVisManager.hh \
-  /usr/local/include/Geant4/G4GraphicsSystemList.hh \
-  /usr/local/include/Geant4/G4VGraphicsSystem.hh \
-  /usr/local/include/Geant4/G4ModelingParameters.hh \
-  /usr/local/include/Geant4/G4VisExtent.hh \
-  /usr/local/include/Geant4/G4Point3D.hh \
-  /usr/local/include/Geant4/G4VisAttributes.hh \
-  /usr/local/include/Geant4/graphics_reps_defs.hh \
-  /usr/local/include/Geant4/G4Colour.hh \
-  /usr/local/include/Geant4/G4Color.hh \
-  /usr/local/include/Geant4/G4VisAttributes.icc \
-  /usr/local/include/Geant4/G4ModelingParameters.icc \
-  /usr/local/include/Geant4/G4NullModel.hh \
-  /usr/local/include/Geant4/G4VModel.hh \
-  /usr/local/include/Geant4/G4VModel.icc \
-  /usr/local/include/Geant4/G4SceneHandlerList.hh \
-  /usr/local/include/Geant4/G4VSceneHandler.hh \
-  /usr/local/include/Geant4/G4VGraphicsScene.hh \
-  /usr/local/include/Geant4/G4ViewerList.hh \
-  /usr/local/include/Geant4/G4VViewer.hh \
-  /usr/local/include/Geant4/G4SceneTreeItem.hh \
-  /usr/local/include/Geant4/G4AttDef.hh \
-  /usr/local/include/Geant4/G4TypeKey.hh \
-  /usr/local/include/Geant4/G4AttValue.hh \
-  /usr/local/include/Geant4/G4ViewParameters.hh \
-  /usr/local/include/Geant4/G4Vector3D.hh \
-  /usr/local/include/Geant4/G4Plane3D.hh \
-  /usr/local/include/Geant4/CLHEP/Geometry/Plane3D.h \
-  /usr/local/include/Geant4/G4VMarker.hh \
-  /usr/local/include/Geant4/G4Visible.hh \
-  /usr/local/include/Geant4/G4Visible.icc \
-  /usr/local/include/Geant4/G4VMarker.icc \
-  /usr/local/include/Geant4/G4ViewParameters.icc \
-  /usr/local/include/Geant4/G4PhysicalVolumeModel.hh \
-  /usr/local/include/Geant4/G4PseudoScene.hh \
-  /usr/local/include/Geant4/G4Box.hh \
-  /usr/local/include/Geant4/G4GeomTypes.hh \
-  /usr/local/include/Geant4/G4GeomConfig.hh \
-  /usr/local/include/Geant4/G4CSGSolid.hh \
-  /usr/local/include/Geant4/G4Polyhedron.hh \
-  /usr/local/include/Geant4/HepPolyhedron.h \
-  /usr/local/include/Geant4/G4TwoVector.hh \
-  /usr/local/include/Geant4/CLHEP/Vector/TwoVector.h \
-  /usr/local/include/Geant4/CLHEP/Vector/TwoVector.icc \
-  /usr/local/include/Geant4/G4Normal3D.hh \
-  /usr/local/include/Geant4/G4Box.icc \
-  /usr/local/include/Geant4/G4Cons.hh \
-  /usr/local/include/Geant4/G4Cons.icc \
-  /usr/local/include/Geant4/G4Orb.hh /usr/local/include/Geant4/G4Orb.icc \
-  /usr/local/include/Geant4/G4Para.hh \
-  /usr/local/include/Geant4/G4Para.icc \
-  /usr/local/include/Geant4/G4Sphere.hh \
-  /usr/local/include/Geant4/G4Sphere.icc \
-  /usr/local/include/Geant4/G4Torus.hh \
-  /usr/local/include/Geant4/G4Torus.icc \
-  /usr/local/include/Geant4/G4Trap.hh \
-  /usr/local/include/Geant4/G4Trap.icc \
-  /usr/local/include/Geant4/G4Trd.hh /usr/local/include/Geant4/G4Trd.icc \
-  /usr/local/include/Geant4/G4Tubs.hh \
-  /usr/local/include/Geant4/G4Tubs.icc \
-  /usr/local/include/Geant4/G4Ellipsoid.hh \
-  /usr/local/include/Geant4/G4Ellipsoid.icc \
-  /usr/local/include/Geant4/G4Polycone.hh \
-  /usr/local/include/Geant4/G4VCSGfaceted.hh \
-  /usr/local/include/Geant4/G4PolyconeSide.hh \
-  /usr/local/include/Geant4/G4VCSGface.hh \
-  /usr/local/include/Geant4/G4PolyconeHistorical.hh \
-  /usr/local/include/Geant4/G4Polycone.icc \
-  /usr/local/include/Geant4/G4Polyhedra.hh \
-  /usr/local/include/Geant4/G4PolyhedraSide.hh \
-  /usr/local/include/Geant4/G4PolyhedraHistorical.hh \
-  /usr/local/include/Geant4/G4Polyhedra.icc \
-  /usr/local/include/Geant4/G4TessellatedSolid.hh \
-  /usr/local/include/Geant4/G4Voxelizer.hh \
-  /usr/local/include/Geant4/G4SurfBits.hh \
-  /usr/local/include/Geant4/G4VFacet.hh \
-  /usr/local/include/Geant4/windefs.hh \
-  /usr/local/include/Geant4/G4Voxelizer.icc \
-  /usr/local/include/Geant4/G4VViewer.icc \
-  /usr/local/include/Geant4/G4THitsMap.hh \
-  /usr/local/include/Geant4/G4THitsCollection.hh \
-  /usr/local/include/Geant4/G4VSceneHandler.icc \
-  /usr/local/include/Geant4/G4SceneList.hh \
-  /usr/local/include/Geant4/G4Scene.hh \
-  /usr/local/include/Geant4/G4Scene.icc \
-  /usr/local/include/Geant4/G4TrajectoriesModel.hh \
-  /usr/local/include/Geant4/G4VisManager.icc \
-  /usr/local/include/Geant4/G4VisExecutive.icc \
-  /usr/local/include/Geant4/G4HitFilterFactories.hh \
-  /usr/local/include/Geant4/G4VFilter.hh \
-  /usr/local/include/Geant4/G4VModelFactory.hh \
+  /usr/local/include/Geant4/G4Track.hh \
+  /usr/local/include/Geant4/trkdefs.hh \
+  /usr/local/include/Geant4/G4DynamicParticle.hh \
+  /usr/local/include/Geant4/G4ElectronOccupancy.hh \
+  /usr/local/include/Geant4/pwdefs.hh \
+  /usr/local/include/Geant4/G4LorentzVector.hh \
+  /usr/local/include/Geant4/G4ParticleDefinition.hh \
+  /usr/local/include/Geant4/G4PDefManager.hh \
+  /usr/local/include/Geant4/G4ParticleDefinition.icc \
+  /usr/local/include/Geant4/G4ParticleMomentum.hh \
+  /usr/local/include/Geant4/G4DynamicParticle.icc \
+  /usr/local/include/Geant4/G4TrackStatus.hh \
+  /usr/local/include/Geant4/G4VUserTrackInformation.hh \
+  /usr/local/include/Geant4/G4PhysicsModelCatalog.hh \
+  /usr/local/include/Geant4/G4Track.icc \
   /usr/local/include/Geant4/G4VHit.hh \
-  /usr/local/include/Geant4/G4DigiFilterFactories.hh \
-  /usr/local/include/Geant4/G4VDigi.hh \
-  /usr/local/include/Geant4/G4TrajectoryFilterFactories.hh \
-  /usr/local/include/Geant4/G4TrajectoryModelFactories.hh \
-  /usr/local/include/Geant4/G4VTrajectoryModel.hh \
-  /usr/local/include/Geant4/G4ASCIITree.hh \
-  /usr/local/include/Geant4/G4VTree.hh \
-  /usr/local/include/Geant4/G4DAWNFILE.hh \
-  /usr/local/include/Geant4/G4HepRepFile.hh \
-  /usr/local/include/Geant4/G4HepRepFileXMLWriter.hh \
-  /usr/local/include/Geant4/G4RayTracer.hh \
-  /usr/local/include/Geant4/G4VRML2File.hh \
-  /usr/local/include/Geant4/G4GMocrenFile.hh \
-  /usr/local/include/Geant4/G4ToolsSGOffscreen.hh \
-  /usr/local/include/Geant4/G4OpenGLImmediateQt.hh \
-  /usr/local/include/Geant4/G4OpenGLQt.hh \
-  /usr/local/include/Geant4/G4OpenGLStoredQt.hh \
-  /usr/local/include/Geant4/G4Qt3D.hh \
-  /usr/local/include/Geant4/G4ToolsSGQtGLES.hh \
-  /usr/local/include/Geant4/G4ToolsSGQtZB.hh \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/QtGlobal \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qglobal.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qconfig.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtcore-config.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qsystemdetection.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/TargetConditionals.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/AvailabilityMacros.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qprocessordetection.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qcompilerdetection.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qtypeinfo.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qsysinfo.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qlogging.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qflags.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qatomic.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qbasicatomic.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qatomic_cxx11.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qgenericatomic.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qglobalstatic.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qmutex.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qnumeric.h \
-  /opt/homebrew/Cellar/qt@5/5.15.16/lib/QtCore.framework/Headers/qversiontagging.h \
-  /usr/local/include/Geant4/G4UIbatch.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/MuravesMessenger.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PhysicsList.hh
+  /usr/local/include/Geant4/G4VReadOutGeometry.hh \
+  /usr/local/include/Geant4/G4SensitiveVolumeList.hh \
+  /usr/local/include/Geant4/G4VSDFilter.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/HadCalorimeterHit.hh \
+  /usr/local/include/Geant4/G4THitsCollection.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/Constants.hh \
+  /usr/local/include/Geant4/G4SDManager.hh \
+  /usr/local/include/Geant4/G4HCtable.hh \
+  /usr/local/include/Geant4/G4SDStructure.hh

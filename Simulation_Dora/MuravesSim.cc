@@ -1,0 +1,177 @@
+//
+// ********************************************************************
+// * License and Disclaimer                                           *
+// *                                                                  *
+// * The  Geant4 software  is  copyright of the Copyright Holders  of *
+// * the Geant4 Collaboration.  It is provided  under  the terms  and *
+// * conditions of the Geant4 Software License,  included in the file *
+// * LICENSE and available at  http://cern.ch/geant4/license .  These *
+// * include a list of copyright holders.                             *
+// *                                                                  *
+// * Neither the authors of this software system, nor their employing *
+// * institutes,nor the agencies providing financial support for this *
+// * work  make  any representation or  warranty, express or implied, *
+// * regarding  this  software system or assume any liability for its *
+// * use.  Please see the license in the file  LICENSE  and URL above *
+// * for the full disclaimer and the limitation of liability.         *
+// *                                                                  *
+// * This  code  implementation is the result of  the  scientific and *
+// * technical work of the GEANT4 collaboration.                      *
+// * By using,  copying,  modifying or  distributing the software (or *
+// * any work based  on the software)  you  agree  to acknowledge its *
+// * use  in  resulting  scientific  publications,  and indicate your *
+// * acceptance of all terms of the Geant4 Software license.          *
+// ********************************************************************
+//
+/// \file exampleB5.cc
+/// \brief Main program of the basic/B5 example
+
+#include "ActionInitialization.hh"
+#include "DetectorConstruction.hh"
+#include "FTFP_BERT.hh"
+
+#include "G4RunManagerFactory.hh"
+#include "G4StepLimiterPhysics.hh"
+#include "G4SteppingVerbose.hh"
+#include "G4UIExecutive.hh"
+#include "G4UImanager.hh"
+#include "G4UIterminal.hh"
+#include "G4UItcsh.hh"
+#include "G4VisExecutive.hh"
+#include "MuravesMessenger.hh"
+#include "PhysicsList.hh"
+
+//#include "G4MPImanager.hh"
+//#include "G4MPIsession.hh"
+//#include "G4VMPIseedGenerator.hh"
+//#include "time.h"
+//#include <chrono>
+
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+int main(int argc, char** argv)
+{
+  G4UIExecutive* ui = nullptr;
+  if (argc == 1) {
+    ui = new G4UIExecutive(argc, argv);
+  }
+  auto theMessenger = new MuravesMessenger();
+
+  // --- Set the seed ---
+  /*
+  auto start = high_resolution_clock::now();
+  
+  G4MPImanager* g4MPI = new G4MPImanager(argc, argv);
+  G4MPIsession* session = g4MPI-> GetMPIsession(); 
+  CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine());
+  //G4int rank_ = MPI::COMM_WORLD.Get_rank(); //获取并行进程号
+  G4int rank_;
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank_); 
+    time_t systime = time(NULL);
+  G4long seed = rank_*10.0+systime;
+  G4Random::setTheSeed(seed); 
+  */
+
+  // --- Command-line arguments (needs to be improved) ---
+  G4String inputfile="";
+  
+  G4int iarg = 1;
+  if (argc > 1) {
+    while ( iarg < argc ) {
+      if (G4String(argv[iarg]).compare("--generator") == 0) {
+	if ( ++iarg < argc ) {
+	  if ( (G4String(argv[iarg]).compare("CRY") == 0)
+	       || (G4String(argv[iarg]).compare("PartGun") == 0)
+	       || (G4String(argv[iarg]).compare("GPS") == 0) ) {
+	    theMessenger->SetPrimaryGenerator(G4String(argv[iarg]));
+	    iarg++;
+	  }
+	  else {
+	    G4cout << "Unknown generator option " << argv[iarg] << G4endl;
+	    return EXIT_FAILURE;
+	  }
+	} else {
+	  G4cout << "Missing generator choice" << G4endl;
+	  return EXIT_FAILURE;
+	}
+      }
+      else if (G4String(argv[iarg]).compare("--inputfile") == 0) {
+	if ( ++iarg < argc ) {
+	  inputfile = G4String(argv[iarg]);
+	  iarg++;
+	} else {
+	  G4cout << "Missing inputfile" << G4endl;
+	  return EXIT_FAILURE;
+	}
+      }
+      else {
+	G4cout << "Unknown option " << argv[iarg] << G4endl;
+	return EXIT_FAILURE;
+      }      
+    } 
+  }
+
+  // Run manager
+  //------------ no need to switch between MT and single-threaded, G4RunManagerType::Default automatically picks the right case
+  auto theRunManager = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
+  // Pick number of threads (example)
+  /*if (argc == 3)
+    runManager->SetNumberOfThreads(atoi(argv[2]));
+  else
+    runManager->SetNumberOfThreads(2);*/
+
+  // UserInitialization classes
+  //---------------------------
+  //DetectorConstruction* theDetector = new DetectorConstruction("scintillator");
+  //theDetector = new DetectorConstruction("Muraves");
+  theRunManager->SetUserInitialization(new B5::DetectorConstruction());
+
+  // ************** CHECK PHYSICS LIST FROM CRY GEANT4 EXAMPLE, it doesn't fully work at the moment ***********************
+  //PhysicsList* thePhysicsList = new PhysicsList;   
+  auto thePhysicsList = new FTFP_BERT;
+  thePhysicsList->SetVerboseLevel(1);
+  theRunManager->SetUserInitialization(new PhysicsList);
+
+  // UserAction classes
+  //-------------------
+  //theRunManager->SetUserAction(new PrimaryGeneratorAction(""));
+  theRunManager->SetUserInitialization(new B5::ActionInitialization());
+  
+  // Initialize G4 kernel
+  //---------------------
+  theRunManager->Initialize();
+
+  // Initialize visualization
+  //---------------------  
+  G4VisManager* theVisManager = new G4VisExecutive;
+  // G4VisExecutive can take a verbosity argument - see /vis/verbose guidance.
+  // G4VisManager* visManager = new G4VisExecutive("Quiet");
+  theVisManager->Initialize();
+
+  // User interactions
+  //------------------
+  G4UImanager* UImanager = G4UImanager::GetUIpointer();  
+
+  if (!ui) {
+    // execute an argument macro file if exist
+    G4String command = "/control/execute ";
+    G4String fileName = argv[1];
+    UImanager->ApplyCommand(command + fileName);
+  }
+  else {
+    UImanager->ApplyCommand("/control/execute init_vis.mac");
+    if (ui->IsGUI()) {
+      UImanager->ApplyCommand("/control/execute gui.mac");
+    }
+    // start interactive session
+    ui->SessionStart();
+    delete ui;
+  }
+
+  delete theVisManager;
+  delete theRunManager;
+  return EXIT_SUCCESS;
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
