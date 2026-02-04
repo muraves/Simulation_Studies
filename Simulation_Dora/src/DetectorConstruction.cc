@@ -30,11 +30,6 @@
 
 #include "CellParameterisation.hh"
 #include "Constants.hh"
-#include "DriftChamberSD.hh"
-#include "EmCalorimeterSD.hh"
-#include "HadCalorimeterSD.hh"
-#include "ScintBarSD.hh"
-#include "MagneticField.hh"
 
 #include "G4Box.hh"
 #include "G4Colour.hh"
@@ -60,6 +55,7 @@
 #include "G4IntersectionSolid.hh"
 #include "G4SubtractionSolid.hh"
 #include "G4VPrimitiveScorer.hh"
+#include "ScintBarSD.hh"
 
 namespace B5
 {
@@ -70,42 +66,44 @@ G4ThreadLocal G4FieldManager* DetectorConstruction::fFieldMgr = nullptr;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-DetectorConstruction::DetectorConstruction() 
+DetectorConstruction::DetectorConstruction(const char *detectorName)
+  : G4VUserDetectorConstruction(),
+    fScoringVolume(0),
+    _nBars(32), _nModules(2), _nPlanes(1), _nStations(4), _stationSpacing(50 * cm), _barLength(107 * cm), _barHeight(1.7 * cm),
+    _barBase(3.3 * cm), _triangEffectiveBase(3.3 * cm), _rotUpperX(NULL), _rotLowerX(NULL), _rotUpperY(NULL), _rotLowerY(NULL),
+    _halfContLengthZ(0.), _halfContLengthXY(0.), _looseAccCheck(0.), _detType("triangular")
 {
-  fArmRotation = new G4RotationMatrix();
-  fArmRotation->rotateY(fArmAngle);
-
-  // define commands for this class
-  DefineCommands();
+  _messenger = new G4GenericMessenger(this, std::string("/muraves/").append(detectorName).append("/"));
+  _messenger->DeclareProperty("nBars", _nBars, "Set the number of scintillating bars per module");
+  _messenger->DeclareProperty("nModules", _nModules, "Set the number of modules per plane");
+  _messenger->DeclareProperty("nPlanes", _nPlanes, "Set the number of planes per station");
+  _messenger->DeclareProperty("nStations", _nStations, "Set the number of XY stations.");
+  _messenger->DeclarePropertyWithUnit("barLength","cm", _barLength, "Set the length of the scintillating bars.");
+  _messenger->DeclarePropertyWithUnit("barHeight","cm", _barHeight, "Set the height of the scintillating bars.");
+  _messenger->DeclarePropertyWithUnit("barBase","cm", _barBase, "Set the size of the base of the scintillating bars.");
+  _messenger->DeclarePropertyWithUnit("triangEffBase","cm", _triangEffectiveBase,
+				      "Set the effective size of the base of the triangular bars due to cut edges (valid only for triangular detector type).");
+  _messenger->DeclareProperty("looseAcceptanceCheck", _looseAccCheck,
+			      "Detector-face-enlargement factor for acceptance check (e.g. 1.1 -> enlarge face size by 10% when checking acceptance, 1 -> no enlargement)");
+  _messenger->DeclareProperty("detectorType", _detType,
+			      "Set the detector type (triangular bars, square bars, monolithic layers)").SetCandidates("triangular square monolithic");
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 DetectorConstruction::~DetectorConstruction()
 {
-  delete fArmRotation;
-  delete fMessenger;
+  delete _messenger;
+  delete _rotUpperX;
+  delete _rotLowerX;
+  delete _rotUpperY;
+  delete _rotLowerY;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
-
-  G4double _barHeight = 17*mm;
-  G4double _barBase = 33*mm;
-  G4double _barLength = 1000*mm;
-  _triangEffectiveBase = 33*mm;
-
-  //_triangEffectiveBase += xySafety; // Add safety margin
-   _nBars = 32;
-   _nModules = 2;
-   _nPlanes = 1;
-   _nStations = 4;
-   _stationSpacing =50*cm;
-
-  //static const char *routineName = "[MuravesDetector::Construct] ";
-
   float xySafety = 0.1 * mm; //  XY shift to separate bars apart
   //float zSafety = 10 * cm; //  Z shift to separate layers apart
   float zSafety = 5.4 * cm; //  Z shift to separate layers apart
@@ -639,39 +637,38 @@ void DetectorConstruction::ConstructMaterials()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void DetectorConstruction::SetArmAngle(G4double val)
+// Track must hit front and back layer
+G4bool DetectorConstruction::IsInsideAcceptance(const G4ThreeVector &pos, const G4ThreeVector &dir) const
 {
-  if (!fSecondArmPhys) {
-    G4cerr << "Detector has not yet been constructed." << G4endl;
-    return;
-  }
+  // 1. Reject particles not entering from front side
+  if (pos[2] < _halfContLengthZ)
+    return false;
 
-  fArmAngle = val;
-  *fArmRotation = G4RotationMatrix();  // make it unit vector
-  fArmRotation->rotateY(fArmAngle);
-  auto x = -5. * m * std::sin(fArmAngle);
-  auto z = 5. * m * std::cos(fArmAngle);
-  fSecondArmPhys->SetTranslation(G4ThreeVector(x, 0., z));
+  // 2. Reject particles not hitting the front side
+  float hitPoint = fabs(pos[0] + (dir[0] / dir[2]) * (_halfContLengthZ - pos[2])); // X coordinate
+  if (hitPoint > _halfContLengthXY * _looseAccCheck)
+    return false;
+  hitPoint = fabs(pos[1] + (dir[1] / dir[2]) * (_halfContLengthZ - pos[2])); // Y coordinate
+  if (hitPoint > _halfContLengthXY * _looseAccCheck)
+    return false;
 
-  // tell G4RunManager that we change the geometry
-  G4RunManager::GetRunManager()->GeometryHasBeenModified();
+  // 3. Reject particles not hitting the back side
+  hitPoint = fabs(pos[0] + (dir[0] / dir[2]) * (-_halfContLengthZ - pos[2])); // X coordinate
+  if (hitPoint > _halfContLengthXY * _looseAccCheck)
+    return false;
+  hitPoint = fabs(pos[1] + (dir[1] / dir[2]) * (-_halfContLengthZ - pos[2])); // Y coordinate
+  if (hitPoint > _halfContLengthXY * _looseAccCheck)
+    return false;
+
+  return true;
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void DetectorConstruction::DefineCommands()
+void DetectorConstruction::DeleteMessenger()
 {
-  // Define /B5/detector command directory using generic messenger class
-  fMessenger = new G4GenericMessenger(this, "/B5/detector/", "Detector control");
-
-  // armAngle command
-  auto& armAngleCmd = fMessenger->DeclareMethodWithUnit(
-    "armAngle", "deg", &DetectorConstruction::SetArmAngle, "Set rotation angle of the second arm.");
-  armAngleCmd.SetParameterName("angle", true);
-  armAngleCmd.SetRange("angle>=0. && angle<180.");
-  armAngleCmd.SetDefaultValue("30.");
+  delete _messenger;
+  _messenger = NULL;
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 }  // namespace B5

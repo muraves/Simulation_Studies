@@ -125,7 +125,7 @@ int main(int argc, char** argv)
   //---------------------------
   //DetectorConstruction* theDetector = new DetectorConstruction("scintillator");
   //theDetector = new DetectorConstruction("Muraves");
-  theRunManager->SetUserInitialization(new B5::DetectorConstruction());
+  theRunManager->SetUserInitialization(new B5::DetectorConstruction("Muraves"));
 
   // ************** CHECK PHYSICS LIST FROM CRY GEANT4 EXAMPLE, it doesn't fully work at the moment ***********************
   //PhysicsList* thePhysicsList = new PhysicsList;   

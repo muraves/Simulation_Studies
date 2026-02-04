@@ -51,40 +51,26 @@ class MagneticField;
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
   public:
-    DetectorConstruction();
-    ~DetectorConstruction() override;
+    DetectorConstruction(const char *detectorName);
+    virtual ~DetectorConstruction();
 
-    G4VPhysicalVolume* Construct() override;
-    void ConstructSDandField() override;
+    virtual G4VPhysicalVolume* Construct();
+    virtual void ConstructSDandField();
+    //virtual G4LogicalVolume* Construct();
+    
+    G4LogicalVolume* GetScoringVolume() const { return fScoringVolume; }
 
-    void SetArmAngle(G4double val);
-    G4double GetArmAngle() { return fArmAngle; }
+    G4bool IsInsideAcceptance(const G4ThreeVector &pos, const G4ThreeVector &dir) const;
+
+    void DeleteMessenger();
 
     void ConstructMaterials();
 
   private:
-    void DefineCommands();
-
-    static G4ThreadLocal G4FieldManager* fFieldMgr;
-
-    G4GenericMessenger* fMessenger = nullptr;
-
-    G4LogicalVolume* fHodoscope1Logical = nullptr;
-    G4LogicalVolume* fHodoscope2Logical = nullptr;
-    G4LogicalVolume* fWirePlane1Logical = nullptr;
-    G4LogicalVolume* fWirePlane2Logical = nullptr;
-    G4LogicalVolume* fCellLogical = nullptr;
-    G4LogicalVolume* fHadCalScintiLogical = nullptr;
-    G4LogicalVolume* fMagneticLogical = nullptr;
-
-    G4LogicalVolume* barLog = nullptr;
-
-    G4double fArmAngle = 30. * CLHEP::deg;
-    G4RotationMatrix* fArmRotation = nullptr;
-    G4VPhysicalVolume* fSecondArmPhys = nullptr;
-
     G4GenericMessenger *_messenger;
     G4LogicalVolume*  fScoringVolume;
+    G4LogicalVolume* barLog = nullptr;
+    static G4ThreadLocal G4FieldManager* fFieldMgr;
 
     // Detector properties
     G4int _nBars;
