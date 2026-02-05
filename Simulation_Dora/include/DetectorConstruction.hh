@@ -34,12 +34,16 @@
 #include "G4RotationMatrix.hh"
 #include "G4Threading.hh"
 #include "globals.hh"
-
+#include "G4Material.hh"
 #include <CLHEP/Units/SystemOfUnits.h>
+#include "G4VPhysicalVolume.hh"
+#include "G4Cache.hh"
 
 class G4FieldManager;
 class G4VPhysicalVolume;
 class G4GenericMessenger;
+class Materials;
+class G4LogicalVolume;
 
 namespace B5
 {
@@ -65,8 +69,10 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     void DeleteMessenger();
 
     void ConstructMaterials();
+    G4Material* FindMaterial(G4String);
 
   private:
+    Materials* fMaterials;
     G4GenericMessenger *_messenger;
     G4LogicalVolume*  fScoringVolume;
     G4LogicalVolume* barLog = nullptr;

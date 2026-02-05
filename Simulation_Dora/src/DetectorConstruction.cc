@@ -56,6 +56,9 @@
 #include "G4SubtractionSolid.hh"
 #include "G4VPrimitiveScorer.hh"
 #include "ScintBarSD.hh"
+#include "Materials.hh"
+#include "G4MaterialPropertiesTable.hh"
+#include "G4Element.hh"
 
 namespace B5
 {
@@ -98,12 +101,15 @@ DetectorConstruction::~DetectorConstruction()
   delete _rotLowerX;
   delete _rotUpperY;
   delete _rotLowerY;
+  if(fMaterials)  delete fMaterials; 
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
+  fMaterials = Materials::GetInstance();
+
   float xySafety = 0.1 * mm; //  XY shift to separate bars apart
   //float zSafety = 10 * cm; //  Z shift to separate layers apart
   float zSafety = 5.4 * cm; //  Z shift to separate layers apart
@@ -264,7 +270,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     boxSolid,
                     triangSolid);
             barLog = new G4LogicalVolume(triangCutEdgeSolid,
-                    scintMaterial,
+                    FindMaterial("polystyrene"),
                     "BARSH2E",
                     NULL,
                     NULL,
@@ -274,7 +280,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
         else {
             // Use plain G4Trap
             barLog = new G4LogicalVolume(triangSolid,
-                    scintMaterial, 
+                    FindMaterial("polystyrene"), 
                     "BARSH2E", 
                     NULL, 
                     NULL, 
@@ -663,12 +669,18 @@ G4bool DetectorConstruction::IsInsideAcceptance(const G4ThreeVector &pos, const 
   return true;
 }
 
+G4Material* DetectorConstruction::FindMaterial(G4String name) 
+{
+    G4Material* material = G4Material::GetMaterial(name,true);
+    return material;
+}
 
 void DetectorConstruction::DeleteMessenger()
 {
   delete _messenger;
   _messenger = NULL;
 }
+
 
 
 }  // namespace B5
