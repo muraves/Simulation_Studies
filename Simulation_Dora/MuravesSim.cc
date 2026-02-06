@@ -49,7 +49,7 @@
 //#include <chrono>
 
 #include "MuravesSim.hh"
-B5::DetectorConstruction* theDetector;
+DetectorConstruction* theDetector;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -127,7 +127,7 @@ int main(int argc, char** argv)
   // UserInitialization classes
   //---------------------------
   //DetectorConstruction* theDetector = new DetectorConstruction("scintillator");
-  theDetector = new B5::DetectorConstruction("Muraves");
+  theDetector = new DetectorConstruction("Muraves");
   theRunManager->SetUserInitialization(theDetector);
 
   // ************** CHECK PHYSICS LIST FROM CRY GEANT4 EXAMPLE, it doesn't fully work at the moment ***********************
@@ -140,7 +140,7 @@ int main(int argc, char** argv)
   // UserAction classes
   //-------------------
   //theRunManager->SetUserAction(new PrimaryGeneratorAction(""));
-  theRunManager->SetUserInitialization(new B5::ActionInitialization());
+  theRunManager->SetUserInitialization(new ActionInitialization());
   
   // Initialize G4 kernel
   //---------------------

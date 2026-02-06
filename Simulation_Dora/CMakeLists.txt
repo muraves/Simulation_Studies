@@ -66,6 +66,8 @@ set(MURAVESSIM_SCRIPTS
   cmd2.file
   cmdpartgun.mac
   cmdgps.mac
+  cmd-cry-dora.file
+  gps_beam_center.mac
   )
 
 foreach(_script ${MURAVESSIM_SCRIPTS})

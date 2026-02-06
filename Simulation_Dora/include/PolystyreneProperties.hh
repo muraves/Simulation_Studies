@@ -1,4 +1,8 @@
-#pragma once
+/// \file PolystyreneProperties.hh
+/// \brief Definition of the PolystyreneProperties class
+
+#ifndef PolystyreneProperties_h
+#define PolystyreneProperties_h 1
 
 namespace Materials {
     static const G4String kPOLYSTYRENE = "polystyrene";
@@ -32,3 +36,5 @@ namespace Materials {
     // Typical absorption length for an inorganic scintillator
     const std::vector<G4double> POLYSTYRENE_ABS_LEN(POLYSTYRENE_ABS_LEN_ENERGIES.size(), 3.5 * m);
 }
+
+#endif

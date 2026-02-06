@@ -1,3 +1,6 @@
+/// \file MuravesMessenger.cc
+/// \brief Implementation of the MuravesMessenger class
+
 #include "MuravesMessenger.hh"
 
 #include "G4GenericMessenger.hh"

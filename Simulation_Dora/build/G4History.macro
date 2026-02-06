@@ -54,9 +54,13 @@
 /gui/addButton gun "pi+" "/gun/particle pi+"
 /gui/addButton gun "neutron" "/gun/particle neutron"
 /gui/addButton gun "proton" "/gun/particle proton"
+/control/execute gps_beam_center.mac
+/gps/particle mu-
+/gps/pos/centre 0 0 -1 m
+/gps/pos/type Point
+/gps/direction 0 0 1
+/gps/ene/type Mono
+/gps/ene/mono 4 GeV
 /run/beamOn
 /analysis/h1/getVector
 /analysis/h2/getVector
-/muraves/Muraves/nPlanes 2
-/vis/viewer/rebuild
-/vis/viewer/refresh

@@ -1,0 +1,9 @@
+/gps/particle mu-
+
+/gps/pos/centre 0 0 -1 m
+/gps/pos/type Point
+
+/gps/direction 0 0 1
+
+/gps/ene/type Mono
+/gps/ene/mono 4 GeV

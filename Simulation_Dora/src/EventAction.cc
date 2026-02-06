@@ -1,36 +1,10 @@
-//
-// ********************************************************************
-// * License and Disclaimer                                           *
-// *                                                                  *
-// * The  Geant4 software  is  copyright of the Copyright Holders  of *
-// * the Geant4 Collaboration.  It is provided  under  the terms  and *
-// * conditions of the Geant4 Software License,  included in the file *
-// * LICENSE and available at  http://cern.ch/geant4/license .  These *
-// * include a list of copyright holders.                             *
-// *                                                                  *
-// * Neither the authors of this software system, nor their employing *
-// * institutes,nor the agencies providing financial support for this *
-// * work  make  any representation or  warranty, express or implied, *
-// * regarding  this  software system or assume any liability for its *
-// * use.  Please see the license in the file  LICENSE  and URL above *
-// * for the full disclaimer and the limitation of liability.         *
-// *                                                                  *
-// * This  code  implementation is the result of  the  scientific and *
-// * technical work of the GEANT4 collaboration.                      *
-// * By using,  copying,  modifying or  distributing the software (or *
-// * any work based  on the software)  you  agree  to acknowledge its *
-// * use  in  resulting  scientific  publications,  and indicate your *
-// * acceptance of all terms of the Geant4 Software license.          *
-// ********************************************************************
-//
 /// \file EventAction.cc
-/// \brief Implementation of the B5::EventAction class
+/// \brief Implementation of the EventAction class
 
 #include "EventAction.hh"
 
-//#include "Analysis.hh"
-//#include "ROOTManager.hh"
 #include "TrackingAction.hh"
+#include "ScintBarHit.hh"
 
 #include "G4Event.hh"
 #include "G4RunManager.hh"
@@ -40,14 +14,10 @@
 #include "G4SDManager.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4ios.hh"
-#include "ScintBarHit.hh"
 #include "G4AnalysisManager.hh"
 
 using std::array;
 using std::vector;
-
-namespace
-{
 
 // Utility function which finds a hit collection with the given Id
 // and print warnings if not found
@@ -70,11 +40,6 @@ G4VHitsCollection* GetHC(const G4Event* event, G4int collId)
   return hc;
 }
 
-}  // namespace
-
-namespace B5
-{
-
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 EventAction::EventAction()
@@ -94,7 +59,6 @@ void EventAction::BeginOfEventAction(const G4Event*)
     auto SDManager = G4SDManager::GetSDMpointer();
     fScintbarsHCID = SDManager->GetCollectionID("Scintbars/ScintbarsColl");
   }
-  //G4cout << "BeginOfEventAction fScintbarsHCID: " << fScintbarsHCID << G4endl;
   
   TrackingAction::Instance()->ResetParents();
 }
@@ -103,10 +67,9 @@ void EventAction::BeginOfEventAction(const G4Event*)
 
 void EventAction::EndOfEventAction(const G4Event* event)
 {
-  //
-  // Fill histograms & ntuple
-  //
-
+  
+  // ------------------- Fill histograms & ntuple -------------------
+  
   // Get analysis manager
   auto analysisManager = G4AnalysisManager::Instance();
   auto mytracking = TrackingAction::Instance();
@@ -121,11 +84,11 @@ void EventAction::EndOfEventAction(const G4Event* event)
   auto nhit = hc->GetSize();
   G4cout << "Nhit: " << nhit << G4endl;
   
+  // Loop over hits
   for ( unsigned long i = 0; i < nhit; i++ ) {
     auto hit = static_cast<ScintbarHit*>(hc->GetHit(i));
     auto pos = hit->GetPos();
 
-    //analysisManager->FillNtupleIColumn(8, mytracking->GetPrimary(hit->GetTrackID()));
     analysisManager->FillNtupleIColumn(1, 0, eventID);
     analysisManager->FillNtupleIColumn(1, 1, nhit); // not really necessary
     analysisManager->FillNtupleIColumn(1, 2, hit->GetTrackID());
@@ -141,7 +104,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
     analysisManager->AddNtupleRow(1);
   }
   
-
+  // Loop over primaries
   analysisManager->FillNtupleIColumn(0, 0, eventID);
   for ( int i = 0; i < event->GetNumberOfPrimaryVertex(); i++ ) {
     for ( int q = 0; q < event->GetPrimaryVertex(i)->GetNumberOfParticle(); q++ ) {
@@ -160,4 +123,3 @@ void EventAction::EndOfEventAction(const G4Event* event)
 }
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-}  // namespace B5

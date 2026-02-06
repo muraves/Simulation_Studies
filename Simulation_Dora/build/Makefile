@@ -177,30 +177,6 @@ src/ActionInitialization.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/ActionInitialization.cc.s
 .PHONY : src/ActionInitialization.cc.s
 
-src/CellParameterisation.o: src/CellParameterisation.cc.o
-.PHONY : src/CellParameterisation.o
-
-# target to build an object file
-src/CellParameterisation.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/CellParameterisation.cc.o
-.PHONY : src/CellParameterisation.cc.o
-
-src/CellParameterisation.i: src/CellParameterisation.cc.i
-.PHONY : src/CellParameterisation.i
-
-# target to preprocess a source file
-src/CellParameterisation.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/CellParameterisation.cc.i
-.PHONY : src/CellParameterisation.cc.i
-
-src/CellParameterisation.s: src/CellParameterisation.cc.s
-.PHONY : src/CellParameterisation.s
-
-# target to generate assembly for a file
-src/CellParameterisation.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/CellParameterisation.cc.s
-.PHONY : src/CellParameterisation.cc.s
-
 src/DetectorConstruction.o: src/DetectorConstruction.cc.o
 .PHONY : src/DetectorConstruction.o
 
@@ -224,102 +200,6 @@ src/DetectorConstruction.s: src/DetectorConstruction.cc.s
 src/DetectorConstruction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/DetectorConstruction.cc.s
 .PHONY : src/DetectorConstruction.cc.s
-
-src/DriftChamberHit.o: src/DriftChamberHit.cc.o
-.PHONY : src/DriftChamberHit.o
-
-# target to build an object file
-src/DriftChamberHit.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/DriftChamberHit.cc.o
-.PHONY : src/DriftChamberHit.cc.o
-
-src/DriftChamberHit.i: src/DriftChamberHit.cc.i
-.PHONY : src/DriftChamberHit.i
-
-# target to preprocess a source file
-src/DriftChamberHit.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/DriftChamberHit.cc.i
-.PHONY : src/DriftChamberHit.cc.i
-
-src/DriftChamberHit.s: src/DriftChamberHit.cc.s
-.PHONY : src/DriftChamberHit.s
-
-# target to generate assembly for a file
-src/DriftChamberHit.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/DriftChamberHit.cc.s
-.PHONY : src/DriftChamberHit.cc.s
-
-src/DriftChamberSD.o: src/DriftChamberSD.cc.o
-.PHONY : src/DriftChamberSD.o
-
-# target to build an object file
-src/DriftChamberSD.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/DriftChamberSD.cc.o
-.PHONY : src/DriftChamberSD.cc.o
-
-src/DriftChamberSD.i: src/DriftChamberSD.cc.i
-.PHONY : src/DriftChamberSD.i
-
-# target to preprocess a source file
-src/DriftChamberSD.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/DriftChamberSD.cc.i
-.PHONY : src/DriftChamberSD.cc.i
-
-src/DriftChamberSD.s: src/DriftChamberSD.cc.s
-.PHONY : src/DriftChamberSD.s
-
-# target to generate assembly for a file
-src/DriftChamberSD.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/DriftChamberSD.cc.s
-.PHONY : src/DriftChamberSD.cc.s
-
-src/EmCalorimeterHit.o: src/EmCalorimeterHit.cc.o
-.PHONY : src/EmCalorimeterHit.o
-
-# target to build an object file
-src/EmCalorimeterHit.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/EmCalorimeterHit.cc.o
-.PHONY : src/EmCalorimeterHit.cc.o
-
-src/EmCalorimeterHit.i: src/EmCalorimeterHit.cc.i
-.PHONY : src/EmCalorimeterHit.i
-
-# target to preprocess a source file
-src/EmCalorimeterHit.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/EmCalorimeterHit.cc.i
-.PHONY : src/EmCalorimeterHit.cc.i
-
-src/EmCalorimeterHit.s: src/EmCalorimeterHit.cc.s
-.PHONY : src/EmCalorimeterHit.s
-
-# target to generate assembly for a file
-src/EmCalorimeterHit.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/EmCalorimeterHit.cc.s
-.PHONY : src/EmCalorimeterHit.cc.s
-
-src/EmCalorimeterSD.o: src/EmCalorimeterSD.cc.o
-.PHONY : src/EmCalorimeterSD.o
-
-# target to build an object file
-src/EmCalorimeterSD.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/EmCalorimeterSD.cc.o
-.PHONY : src/EmCalorimeterSD.cc.o
-
-src/EmCalorimeterSD.i: src/EmCalorimeterSD.cc.i
-.PHONY : src/EmCalorimeterSD.i
-
-# target to preprocess a source file
-src/EmCalorimeterSD.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/EmCalorimeterSD.cc.i
-.PHONY : src/EmCalorimeterSD.cc.i
-
-src/EmCalorimeterSD.s: src/EmCalorimeterSD.cc.s
-.PHONY : src/EmCalorimeterSD.s
-
-# target to generate assembly for a file
-src/EmCalorimeterSD.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/EmCalorimeterSD.cc.s
-.PHONY : src/EmCalorimeterSD.cc.s
 
 src/EventAction.o: src/EventAction.cc.o
 .PHONY : src/EventAction.o
@@ -345,77 +225,53 @@ src/EventAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/EventAction.cc.s
 .PHONY : src/EventAction.cc.s
 
-src/HadCalorimeterHit.o: src/HadCalorimeterHit.cc.o
-.PHONY : src/HadCalorimeterHit.o
+src/Materials.o: src/Materials.cc.o
+.PHONY : src/Materials.o
 
 # target to build an object file
-src/HadCalorimeterHit.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/HadCalorimeterHit.cc.o
-.PHONY : src/HadCalorimeterHit.cc.o
+src/Materials.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/Materials.cc.o
+.PHONY : src/Materials.cc.o
 
-src/HadCalorimeterHit.i: src/HadCalorimeterHit.cc.i
-.PHONY : src/HadCalorimeterHit.i
+src/Materials.i: src/Materials.cc.i
+.PHONY : src/Materials.i
 
 # target to preprocess a source file
-src/HadCalorimeterHit.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/HadCalorimeterHit.cc.i
-.PHONY : src/HadCalorimeterHit.cc.i
+src/Materials.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/Materials.cc.i
+.PHONY : src/Materials.cc.i
 
-src/HadCalorimeterHit.s: src/HadCalorimeterHit.cc.s
-.PHONY : src/HadCalorimeterHit.s
+src/Materials.s: src/Materials.cc.s
+.PHONY : src/Materials.s
 
 # target to generate assembly for a file
-src/HadCalorimeterHit.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/HadCalorimeterHit.cc.s
-.PHONY : src/HadCalorimeterHit.cc.s
+src/Materials.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/Materials.cc.s
+.PHONY : src/Materials.cc.s
 
-src/HadCalorimeterSD.o: src/HadCalorimeterSD.cc.o
-.PHONY : src/HadCalorimeterSD.o
+src/MuSimPhysicsList.o: src/MuSimPhysicsList.cc.o
+.PHONY : src/MuSimPhysicsList.o
 
 # target to build an object file
-src/HadCalorimeterSD.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/HadCalorimeterSD.cc.o
-.PHONY : src/HadCalorimeterSD.cc.o
+src/MuSimPhysicsList.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/MuSimPhysicsList.cc.o
+.PHONY : src/MuSimPhysicsList.cc.o
 
-src/HadCalorimeterSD.i: src/HadCalorimeterSD.cc.i
-.PHONY : src/HadCalorimeterSD.i
-
-# target to preprocess a source file
-src/HadCalorimeterSD.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/HadCalorimeterSD.cc.i
-.PHONY : src/HadCalorimeterSD.cc.i
-
-src/HadCalorimeterSD.s: src/HadCalorimeterSD.cc.s
-.PHONY : src/HadCalorimeterSD.s
-
-# target to generate assembly for a file
-src/HadCalorimeterSD.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/HadCalorimeterSD.cc.s
-.PHONY : src/HadCalorimeterSD.cc.s
-
-src/MagneticField.o: src/MagneticField.cc.o
-.PHONY : src/MagneticField.o
-
-# target to build an object file
-src/MagneticField.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/MagneticField.cc.o
-.PHONY : src/MagneticField.cc.o
-
-src/MagneticField.i: src/MagneticField.cc.i
-.PHONY : src/MagneticField.i
+src/MuSimPhysicsList.i: src/MuSimPhysicsList.cc.i
+.PHONY : src/MuSimPhysicsList.i
 
 # target to preprocess a source file
-src/MagneticField.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/MagneticField.cc.i
-.PHONY : src/MagneticField.cc.i
+src/MuSimPhysicsList.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/MuSimPhysicsList.cc.i
+.PHONY : src/MuSimPhysicsList.cc.i
 
-src/MagneticField.s: src/MagneticField.cc.s
-.PHONY : src/MagneticField.s
+src/MuSimPhysicsList.s: src/MuSimPhysicsList.cc.s
+.PHONY : src/MuSimPhysicsList.s
 
 # target to generate assembly for a file
-src/MagneticField.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/MagneticField.cc.s
-.PHONY : src/MagneticField.cc.s
+src/MuSimPhysicsList.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/MuSimPhysicsList.cc.s
+.PHONY : src/MuSimPhysicsList.cc.s
 
 src/MuravesMessenger.o: src/MuravesMessenger.cc.o
 .PHONY : src/MuravesMessenger.o
@@ -464,30 +320,6 @@ src/PhysicsList.s: src/PhysicsList.cc.s
 src/PhysicsList.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.s
 .PHONY : src/PhysicsList.cc.s
-
-src/PrimaryGeneratorAction.o: src/PrimaryGeneratorAction.cc.o
-.PHONY : src/PrimaryGeneratorAction.o
-
-# target to build an object file
-src/PrimaryGeneratorAction.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction.cc.o
-.PHONY : src/PrimaryGeneratorAction.cc.o
-
-src/PrimaryGeneratorAction.i: src/PrimaryGeneratorAction.cc.i
-.PHONY : src/PrimaryGeneratorAction.i
-
-# target to preprocess a source file
-src/PrimaryGeneratorAction.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction.cc.i
-.PHONY : src/PrimaryGeneratorAction.cc.i
-
-src/PrimaryGeneratorAction.s: src/PrimaryGeneratorAction.cc.s
-.PHONY : src/PrimaryGeneratorAction.s
-
-# target to generate assembly for a file
-src/PrimaryGeneratorAction.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction.cc.s
-.PHONY : src/PrimaryGeneratorAction.cc.s
 
 src/PrimaryGeneratorAction_CRY.o: src/PrimaryGeneratorAction_CRY.cc.o
 .PHONY : src/PrimaryGeneratorAction_CRY.o
@@ -720,45 +552,24 @@ help:
 	@echo "... src/ActionInitialization.o"
 	@echo "... src/ActionInitialization.i"
 	@echo "... src/ActionInitialization.s"
-	@echo "... src/CellParameterisation.o"
-	@echo "... src/CellParameterisation.i"
-	@echo "... src/CellParameterisation.s"
 	@echo "... src/DetectorConstruction.o"
 	@echo "... src/DetectorConstruction.i"
 	@echo "... src/DetectorConstruction.s"
-	@echo "... src/DriftChamberHit.o"
-	@echo "... src/DriftChamberHit.i"
-	@echo "... src/DriftChamberHit.s"
-	@echo "... src/DriftChamberSD.o"
-	@echo "... src/DriftChamberSD.i"
-	@echo "... src/DriftChamberSD.s"
-	@echo "... src/EmCalorimeterHit.o"
-	@echo "... src/EmCalorimeterHit.i"
-	@echo "... src/EmCalorimeterHit.s"
-	@echo "... src/EmCalorimeterSD.o"
-	@echo "... src/EmCalorimeterSD.i"
-	@echo "... src/EmCalorimeterSD.s"
 	@echo "... src/EventAction.o"
 	@echo "... src/EventAction.i"
 	@echo "... src/EventAction.s"
-	@echo "... src/HadCalorimeterHit.o"
-	@echo "... src/HadCalorimeterHit.i"
-	@echo "... src/HadCalorimeterHit.s"
-	@echo "... src/HadCalorimeterSD.o"
-	@echo "... src/HadCalorimeterSD.i"
-	@echo "... src/HadCalorimeterSD.s"
-	@echo "... src/MagneticField.o"
-	@echo "... src/MagneticField.i"
-	@echo "... src/MagneticField.s"
+	@echo "... src/Materials.o"
+	@echo "... src/Materials.i"
+	@echo "... src/Materials.s"
+	@echo "... src/MuSimPhysicsList.o"
+	@echo "... src/MuSimPhysicsList.i"
+	@echo "... src/MuSimPhysicsList.s"
 	@echo "... src/MuravesMessenger.o"
 	@echo "... src/MuravesMessenger.i"
 	@echo "... src/MuravesMessenger.s"
 	@echo "... src/PhysicsList.o"
 	@echo "... src/PhysicsList.i"
 	@echo "... src/PhysicsList.s"
-	@echo "... src/PrimaryGeneratorAction.o"
-	@echo "... src/PrimaryGeneratorAction.i"
-	@echo "... src/PrimaryGeneratorAction.s"
 	@echo "... src/PrimaryGeneratorAction_CRY.o"
 	@echo "... src/PrimaryGeneratorAction_CRY.i"
 	@echo "... src/PrimaryGeneratorAction_CRY.s"

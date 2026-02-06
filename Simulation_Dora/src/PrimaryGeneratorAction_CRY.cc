@@ -5,8 +5,9 @@
 //******************************************************************************
 //
 
-#include <iomanip>
 #include "PrimaryGeneratorAction_CRY.hh"
+
+#include <iomanip>
 #include "DetectorConstruction.hh"
 #include "../MuravesSim.hh"
 

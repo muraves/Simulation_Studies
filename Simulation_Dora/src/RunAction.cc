@@ -32,9 +32,6 @@
 
 #include "G4AnalysisManager.hh"
 
-namespace B5
-{
-
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 RunAction::RunAction(EventAction* eventAction) : fEventAction(eventAction)
@@ -51,7 +48,7 @@ RunAction::RunAction(EventAction* eventAction) : fEventAction(eventAction)
   // Note: merging ntuples is available only with Root output
   analysisManager->SetFileName("MuravesSim_Data"); 
 
-  // Creating ntuple (tuple ID = 0)
+  // Creating ntuples
   if (fEventAction) {
     // tuple Id = 0 --- Particle-generation-level ---------
     analysisManager->CreateNtuple("GenData", "Event-level information of generated primaries");
@@ -101,7 +98,6 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
   // Get analysis manager
   auto analysisManager = G4AnalysisManager::Instance();
 
-  // Reset histograms from previous run
   analysisManager->Reset();
 
   // Open an output file
@@ -114,15 +110,14 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
 
 void RunAction::EndOfRunAction(const G4Run* /*run*/)
 {
-  // save histograms & ntuple
+  // ntuples
   //
   auto analysisManager = G4AnalysisManager::Instance();
   analysisManager->Write();
   analysisManager->CloseFile(false);
-  // Keep content of histos so that they are plotted.
+  // Keep content so that they are plotted.
   // The content will be reset at start of the next run.
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-}  // namespace B5

@@ -1,3 +1,6 @@
+/// \file MuravesMessenger.hh
+/// \brief Definition of the MuravesMessenger class
+
 #ifndef MuravesMessenger_h
 #define MuravesMessenger_h 1
 
@@ -19,7 +22,6 @@ public:
 private:
   static MuravesMessenger* fgInstance;
   G4String primarygenerator;
-  //G4GenericMessenger* fMessenger;
 };
 
 #endif

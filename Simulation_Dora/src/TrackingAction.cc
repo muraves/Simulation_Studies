@@ -27,17 +27,6 @@ void TrackingAction::AddParent( G4int trackID, G4int parentID )
   }
 
   fParentIDs.insert(std::pair<int,int>(trackID, parentID));
-
-  /*auto [it, inserted] =
-  fParentIDs.insert({trackID, parentID});
-
-if (!inserted && it->second != parentID) {
-  G4Exception("TrackingAction::AddParent",
-              "ParentMismatch",
-              FatalException,
-              "Parent ID changed for same track");
-}*/
-
 }
     
 G4int TrackingAction::GetParent( G4int trackID )
