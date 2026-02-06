@@ -42,7 +42,7 @@
 class G4FieldManager;
 class G4VPhysicalVolume;
 class G4GenericMessenger;
-class Materials;
+//class Materials;
 class G4LogicalVolume;
 
 namespace B5
@@ -72,11 +72,13 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     G4Material* FindMaterial(G4String);
 
   private:
-    Materials* fMaterials;
+
+    //void makePolystyrene();
+    //Materials* fMaterials;
     G4GenericMessenger *_messenger;
     G4LogicalVolume*  fScoringVolume;
     G4LogicalVolume* barLog = nullptr;
-    static G4ThreadLocal G4FieldManager* fFieldMgr;
+    //static G4ThreadLocal G4FieldManager* fFieldMgr;
 
     // Detector properties
     G4int _nBars;

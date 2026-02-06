@@ -49,38 +49,46 @@ RunAction::RunAction(EventAction* eventAction) : fEventAction(eventAction)
   // Default settings
   analysisManager->SetNtupleMerging(true);
   // Note: merging ntuples is available only with Root output
-  analysisManager->SetFileName("MuravesSim"); 
+  analysisManager->SetFileName("MuravesSim_Data"); 
 
   // Creating ntuple (tuple ID = 0)
   if (fEventAction) {
-    analysisManager->CreateNtuple("Muraves", "MuravesSim");
+    // tuple Id = 0 --- Particle-generation-level ---------
+    analysisManager->CreateNtuple("GenData", "Event-level information of generated primaries");
 
-    // --- Event-level ---
     analysisManager->CreateNtupleIColumn("Event"); // column Id = 0
-    // --- Particle-generation-level ---
+    
     analysisManager->CreateNtupleIColumn("NGenPart"); // column Id = 1
     analysisManager->CreateNtupleIColumn("GenPartID");  // column Id = 2
     analysisManager->CreateNtupleIColumn("GenPartPDG");  // column Id = 3
     analysisManager->CreateNtupleDColumn("GenPartE"); // column Id = 4   
     analysisManager->CreateNtupleDColumn("GenPartTheta"); // column Id = 5  
     analysisManager->CreateNtupleDColumn("GenPartPhi"); // column Id = 6
-    // --- Hit-level ---
-    analysisManager->CreateNtupleIColumn("NScintHit"); // column Id = 7
-    analysisManager->CreateNtupleIColumn("ScintHitPrimaryID"); // column Id = 8
-    analysisManager->CreateNtupleDColumn("ScintHitE"); // column Id = 9
-    analysisManager->CreateNtupleDColumn("ScintHitPosX"); // column Id = 10
-    analysisManager->CreateNtupleDColumn("ScintHitPosY"); // column Id = 11
-    analysisManager->CreateNtupleDColumn("ScintHitPosZ"); // column Id = 12
-    analysisManager->CreateNtupleIColumn("ScintHitStation"); // column Id = 13
-    analysisManager->CreateNtupleIColumn("ScintHitModule"); // column Id = 14
-    analysisManager->CreateNtupleIColumn("ScintHitBar"); // column Id = 15
-    analysisManager->CreateNtupleIColumn("ScintHitPDG"); // column Id = 16
+    
+    analysisManager->FinishNtuple();
+
+     // tuple Id = 1 --- Hit-level ------------------------
+    analysisManager->CreateNtuple("HitData", "Hit-level information of hits in scintillator bars");
+
+    analysisManager->CreateNtupleIColumn("Event"); // column Id = 0
+    
+    analysisManager->CreateNtupleIColumn("NScintHit"); // column Id = 1
+    analysisManager->CreateNtupleIColumn("ScintHitPrimaryID"); // column Id = 2
+    analysisManager->CreateNtupleDColumn("ScintHitE"); // column Id = 3
+    analysisManager->CreateNtupleDColumn("ScintHitPosX"); // column Id = 4
+    analysisManager->CreateNtupleDColumn("ScintHitPosY"); // column Id = 5
+    analysisManager->CreateNtupleDColumn("ScintHitPosZ"); // column Id = 6
+    analysisManager->CreateNtupleIColumn("ScintHitStation"); // column Id = 7
+    analysisManager->CreateNtupleIColumn("ScintHitModule"); // column Id = 8
+    analysisManager->CreateNtupleIColumn("ScintHitBar"); // column Id = 9
+    analysisManager->CreateNtupleIColumn("ScintHitPDG"); // column Id = 10
   
     analysisManager->FinishNtuple();
   }
 
   // Set ntuple output file
-  analysisManager->SetNtupleFileName(0, "MuravesSim_ntuple");
+  //analysisManager->SetNtupleFileName(0, "Muraves_GenData");
+  //analysisManager->SetNtupleFileName(1, "Muraves_HitData");
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

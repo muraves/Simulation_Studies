@@ -40,6 +40,7 @@
 #include "G4VisExecutive.hh"
 #include "MuravesMessenger.hh"
 #include "PhysicsList.hh"
+#include "MuSimPhysicsList.hh"
 
 //#include "G4MPImanager.hh"
 //#include "G4MPIsession.hh"
@@ -133,7 +134,8 @@ int main(int argc, char** argv)
   //PhysicsList* thePhysicsList = new PhysicsList;   
   auto thePhysicsList = new FTFP_BERT;
   thePhysicsList->SetVerboseLevel(1);
-  theRunManager->SetUserInitialization(new PhysicsList);
+  //theRunManager->SetUserInitialization(new PhysicsList);
+  theRunManager->SetUserInitialization(new CosMuSimPhysicsList);
 
   // UserAction classes
   //-------------------

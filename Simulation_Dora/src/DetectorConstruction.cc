@@ -28,7 +28,7 @@
 
 #include "DetectorConstruction.hh"
 
-#include "CellParameterisation.hh"
+#include "BarParameterisation.hh"
 #include "Constants.hh"
 
 #include "G4Box.hh"
@@ -65,7 +65,7 @@ namespace B5
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-G4ThreadLocal G4FieldManager* DetectorConstruction::fFieldMgr = nullptr;
+//G4ThreadLocal G4FieldManager* DetectorConstruction::fFieldMgr = nullptr;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -90,6 +90,8 @@ DetectorConstruction::DetectorConstruction(const char *detectorName)
 			      "Detector-face-enlargement factor for acceptance check (e.g. 1.1 -> enlarge face size by 10% when checking acceptance, 1 -> no enlargement)");
   _messenger->DeclareProperty("detectorType", _detType,
 			      "Set the detector type (triangular bars, square bars, monolithic layers)").SetCandidates("triangular square monolithic");
+
+  Materials::makeMaterials();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -101,14 +103,14 @@ DetectorConstruction::~DetectorConstruction()
   delete _rotLowerX;
   delete _rotUpperY;
   delete _rotLowerY;
-  if(fMaterials)  delete fMaterials; 
+  //if(fMaterials)  delete fMaterials; 
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
-  fMaterials = Materials::GetInstance();
+  //sfMaterials = Materials::GetInstance();
 
   float xySafety = 0.1 * mm; //  XY shift to separate bars apart
   //float zSafety = 10 * cm; //  Z shift to separate layers apart
@@ -270,18 +272,18 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     boxSolid,
                     triangSolid);
             barLog = new G4LogicalVolume(triangCutEdgeSolid,
-                    FindMaterial("polystyrene"),
+                    FindMaterial(Materials::kPOLYSTYRENE),
                     "BARSH2E",
-                    NULL,
-                    NULL,
-                    NULL,
-                    false);
+                    NULL, // field manager
+                    NULL, // sensitive detector
+                    NULL, // user-defined limits for particles in this volume
+                    false); 
         }
         else {
             // Use plain G4Trap
             barLog = new G4LogicalVolume(triangSolid,
-                    FindMaterial("polystyrene"), 
-                    "BARSH2E", 
+                    FindMaterial(Materials::kPOLYSTYRENE),
+                    "BARSH2E",
                     NULL, 
                     NULL, 
                     NULL, 

@@ -42,8 +42,8 @@ void PrimaryGeneratorAction_PG::GeneratePrimaries(G4Event* anEvent)
   G4ThreeVector pos(x, y, z); 
 
   G4double px = 0; 
-  G4double pz = 1.;
   G4double py = 0; 
+  G4double pz = 1.;
 
   G4ThreeVector mom(px, py, pz); 
 

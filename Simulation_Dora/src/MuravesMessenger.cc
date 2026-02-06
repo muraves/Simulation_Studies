@@ -7,7 +7,7 @@
 MuravesMessenger* MuravesMessenger::fgInstance = 0;
 
 MuravesMessenger::MuravesMessenger()
-  :primarygenerator("CRY")
+  :primarygenerator("GPS")
 {
   fgInstance = this;
 

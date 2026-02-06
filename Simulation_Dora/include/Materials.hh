@@ -31,47 +31,41 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-#ifndef CosMuSimMaterials_h
-#define CosMuSimMaterials_h 1
+#pragma once
 
 #include "globals.hh"
 #include "G4Material.hh"
 #include "G4NistManager.hh"
+#include "G4Exception.hh"
+#include "G4MaterialPropertiesTable.hh"
+#include "G4String.hh"
+#include "G4OpticalParameters.hh"
+#include "G4PhysicalConstants.hh"
+#include "G4Scintillation.hh"
+#include "G4SystemOfUnits.hh"
+
+#include "PolystyreneProperties.hh"
 
 class G4Material;
-class Materials
+namespace Materials
 {
-  public:
+    static const G4double TEMP = 283 * kelvin;
+    void makeMaterials();
 
-    virtual ~Materials();
- 
-    static Materials* GetInstance();
+    // scintillation
+    static const G4String kSCINT_YIELD = "SCINTILLATIONYIELD";
+    static const G4String kSCINT_COMPONENT = "SCINTILLATIONCOMPONENT1";
+    static const G4String kDECAY_TIME_CONSTANT = "SCINTILLATIONTIMECONSTANT1";
+    static const G4String kRESOLUTION_SCALE = "RESOLUTIONSCALE";
+    static const G4String kRISE_TIME = "SCINTILLATIONRISETIME1";
 
-    G4Material* GetMaterial(const G4String);
- 
-  private:
- 
-    Materials();
-
-    void CreateMaterials();
-
-  private:
-
-    static Materials* fInstance;
-
-    G4NistManager*     fNistMan;
-
-    G4Material*        fAir;
-	G4Material* 	   fpolystyrene;
-	G4Material* 	   fBC600;
-    G4Material*        fPMMA;
-    G4Material*        fPTFE;
-    G4Material*        fGlass;
-    G4Material*        fBCF92;
-	G4Material* 	   fFAcrylic;
-	G4Material*        fAl;
-	G4Material* 	   fY11;
-
+    // optical photon stuff
+    static const G4String kREFR_IDX = "RINDEX";
+    static const G4String kREFR_IDX_REAL = "REALRINDEX";
+    static const G4String kREFR_IDX_IMAG = "IMAGINARYRINDEX";
+    static const G4String kABSORPTION_LEN = "ABSLENGTH";
+    
+    static const G4String kOP_DET_EFF = "EFFICIENCY";
+    static const G4String kREFLECTIVITY = "REFLECTIVITY";
+    static const G4String kTRANSMITTANCE = "TRANSMITTANCE";
 };
-
-#endif /*CosMuSimMaterials_h*/

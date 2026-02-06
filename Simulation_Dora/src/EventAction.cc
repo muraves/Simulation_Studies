@@ -126,29 +126,33 @@ void EventAction::EndOfEventAction(const G4Event* event)
     auto pos = hit->GetPos();
 
     //analysisManager->FillNtupleIColumn(8, mytracking->GetPrimary(hit->GetTrackID()));
-    analysisManager->FillNtupleIColumn(8, hit->GetTrackID());
-    analysisManager->FillNtupleDColumn(9, hit->GetEdep());
-    analysisManager->FillNtupleDColumn(10, pos.x());
-    analysisManager->FillNtupleDColumn(11, pos.y());
-    analysisManager->FillNtupleDColumn(12, pos.z());
-    analysisManager->FillNtupleIColumn(13, hit->GetStationID());
-    analysisManager->FillNtupleIColumn(14, hit->GetModuleID());
-    analysisManager->FillNtupleIColumn(15, hit->GetBarID());
-    analysisManager->FillNtupleIColumn(16, hit->GetPDGcode());
+    analysisManager->FillNtupleIColumn(1, 0, eventID);
+    analysisManager->FillNtupleIColumn(1, 1, nhit); // not really necessary
+    analysisManager->FillNtupleIColumn(1, 2, hit->GetTrackID());
+    analysisManager->FillNtupleDColumn(1, 3, hit->GetEdep());
+    analysisManager->FillNtupleDColumn(1, 4, pos.x());
+    analysisManager->FillNtupleDColumn(1, 5, pos.y());
+    analysisManager->FillNtupleDColumn(1, 6, pos.z());
+    analysisManager->FillNtupleIColumn(1, 7, hit->GetStationID());
+    analysisManager->FillNtupleIColumn(1, 8, hit->GetModuleID());
+    analysisManager->FillNtupleIColumn(1, 9, hit->GetBarID());
+    analysisManager->FillNtupleIColumn(1, 10, hit->GetPDGcode());
+  
+    analysisManager->AddNtupleRow(1);
   }
-  analysisManager->AddNtupleRow();
+  
 
-  analysisManager->FillNtupleIColumn(0, eventID);
+  analysisManager->FillNtupleIColumn(0, 0, eventID);
   for ( int i = 0; i < event->GetNumberOfPrimaryVertex(); i++ ) {
     for ( int q = 0; q < event->GetPrimaryVertex(i)->GetNumberOfParticle(); q++ ) {
                 
       auto primary = event->GetPrimaryVertex(i)->GetPrimary(q);
                  
-      analysisManager->FillNtupleIColumn(1, primary->GetTrackID());
-      analysisManager->FillNtupleIColumn(2, primary->GetG4code()->GetPDGEncoding());
-      analysisManager->FillNtupleDColumn(4, primary->GetTotalEnergy());
-      analysisManager->FillNtupleDColumn(5, primary->GetMomentumDirection().theta());
-      analysisManager->FillNtupleDColumn(6, primary->GetMomentumDirection().phi());
+      analysisManager->FillNtupleIColumn(0, 2, primary->GetTrackID());
+      analysisManager->FillNtupleIColumn(0, 3, primary->GetG4code()->GetPDGEncoding());
+      analysisManager->FillNtupleDColumn(0, 4, primary->GetTotalEnergy());
+      analysisManager->FillNtupleDColumn(0, 5, primary->GetMomentumDirection().theta());
+      analysisManager->FillNtupleDColumn(0, 6, primary->GetMomentumDirection().phi());
         
     }    
     analysisManager->AddNtupleRow(0);
