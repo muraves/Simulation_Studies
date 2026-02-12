@@ -87,6 +87,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4NistManager* nist = G4NistManager::Instance();
   G4Material* air_mat = nist->FindOrBuildMaterial("G4_AIR");
   G4Material* Aluminum_mat = nist->FindOrBuildMaterial("G4_Al");
+  G4Material* polystyrene_mat = nist->FindOrBuildMaterial("G4_POLYSTYRENE"); // standard polystyrene
+  //G4Material* polystyrene_mat = FindMaterial(Materials::kPOLYSTYRENE); // with costum scintillator properties
 
   G4bool checkOverlaps = false; // Option to switch on/off checking of volumes overlaps
 
@@ -199,7 +201,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
             G4IntersectionSolid* triangCutEdgeSolid = new G4IntersectionSolid("boxSolid*triangSolid", boxSolid, triangSolid);
 
             barLog = new G4LogicalVolume(triangCutEdgeSolid,
-                    FindMaterial(Materials::kPOLYSTYRENE),
+                    polystyrene_mat,
                     "BARSH2E",
                     NULL, // field manager
                     NULL, // sensitive detector
@@ -209,7 +211,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
         else {
             // Use plain G4Trap
             barLog = new G4LogicalVolume(triangSolid,
-                    FindMaterial(Materials::kPOLYSTYRENE),
+                    polystyrene_mat,
                     "BARSH2E",
                     NULL, 
                     NULL, 

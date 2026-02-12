@@ -50,8 +50,8 @@ RunAction::RunAction(EventAction* eventAction) : fEventAction(eventAction)
 
   // Creating ntuples
   if (fEventAction) {
-    // tuple Id = 0 --- Particle-generation-level ---------
-    analysisManager->CreateNtuple("GenData", "Event-level information of generated primaries");
+    // tuple Id = 0 --- Primary particle-generation-level ---------
+    analysisManager->CreateNtuple("PrimaryGenData", "Event-level information of generated primaries");
 
     analysisManager->CreateNtupleIColumn("Event"); // column Id = 0
     
@@ -79,6 +79,7 @@ RunAction::RunAction(EventAction* eventAction) : fEventAction(eventAction)
     analysisManager->CreateNtupleIColumn("ScintHitModule"); // column Id = 8
     analysisManager->CreateNtupleIColumn("ScintHitBar"); // column Id = 9
     analysisManager->CreateNtupleIColumn("ScintHitPDG"); // column Id = 10
+    analysisManager->CreateNtupleIColumn("ScintHitTrackID"); // column Id = 11
   
     analysisManager->FinishNtuple();
   }

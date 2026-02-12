@@ -133,9 +133,10 @@ int main(int argc, char** argv)
   // ************** CHECK PHYSICS LIST FROM CRY GEANT4 EXAMPLE, it doesn't fully work at the moment ***********************
   //PhysicsList* thePhysicsList = new PhysicsList;   
   auto thePhysicsList = new FTFP_BERT;
+  //auto thePhysicsList = new CosMuSimPhysicsList;
   thePhysicsList->SetVerboseLevel(1);
   //theRunManager->SetUserInitialization(new PhysicsList);
-  theRunManager->SetUserInitialization(new CosMuSimPhysicsList);
+  theRunManager->SetUserInitialization(thePhysicsList);
 
   // UserAction classes
   //-------------------

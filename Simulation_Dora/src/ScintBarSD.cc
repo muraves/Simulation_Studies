@@ -60,8 +60,45 @@ G4bool ScintbarSD::ProcessHits(G4Step* step, G4TouchableHistory* history)
   //auto ModuleNo = touchable->GetCopyNumber(3);
   //auto hitID = kNofHadRows*columnNo+rowNo;
   //auto hit = (*fHitsCollection)[hitID];
+
+  G4int trackID = track->GetTrackID();
+  ScintbarHit* hit = nullptr;
+
+  // Search for existing hit
+for (size_t i = 0; i < fHitsCollection->entries(); i++) {
+  auto existingHit = (*fHitsCollection)[i];
+
+  if ( existingHit->GetTrackID() == trackID &&
+       existingHit->GetStationID() == StationNo &&
+       existingHit->GetModuleID()  == ModuleNo ) {
+    hit = existingHit;
+    G4cout << "hit exists" << G4endl;
+    break;
+  }
+}
+
+// If hit already exists → accumulate
+if (hit) {
+  hit->AddEdep(edep);
+}
+
+// Otherwise create new hit
+else {
+  hit = new ScintbarHit();
+
+  hit->SetEdep(edep);
+  hit->SetPos(pos);
+  hit->SetBarID(BarNo);
+  hit->SetModuleID(ModuleNo);
+  hit->SetStationID(StationNo);
+  hit->SetTrackID(trackID);
+  hit->SetPDGcode(track->GetDefinition()->GetPDGEncoding());
+  hit->SetParentId(track->GetParentID());
   
-  /*
+
+  fHitsCollection->insert(hit);
+}
+/*
   // check if it is first touch
   if ( hit->GetStationID() < 0 ) {
     hit->SetColumnID(columnNo);
@@ -74,7 +111,7 @@ G4bool ScintbarSD::ProcessHits(G4Step* step, G4TouchableHistory* history)
   }
   // add energy deposition
   hit->AddEdep(edep);
-  */
+
 
   auto hit = new ScintbarHit();
   hit->SetEdep(edep);
@@ -88,7 +125,7 @@ G4bool ScintbarSD::ProcessHits(G4Step* step, G4TouchableHistory* history)
   //G4cout << "BarCopyNo: " << BarCopyNo << G4endl;
   hit->Print();
   
-  fHitsCollection->insert(hit);
+  fHitsCollection->insert(hit);*/
 
   return true;
 }

@@ -54,14 +54,14 @@ void ScintbarHit::Draw()
 
 void ScintbarHit::Print()
 {
-  /*G4cout << "Station: " << fStationID
+  G4cout << "Station: " << fStationID
 	 << ", Module: " << fModuleID
 	 << ", BarID: " << fBarID
 	 << ", Edep: " << fEdep/MeV << " (MeV), "
 	 << ", pos: " << fPos
 	 << ", Track ID: " << fTrackID
 	 << ", PDG code: " << fPDGcode
-	 << G4endl;*/
+	 << G4endl;
 }
 
 const std::map<G4String,G4AttDef>* ScintbarHit::GetAttDefs() const

@@ -68,6 +68,9 @@ class ScintbarHit : public G4VHit
     void SetTrackID( G4int id ) { fTrackID = id; };
     G4int GetTrackID() const { return fTrackID; };
 
+    void SetParentId( G4int id ) { fParentId = id; };
+    G4int GetParentId() const { return fParentId; };
+
     void SetPDGcode( G4int c ) { fPDGcode = c; };
     G4int GetPDGcode() const { return fPDGcode; };
 
@@ -79,6 +82,7 @@ class ScintbarHit : public G4VHit
     G4ThreeVector fPos;
     G4int fTrackID;
     G4int fPDGcode;
+    G4int fParentId;
 };
 
 typedef G4THitsCollection<ScintbarHit> ScintbarHitsCollection;

@@ -1418,6 +1418,43 @@ CMakeFiles/MuravesSim.dir/src/MuSimPhysicsList.cc.o: \
   /usr/local/include/Geant4/G4MuIonisation.hh \
   /usr/local/include/Geant4/G4MuBremsstrahlung.hh \
   /usr/local/include/Geant4/G4MuPairProduction.hh \
+  /usr/local/include/Geant4/G4HadronElasticProcess.hh \
+  /usr/local/include/Geant4/G4HadronicProcess.hh \
+  /usr/local/include/Geant4/G4EnergyRangeManager.hh \
+  /usr/local/include/Geant4/G4HadronicInteraction.hh \
+  /usr/local/include/Geant4/G4HadFinalState.hh \
+  /usr/local/include/Geant4/G4HadSecondary.hh \
+  /usr/local/include/Geant4/G4LorentzRotation.hh \
+  /usr/local/include/Geant4/CLHEP/Vector/LorentzRotation.h \
+  /usr/local/include/Geant4/CLHEP/Vector/Boost.h \
+  /usr/local/include/Geant4/CLHEP/Vector/BoostX.h \
+  /usr/local/include/Geant4/CLHEP/Vector/BoostX.icc \
+  /usr/local/include/Geant4/CLHEP/Vector/BoostY.h \
+  /usr/local/include/Geant4/CLHEP/Vector/BoostY.icc \
+  /usr/local/include/Geant4/CLHEP/Vector/BoostZ.h \
+  /usr/local/include/Geant4/CLHEP/Vector/BoostZ.icc \
+  /usr/local/include/Geant4/CLHEP/Vector/Boost.icc \
+  /usr/local/include/Geant4/CLHEP/Vector/LorentzRotation.icc \
+  /usr/local/include/Geant4/G4Nucleus.hh \
+  /usr/local/include/Geant4/G4ReactionProduct.hh \
+  /usr/local/include/Geant4/G4HadProjectile.hh \
+  /usr/local/include/Geant4/G4HadronicException.hh \
+  /usr/local/include/Geant4/G4ReactionProductVector.hh \
+  /usr/local/include/Geant4/G4HadronicProcessType.hh \
+  /usr/local/include/Geant4/G4CrossSectionDataStore.hh \
+  /usr/local/include/Geant4/G4VCrossSectionDataSet.hh \
+  /usr/local/include/Geant4/G4HadXSTypes.hh \
+  /usr/local/include/Geant4/G4HadronElastic.hh \
+  /usr/local/include/Geant4/G4NucleiProperties.hh \
+  /usr/local/include/Geant4/G4HadronInelasticProcess.hh \
+  /usr/local/include/Geant4/G4NeutronCaptureProcess.hh \
+  /usr/local/include/Geant4/G4NeutronRadCapture.hh \
+  /usr/local/include/Geant4/G4NeutronFissionProcess.hh \
+  /usr/local/include/Geant4/G4LFission.hh \
+  /usr/local/include/Geant4/G4NeutronElasticXS.hh \
+  /usr/local/include/Geant4/G4NeutronFissionVI.hh \
+  /usr/local/include/Geant4/G4NeutronCaptureXS.hh \
+  /usr/local/include/Geant4/G4ElementData.hh \
   /usr/local/include/Geant4/G4hMultipleScattering.hh \
   /usr/local/include/Geant4/G4hIonisation.hh \
   /usr/local/include/Geant4/G4hBremsstrahlung.hh \
@@ -1430,5 +1467,4 @@ CMakeFiles/MuravesSim.dir/src/MuSimPhysicsList.cc.o: \
   /usr/local/include/Geant4/G4RadioactiveDecay.hh \
   /usr/local/include/Geant4/G4ParticleChangeForRadDecay.hh \
   /usr/local/include/Geant4/G4NucleusLimits.hh \
-  /usr/local/include/Geant4/G4RadioactiveDecayMode.hh \
-  /usr/local/include/Geant4/G4IonTable.hh
+  /usr/local/include/Geant4/G4RadioactiveDecayMode.hh

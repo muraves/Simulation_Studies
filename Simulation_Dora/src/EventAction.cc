@@ -91,7 +91,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
 
     analysisManager->FillNtupleIColumn(1, 0, eventID);
     analysisManager->FillNtupleIColumn(1, 1, nhit); // not really necessary
-    analysisManager->FillNtupleIColumn(1, 2, hit->GetTrackID());
+    analysisManager->FillNtupleIColumn(1, 2, hit->GetParentId());
     analysisManager->FillNtupleDColumn(1, 3, hit->GetEdep());
     analysisManager->FillNtupleDColumn(1, 4, pos.x());
     analysisManager->FillNtupleDColumn(1, 5, pos.y());
@@ -100,6 +100,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
     analysisManager->FillNtupleIColumn(1, 8, hit->GetModuleID());
     analysisManager->FillNtupleIColumn(1, 9, hit->GetBarID());
     analysisManager->FillNtupleIColumn(1, 10, hit->GetPDGcode());
+    analysisManager->FillNtupleIColumn(1, 11, hit->GetTrackID());
   
     analysisManager->AddNtupleRow(1);
   }
@@ -115,8 +116,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
       analysisManager->FillNtupleIColumn(0, 3, primary->GetG4code()->GetPDGEncoding());
       analysisManager->FillNtupleDColumn(0, 4, primary->GetTotalEnergy());
       analysisManager->FillNtupleDColumn(0, 5, primary->GetMomentumDirection().theta());
-      analysisManager->FillNtupleDColumn(0, 6, primary->GetMomentumDirection().phi());
-        
+      analysisManager->FillNtupleDColumn(0, 6, primary->GetMomentumDirection().phi()); 
     }    
     analysisManager->AddNtupleRow(0);
   }

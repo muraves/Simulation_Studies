@@ -72,6 +72,7 @@ public:
     void ConstructLeptons();
     void ConstructMesons();
     void ConstructBaryons();
+    void ConstructIons();
 
   protected:
   // these methods Construct physics processes and register them
