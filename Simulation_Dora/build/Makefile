@@ -345,6 +345,30 @@ src/PrimaryGeneratorAction_CRY.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_CRY.cc.s
 .PHONY : src/PrimaryGeneratorAction_CRY.cc.s
 
+src/PrimaryGeneratorAction_EcoMug.o: src/PrimaryGeneratorAction_EcoMug.cc.o
+.PHONY : src/PrimaryGeneratorAction_EcoMug.o
+
+# target to build an object file
+src/PrimaryGeneratorAction_EcoMug.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_EcoMug.cc.o
+.PHONY : src/PrimaryGeneratorAction_EcoMug.cc.o
+
+src/PrimaryGeneratorAction_EcoMug.i: src/PrimaryGeneratorAction_EcoMug.cc.i
+.PHONY : src/PrimaryGeneratorAction_EcoMug.i
+
+# target to preprocess a source file
+src/PrimaryGeneratorAction_EcoMug.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_EcoMug.cc.i
+.PHONY : src/PrimaryGeneratorAction_EcoMug.cc.i
+
+src/PrimaryGeneratorAction_EcoMug.s: src/PrimaryGeneratorAction_EcoMug.cc.s
+.PHONY : src/PrimaryGeneratorAction_EcoMug.s
+
+# target to generate assembly for a file
+src/PrimaryGeneratorAction_EcoMug.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_EcoMug.cc.s
+.PHONY : src/PrimaryGeneratorAction_EcoMug.cc.s
+
 src/PrimaryGeneratorAction_GPS.o: src/PrimaryGeneratorAction_GPS.cc.o
 .PHONY : src/PrimaryGeneratorAction_GPS.o
 
@@ -573,6 +597,9 @@ help:
 	@echo "... src/PrimaryGeneratorAction_CRY.o"
 	@echo "... src/PrimaryGeneratorAction_CRY.i"
 	@echo "... src/PrimaryGeneratorAction_CRY.s"
+	@echo "... src/PrimaryGeneratorAction_EcoMug.o"
+	@echo "... src/PrimaryGeneratorAction_EcoMug.i"
+	@echo "... src/PrimaryGeneratorAction_EcoMug.s"
 	@echo "... src/PrimaryGeneratorAction_GPS.o"
 	@echo "... src/PrimaryGeneratorAction_GPS.i"
 	@echo "... src/PrimaryGeneratorAction_GPS.s"

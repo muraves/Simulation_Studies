@@ -17,6 +17,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_CRY.cc.o"
   "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_CRY.cc.o.d"
+  "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_EcoMug.cc.o"
+  "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_EcoMug.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_GPS.cc.o"
   "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_GPS.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_PG.cc.o"

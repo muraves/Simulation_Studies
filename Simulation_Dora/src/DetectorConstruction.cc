@@ -220,7 +220,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
         }
     }
 
-    _triangEffectiveBase += xySafety; // Add safety margin
+_triangEffectiveBase     += xySafety; // Add safety margin
 
     // 4. Build the stations -------------------
     double posFirstBarMod0 = -((float) _nBars - 0.5) * _triangEffectiveBase / 2.; //position of first bar (i.e., bar at most-negative coordinate)

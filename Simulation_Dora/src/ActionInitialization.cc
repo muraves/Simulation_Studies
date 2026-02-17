@@ -6,6 +6,7 @@
 #include "PrimaryGeneratorAction_PG.hh"
 #include "PrimaryGeneratorAction_GPS.hh"
 #include "PrimaryGeneratorAction_CRY.hh"
+#include "PrimaryGeneratorAction_EcoMug.hh"
 #include "RunAction.hh"
 #include "EventAction.hh"
 #include "TrackingAction.hh"
@@ -39,6 +40,8 @@ void ActionInitialization::Build() const
     SetUserAction(new PrimaryGeneratorAction_GPS());
   else if ( generator == "CRY" )
      SetUserAction(new PrimaryGeneratorAction_CRY("cmd-dora.file"));
+  else if ( generator == "EcoMug" )
+     SetUserAction(new PrimaryGeneratorAction_EcoMug());
 
   auto theEventAction = new EventAction;
   SetUserAction(theEventAction);
