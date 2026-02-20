@@ -72,7 +72,7 @@ for (size_t i = 0; i < fHitsCollection->entries(); i++) {
        existingHit->GetStationID() == StationNo &&
        existingHit->GetModuleID()  == ModuleNo ) {
     hit = existingHit;
-    G4cout << "hit exists" << G4endl;
+    //G4cout << "hit exists" << G4endl;
     break;
   }
 }

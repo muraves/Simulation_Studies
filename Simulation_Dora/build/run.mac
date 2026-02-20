@@ -1,0 +1,12 @@
+# run.mac
+/control/verbose 0
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+/particle/verbose 0
+#/mpi/verbose 0
+/process/verbose 0
+
+# Initialize and beam on
+/run/initialize
+/run/beamOn 10000

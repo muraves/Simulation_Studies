@@ -82,7 +82,28 @@ void EventAction::EndOfEventAction(const G4Event* event)
   if ( !hc ) return;
   
   auto nhit = hc->GetSize();
-  G4cout << "Nhit: " << nhit << G4endl;
+  //G4cout << "Nhit: " << nhit << G4endl;
+
+  // Trigger condition (hit in first 6 planar arrays)
+  // stationIDs to be checked: 0 (X0), 8 (Y0), 1 (X1), 9 (Y1), 2 (X2), 10 (Y2)
+  bool planeHit[12] = {false};
+
+  for (unsigned long i = 0; i < nhit; i++) {
+      auto hit = static_cast<ScintbarHit*>(hc->GetHit(i));
+      int stationID = hit->GetStationID();
+
+      if (stationID >= 0 && stationID < 12)
+          planeHit[stationID] = true;
+  }
+
+  // Require X0,Y0,X1,Y1,X2,Y2
+  bool goodEvent =
+      planeHit[0]  && planeHit[8]  &&
+      planeHit[1]  && planeHit[9]  &&
+      planeHit[2]  && planeHit[10];
+
+  if (!goodEvent)
+      return;   // 
   
   // Loop over hits
   for ( unsigned long i = 0; i < nhit; i++ ) {

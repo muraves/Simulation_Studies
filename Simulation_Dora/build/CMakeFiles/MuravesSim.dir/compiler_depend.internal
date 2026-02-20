@@ -2055,13 +2055,59 @@ CMakeFiles/MuravesSim.dir/src/ActionInitialization.cc.o
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__mutex/tag_types.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__mutex/unique_lock.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__node_handle
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/accumulate.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/adjacent_difference.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/exclusive_scan.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/gcd_lcm.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/inclusive_scan.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/inner_product.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/iota.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/midpoint.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/partial_sum.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/pstl_reduce.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/pstl_transform_reduce.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/reduce.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/saturation_arithmetic.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/transform_exclusive_scan.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/transform_inclusive_scan.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__numeric/transform_reduce.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/bernoulli_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/binomial_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/cauchy_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/chi_squared_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/clamp_to_integral.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/default_random_engine.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/discard_block_engine.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/discrete_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/exponential_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/extreme_value_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/fisher_f_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/gamma_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/generate_canonical.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/geometric_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/independent_bits_engine.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/is_seed_sequence.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/is_valid.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/knuth_b.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/linear_congruential_engine.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/log2.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/lognormal_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/mersenne_twister_engine.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/negative_binomial_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/normal_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/piecewise_constant_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/piecewise_linear_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/poisson_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/random_device.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/ranlux.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/seed_seq.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/shuffle_order_engine.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/student_t_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/subtract_with_carry_engine.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/uniform_int_distribution.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/uniform_random_bit_generator.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/uniform_real_distribution.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/weibull_distribution.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__ranges/access.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__ranges/concepts.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__ranges/container_compatible_range.h
@@ -2323,10 +2369,12 @@ CMakeFiles/MuravesSim.dir/src/ActionInitialization.cc.o
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/memory
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/mutex
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/new
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/numeric
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/optional
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/ostream
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/print
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/queue
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/random
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/ratio
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/sstream
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/stack
@@ -2500,9 +2548,11 @@ CMakeFiles/MuravesSim.dir/src/ActionInitialization.cc.o
  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stddef.h
  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdint.h
  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/ActionInitialization.hh
+ /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/EcoMug.h
  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/EventAction.hh
  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/MuravesMessenger.hh
  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorAction_CRY.hh
+ /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorAction_EcoMug.hh
  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorAction_GPS.hh
  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorAction_PG.hh
  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorMessenger.hh
@@ -2565,6 +2615,8 @@ CMakeFiles/MuravesSim.dir/src/ActionInitialization.cc.o
  /usr/local/include/Geant4/CLHEP/Utility/thread_local.h
  /usr/local/include/Geant4/CLHEP/Vector/ThreeVector.h
  /usr/local/include/Geant4/CLHEP/Vector/ThreeVector.icc
+ /usr/local/include/Geant4/G4Allocator.hh
+ /usr/local/include/Geant4/G4AllocatorPool.hh
  /usr/local/include/Geant4/G4ApplicationState.hh
  /usr/local/include/Geant4/G4AutoLock.hh
  /usr/local/include/Geant4/G4DataVector.hh
@@ -2576,9 +2628,13 @@ CMakeFiles/MuravesSim.dir/src/ActionInitialization.cc.o
  /usr/local/include/Geant4/G4PDefManager.hh
  /usr/local/include/Geant4/G4ParticleDefinition.hh
  /usr/local/include/Geant4/G4ParticleDefinition.icc
+ /usr/local/include/Geant4/G4ParticleGun.hh
+ /usr/local/include/Geant4/G4ParticleMomentum.hh
  /usr/local/include/Geant4/G4ParticleTable.hh
  /usr/local/include/Geant4/G4ParticleTable.icc
  /usr/local/include/Geant4/G4ParticleTableIterator.hh
+ /usr/local/include/Geant4/G4PrimaryParticle.hh
+ /usr/local/include/Geant4/G4PrimaryVertex.hh
  /usr/local/include/Geant4/G4String.hh
  /usr/local/include/Geant4/G4String.icc
  /usr/local/include/Geant4/G4Threading.hh
@@ -2592,6 +2648,7 @@ CMakeFiles/MuravesSim.dir/src/ActionInitialization.cc.o
  /usr/local/include/Geant4/G4UserEventAction.hh
  /usr/local/include/Geant4/G4UserRunAction.hh
  /usr/local/include/Geant4/G4UserTrackingAction.hh
+ /usr/local/include/Geant4/G4VPrimaryGenerator.hh
  /usr/local/include/Geant4/G4VUserActionInitialization.hh
  /usr/local/include/Geant4/G4VUserPrimaryGeneratorAction.hh
  /usr/local/include/Geant4/G4ios.hh
@@ -18516,6 +18573,7 @@ CMakeFiles/MuravesSim.dir/src/RunAction.cc.o
  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdint.h
  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/EventAction.hh
  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/RunAction.hh
+ /usr/local/include/Geant4/CLHEP/Units/SystemOfUnits.h
  /usr/local/include/Geant4/CLHEP/Utility/defs.h
  /usr/local/include/Geant4/CLHEP/Vector/ThreeVector.h
  /usr/local/include/Geant4/CLHEP/Vector/ThreeVector.icc
@@ -18543,6 +18601,7 @@ CMakeFiles/MuravesSim.dir/src/RunAction.cc.o
  /usr/local/include/Geant4/G4NtupleBookingManager.icc
  /usr/local/include/Geant4/G4String.hh
  /usr/local/include/Geant4/G4String.icc
+ /usr/local/include/Geant4/G4SystemOfUnits.hh
  /usr/local/include/Geant4/G4TH1ToolsManager.hh
  /usr/local/include/Geant4/G4TH2ToolsManager.hh
  /usr/local/include/Geant4/G4TH3ToolsManager.hh

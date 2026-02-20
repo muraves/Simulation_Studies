@@ -151,17 +151,20 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     std::cout << "[MuravesDetector::Construct] _halfContLengthXY=" << _halfContLengthXY << std::endl;
     // 2.1 compute the Z height of a layer, i.e. of a single view (X or Y) of a station -------------------
     float layerThickness = _barHeight + (_barHeight / (_barBase / 2.) * ((_barBase - _triangEffectiveBase) / 2.)); // Z offset due to cut edges at the base
+    std::cout << "[MuravesDetector::Construct] _barHeight=" << _barHeight << std::endl;
+    std::cout << "[MuravesDetector::Construct] _barBase=" << _barBase << std::endl;
+    std::cout << "[MuravesDetector::Construct] __triangEffectiveBase=" << _triangEffectiveBase << std::endl;
     std::cout << "[MuravesDetector::Construct] layerThickness=" << layerThickness << std::endl;
     _halfContLengthZ = (float) (_nStations - 1) / 2 * _stationSpacing + (layerThickness + zSafety / 2);
 
     std::cout << "[MuravesDetector::Construct] _halContLengthZ=" << _halfContLengthZ << std::endl;
 
-    //2.2 Construct volume containing the detector -------------------
+    //2.2 Construct mother volume containing the detector -------------------
     G4Box *detContainerSolid = 
         new G4Box("Detector",
-                _halfContLengthXY * 1.05,
-                _halfContLengthXY * 1.05,
-                _halfContLengthZ * 1.05);
+                _halfContLengthXY * 2,
+                _halfContLengthXY * 2,
+                _halfContLengthZ * 2); 
 
     G4LogicalVolume *detContainerLog = 
         new G4LogicalVolume(detContainerSolid, 
@@ -171,15 +174,12 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                 NULL,
                 NULL,
                 false);
-    /*new G4PVPlacement(0,                       //no rotation
-      pos3,                    //at position
-      detContainerLog,             //its logical volume
-      "Detector",                //its name
-      logicWorld,                //its mother  volume
-      false,                   //no boolean operation
-      0,                       //copy number
-      checkOverlaps);   */       //overlaps checking
 
+    // Rotation such that: x-axis = perpendicular to planes, pointing from first plane to last plane & z-axis = pointing upwards
+    G4ThreeVector axis(1., 1., 1.);
+    axis = axis.unit();
+    G4RotationMatrix* rotDet = new G4RotationMatrix();
+    rotDet->rotate(-120.*deg, axis);
 
     // 3. Build the scintillating bar -------------------
     std::vector<G4TwoVector> vertices;
@@ -260,15 +260,15 @@ _triangEffectiveBase     += xySafety; // Add safety margin
     float zOffset = layerThickness / 2. - _barHeight / 2.;
 
     float zPosStation0 = - layerThickness / 2.; // Z position of upper X station
-    float zPosStation1 = zPosStation0 - 26*cm; // Z position of upper X station
-    float zPosStation2 = zPosStation0 + 26.2*cm; // Z position of upper X station
-    float zPosStation3 = zPosStation0 + 147.5*cm; // Z position of upper X station
+    float zPosStation1 = zPosStation0 - 25*cm; // Z position of upper X station
+    float zPosStation2 = zPosStation0 + 25*cm; // Z position of upper X station
+    float zPosStation3 = zPosStation0 + 145*cm; // Z position of upper X station
     float zPosStationX[] = {zPosStation0, zPosStation1, zPosStation2, zPosStation3};
 
-    float yPosStation0 = 0*cm ; // y position of upper X station
-    float yPosStation1 = 4*cm; // y position of upper X station
-    float yPosStation2 = -4.5*cm; // y position of upper X station
-    float yPosStation3 = -24.9*cm; // y position of upper X station
+    float yPosStation0 = 0*cm ; // y position of X station 2
+    float yPosStation1 = 5*cm; // y position of X station 1 (closest to Vesuvius)
+    float yPosStation2 = -5*cm; // y position of X station 3
+    float yPosStation3 = -25*cm; // y position of X station 4
     float yPosStation[] = {yPosStation0, yPosStation1, yPosStation2, yPosStation3};
     
     // Implement scintillator bars copy number as bitpattern
@@ -287,7 +287,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
               G4ThreeVector(0,yPosStation[iStation],zPosStationX[iStation]),       //at (0,0,0)
               logicAlShell,            //its logical volume
               "AlShellX",               //its name
-              logicWorld,                     //its mother  volume
+              detContainerLog,                     //its mother  volume
               false,                 //no boolean operation
               0,                     //copy number
               checkOverlaps);        //overlaps checking
@@ -297,7 +297,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
               G4ThreeVector(0,yPosStation[iStation]+20*cm,zPosStationX[iStation]+5.5*cm),       //at (0,0,0)
               logicTEC,            //its logical volume
               "TECX",               //its name
-              logicWorld,                     //its mother  volume
+              detContainerLog,                     //its mother  volume
               false,                 //no boolean operation
               0,                     //copy number
               checkOverlaps);        //overlaps checking
@@ -310,7 +310,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
                 G4ThreeVector(0,yPosStation[iStation], zPosStationX[iStation] + (std::pow(-1,iModule))*((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2))),       //at (0,0,0)
                 logicAlFoil,            //its logical volume
                 "AlFoilX",               //its name
-                logicWorld,                     //its mother  volume
+                detContainerLog,                     //its mother  volume
                 false,                 //no boolean operation
                 2,                     //copy number
                 checkOverlaps);        //overlaps checking
@@ -325,7 +325,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
                 G4ThreeVector(posFirstBar[iModule] + iBar * _triangEffectiveBase, yPosStation[iStation], zPosStationX[iStation] + zOffset),                
                 barLog,
                 "stationX" + stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),      
-                logicWorld,
+                detContainerLog,
                 false,
                 //2 * iBar);
                 BarCopyNo,
@@ -343,7 +343,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
                 G4ThreeVector(posFirstBar[iModule] + (iBar + 0.5) * _triangEffectiveBase,yPosStation[iStation],zPosStationX[iStation] - zOffset),
                 barLog,
                 "stationX" + stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),
-                logicWorld,
+                detContainerLog,
                 false,
                 //2 * iBar + 1);
                 BarCopyNo,
@@ -372,7 +372,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
             G4ThreeVector(0,yPosStation[iStation],zPosStationY[iStation]),
             logicAlShell,            
             "AlShellY",               
-            logicWorld,                     
+            detContainerLog,                     
             false,                
             0,                     
             checkOverlaps);        
@@ -382,7 +382,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
               G4ThreeVector(0,yPosStation[iStation]+20*cm,zPosStationY[iStation]-5.5*cm),       
               logicTEC,            
               "TECY",               
-              logicWorld,                     
+              detContainerLog,                     
               false,                 
               0,                     
               checkOverlaps); 
@@ -395,7 +395,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
                 G4ThreeVector(0,yPosStation[iStation],zPosStationY[iStation] + (std::pow(-1,iModule))*((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2))),       
                 logicAlFoil,            
                 "AlFoilY",               
-                logicWorld,                     
+                detContainerLog,                     
                 false,                 
                 2,                     
                 checkOverlaps);
@@ -410,7 +410,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
                 G4ThreeVector(0, posFirstBar[iModule] + iBar * _triangEffectiveBase +yPosStation[iStation], zPosStationY[iStation] + zOffset ),
                 barLog,
                 "stationY" + stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),
-                logicWorld,
+                detContainerLog,
                 false,
                 //2 * iBar);
                 BarCopyNo);
@@ -426,7 +426,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
                 G4ThreeVector(0, (posFirstBar[iModule] + (iBar + 0.5) * _triangEffectiveBase)+yPosStation[iStation], zPosStationY[iStation] - zOffset ),
                 barLog,
                 "stationY" + stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),
-                logicWorld,
+                detContainerLog,
                 false,
                 //2 * iBar + 1);
                 BarCopyNo);
@@ -440,7 +440,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
 
       //construct Lead block
     G4Material* lead_mat = nist->FindOrBuildMaterial("G4_Pb");
-    G4ThreeVector posLead = G4ThreeVector(0*cm, -(25)*cm, (zPosStation0 + (96.2*cm)));
+    G4ThreeVector posLead = G4ThreeVector(0*cm, yPosStation3, (zPosStation0 + (96.2*cm)));
 
     G4Box *leadSolid = new G4Box("LeadBlock", (130/2)*cm, (120/2)*cm, (60/2)*cm);
 
@@ -457,10 +457,19 @@ _triangEffectiveBase     += xySafety; // Add safety margin
               posLead,                    //at position
               leadLog,             //its logical volume
               "LeadBlock",                //its name
-              logicWorld,                //its mother  volume
+              detContainerLog,                //its mother  volume
               false,                   //no boolean operation
               0,                       //copy number
               checkOverlaps);          //overlaps checking
+    
+    new G4PVPlacement(rotDet,                       //no rotation
+      G4ThreeVector(0,0,0),  //at position (so last station - after lead block - is at ground level (z=0))
+      detContainerLog,             //its logical volume
+      "DetectorMother",                //its name
+      logicWorld,                //its mother  volume
+      false,                   //no boolean operation
+      0,                       //copy number
+      checkOverlaps);          //overlaps checking
 
   // ------------------- visualization attributes -------------------
 
@@ -480,9 +489,9 @@ _triangEffectiveBase     += xySafety; // Add safety margin
     logicTEC->SetVisAttributes(greencol);
 
      
-  //auto barVis = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.4)); 
-  //barVis->SetForceSolid(true);  // fill volume color
-
+  auto barVis = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.4)); 
+  barVis->SetForceSolid(true);  // fill volume color
+  barLog->SetVisAttributes(barVis);
   return physWorld;
 }
 

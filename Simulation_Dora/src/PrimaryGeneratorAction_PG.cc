@@ -35,15 +35,15 @@ PrimaryGeneratorAction_PG::~PrimaryGeneratorAction_PG()
 //----------------------------------------------------------------------------//
 void PrimaryGeneratorAction_PG::GeneratePrimaries(G4Event* anEvent)
 { 
-  G4double x = 0; 
-  G4double z = -1 * m;
+  G4double x = -1*m; 
+  G4double z = 0;
   G4double y = 0; 
 
   G4ThreeVector pos(x, y, z); 
 
-  G4double px = 0; 
+  G4double px = 1.; 
   G4double py = 0; 
-  G4double pz = 1.;
+  G4double pz = 0;
 
   G4ThreeVector mom(px, py, pz); 
 

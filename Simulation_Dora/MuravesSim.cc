@@ -108,6 +108,15 @@ int main(int argc, char** argv)
 	  return EXIT_FAILURE;
 	}
       }
+      else if (G4String(argv[iarg]).compare("--m") == 0) {
+      if (++iarg < argc) {
+        inputfile = G4String(argv[iarg]);
+        iarg++;
+      } else {
+        G4cout << "Missing macro file" << G4endl;
+        return EXIT_FAILURE;
+      }
+    }
       else {
 	G4cout << "Unknown option " << argv[iarg] << G4endl;
 	return EXIT_FAILURE;
@@ -158,15 +167,15 @@ int main(int argc, char** argv)
   //------------------
   G4UImanager* UImanager = G4UImanager::GetUIpointer();  
 
-  if (!ui) {
+  if (!ui && inputfile != "") {
     // execute an argument macro file if exist
     G4String command = "/control/execute ";
-    G4String fileName = argv[1];
-    UImanager->ApplyCommand(command + fileName);
+    //G4String fileName = argv[1];
+    UImanager->ApplyCommand(command + inputfile);
   }
   else {
     UImanager->ApplyCommand("/control/execute init_vis.mac");
-    if (ui->IsGUI()) {
+    if (ui->IsGUI()) { 
       UImanager->ApplyCommand("/control/execute gui.mac");
     }
     // start interactive session

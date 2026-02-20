@@ -31,6 +31,7 @@
 #include "EventAction.hh"
 
 #include "G4AnalysisManager.hh"
+#include "G4SystemOfUnits.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -70,7 +71,7 @@ RunAction::RunAction(EventAction* eventAction) : fEventAction(eventAction)
     analysisManager->CreateNtupleIColumn("Event"); // column Id = 0
     
     analysisManager->CreateNtupleIColumn("NScintHit"); // column Id = 1
-    analysisManager->CreateNtupleIColumn("ScintHitPrimaryID"); // column Id = 2
+    analysisManager->CreateNtupleIColumn("ScintHitParentID"); // column Id = 2
     analysisManager->CreateNtupleDColumn("ScintHitE"); // column Id = 3
     analysisManager->CreateNtupleDColumn("ScintHitPosX"); // column Id = 4
     analysisManager->CreateNtupleDColumn("ScintHitPosY"); // column Id = 5
@@ -82,6 +83,13 @@ RunAction::RunAction(EventAction* eventAction) : fEventAction(eventAction)
     analysisManager->CreateNtupleIColumn("ScintHitTrackID"); // column Id = 11
   
     analysisManager->FinishNtuple();
+
+    analysisManager->CreateH1("theta", "Muon Theta", 50, 0., M_PI);
+    analysisManager->CreateH1("phi",   "Muon Phi",   50, 0, 2*M_PI);
+
+    analysisManager->CreateH1("x", "Muon generated x", 50, -80*cm, 200*cm);
+    analysisManager->CreateH1("y",   "Muon generated y",   50, -140*cm, 140*cm);
+    analysisManager->CreateH1("z",   "Muon generated z",   50, -150*cm, 130*cm);
   }
 
   // Set ntuple output file
