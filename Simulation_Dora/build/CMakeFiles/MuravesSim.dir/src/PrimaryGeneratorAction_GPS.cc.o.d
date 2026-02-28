@@ -1087,6 +1087,7 @@ CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_GPS.cc.o: \
   /usr/local/include/Geant4/CLHEP/Random/RandPoissonQ.icc \
   /usr/local/include/Geant4/CLHEP/Random/RandStudentT.h \
   /usr/local/include/Geant4/CLHEP/Random/RandStudentT.icc \
+  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorInfo.hh \
   /usr/local/include/Geant4/G4Event.hh \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/set \
   /usr/local/include/Geant4/evtdefs.hh \

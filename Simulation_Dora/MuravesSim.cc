@@ -45,8 +45,10 @@
 //#include "G4MPImanager.hh"
 //#include "G4MPIsession.hh"
 //#include "G4VMPIseedGenerator.hh"
-//#include "time.h"
-//#include <chrono>
+#include "time.h"
+#include <chrono>
+using namespace std;
+using namespace chrono;
 
 #include "MuravesSim.hh"
 DetectorConstruction* theDetector;
@@ -55,6 +57,8 @@ DetectorConstruction* theDetector;
 
 int main(int argc, char** argv)
 {
+  auto start = high_resolution_clock::now();
+
   G4UIExecutive* ui = nullptr;
   if (argc == 1) {
     ui = new G4UIExecutive(argc, argv);
@@ -127,6 +131,7 @@ int main(int argc, char** argv)
   // Run manager
   //------------ no need to switch between MT and single-threaded, G4RunManagerType::Default automatically picks the right case
   auto theRunManager = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
+
   // Pick number of threads (example)
   /*if (argc == 3)
     runManager->SetNumberOfThreads(atoi(argv[2]));
@@ -182,6 +187,12 @@ int main(int argc, char** argv)
     ui->SessionStart();
     delete ui;
   }
+
+  auto end = high_resolution_clock::now();
+
+  auto duration = duration_cast<milliseconds>(end - start).count();
+
+  cout << "Time taken by program: " << duration << " milliseconds" << endl;
 
   delete theVisManager;
   delete theRunManager;

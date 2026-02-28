@@ -5,6 +5,7 @@
 #define RunAction_h 1
 
 #include "G4UserRunAction.hh"
+#include "PrimaryGeneratorInfo.hh"
 
 class G4Run;
 
@@ -13,7 +14,7 @@ class EventAction;
 class RunAction : public G4UserRunAction
 {
   public:
-    RunAction(EventAction* eventAction);
+    RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorInfo);
     ~RunAction() override = default;
 
     void BeginOfRunAction(const G4Run*) override;
@@ -21,6 +22,8 @@ class RunAction : public G4UserRunAction
 
   private:
     EventAction* fEventAction = nullptr;
+    PrimaryGeneratorInfo* fGeneratorInfo; 
+    std::string GetTimestamp();   
 };
 
 

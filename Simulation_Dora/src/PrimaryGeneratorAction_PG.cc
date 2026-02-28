@@ -35,7 +35,7 @@ PrimaryGeneratorAction_PG::~PrimaryGeneratorAction_PG()
 //----------------------------------------------------------------------------//
 void PrimaryGeneratorAction_PG::GeneratePrimaries(G4Event* anEvent)
 { 
-  G4double x = -1*m; 
+  G4double x = -1*m;
   G4double z = 0;
   G4double y = 0; 
 
@@ -49,7 +49,15 @@ void PrimaryGeneratorAction_PG::GeneratePrimaries(G4Event* anEvent)
 
   particleGun->SetParticlePosition(pos);
   particleGun->SetParticleMomentumDirection(mom.unit());
-  particleGun->SetParticleMomentum(4. * GeV);    
+  particleGun->SetParticleEnergy(4. * GeV);    
 
   particleGun->GeneratePrimaryVertex(anEvent);
+}
+
+std::string PrimaryGeneratorAction_PG::GetInfoSummary() const {
+    std::ostringstream oss;
+    oss << "Particle: " << particleGun->GetParticleDefinition()->GetParticleName()
+        << ", Energy: " << particleGun->GetParticleEnergy()/CLHEP::MeV << " MeV"
+        << ", Direction: " << particleGun->GetParticleMomentumDirection();
+    return oss.str();
 }

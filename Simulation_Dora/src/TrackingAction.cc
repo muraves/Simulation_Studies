@@ -10,7 +10,13 @@ void TrackingAction::PreUserTrackingAction( const G4Track* track )
   //G4cout << "UserTracking: trackID = " << track->GetTrackID()
   //	 << " PDG = " << track->GetDefinition()->GetPDGEncoding()
   //	 << " Parent = " << track->GetParentID() << G4endl;
+  /*if (track->GetTrackID() != 1 || track->GetParentID() != 0) {
+    // Stop tracking this particle
+    G4Track* nonConstTrack = const_cast<G4Track*>(track);
+    nonConstTrack->SetTrackStatus(fStopAndKill);
+}*/
   AddParent( track->GetTrackID(), track->GetParentID() );
+  
 }
 
 void TrackingAction::PostUserTrackingAction( const G4Track* track ) {}

@@ -29,6 +29,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MuravesSim.dir/src/RNGWrapper.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/RunAction.cc.o"
   "CMakeFiles/MuravesSim.dir/src/RunAction.cc.o.d"
+  "CMakeFiles/MuravesSim.dir/src/RunInformation.cc.o"
+  "CMakeFiles/MuravesSim.dir/src/RunInformation.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o"
   "CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o"

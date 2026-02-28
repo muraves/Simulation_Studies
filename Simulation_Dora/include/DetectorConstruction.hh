@@ -31,6 +31,21 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 
     G4Material* FindMaterial(G4String);
 
+    // getters for run information
+    G4int GetNBars() const { return _nBars; }
+    G4int GetNModules() const { return _nModules; }
+    G4int GetNPlanes() const { return _nPlanes; }
+    G4int GetNStations() const { return _nStations; }
+
+    G4double GetBarLength() const { return _barLength; }
+    G4double GetBarHeight() const { return _barHeight; }
+    G4double GetBarBase() const { return _barBase; }
+    G4double GetTriangEffectiveBase() const { return _triangEffectiveBase; }
+    G4double GetStationSpacing() const { return _stationSpacing; }
+
+    G4double GetLooseAccCheck() const { return _looseAccCheck; }
+    std::string GetDetectorType() const { return _detType; }
+
   private:
     G4GenericMessenger* _messenger;
     G4LogicalVolume* barLog = nullptr;

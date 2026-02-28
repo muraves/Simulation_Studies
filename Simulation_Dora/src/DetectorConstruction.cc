@@ -95,9 +95,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
        
     // ------------------- World -------------------
     
-    G4double world_sizeX = 4.*m;
-    G4double world_sizeY = 4.*m;
-    G4double world_sizeZ  = 4.*m;
+    G4double world_sizeX = 10.*m;
+    G4double world_sizeY = 10.*m;
+    G4double world_sizeZ  = 10.*m;
     
     G4Box* solidWorld = new G4Box("World", 0.5*world_sizeX, 0.5*world_sizeY, 0.5*world_sizeZ);    
 
@@ -223,7 +223,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 _triangEffectiveBase     += xySafety; // Add safety margin
 
     // 4. Build the stations -------------------
-    double posFirstBarMod0 = -((float) _nBars - 0.5) * _triangEffectiveBase / 2.; //position of first bar (i.e., bar at most-negative coordinate)
+    double posFirstBarMod0 = -((float) _nBars -0.5) * _triangEffectiveBase / 2.; //position of first bar (i.e., bar at most-negative coordinate)
     double posFirstBarMod1 = posFirstBarMod0 + (_nBars) * _triangEffectiveBase/2. ;
     double posFirstBar[] = {posFirstBarMod0,posFirstBarMod1};
 
@@ -484,14 +484,18 @@ _triangEffectiveBase     += xySafety; // Add safety margin
     G4VisAttributes* greencol = new G4VisAttributes(G4Colour(0.,1.0,0.,0.4));
     G4VisAttributes* bluecol = new G4VisAttributes(G4Colour(0.,0.,0.8));
 
-    logicAlFoil->SetVisAttributes(bluecol);
+    //logicAlFoil->SetVisAttributes(bluecol);
     logicAlShell->SetVisAttributes(cyancol);
     logicTEC->SetVisAttributes(greencol);
 
+  bluecol->SetForceSolid(true);
+  logicAlFoil->SetVisAttributes(bluecol);
      
   auto barVis = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.4)); 
   barVis->SetForceSolid(true);  // fill volume color
   barLog->SetVisAttributes(barVis);
+
+  // ------------------- Return world -------------------
   return physWorld;
 }
 

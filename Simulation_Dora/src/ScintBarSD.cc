@@ -95,7 +95,6 @@ else {
   hit->SetPDGcode(track->GetDefinition()->GetPDGEncoding());
   hit->SetParentId(track->GetParentID());
   
-
   fHitsCollection->insert(hit);
 }
 /*

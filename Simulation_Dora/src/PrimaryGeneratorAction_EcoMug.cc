@@ -43,54 +43,66 @@ using namespace chrono;
 PrimaryGeneratorAction_EcoMug::PrimaryGeneratorAction_EcoMug(): G4VUserPrimaryGeneratorAction(),fParticleGun(0), mu_plus(0),mu_minus(0)
 { 
     fGenHSphere.SetUseHSphere();
-    fGenHSphere.SetHSphereRadius(130*cm);
-	float yPosStation1 = 5*cm;
-	float planeHalfwidth = 107./2.*cm;
-	fGenHSphere.SetHSphereCenterPosition({60.*cm, 0., -planeHalfwidth + yPosStation1 });
 
-    //fGenHSphere.SetMinimumMomentum(100.*MeV);
-	//fGenHSphere.SetMaximumMomentum(200.*GeV); 
-	fGenHSphere.SetMinimumTheta(1.0434);
-	fGenHSphere.SetMaximumTheta(M_PI-1.0434); 
+	G4double HSphereCenterX = 54.15*cm;
+	G4double HSphereCenterY = 0.*cm;
+	G4double HSphereCenterZ = -48.5*cm;
+	fHSphereCenter = {HSphereCenterX, HSphereCenterY, HSphereCenterZ};
+	fHSphereRadius = 155*cm;
 
-	//fGenHSphere.SetMinimumTheta(0);
-	//fGenHSphere.SetMaximumTheta(M_PI/2.);
+    fGenHSphere.SetHSphereRadius(fHSphereRadius);
+	fGenHSphere.SetHSphereCenterPosition(fHSphereCenter);
 
-	//fGenHSphere.SetMinimumPhi(M_PI-0.5618);
-	//fGenHSphere.SetMaximumPhi(0.5618+M_PI);
+	
+	// -------- Set limitations on generation position on hemisphere -------- 
+	fMinPosTheta = 0.3215873786380738;
 
-	fGenHSphere.SetMinimumPhi(0);
-	fGenHSphere.SetMaximumPhi(M_PI/2.);
+	fGenHSphere.SetHSphereMinPositionTheta(fMinPosTheta); 
 
-    EcoMug genCustomHSphere(fGenHSphere);
-    //genCustomHSphere.SetDifferentialFlux(PrimaryGeneratorAction_EcoMug::J);
+	fMinPosPhi = M_PI-1.3962634; 
+	fMaxPosPhi =  M_PI+1.3962634; 
+
+	fGenHSphere.SetHSphereMinPositionPhi(fMinPosPhi);
+	fGenHSphere.SetHSphereMaxPositionPhi(fMaxPosPhi);
+
+	// -------- Set limitations on generated muon direction -------- 
+	fMinTheta = 0.4281718934433896; // angle with negative z
+
+	fGenHSphere.SetMinimumTheta(M_PI/2-fMinTheta); 
+
+	fMaxPhi = 1.1078966608109395; 
+	fMinPhi = -fMaxPhi; // symmetrical view
+
+	//fGenHSphere.SetMinimumPhi(fMinPhi);
+	//fGenHSphere.SetMaximumPhi(fMaxPhi);
+	
     //fGenHSphere.SetHorizontalRate(200.*EMUnits::hertz/EMUnits::m2);
-
-    genCustomHSphere.SetDifferentialFlux(
+    fGenHSphere.SetDifferentialFlux(
     [this](double p, double theta)
     {
         return this->J(p, theta);
-    }
-);
+    });
 
-    G4double rateHSphere;
-	G4double errorHSphere;
-    genCustomHSphere.GetAverageGenRateAndError(rateHSphere, errorHSphere, 1e7);
+	genSurfaceArea = fGenHSphere.GetGenSurfaceArea();
 
 	G4int n_particle = 1;
 	fParticleGun  = new G4ParticleGun(n_particle);
 
 	mu_plus = G4ParticleTable::GetParticleTable()->FindParticle("mu+");
 	mu_minus = G4ParticleTable::GetParticleTable()->FindParticle("mu-");
-  }
 
+	fGenHSphere.GetAverageGenRateAndError(rateHSphere,errorHSphere);
+
+	G4cout << "Rate " << rateHSphere << G4endl;
+	G4cout << "Error" << errorHSphere << G4endl;
+  }
 
 PrimaryGeneratorAction_EcoMug::~PrimaryGeneratorAction_EcoMug()
 {  
     delete fParticleGun;
 }
 
-// Parameterise Guan's flux (currently: Geisser's flux)
+// Parameterise Guan's flux (EcoMug uses m-2 sr-1 s-1 GeV-1)
 G4double PrimaryGeneratorAction_EcoMug::J(G4double p, G4double theta) 
 {
 	G4double P1 = 0.102573;
@@ -108,72 +120,37 @@ G4double PrimaryGeneratorAction_EcoMug::J(G4double p, G4double theta)
 	G4double E_muon;
 	E_muon = sqrt(p*p+0.10566*0.10566);
 
-    G4double A = 0.14;
+    G4double A = 1400; 
 	G4double B = E_muon*(1 + 3.64/(E_muon*pow(cos_theta_atm,1.29)));
     G4double C = 1. / (1. + 1.1*E_muon*cos_theta_atm/115.);
     G4double D = 0.054 / (1. + 1.1*E_muon*cos_theta_atm/850.);
     return A*pow(B,-2.7)*(C+D);
 };
 
-#define EPSILON 0.00001
-
-  struct Point {
-    double x;
-    double y;
-    double z;
-};
-
 void PrimaryGeneratorAction_EcoMug::GeneratePrimaries(G4Event* anEvent)
 {	
-	/*fGenHSphere.Generate();
-	array<double,3>  muon_pos = fGenHSphere.GetGenerationPosition();
-	G4double muon_ptot = fGenHSphere.GetGenerationMomentum() * GeV;
-	G4double muon_theta = fGenHSphere.GetGenerationTheta();
-	G4double muon_phi = fGenHSphere.GetGenerationPhi();
-	G4double muon_charge = fGenHSphere.GetCharge();*/
-	//G4cout << "muon_theta" << muon_theta / deg << G4endl;
-	//G4cout << "muon_phi" << muon_phi / deg << G4endl;
 	G4double muon_phi;
     G4double muon_theta;
     G4double muon_ptot;
     G4double muon_charge;
     std::array<double,3> muon_pos;
 
-	//double phi_min = -M_PI/2.;
-    double angle = M_PI/4.; //fGenHSphere.GetMaximumPhi()
-
-	do {
-        fGenHSphere.Generate();  // generate a muon
-        muon_pos = fGenHSphere.GetGenerationPosition();
-        muon_ptot = fGenHSphere.GetGenerationMomentum() * GeV;
-        muon_theta = fGenHSphere.GetGenerationTheta();
-        muon_phi = fGenHSphere.GetGenerationPhi();
-        muon_charge = fGenHSphere.GetCharge();
-
-        // Convert the desired range (-angle, angle) to (0, 2pi) for comparison
-		// Window 1: around 0
-		double phi0_min = 0.0;
-		double phi0_max = angle;
-		double phi0_min_wrapped = 2*M_PI - angle; // equivalent of -angle
-
-		// Window 2: around pi
-		double phi_pi_min = M_PI - angle;
-		double phi_pi_max = M_PI + angle;
-
-		bool in_window0 = (muon_phi >= phi0_min && muon_phi <= phi0_max) ||
-						(muon_phi >= phi0_min_wrapped && muon_phi < 2*M_PI);
-
-		bool in_window_pi = (muon_phi >= phi_pi_min && muon_phi <= phi_pi_max);
-
-		if (in_window0 || in_window_pi) {
-			break; // phi in either desired window
-		}
-	} while (true);  // repeat until muon_phi is in range
+	// ------------- Generate a muon from the custom flux parameterisation on the hemisphere ---------------
+	fGenHSphere.GenerateFromCustomJ();  
+    muon_pos = fGenHSphere.GetGenerationPosition();
+    muon_ptot = fGenHSphere.GetGenerationMomentum() * GeV;
+    muon_theta = fGenHSphere.GetGenerationTheta();
+    muon_phi = fGenHSphere.GetGenerationPhi();
+    muon_charge = fGenHSphere.GetCharge();
 
 	auto analysisManager = G4AnalysisManager::Instance();
 	analysisManager->FillH1(0, muon_theta);  // histogram ID 0
-    analysisManager->FillH1(1, muon_phi);    // histogram ID 1
 
+	//G4double muon_phi_hist = muon_phi;
+	//if (muon_phi_hist > M_PI)
+	//{muon_phi_hist -= 2*M_PI;} 
+
+    analysisManager->FillH1(1, muon_phi);    // histogram ID 1
 	analysisManager->FillH1(2, muon_pos[0]);    // histogram ID 1
 	analysisManager->FillH1(3, muon_pos[1]);    // histogram ID 1
 	analysisManager->FillH1(4, muon_pos[2]);    // histogram ID 1
@@ -193,7 +170,34 @@ void PrimaryGeneratorAction_EcoMug::GeneratePrimaries(G4Event* anEvent)
     {fParticleGun->SetParticleDefinition(mu_plus);}
 	else 
     {fParticleGun->SetParticleDefinition(mu_minus);}
-		
-
+	
 	fParticleGun->GeneratePrimaryVertex(anEvent);
+	
+}
+
+std::string PrimaryGeneratorAction_EcoMug::GetInfoSummary() const {
+    std::ostringstream oss;
+    oss << "Generator: " << GetGeneratorName() <<
+	"\nfHSphereCenter (cm): ("
+    << fHSphereCenter[0] / cm << ", "
+    << fHSphereCenter[1] / cm << ", "
+    << fHSphereCenter[2] / cm << ")\n"
+        << "fHSphereRadius (cm): " << fHSphereRadius / cm
+		<< "\nTheta range: [" 
+		<< fMinTheta << ", "
+		<< fMaxTheta << "]\n"
+		<< "Phi range: [" 
+		<< fMinPhi << ", "
+		<< fMaxPhi << "]\n"
+		<< "\nThetaPos range: [" 
+		<< fMinPosTheta << ", "
+		<< fMaxPosTheta << "]\n"
+		<< "PhiPos range: [" 
+		<< fMinPosPhi << ", "
+		<< fMaxPosPhi << "]\n"
+		<< "Muon generation rate (m-2 s-1): " << rateHSphere
+		<< "\nMuon generation rate error: " << errorHSphere
+		<< "\nGeneration surface area (m^2): " << genSurfaceArea / m2
+		;
+    return oss.str();
 }

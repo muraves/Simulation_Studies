@@ -489,6 +489,30 @@ src/RunAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/RunAction.cc.s
 .PHONY : src/RunAction.cc.s
 
+src/RunInformation.o: src/RunInformation.cc.o
+.PHONY : src/RunInformation.o
+
+# target to build an object file
+src/RunInformation.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/RunInformation.cc.o
+.PHONY : src/RunInformation.cc.o
+
+src/RunInformation.i: src/RunInformation.cc.i
+.PHONY : src/RunInformation.i
+
+# target to preprocess a source file
+src/RunInformation.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/RunInformation.cc.i
+.PHONY : src/RunInformation.cc.i
+
+src/RunInformation.s: src/RunInformation.cc.s
+.PHONY : src/RunInformation.s
+
+# target to generate assembly for a file
+src/RunInformation.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/RunInformation.cc.s
+.PHONY : src/RunInformation.cc.s
+
 src/ScintBarHit.o: src/ScintBarHit.cc.o
 .PHONY : src/ScintBarHit.o
 
@@ -615,6 +639,9 @@ help:
 	@echo "... src/RunAction.o"
 	@echo "... src/RunAction.i"
 	@echo "... src/RunAction.s"
+	@echo "... src/RunInformation.o"
+	@echo "... src/RunInformation.i"
+	@echo "... src/RunInformation.s"
 	@echo "... src/ScintBarHit.o"
 	@echo "... src/ScintBarHit.i"
 	@echo "... src/ScintBarHit.s"

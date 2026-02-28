@@ -282,10 +282,24 @@ CMakeFiles/MuravesSim.dir/src/RunAction.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MuravesSim.dir/src/RunAction.cc.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/RunAction.cc -o CMakeFiles/MuravesSim.dir/src/RunAction.cc.s
 
+CMakeFiles/MuravesSim.dir/src/RunInformation.cc.o: CMakeFiles/MuravesSim.dir/flags.make
+CMakeFiles/MuravesSim.dir/src/RunInformation.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/RunInformation.cc
+CMakeFiles/MuravesSim.dir/src/RunInformation.cc.o: CMakeFiles/MuravesSim.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/MuravesSim.dir/src/RunInformation.cc.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MuravesSim.dir/src/RunInformation.cc.o -MF CMakeFiles/MuravesSim.dir/src/RunInformation.cc.o.d -o CMakeFiles/MuravesSim.dir/src/RunInformation.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/RunInformation.cc
+
+CMakeFiles/MuravesSim.dir/src/RunInformation.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MuravesSim.dir/src/RunInformation.cc.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/RunInformation.cc > CMakeFiles/MuravesSim.dir/src/RunInformation.cc.i
+
+CMakeFiles/MuravesSim.dir/src/RunInformation.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MuravesSim.dir/src/RunInformation.cc.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/RunInformation.cc -o CMakeFiles/MuravesSim.dir/src/RunInformation.cc.s
+
 CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o: CMakeFiles/MuravesSim.dir/flags.make
 CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarHit.cc
 CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o: CMakeFiles/MuravesSim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o -MF CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o.d -o CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarHit.cc
 
 CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.i: cmake_force
@@ -299,7 +313,7 @@ CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.s: cmake_force
 CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o: CMakeFiles/MuravesSim.dir/flags.make
 CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarSD.cc
 CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o: CMakeFiles/MuravesSim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o -MF CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o.d -o CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarSD.cc
 
 CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.i: cmake_force
@@ -313,7 +327,7 @@ CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.s: cmake_force
 CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o: CMakeFiles/MuravesSim.dir/flags.make
 CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/TrackingAction.cc
 CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o: CMakeFiles/MuravesSim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o -MF CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o.d -o CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o -c /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/TrackingAction.cc
 
 CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.i: cmake_force
@@ -341,6 +355,7 @@ MuravesSim_OBJECTS = \
 "CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorMessenger.cc.o" \
 "CMakeFiles/MuravesSim.dir/src/RNGWrapper.cc.o" \
 "CMakeFiles/MuravesSim.dir/src/RunAction.cc.o" \
+"CMakeFiles/MuravesSim.dir/src/RunInformation.cc.o" \
 "CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o" \
 "CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o" \
 "CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o"
@@ -363,6 +378,7 @@ MuravesSim: CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_PG.cc.o
 MuravesSim: CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorMessenger.cc.o
 MuravesSim: CMakeFiles/MuravesSim.dir/src/RNGWrapper.cc.o
 MuravesSim: CMakeFiles/MuravesSim.dir/src/RunAction.cc.o
+MuravesSim: CMakeFiles/MuravesSim.dir/src/RunInformation.cc.o
 MuravesSim: CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o
 MuravesSim: CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o
 MuravesSim: CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o
@@ -410,7 +426,7 @@ MuravesSim: /usr/local/lib/libG4global.dylib
 MuravesSim: /usr/local/lib/libG4clhep.dylib
 MuravesSim: /usr/local/lib/libG4ptl.2.3.3.dylib
 MuravesSim: CMakeFiles/MuravesSim.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX executable MuravesSim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX executable MuravesSim"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MuravesSim.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -29,13 +29,16 @@
 #include "RunAction.hh"
 
 #include "EventAction.hh"
+#include "RunInformation.hh"
 
 #include "G4AnalysisManager.hh"
+#include "G4RunManager.hh"
+#include "G4Run.hh"
 #include "G4SystemOfUnits.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-RunAction::RunAction(EventAction* eventAction) : fEventAction(eventAction)
+RunAction::RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorInfo) : fEventAction(eventAction), fGeneratorInfo(generatorInfo)
 {
   // Create the generic analysis manager
   auto analysisManager = G4AnalysisManager::Instance();
@@ -85,7 +88,7 @@ RunAction::RunAction(EventAction* eventAction) : fEventAction(eventAction)
     analysisManager->FinishNtuple();
 
     analysisManager->CreateH1("theta", "Muon Theta", 50, 0., M_PI);
-    analysisManager->CreateH1("phi",   "Muon Phi",   50, 0, 2*M_PI);
+    analysisManager->CreateH1("phi",   "Muon Phi",   50, -M_PI, M_PI);
 
     analysisManager->CreateH1("x", "Muon generated x", 50, -80*cm, 200*cm);
     analysisManager->CreateH1("y",   "Muon generated y",   50, -140*cm, 140*cm);
@@ -101,6 +104,23 @@ RunAction::RunAction(EventAction* eventAction) : fEventAction(eventAction)
 
 void RunAction::BeginOfRunAction(const G4Run* /*run*/)
 {
+  G4int nEvents = G4RunManager::GetRunManager()->GetCurrentRun()->GetNumberOfEventToBeProcessed();
+
+  auto det = static_cast<const DetectorConstruction*>(
+                  G4RunManager::GetRunManager()->GetUserDetectorConstruction());
+
+  std::string timestamp = GetTimestamp();
+  
+  std::string configFilename = "run_config_" + timestamp + ".txt";
+  std::string runFilename = "MuravesSim_Data_" + timestamp;
+
+  std::string generatorSummary;
+    if (fGeneratorInfo) {
+        generatorSummary = fGeneratorInfo->GetInfoSummary();
+    }
+
+  RunInformation::Write(configFilename, det, nEvents, generatorSummary);
+
   // inform the runManager to save random number seed
   // G4RunManager::GetRunManager()->SetRandomNumberStore(true);
 
@@ -112,7 +132,7 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
   // Open an output file
   // The default file name is set in RunAction::RunAction(),
   // it can be overwritten in a macro
-  analysisManager->OpenFile();
+  analysisManager->OpenFile(runFilename);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -126,6 +146,22 @@ void RunAction::EndOfRunAction(const G4Run* /*run*/)
   analysisManager->CloseFile(false);
   // Keep content so that they are plotted.
   // The content will be reset at start of the next run.
+}
+
+// generate YYYYMMDD_HHMMSS timestamp to get unique names for output files (avoids overwriting)
+std::string RunAction::GetTimestamp() {
+    std::time_t now = std::time(nullptr);
+    std::tm* t = std::localtime(&now);
+
+    std::ostringstream oss;
+    oss << (t->tm_year + 1900)
+        << std::setw(2) << std::setfill('0') << (t->tm_mon + 1)
+        << std::setw(2) << std::setfill('0') << t->tm_mday
+        << "_"
+        << std::setw(2) << std::setfill('0') << t->tm_hour
+        << std::setw(2) << std::setfill('0') << t->tm_min
+        << std::setw(2) << std::setfill('0') << t->tm_sec;
+    return oss.str();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

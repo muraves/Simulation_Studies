@@ -1,0 +1,31 @@
+Run timestamp: Fri Feb 27 15:11:34 2026
+
+===== Detector Parameters =====
+nBars: 32
+nModules: 2
+nPlanes: 1
+nStations: 4
+barLength (cm): 107
+barHeight (cm): 1.7
+barBase (cm): 3.3
+triangEffectiveBase (cm): 3.31
+stationSpacing (cm): 50
+looseAcceptanceCheck: 0
+detectorType: triangular
+
+===== Generator Parameters =====
+Generator: EcoMug
+fHSphereCenter (cm): (54.15, 0, -48.5)
+fHSphereRadius (cm): 155
+Theta range: [0, 0]
+Phi range: [0, 0]
+
+ThetaPos range: [0, 0]
+PhiPos range: [0, 0]
+Muon generation rate (m-2 s-1): 80.2139
+Muon generation rate error: 0.466196
+Generation surface area (m^2): 15.0954
+
+===== Run Info =====
+Number of events: 100000
+Kill secondaries: true

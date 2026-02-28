@@ -34,3 +34,11 @@ void PrimaryGeneratorAction_GPS::GeneratePrimaries(G4Event* anEvent)
 { 
   particleGun->GeneratePrimaryVertex(anEvent);
 }
+
+std::string PrimaryGeneratorAction_GPS::GetInfoSummary() const {
+    std::ostringstream oss;
+    oss << "Particle: " << particleGun->GetParticleDefinition()->GetParticleName()
+        << ", Energy: " << particleGun->GetParticleEnergy()/CLHEP::MeV << " MeV"
+        << ", Direction: " << particleGun->GetParticleMomentumDirection();
+    return oss.str();
+}
