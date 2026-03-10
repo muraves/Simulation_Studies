@@ -14,7 +14,9 @@ public:
                     //const PrimaryGeneratorAction_EcoMug* gen,
                     //const MuravesMessenger* mes,
                     G4int nEvents,
-                    const std::string& generatorSummary = "");
+                    const std::string& generatorSummary = "",
+                  long long total_ms = -1,
+                long seed=0);
 };
 
 #endif

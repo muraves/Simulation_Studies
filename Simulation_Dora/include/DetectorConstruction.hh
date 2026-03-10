@@ -34,17 +34,21 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     // getters for run information
     G4int GetNBars() const { return _nBars; }
     G4int GetNModules() const { return _nModules; }
-    G4int GetNPlanes() const { return _nPlanes; }
     G4int GetNStations() const { return _nStations; }
 
     G4double GetBarLength() const { return _barLength; }
     G4double GetBarHeight() const { return _barHeight; }
     G4double GetBarBase() const { return _barBase; }
     G4double GetTriangEffectiveBase() const { return _triangEffectiveBase; }
-    G4double GetStationSpacing() const { return _stationSpacing; }
+    G4double GetStationSpacing() const { return zSafety; }
+    G4double GetBarGap() const { return xySafety; }
 
     G4double GetLooseAccCheck() const { return _looseAccCheck; }
     std::string GetDetectorType() const { return _detType; }
+
+    const float* GetZPosStationsX() const { return zPosStationX; }
+    const float* GetZPosStationsY() const { return zPosStationY; }
+    const float* GetYPosStations() const { return yPosStation; }
 
   private:
     G4GenericMessenger* _messenger;
@@ -53,7 +57,6 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     // Detector properties
     G4int _nBars;
     G4int _nModules;
-    G4int _nPlanes;
     G4int _nStations;
     G4double _stationSpacing;
 
@@ -62,6 +65,15 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     G4double _barHeight;
     G4double _barBase;
     G4double _triangEffectiveBase;
+
+    // Configuration properties
+    G4double xySafety;
+    G4double zSafety;
+
+    // Station positions
+    float zPosStationX[4];
+    float zPosStationY[4];
+    float yPosStation[4];
 
     // Rotation matrices to place bars
     G4RotationMatrix *_rotUpperX;

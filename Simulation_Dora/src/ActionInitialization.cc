@@ -13,8 +13,7 @@
 #include "MuravesMessenger.hh"
 #include "PrimaryGeneratorInfo.hh"
 
-ActionInitialization::ActionInitialization()
- : G4VUserActionInitialization()
+ActionInitialization::ActionInitialization(long seed) : G4VUserActionInitialization(), fSeed(seed)
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -28,7 +27,7 @@ void ActionInitialization::BuildForMaster() const
 {
   auto eventAction = new EventAction;
   PrimaryGeneratorInfo* fGeneratorInfo = nullptr;
-  SetUserAction(new RunAction(eventAction, fGeneratorInfo));
+  SetUserAction(new RunAction(eventAction, fGeneratorInfo, fSeed));
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -49,7 +48,7 @@ void ActionInitialization::Build() const
      //SetUserAction(new PrimaryGeneratorAction_CRY("cmd-dora.file"));
      //fGeneratorInfo = new PrimaryGeneratorAction_CRY();
   else if ( generator == "EcoMug" )
-     SetUserAction(new PrimaryGeneratorAction_EcoMug());
+     //SetUserAction(new PrimaryGeneratorAction_EcoMug());
      fGeneratorInfo = new PrimaryGeneratorAction_EcoMug();
   
   generatorAction = dynamic_cast<G4VUserPrimaryGeneratorAction*>(fGeneratorInfo);
@@ -58,7 +57,7 @@ void ActionInitialization::Build() const
   auto theEventAction = new EventAction;
   SetUserAction(theEventAction);
 
-  SetUserAction(new RunAction(theEventAction, fGeneratorInfo));
+  SetUserAction(new RunAction(theEventAction, fGeneratorInfo, fSeed));
 
   SetUserAction(new TrackingAction());
 }

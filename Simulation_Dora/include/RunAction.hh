@@ -14,7 +14,7 @@ class EventAction;
 class RunAction : public G4UserRunAction
 {
   public:
-    RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorInfo);
+    RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorInfo, long seed);
     ~RunAction() override = default;
 
     void BeginOfRunAction(const G4Run*) override;
@@ -23,7 +23,11 @@ class RunAction : public G4UserRunAction
   private:
     EventAction* fEventAction = nullptr;
     PrimaryGeneratorInfo* fGeneratorInfo; 
-    std::string GetTimestamp();   
+    std::string GetTimestamp();  
+    std::chrono::high_resolution_clock::time_point startTime;
+    std::chrono::high_resolution_clock::time_point endTime; 
+    long fSeed;
+    std::string fTimestamp;
 };
 
 

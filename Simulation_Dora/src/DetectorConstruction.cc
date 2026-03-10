@@ -41,14 +41,13 @@
 
 DetectorConstruction::DetectorConstruction(const char *detectorName)
   : G4VUserDetectorConstruction(),
-    _nBars(32), _nModules(2), _nPlanes(1), _nStations(4), _stationSpacing(50 * cm), _barLength(107 * cm), _barHeight(1.7 * cm),
-    _barBase(3.3 * cm), _triangEffectiveBase(3.3 * cm), _rotUpperX(NULL), _rotLowerX(NULL), _rotUpperY(NULL), _rotLowerY(NULL),
+    _nBars(32), _nModules(2), _nStations(4), _stationSpacing(50 * cm), _barLength(107 * cm), _barHeight(1.7 * cm),
+    _barBase(3.2 * cm), _triangEffectiveBase(3.2 * cm), _rotUpperX(NULL), _rotLowerX(NULL), _rotUpperY(NULL), _rotLowerY(NULL),
     _halfContLengthZ(0.), _halfContLengthXY(0.), _looseAccCheck(0.), _detType("triangular")
 {
   _messenger = new G4GenericMessenger(this, std::string("/muraves/").append(detectorName).append("/"));
   _messenger->DeclareProperty("nBars", _nBars, "Set the number of scintillating bars per module");
   _messenger->DeclareProperty("nModules", _nModules, "Set the number of modules per plane");
-  _messenger->DeclareProperty("nPlanes", _nPlanes, "Set the number of planes per station");
   _messenger->DeclareProperty("nStations", _nStations, "Set the number of XY stations.");
   _messenger->DeclarePropertyWithUnit("barLength","cm", _barLength, "Set the length of the scintillating bars.");
   _messenger->DeclarePropertyWithUnit("barHeight","cm", _barHeight, "Set the height of the scintillating bars.");
@@ -81,8 +80,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 {
   //sfMaterials = Materials::GetInstance();
 
-  float xySafety = 0.1 * mm; //  XY shift to separate bars apart
-  float zSafety = 5.4 * cm; //  Z shift to separate layers apart
+  xySafety = 0.5 * mm; //  XY shift to separate bars apart
+  zSafety = 5.4 * cm; //  Z shift to separate layers apart
   
   G4NistManager* nist = G4NistManager::Instance();
   G4Material* air_mat = nist->FindOrBuildMaterial("G4_AIR");
@@ -90,7 +89,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4Material* polystyrene_mat = nist->FindOrBuildMaterial("G4_POLYSTYRENE"); // standard polystyrene
   //G4Material* polystyrene_mat = FindMaterial(Materials::kPOLYSTYRENE); // with costum scintillator properties
 
-  G4bool checkOverlaps = false; // Option to switch on/off checking of volumes overlaps
+  G4bool checkOverlaps = true; // Option to switch on/off checking of volumes overlaps
 
        
     // ------------------- World -------------------
@@ -112,17 +111,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                 false,                 //no boolean operation
                 0,                     //copy number
                 checkOverlaps);        //overlaps checking
-
-    
-    //------------------- Aluminum shell -------------------
-  
-    G4double _AlShellHeight = 10*cm; // Thickness (height) of aluminum shell box
-    
-    G4Box* solidAlShellOut = new G4Box("AlShell", 0.5*1.2*m, 0.5*1.2*m, 0.5*_AlShellHeight);    
-    G4Box* solidAlShellIn =  new G4Box("AlShell", 0.5*1.10*m, 0.5*1.1*m, 0.5*_AlShellHeight);    
-    G4SubtractionSolid* solidAlShell = new G4SubtractionSolid("solidAlShell",solidAlShellOut,solidAlShellIn);
-
-    G4LogicalVolume* logicAlShell = new G4LogicalVolume(solidAlShell, Aluminum_mat, "AlShell");         
+      
     
     //------------------- Aluminum foil -------------------
     
@@ -134,7 +123,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
     //------------------- TEC -------------------
     
-    G4Box* solidTEC = new G4Box("TEC", 0.5*30*cm, 0.5*20*cm, 0.5*0.15*cm);   
+    G4double TEC_thickness = 0.15*cm;
+
+    G4Box* solidTEC = new G4Box("TEC", 0.5*30*cm, 0.5*20*cm, 0.5*TEC_thickness);   
 
     G4LogicalVolume* logicTEC = new G4LogicalVolume(solidTEC, Aluminum_mat, "TEC");          
 
@@ -148,7 +139,11 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
         _triangEffectiveBase = _barBase;
     // 2. Build the logical box containing the detector -------------------
     _halfContLengthXY = (std::max(_barLength, (_barBase + xySafety) * (_nBars + 0.5))) / 2.;
-    std::cout << "[MuravesDetector::Construct] _halfContLengthXY=" << _halfContLengthXY << std::endl;
+    G4cout << "[MuravesDetector::Construct] (_barBase + xySafety) * (_nBars + 0.5) / 2. = " << (_barBase + xySafety) * (_nBars + 0.5) / 2. << G4endl;
+    G4cout << "[MuravesDetector::Construct] ((_barBase + xySafety) * (_nBars + 0.5)-xySafety) / 2. = " << ((_barBase + xySafety) * (_nBars + 0.5)-xySafety) / 2. << G4endl;
+    G4cout << "[MuravesDetector::Construct] (_barBase + xySafety) * (_nBars/2 + 0.5) - xySafety/2 = " << (_barBase + xySafety) * (_nBars/2 + 0.5) - xySafety/2 << G4endl;
+    G4cout << "[MuravesDetector::Construct] (_barBase + xySafety) * (_nBars/2) - xySafety = " << (_barBase + xySafety) * (_nBars/2) - xySafety << G4endl;
+    G4cout << "[MuravesDetector::Construct] _halfContLengthXY = " << _halfContLengthXY << G4endl;
     // 2.1 compute the Z height of a layer, i.e. of a single view (X or Y) of a station -------------------
     float layerThickness = _barHeight + (_barHeight / (_barBase / 2.) * ((_barBase - _triangEffectiveBase) / 2.)); // Z offset due to cut edges at the base
     std::cout << "[MuravesDetector::Construct] _barHeight=" << _barHeight << std::endl;
@@ -158,6 +153,17 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     _halfContLengthZ = (float) (_nStations - 1) / 2 * _stationSpacing + (layerThickness + zSafety / 2);
 
     std::cout << "[MuravesDetector::Construct] _halContLengthZ=" << _halfContLengthZ << std::endl;
+
+    //------------------- Aluminum shell -------------------
+  
+    //G4double _AlShellHeight = layerThickness + zSafety; // Thickness (height) of aluminum shell box
+    G4double _AlShellHeight = zSafety;
+    
+    G4Box* solidAlShellOut = new G4Box("AlShell", 0.5*1.2*m, 0.5*1.2*m, 0.5*_AlShellHeight);    
+    G4Box* solidAlShellIn =  new G4Box("AlShell", 0.5*1.10*m, 0.5*1.1*m, 0.5*(_AlShellHeight-2*_AlFoilThickness));    
+    G4SubtractionSolid* solidAlShell = new G4SubtractionSolid("solidAlShell",solidAlShellOut,solidAlShellIn);
+
+    G4LogicalVolume* logicAlShell = new G4LogicalVolume(solidAlShell, Aluminum_mat, "AlShell");   
 
     //2.2 Construct mother volume containing the detector -------------------
     G4Box *detContainerSolid = 
@@ -224,7 +230,9 @@ _triangEffectiveBase     += xySafety; // Add safety margin
 
     // 4. Build the stations -------------------
     double posFirstBarMod0 = -((float) _nBars -0.5) * _triangEffectiveBase / 2.; //position of first bar (i.e., bar at most-negative coordinate)
+    G4cout << "[MuravesDetector::Construct] -((float) _nBars -0.5) * _triangEffectiveBase / 2. = " << posFirstBarMod0 << G4endl;
     double posFirstBarMod1 = posFirstBarMod0 + (_nBars) * _triangEffectiveBase/2. ;
+    G4cout << "[MuravesDetector::Construct] posFirstBarMod0 + (_nBars) * _triangEffectiveBase/2. = " << posFirstBarMod1 << G4endl;
     double posFirstBar[] = {posFirstBarMod0,posFirstBarMod1};
 
     std::stringstream barName;
@@ -263,13 +271,23 @@ _triangEffectiveBase     += xySafety; // Add safety margin
     float zPosStation1 = zPosStation0 - 25*cm; // Z position of upper X station
     float zPosStation2 = zPosStation0 + 25*cm; // Z position of upper X station
     float zPosStation3 = zPosStation0 + 145*cm; // Z position of upper X station
-    float zPosStationX[] = {zPosStation0, zPosStation1, zPosStation2, zPosStation3};
 
+    //zPosStationX[] = {zPosStation0, zPosStation1, zPosStation2, zPosStation3};
+    zPosStationX[0] = zPosStation0;
+    zPosStationX[1] = zPosStation1;
+    zPosStationX[2] = zPosStation2;
+    zPosStationX[3] = zPosStation3;
+    
+    // y positions are wrt second station
     float yPosStation0 = 0*cm ; // y position of X station 2
     float yPosStation1 = 5*cm; // y position of X station 1 (closest to Vesuvius)
     float yPosStation2 = -5*cm; // y position of X station 3
     float yPosStation3 = -25*cm; // y position of X station 4
-    float yPosStation[] = {yPosStation0, yPosStation1, yPosStation2, yPosStation3};
+    //float yPosStation[] = {yPosStation0, yPosStation1, yPosStation2, yPosStation3};
+    yPosStation[0] = yPosStation0;
+    yPosStation[1] = yPosStation1;
+    yPosStation[2] = yPosStation2;
+    yPosStation[3] = yPosStation3;
     
     // Implement scintillator bars copy number as bitpattern
     // bit 0-7 -> iBar number
@@ -294,7 +312,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
 
       G4VPhysicalVolume* physTEC = 
         new G4PVPlacement(0,                     //no rotation
-              G4ThreeVector(0,yPosStation[iStation]+20*cm,zPosStationX[iStation]+5.5*cm),       //at (0,0,0)
+              G4ThreeVector(0,yPosStation[iStation]+20*cm,zPosStationX[iStation]+(_AlShellHeight+TEC_thickness)/2),       //at (0,0,0)
               logicTEC,            //its logical volume
               "TECX",               //its name
               detContainerLog,                     //its mother  volume
@@ -305,7 +323,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
       for (G4int iModule = 0; iModule < _nModules;iModule++){
         moduleName << iModule;
 
-        G4VPhysicalVolume* physAlFoil = 
+        /*G4VPhysicalVolume* physAlFoil = 
           new G4PVPlacement(0,                     //no rotation
                 G4ThreeVector(0,yPosStation[iStation], zPosStationX[iStation] + (std::pow(-1,iModule))*((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2))),       //at (0,0,0)
                 logicAlFoil,            //its logical volume
@@ -313,7 +331,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
                 detContainerLog,                     //its mother  volume
                 false,                 //no boolean operation
                 2,                     //copy number
-                checkOverlaps);        //overlaps checking
+                checkOverlaps);*/        //overlaps checking
 
         for (G4int iBar = 0; iBar < _nBars/2; iBar++) {
           barName << 2 * iBar;
@@ -357,12 +375,23 @@ _triangEffectiveBase     += xySafety; // Add safety margin
     }
 
     // zPosStation0 = - layerThickness / 2. - layerThickness - zSafety; // old: caused overlap
-    zPosStation0 = - layerThickness / 2. - _AlShellHeight; // Z position of upper Y station
-    zPosStation1 = zPosStation0 - 26*cm ; // Z position of upper Y station
-    zPosStation2 = zPosStation0 + 26.2*cm ; // Z position of upper Y station
-    zPosStation3 = zPosStation0 + 147.5*cm ; // Z position of upper Y station
+    //zPosStation0 = - layerThickness / 2. - _AlShellHeight; // Z position of upper Y station
+    //zPosStation1 = zPosStation0 - 25*cm ; // Z position of upper Y station
+    //zPosStation2 = zPosStation0 + 25*cm ; // Z position of upper Y station
+    //zPosStation3 = zPosStation0 + 145*cm ; // Z position of upper Y station
+
+    // shift Z stations 1 shell thickness
+    zPosStation0 -= _AlShellHeight; // Z position of upper Y station 
+    zPosStation1 -= _AlShellHeight;; // Z position of upper Y station
+    zPosStation2 -= _AlShellHeight;  ; // Z position of upper Y station
+    zPosStation3 -= _AlShellHeight;  ; // Z position of upper Y station
   
-    float zPosStationY[] = {zPosStation0, zPosStation1, zPosStation2, zPosStation3};
+    //float zPosStationY[] = {zPosStation0, zPosStation1, zPosStation2, zPosStation3};
+
+    zPosStationY[0] = zPosStation0;
+    zPosStationY[1] = zPosStation1;
+    zPosStationY[2] = zPosStation2;
+    zPosStationY[3] = zPosStation3;
 
     // 4.2 Y view -------------------
     for (G4int iStation=0; iStation<_nStations;iStation++){
@@ -379,7 +408,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
       
       G4VPhysicalVolume* physTEC = 
         new G4PVPlacement(_rotZ,                     
-              G4ThreeVector(0,yPosStation[iStation]+20*cm,zPosStationY[iStation]-5.5*cm),       
+              G4ThreeVector(0,yPosStation[iStation]+20*cm,zPosStationY[iStation]-(_AlShellHeight+TEC_thickness)/2),       
               logicTEC,            
               "TECY",               
               detContainerLog,                     
@@ -390,7 +419,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
       for (G4int iModule = 0; iModule < _nModules;iModule++){
         moduleName << iModule;
 
-        G4VPhysicalVolume* physAlFoil = 
+        /*G4VPhysicalVolume* physAlFoil = 
           new G4PVPlacement(0,                     
                 G4ThreeVector(0,yPosStation[iStation],zPosStationY[iStation] + (std::pow(-1,iModule))*((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2))),       
                 logicAlFoil,            
@@ -398,7 +427,7 @@ _triangEffectiveBase     += xySafety; // Add safety margin
                 detContainerLog,                     
                 false,                 
                 2,                     
-                checkOverlaps);
+                checkOverlaps);*/
 
         for (G4int iBar = 0; iBar <_nBars/2; iBar++) {
           barName << 2 * iBar;

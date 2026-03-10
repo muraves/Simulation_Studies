@@ -38,7 +38,7 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-RunAction::RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorInfo) : fEventAction(eventAction), fGeneratorInfo(generatorInfo)
+RunAction::RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorInfo, long seed) : fEventAction(eventAction), fGeneratorInfo(generatorInfo), fSeed(seed)
 {
   // Create the generic analysis manager
   auto analysisManager = G4AnalysisManager::Instance();
@@ -54,7 +54,7 @@ RunAction::RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorIn
 
   // Creating ntuples
   if (fEventAction) {
-    // tuple Id = 0 --- Primary particle-generation-level ---------
+    // tuple Id = 0 --- Primary particle-generation-level: triggering muon---------
     analysisManager->CreateNtuple("PrimaryGenData", "Event-level information of generated primaries");
 
     analysisManager->CreateNtupleIColumn("Event"); // column Id = 0
@@ -68,7 +68,7 @@ RunAction::RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorIn
     
     analysisManager->FinishNtuple();
 
-     // tuple Id = 1 --- Hit-level ------------------------
+     // tuple Id = 1 --- Hit-level: triggering muon ------------------------
     analysisManager->CreateNtuple("HitData", "Hit-level information of hits in scintillator bars");
 
     analysisManager->CreateNtupleIColumn("Event"); // column Id = 0
@@ -87,12 +87,45 @@ RunAction::RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorIn
   
     analysisManager->FinishNtuple();
 
-    analysisManager->CreateH1("theta", "Muon Theta", 50, 0., M_PI);
-    analysisManager->CreateH1("phi",   "Muon Phi",   50, -M_PI, M_PI);
+    // tuple Id = 2 --- Primary particle-generation-level: non-triggering muon ---------
+    analysisManager->CreateNtuple("PrimaryGenData_NT", "Event-level information of generated primaries");
 
-    analysisManager->CreateH1("x", "Muon generated x", 50, -80*cm, 200*cm);
-    analysisManager->CreateH1("y",   "Muon generated y",   50, -140*cm, 140*cm);
-    analysisManager->CreateH1("z",   "Muon generated z",   50, -150*cm, 130*cm);
+    analysisManager->CreateNtupleIColumn("Event"); // column Id = 0
+    
+    analysisManager->CreateNtupleIColumn("NGenPart"); // column Id = 1
+    analysisManager->CreateNtupleIColumn("GenPartID");  // column Id = 2
+    analysisManager->CreateNtupleIColumn("GenPartPDG");  // column Id = 3
+    analysisManager->CreateNtupleDColumn("GenPartE"); // column Id = 4   
+    analysisManager->CreateNtupleDColumn("GenPartTheta"); // column Id = 5  
+    analysisManager->CreateNtupleDColumn("GenPartPhi"); // column Id = 6
+    
+    analysisManager->FinishNtuple();
+
+     // tuple Id = 3 --- Hit-level: non-triggering muon ------------------------
+    analysisManager->CreateNtuple("HitData_NT", "Hit-level information of hits in scintillator bars");
+
+    analysisManager->CreateNtupleIColumn("Event"); // column Id = 0
+    
+    analysisManager->CreateNtupleIColumn("NScintHit"); // column Id = 1
+    analysisManager->CreateNtupleIColumn("ScintHitParentID"); // column Id = 2
+    analysisManager->CreateNtupleDColumn("ScintHitE"); // column Id = 3
+    analysisManager->CreateNtupleDColumn("ScintHitPosX"); // column Id = 4
+    analysisManager->CreateNtupleDColumn("ScintHitPosY"); // column Id = 5
+    analysisManager->CreateNtupleDColumn("ScintHitPosZ"); // column Id = 6
+    analysisManager->CreateNtupleIColumn("ScintHitStation"); // column Id = 7
+    analysisManager->CreateNtupleIColumn("ScintHitModule"); // column Id = 8
+    analysisManager->CreateNtupleIColumn("ScintHitBar"); // column Id = 9
+    analysisManager->CreateNtupleIColumn("ScintHitPDG"); // column Id = 10
+    analysisManager->CreateNtupleIColumn("ScintHitTrackID"); // column Id = 11
+  
+    analysisManager->FinishNtuple();
+
+    //analysisManager->CreateH1("theta", "Muon Theta", 50, 0., M_PI);
+    //analysisManager->CreateH1("phi",   "Muon Phi",   50, -M_PI, M_PI);
+
+    //analysisManager->CreateH1("x", "Muon generated x", 50, -80*cm, 200*cm);
+    //analysisManager->CreateH1("y",   "Muon generated y",   50, -140*cm, 140*cm);
+    //analysisManager->CreateH1("z",   "Muon generated z",   50, -150*cm, 130*cm);
   }
 
   // Set ntuple output file
@@ -104,22 +137,24 @@ RunAction::RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorIn
 
 void RunAction::BeginOfRunAction(const G4Run* /*run*/)
 {
+  startTime = std::chrono::high_resolution_clock::now();
+
   G4int nEvents = G4RunManager::GetRunManager()->GetCurrentRun()->GetNumberOfEventToBeProcessed();
 
   auto det = static_cast<const DetectorConstruction*>(
                   G4RunManager::GetRunManager()->GetUserDetectorConstruction());
 
-  std::string timestamp = GetTimestamp();
+  fTimestamp = GetTimestamp();
   
-  std::string configFilename = "run_config_" + timestamp + ".txt";
-  std::string runFilename = "MuravesSim_Data_" + timestamp;
+  //std::string configFilename = "../../../Muraves_SimData/run_config_" + timestamp + ".txt";
+  std::string runFilename = "../../../Muraves_SimData/MuravesSim_Data_" + fTimestamp;
 
   std::string generatorSummary;
     if (fGeneratorInfo) {
         generatorSummary = fGeneratorInfo->GetInfoSummary();
     }
 
-  RunInformation::Write(configFilename, det, nEvents, generatorSummary);
+  //RunInformation::Write(configFilename, det, nEvents, generatorSummary);
 
   // inform the runManager to save random number seed
   // G4RunManager::GetRunManager()->SetRandomNumberStore(true);
@@ -146,6 +181,39 @@ void RunAction::EndOfRunAction(const G4Run* /*run*/)
   analysisManager->CloseFile(false);
   // Keep content so that they are plotted.
   // The content will be reset at start of the next run.
+  
+
+  // Record end time
+    endTime = std::chrono::high_resolution_clock::now();
+
+    // Calculate elapsed time in milliseconds
+    long long total_ms = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+
+    // Detector info
+    auto det = static_cast<const DetectorConstruction*>(
+                    G4RunManager::GetRunManager()->GetUserDetectorConstruction());
+
+    G4int nEvents = G4RunManager::GetRunManager()->GetCurrentRun()->GetNumberOfEventToBeProcessed();
+
+
+    std::string generatorSummary;
+    if (fGeneratorInfo) {
+        generatorSummary = fGeneratorInfo->GetInfoSummary();
+    }
+
+
+    // Generate filename
+    std::string configFilename = "../../../Muraves_SimData/run_config_" + fTimestamp + ".txt";
+
+    // Write all run info including runtime
+       if (!generatorSummary.empty()) {
+    RunInformation::Write(configFilename, det, nEvents, generatorSummary, total_ms, fSeed);}
+
+    // Write & close analysis data
+    //auto analysisManager = G4AnalysisManager::Instance();
+    //analysisManager->Write();
+    //analysisManager->CloseFile(false);
+
 }
 
 // generate YYYYMMDD_HHMMSS timestamp to get unique names for output files (avoids overwriting)

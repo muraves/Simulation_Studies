@@ -9,11 +9,14 @@
 class ActionInitialization : public G4VUserActionInitialization
 {
   public:
-    ActionInitialization();
+    ActionInitialization(long seed);
     virtual ~ActionInitialization();
 
     virtual void BuildForMaster() const;
     virtual void Build() const;
+
+  private:
+    long fSeed;
 };
 
 #endif

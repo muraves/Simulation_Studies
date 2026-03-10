@@ -39,6 +39,7 @@ class PrimaryGeneratorAction_EcoMug : public G4VUserPrimaryGeneratorAction, publ
     G4double fMinPhi, fMaxPhi;
     G4double fMinPosPhi, fMaxPosPhi;
     G4double rateHSphere, errorHSphere, genSurfaceArea;
+    long seedEcomug;
 
     std::array<G4double, 3> GetHSphereCenter() const { return fHSphereCenter; }
     G4double GetHSphereRadius() const { return fHSphereRadius; }
