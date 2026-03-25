@@ -851,7 +851,8 @@ private:
     error = V*pow((expectedSquare-pow(expected,2))/(npoints-1), 0.5);
   };
 
-    void MCJprimeCustomHSphereIntegration(double &rate, double &error, int npoints) { 
+  // OLD
+    /*void MCJprimeCustomHSphereIntegration(double &rate, double &error, int npoints) { 
     double I = 0., I2 = 0., value = 0.;
     for (auto i = 0; i < npoints; ++i) {
       mTheta0 = mRandom.GenerateRandomDouble(mHSphereMinPositionTheta, mHSphereMaxPositionTheta);
@@ -868,7 +869,101 @@ private:
     double expectedSquare = I2/npoints;
     rate = V*I/npoints;
     error = V*pow((expectedSquare-pow(expected,2))/(npoints-1), 0.5);
+  };*/
+
+  void MCJprimeCustomHSphereIntegration(double &rate, double &error, int npoints) {
+    double I = 0., I2 = 0., value = 0.;
+    for (auto i = 0; i < npoints; ++i) {
+      //mTheta0          = acos(mRandom.GenerateRandomDouble(mHSphereCosMaxPositionTheta, mHSphereCosMinPositionTheta));
+      mTheta0 = mRandom.GenerateRandomDouble(mHSphereMinPositionTheta, mHSphereMaxPositionTheta);
+      mPhi0            = mRandom.GenerateRandomDouble(mHSphereMinPositionPhi, mHSphereMaxPositionPhi); // NEW
+      mGenerationTheta = mRandom.GenerateRandomDouble(mMinimumTheta, mMaximumTheta);
+      mGenerationPhi   = mRandom.GenerateRandomDouble(mMinimumPhi, mMaximumPhi);
+      mGenerationMomentum = mRandom.GenerateRandomDouble(mMinimumMomentum, mMaximumMomentum);
+
+      double cosDeltaPhi = cos(mGenerationPhi - mPhi0); // NEW
+
+      value = mJ(mGenerationMomentum, mGenerationTheta)
+              * (sin(mTheta0) * sin(mGenerationTheta) * sin(mGenerationTheta) * cosDeltaPhi  // CHANGED
+                + cos(mTheta0) * cos(mGenerationTheta) * sin(mGenerationTheta))
+              * sin(mTheta0);
+      if (value < 0) value = 0;
+      I  += value;
+      I2 += pow(value, 2);
+    }
+
+    // Add position-phi range to V: NEW
+    double V = (mMaximumMomentum - mMinimumMomentum)
+            * (mMaximumTheta    - mMinimumTheta)
+            * (mMaximumPhi      - mMinimumPhi)
+            * (mHSphereMaxPositionTheta - mHSphereMinPositionTheta)
+            * (mHSphereMaxPositionPhi   - mHSphereMinPositionPhi); // NEW
+
+    double expected       = I  / npoints;
+    double expectedSquare = I2 / npoints;
+    rate  = V * I / npoints;
+    error = V * pow((expectedSquare - pow(expected, 2)) / (npoints - 1), 0.5);
   };
+
+  /*void MCJprimeCustomHSphereIntegration(double &rate, double &error, int npoints) {
+    double I = 0., I2 = 0., value = 0.;
+
+    for (int i = 0; i < npoints; ++i) {
+
+        // -----------------------------
+        // Sample theta0 correctly: uniform in cos(theta0)
+        // -----------------------------
+        double cosTheta0 = mRandom.GenerateRandomDouble(
+            cos(mHSphereMaxPositionTheta), 
+            cos(mHSphereMinPositionTheta)
+        );
+        double theta0 = acos(cosTheta0);
+
+        double phi0 = mRandom.GenerateRandomDouble(
+            mHSphereMinPositionPhi, 
+            mHSphereMaxPositionPhi
+        );
+
+        // -----------------------------
+        // Sample generation theta, phi, momentum
+        // -----------------------------
+        double theta  = mRandom.GenerateRandomDouble(mMinimumTheta, mMaximumTheta);
+        double phi    = mRandom.GenerateRandomDouble(mMinimumPhi, mMaximumPhi);
+        double p      = mRandom.GenerateRandomDouble(mMinimumMomentum, mMaximumMomentum);
+
+        double cos_dphi = cos(phi - phi0);
+
+        // -----------------------------
+        // Integrand: geometrical factor * flux
+        // -----------------------------
+        value = mJ(p, theta) * (
+                  (sin(theta0) * sin(theta) * cos_dphi
+                   + cos(theta0) * cos(theta))
+                  * sin(theta)   // sin(theta) for dΩ_gen
+                  * 1.0          // no extra sin(theta0) needed: sampling is uniform in cosθ0
+               );
+
+        if (value < 0) value = 0;
+
+        I  += value;
+        I2 += value * value;
+    }
+
+    // -----------------------------
+    // Volume factor V
+    // -----------------------------
+    double V = (mMaximumMomentum - mMinimumMomentum)
+             * (mMaximumTheta    - mMinimumTheta)
+             * (mMaximumPhi      - mMinimumPhi)
+             * (cos(mHSphereMinPositionTheta) - cos(mHSphereMaxPositionTheta)) // Δcosθ
+             * (mHSphereMaxPositionPhi - mHSphereMinPositionPhi);
+
+    double expected       = I / npoints;
+    double expectedSquare = I2 / npoints;
+
+    rate  = V * expected;
+    error = V * sqrt((expectedSquare - expected * expected) / (npoints - 1));
+}*/
 
   void MCJprimeSkyIntegration(double &rate, double &error, int npoints) { 
     double I = 0., I2 = 0., value = 0.;
@@ -908,7 +1003,8 @@ private:
     error = V*pow((expectedSquare-pow(expected,2))/(npoints-1), 0.5);
   };
 
-  void MCJprimeHSphereIntegration(double &rate, double &error, int npoints) { 
+  // OLD
+  /*void MCJprimeHSphereIntegration(double &rate, double &error, int npoints) { 
     double I = 0., I2 = 0., value = 0.;
     for (auto i = 0; i < npoints; ++i) {
       mTheta0 = mRandom.GenerateRandomDouble(mHSphereMinPositionTheta, mHSphereMaxPositionTheta);
@@ -923,6 +1019,34 @@ private:
       I2 += pow(value, 2);
     }
     double V = (mMaximumMomentum-mMinimumMomentum)*(mMaximumTheta-mMinimumTheta)*(mMaximumPhi-mMinimumPhi)*(mHSphereMaxPositionTheta-mHSphereMinPositionTheta);
+    double expected = I/npoints;
+    double expectedSquare = I2/npoints;
+    rate = V*I/npoints;
+    error = V*pow((expectedSquare-pow(expected,2))/(npoints-1), 0.5);
+  };*/
+
+  void MCJprimeHSphereIntegration(double &rate, double &error, int npoints) { 
+    double I = 0., I2 = 0., value = 0.;
+    for (auto i = 0; i < npoints; ++i) {
+      //mTheta0 = acos(mRandom.GenerateRandomDouble(mHSphereCosMaxPositionTheta, mHSphereCosMinPositionTheta));
+      mTheta0 = mRandom.GenerateRandomDouble(mHSphereMinPositionTheta, mHSphereMaxPositionTheta);
+      mPhi0 = mRandom.GenerateRandomDouble(mHSphereMinPositionPhi, mHSphereMaxPositionPhi); // NEW
+      mGenerationTheta = mRandom.GenerateRandomDouble(mMinimumTheta, mMaximumTheta);
+      mGenerationPhi = mRandom.GenerateRandomDouble(mMinimumPhi, mMaximumPhi);
+      mGenerationMomentum = mRandom.GenerateRandomDouble(mMinimumMomentum, mMaximumMomentum);
+
+      double cosDeltaPhi = cos(mGenerationPhi - mPhi0); // NEW
+      mN = 2.856-0.655*log(mGenerationMomentum);
+
+      if (mN < 0.1) mN = 0.1;
+      value = 1600*pow(mGenerationMomentum+2.68, -3.175)*pow(mGenerationMomentum, 0.279)*pow(cos(mGenerationTheta), mN)*(sin(mTheta0)*sin(mGenerationTheta)*sin(mGenerationTheta)*cosDeltaPhi+cos(mTheta0)*cos(mGenerationTheta)*sin(mGenerationTheta))*sin(mTheta0);
+      if (value < 0) value = 0;
+      I  += value;
+      I2 += pow(value, 2);
+    }
+    double V = (mMaximumMomentum-mMinimumMomentum)*(mMaximumTheta-mMinimumTheta)*(mMaximumPhi-mMinimumPhi)*(mHSphereMaxPositionTheta-mHSphereMinPositionTheta)
+    * (mHSphereMaxPositionPhi   - mHSphereMinPositionPhi); // NEW;
+    
     double expected = I/npoints;
     double expectedSquare = I2/npoints;
     rate = V*I/npoints;

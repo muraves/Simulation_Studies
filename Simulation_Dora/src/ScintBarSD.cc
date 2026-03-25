@@ -31,18 +31,33 @@ void ScintbarSD::Initialize(G4HCofThisEvent* hce)
     fHCID = G4SDManager::GetSDMpointer()->GetCollectionID(fHitsCollection);
   }
   hce->AddHitsCollection(fHCID, fHitsCollection);
+  fHitCount = 0;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 G4bool ScintbarSD::ProcessHits(G4Step* step, G4TouchableHistory* history)
 {
+  fHitCount++;
+  if (fHitCount % 1000 == 0) {
+  G4cout << "Hit count :" << fHitCount << G4endl;}
+  /*if (fHitCount > 10000) {  // tune this threshold
+        std::cout << "WARNING: Aborting runaway event, hit count exceeded: " 
+                  << fHitCount << std::endl;
+        G4RunManager::GetRunManager()->AbortEvent();
+        fHitCount = 0;
+        return false;
+    }*/
   // geometry info from PreStepPoint
   auto prestep = step->GetPreStepPoint();
   auto touchable = step->GetPreStepPoint()->GetTouchable();
   auto track = step->GetTrack();
   
   G4ThreeVector pos = prestep->GetPosition();
+  /*G4ThreeVector pos = prestep->GetTouchableHandle()
+                            ->GetHistory()
+                            ->GetTopTransform()
+                            .TransformPoint(prestep->GetPosition());*/
   
   G4double edep = step->GetTotalEnergyDeposit();
   if ( edep == 0. ) return false;
@@ -70,7 +85,8 @@ for (size_t i = 0; i < fHitsCollection->entries(); i++) {
 
   if ( existingHit->GetTrackID() == trackID &&
        existingHit->GetStationID() == StationNo &&
-       existingHit->GetModuleID()  == ModuleNo ) {
+       existingHit->GetModuleID()  == ModuleNo &&
+       existingHit->GetBarID()  == BarNo) {
     hit = existingHit;
     //G4cout << "hit exists" << G4endl;
     break;
@@ -90,6 +106,9 @@ else {
   hit->SetPos(pos);
   hit->SetBarID(BarNo);
   hit->SetModuleID(ModuleNo);
+  G4cout << "StationNo: " << StationNo << G4endl;
+  //G4cout << "ModuleNo: " << ModuleNo << G4endl;
+  //G4cout << "BarNo: " << BarNo << G4endl;
   hit->SetStationID(StationNo);
   hit->SetTrackID(trackID);
   hit->SetPDGcode(track->GetDefinition()->GetPDGEncoding());

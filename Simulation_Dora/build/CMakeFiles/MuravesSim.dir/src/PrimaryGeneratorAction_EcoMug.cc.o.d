@@ -1,6 +1,6 @@
 CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_EcoMug.cc.o: \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_EcoMug.cc \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorAction_EcoMug.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_EcoMug.cc \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorAction_EcoMug.hh \
   /usr/local/include/Geant4/G4VUserPrimaryGeneratorAction.hh \
   /usr/local/include/Geant4/G4ParticleGun.hh \
   /usr/local/include/Geant4/globals.hh \
@@ -1024,7 +1024,7 @@ CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_EcoMug.cc.o: \
   /usr/local/include/Geant4/G4AllocatorPool.hh \
   /usr/local/include/Geant4/G4PrimaryParticle.hh \
   /usr/local/include/Geant4/G4ParticleMomentum.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/EcoMug.h \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/EcoMug.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/random \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/bernoulli_distribution.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/uniform_real_distribution.h \
@@ -1073,8 +1073,8 @@ CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_EcoMug.cc.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/seed_seq.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/student_t_distribution.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/weibull_distribution.h \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/MuravesMessenger.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorInfo.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/MuravesMessenger.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorInfo.hh \
   /usr/local/include/Geant4/G4LogicalVolumeStore.hh \
   /usr/local/include/Geant4/G4LogicalVolume.hh \
   /usr/local/include/Geant4/G4Region.hh \

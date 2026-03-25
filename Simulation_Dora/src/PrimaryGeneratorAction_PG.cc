@@ -35,9 +35,12 @@ PrimaryGeneratorAction_PG::~PrimaryGeneratorAction_PG()
 //----------------------------------------------------------------------------//
 void PrimaryGeneratorAction_PG::GeneratePrimaries(G4Event* anEvent)
 { 
-  G4double x = -1*m;
-  G4double z = 0;
-  G4double y = 0; 
+  G4double x = -1*m; 
+  //G4double y = 0; 
+  G4double y = (-53 + 106 * G4UniformRand()) * cm;
+  //G4double z = 0;
+  G4double z = (-80 + 140 * G4UniformRand()) * cm;
+  
 
   G4ThreeVector pos(x, y, z); 
 

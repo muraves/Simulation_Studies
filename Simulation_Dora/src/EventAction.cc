@@ -15,6 +15,7 @@
 #include "G4SystemOfUnits.hh"
 #include "G4ios.hh"
 #include "G4AnalysisManager.hh"
+//#include "SteppingAction.hh"
 
 using std::array;
 using std::vector;
@@ -52,8 +53,12 @@ EventAction::EventAction()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void EventAction::BeginOfEventAction(const G4Event*)
+void EventAction::BeginOfEventAction(const G4Event* event)
 {
+  G4int eventID = event->GetEventID();
+    if (eventID % 50000 == 0) 
+        G4cout << ">>> Starting event " << eventID << "..." << G4endl;
+
   // Find hit collections by names (just once)
   if ( fScintbarsHCID == -1 ) {
     auto SDManager = G4SDManager::GetSDMpointer();
@@ -61,12 +66,18 @@ void EventAction::BeginOfEventAction(const G4Event*)
   }
   
   TrackingAction::Instance()->ResetParents();
+  //fTouchedRock=false;
+  //if (fSteppingAction) fSteppingAction->Reset();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void EventAction::EndOfEventAction(const G4Event* event)
 {
+  if (event->IsAborted()) {
+        std::cout << "Event " << event->GetEventID() << " was aborted, skipping save." << std::endl;
+        return;  // don't save anything
+    }
   
   // ------------------- Fill histograms & ntuple -------------------
   
@@ -136,6 +147,8 @@ void EventAction::EndOfEventAction(const G4Event* event)
         analysisManager->FillNtupleDColumn(0, 4, primary->GetTotalEnergy());
         analysisManager->FillNtupleDColumn(0, 5, primary->GetMomentumDirection().theta());
         analysisManager->FillNtupleDColumn(0, 6, primary->GetMomentumDirection().phi()); 
+        analysisManager->FillNtupleIColumn(0, 7, event->IsAborted()); 
+        //analysisManager->FillNtupleIColumn(0, 8, fTouchedRock); 
       }    
       analysisManager->AddNtupleRow(0);
     }
@@ -173,6 +186,8 @@ void EventAction::EndOfEventAction(const G4Event* event)
         analysisManager->FillNtupleDColumn(2, 4, primary->GetTotalEnergy());
         analysisManager->FillNtupleDColumn(2, 5, primary->GetMomentumDirection().theta());
         analysisManager->FillNtupleDColumn(2, 6, primary->GetMomentumDirection().phi()); 
+        analysisManager->FillNtupleIColumn(2, 7, event->IsAborted());
+        //analysisManager->FillNtupleIColumn(0, 8, fTouchedRock);
       }    
       analysisManager->AddNtupleRow(2);
     }

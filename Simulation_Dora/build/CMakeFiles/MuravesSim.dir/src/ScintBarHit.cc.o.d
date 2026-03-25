@@ -1,6 +1,6 @@
 CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o: \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarHit.cc \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/ScintBarHit.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/src/ScintBarHit.cc \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/ScintBarHit.hh \
   /usr/local/include/Geant4/G4VHit.hh \
   /usr/local/include/Geant4/globals.hh \
   /usr/local/include/Geant4/G4ios.hh \
@@ -1031,7 +1031,7 @@ CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__stop_token/stop_source.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__thread/thread.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__thread/this_thread.h \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/DetectorConstruction.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/DetectorConstruction.hh \
   /usr/local/include/Geant4/G4VUserDetectorConstruction.hh \
   /usr/local/include/Geant4/G4Material.hh \
   /usr/local/include/Geant4/G4Element.hh \

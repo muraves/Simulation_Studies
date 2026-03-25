@@ -1,5 +1,5 @@
 CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PhysicsList.cc \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/src/PhysicsList.cc \
   /usr/local/include/Geant4/globals.hh \
   /usr/local/include/Geant4/G4ios.hh \
   /usr/local/include/Geant4/G4Types.hh \
@@ -972,7 +972,7 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/iomanip \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/map \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__tree \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PhysicsList.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/PhysicsList.hh \
   /usr/local/include/Geant4/G4VUserPhysicsList.hh \
   /usr/local/include/Geant4/G4ParticleDefinition.hh \
   /usr/local/include/Geant4/G4PDefManager.hh \

@@ -29,6 +29,7 @@ class ScintbarSD : public G4VSensitiveDetector
   private:
     ScintbarHitsCollection* fHitsCollection = nullptr;
     G4int fHCID = -1;
+    G4int fHitCount = 0;
 };
 
 

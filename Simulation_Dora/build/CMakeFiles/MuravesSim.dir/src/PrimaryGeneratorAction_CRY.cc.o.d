@@ -1,6 +1,6 @@
 CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_CRY.cc.o: \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_CRY.cc \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorAction_CRY.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_CRY.cc \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorAction_CRY.hh \
   /usr/local/include/Geant4/G4VUserPrimaryGeneratorAction.hh \
   /usr/local/include/Geant4/G4ThreeVector.hh \
   /usr/local/include/Geant4/globals.hh \
@@ -1092,15 +1092,15 @@ CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_CRY.cc.o: \
   /Users/dorageeraerts/Documents/PhD/software/cry/src/CRYParticle.h \
   /Users/dorageeraerts/Documents/PhD/software/cry/src/CRYGenerator.h \
   /Users/dorageeraerts/Documents/PhD/software/cry/src/CRYPrimary.h \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/RNGWrapper.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorMessenger.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/RNGWrapper.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorMessenger.hh \
   /usr/local/include/Geant4/G4UImessenger.hh \
   /usr/local/include/Geant4/G4UIdirectory.hh \
   /usr/local/include/Geant4/G4UIcommand.hh \
   /usr/local/include/Geant4/G4ApplicationState.hh \
   /usr/local/include/Geant4/G4UIparameter.hh \
   /usr/local/include/Geant4/G4UItokenNum.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/DetectorConstruction.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/DetectorConstruction.hh \
   /usr/local/include/Geant4/G4VUserDetectorConstruction.hh \
   /usr/local/include/Geant4/G4RotationMatrix.hh \
   /usr/local/include/Geant4/CLHEP/Vector/Rotation.h \
@@ -1147,7 +1147,7 @@ CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_CRY.cc.o: \
   /usr/local/include/Geant4/G4VPhysicalVolume.icc \
   /usr/local/include/Geant4/G4Cache.hh \
   /usr/local/include/Geant4/G4CacheDetails.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/../MuravesSim.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/src/../MuravesSim.hh \
   /usr/local/include/Geant4/G4Event.hh \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/set \
   /usr/local/include/Geant4/evtdefs.hh \

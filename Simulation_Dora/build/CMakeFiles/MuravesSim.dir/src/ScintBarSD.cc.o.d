@@ -1,6 +1,6 @@
 CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o: \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/ScintBarSD.cc \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/ScintBarSD.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/src/ScintBarSD.cc \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/ScintBarSD.hh \
   /usr/local/include/Geant4/G4VSensitiveDetector.hh \
   /usr/local/include/Geant4/G4CollectionNameVector.hh \
   /usr/local/include/Geant4/globals.hh \
@@ -1138,7 +1138,7 @@ CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o: \
   /usr/local/include/Geant4/G4VReadOutGeometry.hh \
   /usr/local/include/Geant4/G4SensitiveVolumeList.hh \
   /usr/local/include/Geant4/G4VSDFilter.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/ScintBarHit.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/ScintBarHit.hh \
   /usr/local/include/Geant4/G4THitsCollection.hh \
   /usr/local/include/Geant4/G4SDManager.hh \
   /usr/local/include/Geant4/G4HCtable.hh \

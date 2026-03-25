@@ -9,4 +9,5 @@
 
 # Initialize and beam on
 /run/initialize
-/run/beamOn 1000
+/run/printProgress 0
+/run/beamOn 1

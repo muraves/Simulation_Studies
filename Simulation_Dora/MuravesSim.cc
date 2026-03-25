@@ -41,6 +41,7 @@
 #include "MuravesMessenger.hh"
 #include "PhysicsList.hh"
 #include "MuSimPhysicsList.hh"
+#include "RunInformation.hh"
 
 //#include "G4MPImanager.hh"
 //#include "G4MPIsession.hh"
@@ -59,13 +60,23 @@ int main(int argc, char** argv)
 {
   auto start = high_resolution_clock::now();
 
+  std::cout << "argc = " << argc << std::endl;
+
+    //for (int i = 0; i < argc; i++) {
+        //std::cout << "argv[" << i << "] = " << argv[i] << std::endl;
+    //}
+
   G4UIExecutive* ui = nullptr;
   if (argc == 1) {
     ui = new G4UIExecutive(argc, argv);
   }
   auto theMessenger = new MuravesMessenger();
 
+  long seed = std::chrono::system_clock::now().time_since_epoch().count();
+  G4Random::setTheSeed(seed);
   // --- Set the seed ---
+  //int seed = std::stoi(argv[2]);
+  //CLHEP::HepRandom::setTheSeed(seed);
   /*
   auto start = high_resolution_clock::now();
   
@@ -155,7 +166,7 @@ int main(int argc, char** argv)
   // UserAction classes
   //-------------------
   //theRunManager->SetUserAction(new PrimaryGeneratorAction(""));
-  theRunManager->SetUserInitialization(new ActionInitialization());
+  theRunManager->SetUserInitialization(new ActionInitialization(seed));
   
   // Initialize G4 kernel
   //---------------------
@@ -191,8 +202,24 @@ int main(int argc, char** argv)
   auto end = high_resolution_clock::now();
 
   auto duration = duration_cast<milliseconds>(end - start).count();
-
+  
   cout << "Time taken by program: " << duration << " milliseconds" << endl;
+
+  auto hours = duration / (1000 * 60 * 60);
+    duration %= (1000 * 60 * 60);
+
+    auto minutes = duration / (1000 * 60);
+   duration %= (1000 * 60);
+
+    auto seconds = duration / 1000;
+    auto milliseconds = duration % 1000;
+
+    cout << "Time taken by program: "
+         << hours << "h "
+         << minutes << "m "
+         << seconds << "s "
+         << milliseconds << "ms" << endl;
+
 
   delete theVisManager;
   delete theRunManager;

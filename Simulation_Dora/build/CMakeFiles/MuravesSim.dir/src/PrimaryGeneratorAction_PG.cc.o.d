@@ -1,6 +1,6 @@
 CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_PG.cc.o: \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_PG.cc \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorAction_PG.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_PG.cc \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorAction_PG.hh \
   /usr/local/include/Geant4/G4VUserPrimaryGeneratorAction.hh \
   /usr/local/include/Geant4/G4ThreeVector.hh \
   /usr/local/include/Geant4/globals.hh \
@@ -1087,7 +1087,7 @@ CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_PG.cc.o: \
   /usr/local/include/Geant4/CLHEP/Random/RandPoissonQ.icc \
   /usr/local/include/Geant4/CLHEP/Random/RandStudentT.h \
   /usr/local/include/Geant4/CLHEP/Random/RandStudentT.icc \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorInfo.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorInfo.hh \
   /usr/local/include/Geant4/G4ParticleGun.hh \
   /usr/local/include/Geant4/G4VPrimaryGenerator.hh \
   /usr/local/include/Geant4/G4PrimaryVertex.hh \

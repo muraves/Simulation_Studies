@@ -1,6 +1,6 @@
 CMakeFiles/MuravesSim.dir/src/Materials.cc.o: \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/Materials.cc \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/Materials.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/src/Materials.cc \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/Materials.hh \
   /usr/local/include/Geant4/globals.hh \
   /usr/local/include/Geant4/G4ios.hh \
   /usr/local/include/Geant4/G4Types.hh \
@@ -1199,4 +1199,4 @@ CMakeFiles/MuravesSim.dir/src/Materials.cc.o: \
   /usr/local/include/Geant4/G4ParticleChange.icc \
   /usr/local/include/Geant4/G4ProcessType.hh \
   /usr/local/include/Geant4/G4SystemOfUnits.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PolystyreneProperties.hh
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/PolystyreneProperties.hh

@@ -43,17 +43,37 @@ RunAction::RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorIn
   // Create the generic analysis manager
   auto analysisManager = G4AnalysisManager::Instance();
   analysisManager->SetDefaultFileType("root");
-  // If the filename extension is not provided, the default file type (root)
-  // will be used for all files specified without extension.
-  analysisManager->SetVerboseLevel(1);
-
-  // Default settings
-  analysisManager->SetNtupleMerging(true);
-  // Note: merging ntuples is available only with Root output
+  
+  
   analysisManager->SetFileName("MuravesSim_Data"); 
 
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+void RunAction::BeginOfRunAction(const G4Run* /*run*/)
+{
+  startTime = std::chrono::high_resolution_clock::now();
+
+  G4int nEvents = G4RunManager::GetRunManager()->GetCurrentRun()->GetNumberOfEventToBeProcessed();
+
+  auto det = static_cast<const DetectorConstruction*>(
+                  G4RunManager::GetRunManager()->GetUserDetectorConstruction());
+
+  fTimestamp = GetTimestamp();
+  
+  //std::string configFilename = "../../../Muraves_SimData/run_config_" + timestamp + ".txt";
+  std::string runFilename = "../../../MuravesSim_Data/MuravesSim_Data_" + fTimestamp;
+
+  auto analysisManager = G4AnalysisManager::Instance();
+  analysisManager->SetVerboseLevel(1);
+  analysisManager->SetNtupleMerging(true); // merge tuples from worker threads
+
+  //analysisManager->Reset();
+
+
   // Creating ntuples
-  if (fEventAction) {
+  
     // tuple Id = 0 --- Primary particle-generation-level: triggering muon---------
     analysisManager->CreateNtuple("PrimaryGenData", "Event-level information of generated primaries");
 
@@ -65,6 +85,8 @@ RunAction::RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorIn
     analysisManager->CreateNtupleDColumn("GenPartE"); // column Id = 4   
     analysisManager->CreateNtupleDColumn("GenPartTheta"); // column Id = 5  
     analysisManager->CreateNtupleDColumn("GenPartPhi"); // column Id = 6
+    analysisManager->CreateNtupleIColumn("Aborted"); // column Id = 7
+    //analysisManager->CreateNtupleIColumn("touchedRock"); // column Id = 8
     
     analysisManager->FinishNtuple();
 
@@ -98,7 +120,10 @@ RunAction::RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorIn
     analysisManager->CreateNtupleDColumn("GenPartE"); // column Id = 4   
     analysisManager->CreateNtupleDColumn("GenPartTheta"); // column Id = 5  
     analysisManager->CreateNtupleDColumn("GenPartPhi"); // column Id = 6
+    analysisManager->CreateNtupleIColumn("Aborted"); // column Id = 7
+    //analysisManager->CreateNtupleIColumn("touchedRock"); // column Id = 8
     
+
     analysisManager->FinishNtuple();
 
      // tuple Id = 3 --- Hit-level: non-triggering muon ------------------------
@@ -126,48 +151,9 @@ RunAction::RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorIn
     //analysisManager->CreateH1("x", "Muon generated x", 50, -80*cm, 200*cm);
     //analysisManager->CreateH1("y",   "Muon generated y",   50, -140*cm, 140*cm);
     //analysisManager->CreateH1("z",   "Muon generated z",   50, -150*cm, 130*cm);
-  }
-
-  // Set ntuple output file
-  //analysisManager->SetNtupleFileName(0, "Muraves_GenData");
-  //analysisManager->SetNtupleFileName(1, "Muraves_HitData");
-}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-void RunAction::BeginOfRunAction(const G4Run* /*run*/)
-{
-  startTime = std::chrono::high_resolution_clock::now();
-
-  G4int nEvents = G4RunManager::GetRunManager()->GetCurrentRun()->GetNumberOfEventToBeProcessed();
-
-  auto det = static_cast<const DetectorConstruction*>(
-                  G4RunManager::GetRunManager()->GetUserDetectorConstruction());
-
-  fTimestamp = GetTimestamp();
   
-  //std::string configFilename = "../../../Muraves_SimData/run_config_" + timestamp + ".txt";
-  std::string runFilename = "../../../Muraves_SimData/MuravesSim_Data_" + fTimestamp;
+    analysisManager->OpenFile(runFilename);
 
-  std::string generatorSummary;
-    if (fGeneratorInfo) {
-        generatorSummary = fGeneratorInfo->GetInfoSummary();
-    }
-
-  //RunInformation::Write(configFilename, det, nEvents, generatorSummary);
-
-  // inform the runManager to save random number seed
-  // G4RunManager::GetRunManager()->SetRandomNumberStore(true);
-
-  // Get analysis manager
-  auto analysisManager = G4AnalysisManager::Instance();
-
-  analysisManager->Reset();
-
-  // Open an output file
-  // The default file name is set in RunAction::RunAction(),
-  // it can be overwritten in a macro
-  analysisManager->OpenFile(runFilename);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -203,7 +189,7 @@ void RunAction::EndOfRunAction(const G4Run* /*run*/)
 
 
     // Generate filename
-    std::string configFilename = "../../../Muraves_SimData/run_config_" + fTimestamp + ".txt";
+    std::string configFilename = "../../../MuravesSim_Data/run_config_" + fTimestamp + ".txt";
 
     // Write all run info including runtime
        if (!generatorSummary.empty()) {

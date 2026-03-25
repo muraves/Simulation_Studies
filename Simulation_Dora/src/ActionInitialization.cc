@@ -12,6 +12,7 @@
 #include "TrackingAction.hh"
 #include "MuravesMessenger.hh"
 #include "PrimaryGeneratorInfo.hh"
+#include "SteppingAction.hh"
 
 ActionInitialization::ActionInitialization(long seed) : G4VUserActionInitialization(), fSeed(seed)
 {}
@@ -25,9 +26,11 @@ ActionInitialization::~ActionInitialization()
 
 void ActionInitialization::BuildForMaster() const
 {
-  auto eventAction = new EventAction;
+  //auto theEventAction = new EventAction();         
+  //SetUserAction(theEventAction);
+  //SetUserAction(new MySteppingAction(theEventAction));
   PrimaryGeneratorInfo* fGeneratorInfo = nullptr;
-  SetUserAction(new RunAction(eventAction, fGeneratorInfo, fSeed));
+  SetUserAction(new RunAction(nullptr, fGeneratorInfo, fSeed));
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -54,12 +57,15 @@ void ActionInitialization::Build() const
   generatorAction = dynamic_cast<G4VUserPrimaryGeneratorAction*>(fGeneratorInfo);
   SetUserAction(generatorAction);
 
-  auto theEventAction = new EventAction;
+  auto theEventAction = new EventAction();         
   SetUserAction(theEventAction);
+  SetUserAction(new MySteppingAction(theEventAction));
 
   SetUserAction(new RunAction(theEventAction, fGeneratorInfo, fSeed));
 
   SetUserAction(new TrackingAction());
+
+  //SetUserAction(theSteppingAction);
 }
 
 

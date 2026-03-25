@@ -87,6 +87,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4Material* air_mat = nist->FindOrBuildMaterial("G4_AIR");
   G4Material* Aluminum_mat = nist->FindOrBuildMaterial("G4_Al");
   G4Material* polystyrene_mat = nist->FindOrBuildMaterial("G4_POLYSTYRENE"); // standard polystyrene
+  G4Material* rock_mat = new G4Material("StandardRock", 11.0, 22.0*g/mole, 2.65*g/cm3);
   //G4Material* polystyrene_mat = FindMaterial(Materials::kPOLYSTYRENE); // with costum scintillator properties
 
   G4bool checkOverlaps = true; // Option to switch on/off checking of volumes overlaps
@@ -94,9 +95,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
        
     // ------------------- World -------------------
     
-    G4double world_sizeX = 10.*m;
-    G4double world_sizeY = 10.*m;
-    G4double world_sizeZ  = 10.*m;
+    G4double world_sizeX = 5.*m;
+    G4double world_sizeY = 2.*m;
+    G4double world_sizeZ  = 3.*m;
     
     G4Box* solidWorld = new G4Box("World", 0.5*world_sizeX, 0.5*world_sizeY, 0.5*world_sizeZ);    
 
@@ -158,34 +159,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   
     //G4double _AlShellHeight = layerThickness + zSafety; // Thickness (height) of aluminum shell box
     G4double _AlShellHeight = zSafety;
+    G4double AlShellThickness = 1.2*m;
     
-    G4Box* solidAlShellOut = new G4Box("AlShell", 0.5*1.2*m, 0.5*1.2*m, 0.5*_AlShellHeight);    
+    G4Box* solidAlShellOut = new G4Box("AlShell", 0.5*AlShellThickness, 0.5*AlShellThickness, 0.5*_AlShellHeight);    
     G4Box* solidAlShellIn =  new G4Box("AlShell", 0.5*1.10*m, 0.5*1.1*m, 0.5*(_AlShellHeight-2*_AlFoilThickness));    
     G4SubtractionSolid* solidAlShell = new G4SubtractionSolid("solidAlShell",solidAlShellOut,solidAlShellIn);
 
     G4LogicalVolume* logicAlShell = new G4LogicalVolume(solidAlShell, Aluminum_mat, "AlShell");   
-
-    //2.2 Construct mother volume containing the detector -------------------
-    G4Box *detContainerSolid = 
-        new G4Box("Detector",
-                _halfContLengthXY * 2,
-                _halfContLengthXY * 2,
-                _halfContLengthZ * 2); 
-
-    G4LogicalVolume *detContainerLog = 
-        new G4LogicalVolume(detContainerSolid, 
-                air_mat, 
-                "Detector",
-                NULL,
-                NULL,
-                NULL,
-                false);
-
-    // Rotation such that: x-axis = perpendicular to planes, pointing from first plane to last plane & z-axis = pointing upwards
-    G4ThreeVector axis(1., 1., 1.);
-    axis = axis.unit();
-    G4RotationMatrix* rotDet = new G4RotationMatrix();
-    rotDet->rotate(-120.*deg, axis);
 
     // 3. Build the scintillating bar -------------------
     std::vector<G4TwoVector> vertices;
@@ -268,9 +248,9 @@ _triangEffectiveBase     += xySafety; // Add safety margin
     float zOffset = layerThickness / 2. - _barHeight / 2.;
 
     float zPosStation0 = - layerThickness / 2.; // Z position of upper X station
-    float zPosStation1 = zPosStation0 - 25*cm; // Z position of upper X station
-    float zPosStation2 = zPosStation0 + 25*cm; // Z position of upper X station
-    float zPosStation3 = zPosStation0 + 145*cm; // Z position of upper X station
+    float zPosStation1 = zPosStation0 - 26.7*cm; // Z position of upper X station
+    float zPosStation2 = zPosStation0 + 26.*cm; // Z position of upper X station
+    float zPosStation3 = zPosStation0 + 147.5*cm; // Z position of upper X station
 
     //zPosStationX[] = {zPosStation0, zPosStation1, zPosStation2, zPosStation3};
     zPosStationX[0] = zPosStation0;
@@ -279,15 +259,44 @@ _triangEffectiveBase     += xySafety; // Add safety margin
     zPosStationX[3] = zPosStation3;
     
     // y positions are wrt second station
-    float yPosStation0 = 0*cm ; // y position of X station 2
-    float yPosStation1 = 5*cm; // y position of X station 1 (closest to Vesuvius)
-    float yPosStation2 = -5*cm; // y position of X station 3
-    float yPosStation3 = -25*cm; // y position of X station 4
+    float offSet = 24*cm; // position of station 2
+    float yPosStation0 = 24*cm - offSet; // y position of X station 2
+    float yPosStation1 = 28*cm - offSet; // y position of X station 1 (closest to Vesuvius)
+    float yPosStation2 = 19.5*cm - offSet; // y position of X station 3
+    float yPosStation3 = - offSet; // y position of X station 4
     //float yPosStation[] = {yPosStation0, yPosStation1, yPosStation2, yPosStation3};
     yPosStation[0] = yPosStation0;
     yPosStation[1] = yPosStation1;
     yPosStation[2] = yPosStation2;
     yPosStation[3] = yPosStation3;
+
+    _halfContLengthXY = 0.75*m;
+    G4double detectorBottom = yPosStation[3] - 0.5*AlShellThickness;  // = -0.85 m
+  // Top of highest shell in detector frame
+  G4double detectorTop = yPosStation[1] + 0.5*AlShellThickness;  // station 1 is highest
+    _halfContLengthXY  = std::max(std::abs(detectorBottom), std::abs(detectorTop));
+    //_halfContLengthXY = ;
+    //_halfContLengthZ = 1*m;
+    G4Box *detContainerSolid = 
+        new G4Box("Detector",
+                _halfContLengthXY,
+                _halfContLengthXY,
+                _halfContLengthZ*2); 
+
+    G4LogicalVolume *detContainerLog = 
+        new G4LogicalVolume(detContainerSolid, 
+                air_mat, 
+                "Detector",
+                NULL,
+                NULL,
+                NULL,
+                false);
+
+    // Rotation such that: x-axis = perpendicular to planes, pointing from first plane to last plane & z-axis = pointing upwards
+    G4ThreeVector axis(1., 1., 1.);
+    axis = axis.unit();
+    G4RotationMatrix* rotDet = new G4RotationMatrix();
+    rotDet->rotate(-120.*deg, axis);
     
     // Implement scintillator bars copy number as bitpattern
     // bit 0-7 -> iBar number
@@ -490,9 +499,27 @@ _triangEffectiveBase     += xySafety; // Add safety margin
               false,                   //no boolean operation
               0,                       //copy number
               checkOverlaps);          //overlaps checking
+
+G4double detBottom_world = - _halfContLengthXY;
+
+// Ground fills from world bottom to detector bottom
+G4double ground_sizeZ  = detBottom_world - (-0.5*world_sizeZ);
+G4double groundCenterZ = -0.5*world_sizeZ + 0.5*ground_sizeZ;
+
+G4Box* solidGround = new G4Box("Ground", 
+    0.5*world_sizeX, 
+    0.5*world_sizeY, 
+    0.5*ground_sizeZ);
+G4LogicalVolume* logicGround = new G4LogicalVolume(solidGround, rock_mat, "logGround");
+
+new G4PVPlacement(0,
+    G4ThreeVector(0, 0, groundCenterZ),
+    logicGround, "physGround",
+    logicWorld,   // in world, not detContainerLog
+    false, 0, checkOverlaps);
     
     new G4PVPlacement(rotDet,                       //no rotation
-      G4ThreeVector(0,0,0),  //at position (so last station - after lead block - is at ground level (z=0))
+      G4ThreeVector(0.5*_AlShellHeight+0.5*layerThickness,0,0),  //at position 
       detContainerLog,             //its logical volume
       "DetectorMother",                //its name
       logicWorld,                //its mother  volume

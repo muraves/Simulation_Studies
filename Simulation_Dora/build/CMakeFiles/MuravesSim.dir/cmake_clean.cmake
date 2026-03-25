@@ -35,6 +35,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o"
   "CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.o.d"
+  "CMakeFiles/MuravesSim.dir/src/SteppingAction.cc.o"
+  "CMakeFiles/MuravesSim.dir/src/SteppingAction.cc.o.d"
   "CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o"
   "CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o.d"
   "MuravesSim"

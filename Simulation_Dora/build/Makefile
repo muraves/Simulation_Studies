@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora
+CMAKE_SOURCE_DIR = /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build
+CMAKE_BINARY_DIR = /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build/CMakeFiles /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/build/CMakeFiles /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -561,6 +561,30 @@ src/ScintBarSD.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/ScintBarSD.cc.s
 .PHONY : src/ScintBarSD.cc.s
 
+src/SteppingAction.o: src/SteppingAction.cc.o
+.PHONY : src/SteppingAction.o
+
+# target to build an object file
+src/SteppingAction.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/SteppingAction.cc.o
+.PHONY : src/SteppingAction.cc.o
+
+src/SteppingAction.i: src/SteppingAction.cc.i
+.PHONY : src/SteppingAction.i
+
+# target to preprocess a source file
+src/SteppingAction.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/SteppingAction.cc.i
+.PHONY : src/SteppingAction.cc.i
+
+src/SteppingAction.s: src/SteppingAction.cc.s
+.PHONY : src/SteppingAction.s
+
+# target to generate assembly for a file
+src/SteppingAction.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MuravesSim.dir/build.make CMakeFiles/MuravesSim.dir/src/SteppingAction.cc.s
+.PHONY : src/SteppingAction.cc.s
+
 src/TrackingAction.o: src/TrackingAction.cc.o
 .PHONY : src/TrackingAction.o
 
@@ -648,6 +672,9 @@ help:
 	@echo "... src/ScintBarSD.o"
 	@echo "... src/ScintBarSD.i"
 	@echo "... src/ScintBarSD.s"
+	@echo "... src/SteppingAction.o"
+	@echo "... src/SteppingAction.i"
+	@echo "... src/SteppingAction.s"
 	@echo "... src/TrackingAction.o"
 	@echo "... src/TrackingAction.i"
 	@echo "... src/TrackingAction.s"

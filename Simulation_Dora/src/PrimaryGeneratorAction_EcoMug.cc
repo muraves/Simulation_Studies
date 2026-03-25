@@ -42,7 +42,12 @@ using namespace chrono;
 
 PrimaryGeneratorAction_EcoMug::PrimaryGeneratorAction_EcoMug(): G4VUserPrimaryGeneratorAction(),fParticleGun(0), mu_plus(0),mu_minus(0)
 { 
+	const double DEG_TO_RAD = M_PI / 180.0;
+
     fGenHSphere.SetUseHSphere();
+	/*fGenHSphere.SetUseSky();
+	fGenHSphere.SetSkySize({{1.*m, 1.*m}});
+	fGenHSphere.SetSkyCenterPosition({{0., 0., 0.}});*/
 
 	G4double HSphereCenterX = 56.45*cm;
 	G4double HSphereCenterY = 0.*cm;
@@ -56,14 +61,20 @@ PrimaryGeneratorAction_EcoMug::PrimaryGeneratorAction_EcoMug(): G4VUserPrimaryGe
 	seedEcomug = std::chrono::system_clock::now().time_since_epoch().count();
 	fGenHSphere.SetSeed(seedEcomug);
 
+	fGenHSphere.SetMaximumMomentum(100*GeV);
+	fGenHSphere.SetMaximumTheta(DEG_TO_RAD*80.);
+
 	
 	// -------- Set limitations on generation position on hemisphere -------- 
-	//fMinPosTheta = 0.31037063232396755;
+	//fMinPosTheta = 0.65;
 
 	//fGenHSphere.SetHSphereMinPositionTheta(fMinPosTheta); 
 
 	//fMinPosPhi = 2.0938588701035186;
 	//fMaxPosPhi = -2.0938588701035186+2*M_PI;
+
+	//fMinPosPhi = -30.0 * DEG_TO_RAD;
+	//fMaxPosPhi = 30.0 * DEG_TO_RAD;
 	
 	// backwards
 	//fMinPosPhi = - 1.4705358676698623;
@@ -73,12 +84,17 @@ PrimaryGeneratorAction_EcoMug::PrimaryGeneratorAction_EcoMug(): G4VUserPrimaryGe
 	//fGenHSphere.SetHSphereMaxPositionPhi(fMaxPosPhi);
 
 	// -------- Set limitations on generated muon direction -------- 
-	//fMinTheta = 0.4852877880148983; // angle with negative z
+	//fMinTheta = 0.5; // angle with negative z
 
 	//fGenHSphere.SetMinimumTheta(fMinTheta); 
 
 	//fMaxPhi = 1.0477337834862748;
 	//fMinPhi = -fMaxPhi; // symmetrical view
+
+	
+	//fMinPhi = -30.0 * DEG_TO_RAD;
+	//fMaxPhi = 30.0 * DEG_TO_RAD ;
+	
 
 	// backwards
 	//fMinPhi = 2.0938588701035186;
@@ -94,6 +110,8 @@ PrimaryGeneratorAction_EcoMug::PrimaryGeneratorAction_EcoMug(): G4VUserPrimaryGe
         return this->J(p, theta);
     });
 
+	fGenHSphere.SetHorizontalRate(138.46*EMUnits::hertz/EMUnits::m2);
+
 	genSurfaceArea = fGenHSphere.GetGenSurfaceArea();
 
 	G4int n_particle = 1;
@@ -102,7 +120,7 @@ PrimaryGeneratorAction_EcoMug::PrimaryGeneratorAction_EcoMug(): G4VUserPrimaryGe
 	mu_plus = G4ParticleTable::GetParticleTable()->FindParticle("mu+");
 	mu_minus = G4ParticleTable::GetParticleTable()->FindParticle("mu-");
 
-	fGenHSphere.GetAverageGenRateAndError(rateHSphere,errorHSphere);
+	fGenHSphere.GetAverageGenRateAndError(rateHSphere,errorHSphere, 1e8);
 
 	//G4cout << "Rate " << rateHSphere << G4endl;
 	//G4cout << "Error" << errorHSphere << G4endl;

@@ -1,6 +1,6 @@
 CMakeFiles/MuravesSim.dir/src/DetectorConstruction.cc.o: \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/src/DetectorConstruction.cc \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/DetectorConstruction.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/src/DetectorConstruction.cc \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/DetectorConstruction.hh \
   /usr/local/include/Geant4/G4VUserDetectorConstruction.hh \
   /usr/local/include/Geant4/globals.hh \
   /usr/local/include/Geant4/G4ios.hh \
@@ -1328,14 +1328,14 @@ CMakeFiles/MuravesSim.dir/src/DetectorConstruction.cc.o: \
   /usr/local/include/Geant4/G4SubtractionSolid.hh \
   /usr/local/include/Geant4/G4VPrimitiveScorer.hh \
   /usr/local/include/Geant4/G4MultiFunctionalDetector.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/ScintBarSD.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/ScintBarHit.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/ScintBarSD.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/ScintBarHit.hh \
   /usr/local/include/Geant4/G4THitsCollection.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/Materials.hh \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/Materials.hh \
   /usr/local/include/Geant4/G4OpticalParameters.hh \
   /usr/local/include/Geant4/G4PhysicalConstants.hh \
   /usr/local/include/Geant4/G4Scintillation.hh \
   /usr/local/include/Geant4/G4EmSaturation.hh \
   /usr/local/include/Geant4/G4OpticalPhoton.hh \
   /usr/local/include/Geant4/G4VRestDiscreteProcess.hh \
-  /Users/dorageeraerts/Documents/PhD/simulation/Simulation_Studies/Simulation_Dora/include/PolystyreneProperties.hh
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/PolystyreneProperties.hh
