@@ -8,6 +8,7 @@ public:
     virtual ~PrimaryGeneratorInfo() {}
     virtual std::string GetGeneratorName() const = 0;
     virtual std::string GetInfoSummary() const = 0;
+    virtual void Initialize() {}
 };
 
 #endif

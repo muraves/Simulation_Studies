@@ -106,7 +106,7 @@ else {
   hit->SetPos(pos);
   hit->SetBarID(BarNo);
   hit->SetModuleID(ModuleNo);
-  G4cout << "StationNo: " << StationNo << G4endl;
+  //G4cout << "StationNo: " << StationNo << G4endl;
   //G4cout << "ModuleNo: " << ModuleNo << G4endl;
   //G4cout << "BarNo: " << BarNo << G4endl;
   hit->SetStationID(StationNo);

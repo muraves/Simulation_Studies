@@ -42,6 +42,7 @@
 #include "PhysicsList.hh"
 #include "MuSimPhysicsList.hh"
 #include "RunInformation.hh"
+#include "QGSP_BERT.hh"
 
 //#include "G4MPImanager.hh"
 //#include "G4MPIsession.hh"
@@ -145,9 +146,10 @@ int main(int argc, char** argv)
 
   // Pick number of threads (example)
   /*if (argc == 3)
-    runManager->SetNumberOfThreads(atoi(argv[2]));
+    theRunManager->SetNumberOfThreads(atoi(argv[2]));
   else
-    runManager->SetNumberOfThreads(2);*/
+    theRunManager->SetNumberOfThreads(2);*/
+    theRunManager->SetNumberOfThreads(1);
 
   // UserInitialization classes
   //---------------------------

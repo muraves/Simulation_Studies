@@ -9,6 +9,7 @@
 #include "globals.hh"
 #include "EcoMug.h"
 #include "MuravesMessenger.hh"
+#include "G4SystemOfUnits.hh"
 #include "PrimaryGeneratorInfo.hh"
 
 class G4ParticleGun;
@@ -23,7 +24,7 @@ class G4Box;
 class PrimaryGeneratorAction_EcoMug : public G4VUserPrimaryGeneratorAction, public PrimaryGeneratorInfo
 {
   public:
-    PrimaryGeneratorAction_EcoMug();    
+    PrimaryGeneratorAction_EcoMug(const std::string& inputFile = "");    
     virtual ~PrimaryGeneratorAction_EcoMug();
 
     // method from the base class
@@ -32,13 +33,15 @@ class PrimaryGeneratorAction_EcoMug : public G4VUserPrimaryGeneratorAction, publ
     // method to access particle gun
     const G4ParticleGun* GetParticleGun() const { return fParticleGun; }
 
-    G4double fHSphereRadius;
-    std::array<G4double, 3> fHSphereCenter; // use std::array, EcoMug cannot take G4ThreeVector as input
+    G4double fHSphereRadius = 1*m;
+    std::array<G4double, 3> fHSphereCenter = {0, 0, 0}; // use std::array, EcoMug cannot take G4ThreeVector as input
     G4double fMinTheta, fMaxTheta;
     G4double fMinPosTheta, fMaxPosTheta;
     G4double fMinPhi, fMaxPhi;
     G4double fMinPosPhi, fMaxPosPhi;
-    G4double rateHSphere, errorHSphere, genSurfaceArea;
+    G4double fHorizontalRate;
+    mutable G4double rateHSphere, errorHSphere;
+    mutable G4double genSurfaceArea;
     long seedEcomug;
 
     std::array<G4double, 3> GetHSphereCenter() const { return fHSphereCenter; }
@@ -47,15 +50,27 @@ class PrimaryGeneratorAction_EcoMug : public G4VUserPrimaryGeneratorAction, publ
     G4double GetMaxTheta() const { return fMaxTheta; }
     G4double GetMinPhi() const { return fMinPhi; }
     G4double GetMaxPhi() const { return fMaxPhi; }
+    G4bool genHSphere; // Sky or HSphere
+    G4bool customFlux;
+    void SetGenHSphere(G4bool val) { genHSphere = val; }
+    void SetCustomFlux(G4bool val) { customFlux = val; }
+
+    G4double fSkySizeX = 1.*m;
+    G4double fSkySizeY = 1.*m;
+    G4double fSkyCenterX = 0.;
+    G4double fSkyCenterY = 0.;
+    G4double fSkyCenterZ = 0.;
 
     virtual std::string GetGeneratorName() const override {return "EcoMug";}
     virtual std::string GetInfoSummary() const override;
+    void Initialize() override;
+    void ReadConfigFile(const std::string& filename);
 
   private:
     G4ParticleGun*  fParticleGun; 
     G4ParticleDefinition *mu_plus;
     G4ParticleDefinition *mu_minus;
-    EcoMug fGenHSphere;
+    mutable EcoMug fGenHSphere;
     //EcoMug* genCostumHSphere = nullptr;
     G4Box* fEnvelopeBox;
     G4double E_in;

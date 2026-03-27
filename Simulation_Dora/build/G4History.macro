@@ -54,6 +54,7 @@
 /gui/addButton gun "pi+" "/gun/particle pi+"
 /gui/addButton gun "neutron" "/gun/particle neutron"
 /gui/addButton gun "proton" "/gun/particle proton"
+/EcoMug/readConfig ecomug_config.txt
 /run/beamOn
 /analysis/h1/getVector
 /analysis/h2/getVector

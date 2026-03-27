@@ -822,6 +822,7 @@ private:
     for (auto i = 0; i < npoints; ++i) {
       mGenerationTheta = mRandom.GenerateRandomDouble(mMinimumTheta, mMaximumTheta);
       mGenerationMomentum = mRandom.GenerateRandomDouble(mMinimumMomentum, mMaximumMomentum);
+      //value = mJ(mGenerationMomentum, mGenerationTheta)* std::abs(sin(mGenerationTheta) * cos(mGenerationPhi))* sin(mGenerationTheta);
       value = mJ(mGenerationMomentum, mGenerationTheta)*cos(mGenerationTheta)*sin(mGenerationTheta);
       I  += value;
       I2 += pow(value, 2);
@@ -972,6 +973,7 @@ private:
       mGenerationMomentum = mRandom.GenerateRandomDouble(mMinimumMomentum, mMaximumMomentum);
       mN = 2.856-0.655*log(mGenerationMomentum);
       if (mN < 0.1) mN = 0.1;
+      //value = 1600*pow(mGenerationMomentum+2.68, -3.175)*pow(mGenerationMomentum, 0.279)*pow(cos(mGenerationTheta), mN)* std::abs(sin(mGenerationTheta) * cos(mGenerationPhi))* sin(mGenerationTheta);
       value = 1600*pow(mGenerationMomentum+2.68, -3.175)*pow(mGenerationMomentum, 0.279)*pow(cos(mGenerationTheta), mN+1)*sin(mGenerationTheta);
       I  += value;
       I2 += pow(value, 2);

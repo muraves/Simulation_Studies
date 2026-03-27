@@ -6,6 +6,7 @@
 
 #include "G4UserRunAction.hh"
 #include "PrimaryGeneratorInfo.hh"
+#include <chrono>
 
 class G4Run;
 

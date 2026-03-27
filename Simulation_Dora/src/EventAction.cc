@@ -16,6 +16,7 @@
 #include "G4ios.hh"
 #include "G4AnalysisManager.hh"
 //#include "SteppingAction.hh"
+#include <sys/resource.h>
 
 using std::array;
 using std::vector;
@@ -113,7 +114,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
       planeHit[1]  && planeHit[9]  &&
       planeHit[2]  && planeHit[10];
 
-  if (goodEvent) {
+  /*if (goodEvent) {
     // Loop over hits
     for ( unsigned long i = 0; i < nhit; i++ ) {
       auto hit = static_cast<ScintbarHit*>(hc->GetHit(i));
@@ -152,8 +153,8 @@ void EventAction::EndOfEventAction(const G4Event* event)
       }    
       analysisManager->AddNtupleRow(0);
     }
-  }
-  else { //return;   
+  }*/
+  /*else { //return;   
     for ( unsigned long i = 0; i < nhit; i++ ) {
       auto hit = static_cast<ScintbarHit*>(hc->GetHit(i));
       auto pos = hit->GetPos();
@@ -191,7 +192,23 @@ void EventAction::EndOfEventAction(const G4Event* event)
       }    
       analysisManager->AddNtupleRow(2);
     }
-  }
+  }*/
+
+/*struct rusage r;
+    getrusage(RUSAGE_SELF, &r);
+    long rss_kb = r.ru_maxrss / 1024; // macOS: bytes → KB
+    
+    static long lastRSS = 0;
+    long delta = rss_kb - lastRSS;
+    
+    G4int id = event->GetEventID();
+    if (id % 1 == 0 || delta > 1000) { // print every 100 or on big jumps
+        G4cout << "Event " << id 
+               << " RSS: " << rss_kb << " KB"
+               << " delta: " << delta << " KB"
+               << G4endl;
+    }
+    lastRSS = rss_kb;*/
   
 }
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

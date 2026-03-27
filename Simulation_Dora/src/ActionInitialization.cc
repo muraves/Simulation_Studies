@@ -14,7 +14,7 @@
 #include "PrimaryGeneratorInfo.hh"
 #include "SteppingAction.hh"
 
-ActionInitialization::ActionInitialization(long seed) : G4VUserActionInitialization(), fSeed(seed)
+ActionInitialization::ActionInitialization(long seed, const std::string& ecomugFile) : G4VUserActionInitialization(), fSeed(seed), fEcoMugFile(ecomugFile)
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -52,7 +52,7 @@ void ActionInitialization::Build() const
      //fGeneratorInfo = new PrimaryGeneratorAction_CRY();
   else if ( generator == "EcoMug" )
      //SetUserAction(new PrimaryGeneratorAction_EcoMug());
-     fGeneratorInfo = new PrimaryGeneratorAction_EcoMug();
+     fGeneratorInfo = new PrimaryGeneratorAction_EcoMug(fEcoMugFile);
   
   generatorAction = dynamic_cast<G4VUserPrimaryGeneratorAction*>(fGeneratorInfo);
   SetUserAction(generatorAction);

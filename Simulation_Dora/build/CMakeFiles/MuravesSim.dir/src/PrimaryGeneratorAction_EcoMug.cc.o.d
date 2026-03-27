@@ -1074,6 +1074,7 @@ CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_EcoMug.cc.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/student_t_distribution.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/weibull_distribution.h \
   /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/MuravesMessenger.hh \
+  /usr/local/include/Geant4/G4SystemOfUnits.hh \
   /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorInfo.hh \
   /usr/local/include/Geant4/G4LogicalVolumeStore.hh \
   /usr/local/include/Geant4/G4LogicalVolume.hh \
@@ -1333,7 +1334,6 @@ CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_EcoMug.cc.o: \
   /usr/local/include/Geant4/rundefs.hh \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/list \
   /usr/local/include/Geant4/G4Run.hh \
-  /usr/local/include/Geant4/G4SystemOfUnits.hh \
   /usr/local/include/Geant4/G4Geantino.hh \
   /usr/local/include/Geant4/G4IonTable.hh \
   /usr/local/include/Geant4/G4Ions.hh \
@@ -1409,4 +1409,7 @@ CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_EcoMug.cc.o: \
   /usr/local/include/Geant4/G4GenericFileManager.icc \
   /usr/local/include/Geant4/G4TransportationManager.hh \
   /usr/local/include/Geant4/G4SafetyHelper.hh \
-  /usr/local/include/Geant4/G4TransportationManager.icc
+  /usr/local/include/Geant4/G4TransportationManager.icc \
+  /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/EcomugMessenger.hh \
+  /usr/local/include/Geant4/G4UIcmdWithAString.hh \
+  /usr/local/include/Geant4/G4UIcmdWithABool.hh

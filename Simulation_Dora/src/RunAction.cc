@@ -35,6 +35,7 @@
 #include "G4RunManager.hh"
 #include "G4Run.hh"
 #include "G4SystemOfUnits.hh"
+#include <chrono>
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -153,6 +154,8 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
     //analysisManager->CreateH1("z",   "Muon generated z",   50, -150*cm, 130*cm);
   
     analysisManager->OpenFile(runFilename);
+
+    if (fGeneratorInfo) fGeneratorInfo->Initialize();
 
 }
 
