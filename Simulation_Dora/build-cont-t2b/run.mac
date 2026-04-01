@@ -1,0 +1,15 @@
+# run.mac
+/control/verbose 0
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+/particle/verbose 0
+#/mpi/verbose 0
+/process/verbose 0
+
+/EcoMug/readConfig ecomug_config.txt
+
+# Initialize and beam on
+/run/initialize
+/run/printProgress 0
+/run/beamOn 100000

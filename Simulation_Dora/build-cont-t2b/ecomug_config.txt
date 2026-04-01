@@ -1,0 +1,23 @@
+# booleans
+gen_hsphere 1
+custom_flux 1
+
+# in radians
+theta_min 0.0
+theta_max 1.57079
+#phi_min 1.0
+#phi_max 6.28318530718
+
+pos_theta_min 0.0
+pos_theta_max 1.57079
+pos_phi_min 0.0
+pos_phi_max 6.28318530718
+
+# in s-1 m-2
+horizontal_rate 138
+
+# in cm
+hsphere_center_x 56.45
+hsphere_center_y 0.0
+hsphere_center_z -48.5
+hsphere_radius 150.0

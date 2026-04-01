@@ -62,13 +62,15 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
                   G4RunManager::GetRunManager()->GetUserDetectorConstruction());
 
   fTimestamp = GetTimestamp();
-  
-  //std::string configFilename = "../../../Muraves_SimData/run_config_" + timestamp + ".txt";
-  std::string runFilename = "../../../MuravesSim_Data/MuravesSim_Data_" + fTimestamp;
 
   auto analysisManager = G4AnalysisManager::Instance();
   analysisManager->SetVerboseLevel(1);
   analysisManager->SetNtupleMerging(true); // merge tuples from worker threads
+  
+  //std::string configFilename = "../../../Muraves_SimData/run_config_" + timestamp + ".txt";
+  //std::string runFilename = "../../../MuravesSim_Data/MuravesSim_Data_" + fTimestamp;
+  std::string runFilename = "/output/MuravesSim_Data_" + fTimestamp;
+  analysisManager->OpenFile(runFilename);
 
   //analysisManager->Reset();
 
@@ -153,7 +155,6 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
     //analysisManager->CreateH1("y",   "Muon generated y",   50, -140*cm, 140*cm);
     //analysisManager->CreateH1("z",   "Muon generated z",   50, -150*cm, 130*cm);
   
-    analysisManager->OpenFile(runFilename);
 
     if (fGeneratorInfo) fGeneratorInfo->Initialize();
 
@@ -192,10 +193,11 @@ void RunAction::EndOfRunAction(const G4Run* /*run*/)
 
 
     // Generate filename
-    std::string configFilename = "../../../MuravesSim_Data/run_config_" + fTimestamp + ".txt";
+    //std::string configFilename = "../../../MuravesSim_Data/run_config_" + fTimestamp + ".txt";
+    std::string configFilename = "/output/run_config_" + fTimestamp + ".txt";
 
     // Write all run info including runtime
-       if (!generatorSummary.empty()) {
+      if (!generatorSummary.empty()) {
     RunInformation::Write(configFilename, det, nEvents, generatorSummary, total_ms, fSeed);}
 
     // Write & close analysis data

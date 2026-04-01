@@ -23,8 +23,8 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 # CRY stuff
 #
 #set(CRY_PATH /home/michael/muography/simulations/CRY/cry_v1.7)
-set(CRY_PATH /Users/dorageeraerts/Documents/PhD/software/cry)
-#set(CRY_PATH /opt/CRY)
+#set(CRY_PATH /Users/dorageeraerts/Documents/PhD/software/cry)
+set(CRY_PATH /opt/CRY)
 set(CRY_LIB -L${CRY_PATH}/lib libCRY.a) 
 include_directories(${CRY_PATH}/src)
 
