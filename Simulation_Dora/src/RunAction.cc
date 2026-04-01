@@ -214,7 +214,11 @@ void RunAction::EndOfRunAction(const G4Run* /*run*/)
 
     // Generate filename
     //std::string configFilename = "../../../MuravesSim_Data/run_config_" + fTimestamp + ".txt";
+<<<<<<< HEAD
     std::string configFilename = "/output/run_config_" + fTimestamp + ".txt";
+=======
+    std::string configFilename = std::string(fDataPath) + "/run_config_" + fTimestamp + "FS_UR.txt";
+>>>>>>> 1b1ed3c2d55bc4cbf2ab758a55b81af2d6e52590
 
     // Write all run info including runtime
       if (!generatorSummary.empty()) {
