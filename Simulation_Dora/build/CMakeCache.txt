@@ -213,6 +213,9 @@ CMAKE_TAPI:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/tapi
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Path to CRY installation
+CRY_PATH:PATH=/Users/dorageeraerts/Documents/PhD/software/cry
+
 //Path to a file.
 EXPAT_INCLUDE_DIR:PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include
 

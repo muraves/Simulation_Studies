@@ -7,9 +7,10 @@
 #/mpi/verbose 0
 /process/verbose 0
 
+#/muraves/dataPath /Users/dorageeraerts/Documents/PhD/simulation/Muraves/MuravesSim_Data
 /EcoMug/readConfig ecomug_config.txt
 
 # Initialize and beam on
 /run/initialize
 /run/printProgress 0
-/run/beamOn 1
+/run/beamOn 10000

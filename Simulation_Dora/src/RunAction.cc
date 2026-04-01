@@ -48,6 +48,19 @@ RunAction::RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorIn
   
   analysisManager->SetFileName("MuravesSim_Data"); 
 
+  fDataPath = "../../../MuravesSim_Data";  // fallback (command will overwrite this)
+
+  fDataPathCmd = new G4UIcmdWithAString("/muraves/dataPath", this);
+  fDataPathCmd->SetGuidance("Set the output data directory path");
+  fDataPathCmd->SetParameterName("path", false);
+  fDataPathCmd->SetDefaultValue("../../../MuravesSim_Data"); 
+
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+void RunAction::SetNewValue(G4UIcommand* cmd, G4String val) {
+    if (cmd == fDataPathCmd) fDataPath = val;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -62,6 +75,13 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
                   G4RunManager::GetRunManager()->GetUserDetectorConstruction());
 
   fTimestamp = GetTimestamp();
+<<<<<<< HEAD
+=======
+  
+  //std::string configFilename = "../../../Muraves_SimData/run_config_" + timestamp + ".txt";
+  //std::string runFilename = "../../../MuravesSim_Data/MuravesSim_Data_" + fTimestamp;
+  std::string runFilename    = std::string(fDataPath) + "/MuravesSim_Data_" + fTimestamp + "FS_UR";
+>>>>>>> 1b1ed3c2d55bc4cbf2ab758a55b81af2d6e52590
 
   auto analysisManager = G4AnalysisManager::Instance();
   analysisManager->SetVerboseLevel(1);
@@ -113,7 +133,7 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
     analysisManager->FinishNtuple();
 
     // tuple Id = 2 --- Primary particle-generation-level: non-triggering muon ---------
-    analysisManager->CreateNtuple("PrimaryGenData_NT", "Event-level information of generated primaries");
+    /*analysisManager->CreateNtuple("PrimaryGenData_NT", "Event-level information of generated primaries");
 
     analysisManager->CreateNtupleIColumn("Event"); // column Id = 0
     
@@ -146,7 +166,7 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
     analysisManager->CreateNtupleIColumn("ScintHitPDG"); // column Id = 10
     analysisManager->CreateNtupleIColumn("ScintHitTrackID"); // column Id = 11
   
-    analysisManager->FinishNtuple();
+    analysisManager->FinishNtuple();*/
 
     //analysisManager->CreateH1("theta", "Muon Theta", 50, 0., M_PI);
     //analysisManager->CreateH1("phi",   "Muon Phi",   50, -M_PI, M_PI);

@@ -161,6 +161,7 @@ int main(int argc, char** argv)
   //PhysicsList* thePhysicsList = new PhysicsList;   
   auto thePhysicsList = new FTFP_BERT;
   //auto thePhysicsList = new CosMuSimPhysicsList;
+  //auto thePhysicsList = new PhysicsList;
   thePhysicsList->SetVerboseLevel(1);
   //theRunManager->SetUserInitialization(new PhysicsList);
   theRunManager->SetUserInitialization(thePhysicsList);
