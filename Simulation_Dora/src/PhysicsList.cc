@@ -1,244 +1,135 @@
-//******************************************************************************
-// PhysicsList.cc
-//
-// Defines physics processes for this application.
-//
-// 1.00 JMV, LLNL, JAN-2007:  First version.
-// 1.01 DLW, LLNL, Feb-2012:  Upgradeto replace deprecated modules
-//******************************************************************************
-//
-#include "globals.hh"
+/// \file PhysicsList.cc
+/// \brief Muography physics list adapted from FTFP_BERT
+///
+///  Base:    FTFP_BERT — full hadronic coverage 0.001–1000 GeV,
+///                       includes G4NeutronHP for accurate low-energy
+///                       neutron transport (required for secondary studies)
+///  EM:      G4EmStandardPhysics_option4 — most accurate muon ionisation (paper Zhang2025, 2507.03914v2)
+///                       and scattering, Goudsmit-Saunderson for e±,
+///                       Doppler-broadened Compton below 20 MeV
+///  Steps:   G4StepLimiterPhysics — activated per-volume via G4UserLimits
+///  Optical: G4OpticalPhysics — scintillation, WLS, boundary processes
+
 #include "PhysicsList.hh"
 
-#include "G4ParticleDefinition.hh"
-#include "G4ParticleWithCuts.hh"
-#include "G4ProcessManager.hh"
-#include "G4ProcessVector.hh"
-#include "G4ParticleTypes.hh"
-#include "G4ParticleTable.hh"
-#include "G4Material.hh"
-#include "G4MaterialTable.hh"
-#include "G4ios.hh"
-#include <iomanip>
+#include "G4SystemOfUnits.hh"
 
-using namespace CLHEP;
+// --- Base list ---
+#include "FTFP_BERT.hh"
 
-//----------------------------------------------------------------------------//
-PhysicsList::PhysicsList():  G4VUserPhysicsList()
-{ 
+// --- EM replacement ---
+#include "G4EmStandardPhysics_option4.hh"
+
+// --- Step limiter ---
+#include "G4StepLimiterPhysics.hh"
+
+// --- Optical ---
+#include "G4OpticalPhysics.hh"
+#include "G4OpticalParameters.hh"
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+PhysicsList::PhysicsList() : G4VModularPhysicsList()
+{
+  // -- Start from FTFP_BERT, copying all its constructors except the
+  //    default EM (G4EmStandardPhysics / "emstandard_opt0") which we replace.
+  //    FTFP_BERT already includes:
+  //      G4HadronPhysicsFTFP_BERT   hadronic inelastic (Bertini + FTF)
+  //      G4HadronElasticPhysics     hadronic elastic
+  //      G4NeutronHP                high-precision neutrons < 20 MeV
+  //      G4DecayPhysics             decays
+  //      G4RadioactiveDecayPhysics  radioactive decay
+  //      G4StoppingPhysics          at-rest (mu- capture, pi- absorption)
+  //      G4IonPhysics               ion transport
+  //      G4EmExtraPhysics           muon nuclear, gamma nuclear, synchrotron
+
+  G4VModularPhysicsList* base = new FTFP_BERT();
+  for (G4int i = 0; ; ++i)
+  {
+    G4VPhysicsConstructor* elem =
+        const_cast<G4VPhysicsConstructor*>(base->GetPhysics(i));
+    if (!elem) break;
+
+    // Skip default EM — replaced below with option4
+    if (elem->GetPhysicsName() == "emstandard_opt0") continue;
+
+    RegisterPhysics(elem);
+  }
+  //delete base;
+
+  // -- EM option4: best muon ionisation + scattering accuracy,
+  //    Goudsmit-Saunderson for e±, Monash Compton below 20 MeV,
+  //    Penelope ionisation below 100 keV. All relevant for secondaries.
+  RegisterPhysics(new G4EmStandardPhysics_option4());
+
+  // -- Step limiter: enabled per-volume in DetectorConstruction via
+  //    logVol->SetUserLimits(new G4UserLimits(maxStepSize))
+  //    See recommended values below in SetCuts().
+  RegisterPhysics(new G4StepLimiterPhysics());
+
+  // -- Optical: scintillation, WLS, Cerenkov, boundary, absorption.
+  //    Configure via G4OpticalParameters after registration.
+  G4OpticalPhysics* opticalPhysics = new G4OpticalPhysics();
+  G4OpticalParameters* optParams   = G4OpticalParameters::Instance();
+
+  optParams->SetScintFiniteRiseTime(true);
+  optParams->SetScintTrackSecondariesFirst(true);
+  // optParams->SetCerenkovMaxPhotonsPerStep(300); // uncomment if using Cerenkov
+  // optParams->SetWLSTimeProfile("delta");         // or "exponential"
+
+  RegisterPhysics(opticalPhysics);
+
   defaultCutValue = 1.*mm;
   SetVerboseLevel(1);
 }
 
-//----------------------------------------------------------------------------//
-PhysicsList::~PhysicsList()
-{
-}
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-//----------------------------------------------------------------------------//
-// Create all particles that can appear in this application.
-//----------------------------------------------------------------------------//
-void PhysicsList::ConstructParticle()
-{
-  // In this method, static member functions should be called
-  // for all particles which you want to use.
-  // This ensures that objects of these particle types will be
-  // created in the program. 
+PhysicsList::~PhysicsList() {}
 
-  ConstructBosons();
-  ConstructLeptons();
-  ConstructMesons();
-  ConstructBaryons();
-  ConstructIons();
-}
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void PhysicsList::ConstructBosons()
-{ 
-  // pseudo-particles
-  G4Geantino::GeantinoDefinition();
-  G4ChargedGeantino::ChargedGeantinoDefinition();
-
-  // gamma
-  G4Gamma::GammaDefinition();
-}
-
-void PhysicsList::ConstructLeptons()
-{
-  // leptons
-  G4Electron::ElectronDefinition();
-  G4Positron::PositronDefinition();
-  G4MuonPlus::MuonPlusDefinition();
-  G4MuonMinus::MuonMinusDefinition();
-
-  G4NeutrinoE::NeutrinoEDefinition();
-  G4AntiNeutrinoE::AntiNeutrinoEDefinition();
-  G4NeutrinoMu::NeutrinoMuDefinition();
-  G4AntiNeutrinoMu::AntiNeutrinoMuDefinition();
-}
-
-void PhysicsList::ConstructMesons()
-{
- //  mesons
-  G4PionPlus::PionPlusDefinition();
-  G4PionMinus::PionMinusDefinition();
-  G4PionZero::PionZeroDefinition();
-  G4Eta::EtaDefinition();
-  G4EtaPrime::EtaPrimeDefinition();
-  G4KaonPlus::KaonPlusDefinition();
-  G4KaonMinus::KaonMinusDefinition();
-  G4KaonZero::KaonZeroDefinition();
-  G4AntiKaonZero::AntiKaonZeroDefinition();
-  G4KaonZeroLong::KaonZeroLongDefinition();
-  G4KaonZeroShort::KaonZeroShortDefinition();
-}
-
-void PhysicsList::ConstructBaryons()
-{
-//  baryons
-  G4Proton::ProtonDefinition();
-  G4AntiProton::AntiProtonDefinition();
-  G4Neutron::NeutronDefinition();
-  G4AntiNeutron::AntiNeutronDefinition();
-}
-
-void PhysicsList::ConstructIons()
-{
-  //  nuclei
-  G4Alpha::AlphaDefinition();
-  G4Deuteron::DeuteronDefinition();
-  G4Triton::TritonDefinition();
-  G4He3::He3Definition();
-  //  generic ion
-  G4GenericIon::GenericIonDefinition();
-}
-
-//----------------------------------------------------------------------------//
-// Create all particle transportation processes
-//----------------------------------------------------------------------------//
 void PhysicsList::ConstructProcess()
 {
-  AddTransportation();
-  ConstructInteractions();
+  G4VModularPhysicsList::ConstructProcess();
 }
 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-//----------------------------------------------------------------------------//
-// Define electromagnetic transportation processes
-//----------------------------------------------------------------------------//
-// gamma
-#include "G4PhotoElectricEffect.hh" 
-#include "G4ComptonScattering.hh"  
-#include "G4PolarizedCompton.hh"
-#include "G4GammaConversion.hh" 
-// e-
-// e+
-#include "G4eMultipleScattering.hh"
-#include "G4eIonisation.hh"
-#include "G4eBremsstrahlung.hh"
-#include "G4eplusAnnihilation.hh"
-// muon
-#include "G4MuMultipleScattering.hh"
-#include "G4MuIonisation.hh" 
-#include "G4MuBremsstrahlung.hh" 
-#include "G4MuPairProduction.hh" 
-// neutron
-#include "G4HadronElasticProcess.hh"
-//#include "G4LElastic.hh"
-#include "G4HadronElastic.hh"
-#include "G4HadronInelasticProcess.hh"
-//#include "G4LENeutronInelastic.hh"
-#include "G4NeutronCaptureProcess.hh"
-//#include "G4LCapture.hh"
-#include "G4NeutronRadCapture.hh"
-#include "G4NeutronFissionProcess.hh"
-#include "G4LFission.hh"
-
-#include "G4hMultipleScattering.hh"
-#include "G4hIonisation.hh"
-
-//----------------------------------------------------------------------------//
-void PhysicsList::ConstructInteractions()
-{
-  auto theParticleIterator=GetParticleIterator();
-  theParticleIterator->reset();
-  while( (*theParticleIterator)() ){
-    G4ParticleDefinition* particle = theParticleIterator->value();
-    G4ProcessManager* pmanager = particle->GetProcessManager();
-    G4String particleName = particle->GetParticleName();
-     
-    if (particleName == "gamma") {
-      // Standard classes
-      pmanager->AddDiscreteProcess(new G4PhotoElectricEffect());
-      pmanager->AddDiscreteProcess(new G4ComptonScattering());
-      pmanager->AddDiscreteProcess(new G4PolarizedCompton());
-      pmanager->AddDiscreteProcess(new G4GammaConversion());
-    } else if (particleName == "e-") {
-      // Standard classes:
-      pmanager->AddProcess(new G4eMultipleScattering(),-1, 1,1);
-      pmanager->AddProcess(new G4eIonisation(),       -1, 2,2);
-      pmanager->AddProcess(new G4eBremsstrahlung(),   -1,-1,3); 
-
-    } else if (particleName == "e+") {
-      // Standard classes:
-      pmanager->AddProcess(new G4eMultipleScattering(),-1, 1,1);
-      pmanager->AddProcess(new G4eIonisation(),       -1, 2,2);
-      pmanager->AddProcess(new G4eBremsstrahlung(),   -1,-1,3);
-      pmanager->AddProcess(new G4eplusAnnihilation(),  0,-1,4);
-      
-    } else if (particleName == "neutron") {
-      /*
-      // elastic scattering
-      G4HadronElasticProcess* theElasticProcess =
-                                    new G4HadronElasticProcess;
-      G4HadronElastic* theElasticModel = new G4HadronElastic;
-      theElasticProcess->RegisterMe(theElasticModel);
-      pmanager->AddDiscreteProcess(theElasticProcess);
-      // inelastic scattering
-      //G4NeutronInelasticProcess* theInelasticProcess =
-      //                           new G4NeutronInelasticProcess("inelastic");
-      //G4RPGNeutronInelastic* theInelasticModel = new G4RPGNeutronInelastic;
-      //theInelasticProcess->RegisterMe(theInelasticModel);
-      //pmanager->AddDiscreteProcess(theInelasticProcess);
-      // capture
-      G4HadronCaptureProcess* theCaptureProcess =
-                               new G4HadronCaptureProcess;
-      G4NeutronRadCapture* theCaptureModel = new G4NeutronRadCapture;
-      theCaptureProcess->RegisterMe(theCaptureModel);
-      pmanager->AddDiscreteProcess(theCaptureProcess);
-      // fission
-      G4HadronFissionProcess* theFissionProcess =
-                                 new G4HadronFissionProcess;
-      G4LFission* theFissionModel = new G4LFission;
-      theFissionProcess->RegisterMe(theFissionModel);
-      pmanager->AddDiscreteProcess(theFissionProcess);
-      */
-    } else if( particleName == "mu+" ||
-               particleName == "mu-"    ) {
-    //muon  
-     // Construct processes for muon+
-     pmanager->AddProcess(new G4MuMultipleScattering(),-1,1,1);
-     pmanager->AddProcess(new G4MuIonisation(),-1,2,2);
-     pmanager->AddProcess(new G4MuBremsstrahlung(),-1,-1,3);
-     pmanager->AddProcess(new G4MuPairProduction(),-1,-1,4);
-
-    } else if( particleName == "GenericIon" ) {
-      pmanager->AddProcess(new G4hMultipleScattering(),-1,1,1);
-      pmanager->AddProcess(new G4hIonisation(),-1,2,2);
-    } else {
-      if ((particle->GetPDGCharge() != 0.0) &&
-          (particle->GetParticleName() != "chargedgeantino")&&
-          (!particle->IsShortLived()) ) {
-     // all others charged particles except geantino
-       pmanager->AddProcess(new G4hMultipleScattering(),-1,1,1);
-       pmanager->AddProcess(new G4hIonisation(),-1,2,2);
-      }
-    }
-  }
-}
-
-
-//----------------------------------------------------------------------------//
 void PhysicsList::SetCuts()
-{  SetCutsWithDefault();   
-   if (verboseLevel > 0) DumpCutValuesTable();  
+{
+  // Production cuts: secondary particles below these ranges are not tracked.
+  // Tighter cuts = more secondaries tracked = slower but more complete.
+  //
+  // Recommended for muography with secondary studies:
+  //   - Rock / absorber volumes : 1 mm  (default — no need to track every delta ray)
+  //   - Active detector volumes : 0.1 mm (track more secondaries near detector)
+  //   - Very thin detector layers: 0.01 mm
+  //
+  // Per-region cuts are set in DetectorConstruction via G4Region + G4ProductionCuts.
+  // The defaultCutValue (1 mm) applies everywhere no region cut is set.
+
+  SetCutsWithDefault();
+
+  if (verboseLevel > 0) DumpCutValuesTable();
 }
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+//
+// G4StepLimiterPhysics — recommended step sizes by volume type
+// (set these in DetectorConstruction.cc):
+//
+//   Rock / bulk absorber:
+//     new G4UserLimits(100.*mm)   // large steps fine, muon barely deflects
+//
+//   Scintillator / active detector:
+//     new G4UserLimits(1.*mm)     // resolve light yield and track topology
+//
+//   Thin foils / windows / PCBs:
+//     new G4UserLimits(0.1*mm)    // resolve thin-layer scattering accurately
+//
+//   Air / vacuum gaps:
+//     new G4UserLimits(10.*mm)    // no physics, just geometry crossing
+//
+// Without G4UserLimits set on a volume, G4StepLimiterPhysics has no effect.
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

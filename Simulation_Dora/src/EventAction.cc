@@ -114,7 +114,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
       planeHit[1]  && planeHit[9]  &&
       planeHit[2]  && planeHit[10];
 
-  /*if (goodEvent) {
+  if (goodEvent) {
     // Loop over hits
     for ( unsigned long i = 0; i < nhit; i++ ) {
       auto hit = static_cast<ScintbarHit*>(hc->GetHit(i));
@@ -153,7 +153,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
       }    
       analysisManager->AddNtupleRow(0);
     }
-  }*/
+  }
   /*else { //return;   
     for ( unsigned long i = 0; i < nhit; i++ ) {
       auto hit = static_cast<ScintbarHit*>(hc->GetHit(i));

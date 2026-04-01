@@ -2698,6 +2698,7 @@ CMakeFiles/MuravesSim.dir/src/ActionInitialization.cc.o: /Users/dorageeraerts/Do
   /usr/local/include/Geant4/G4Threading.hh \
   /usr/local/include/Geant4/G4ThreeVector.hh \
   /usr/local/include/Geant4/G4Types.hh \
+  /usr/local/include/Geant4/G4UIcmdWithAString.hh \
   /usr/local/include/Geant4/G4UIcommand.hh \
   /usr/local/include/Geant4/G4UIdirectory.hh \
   /usr/local/include/Geant4/G4UImessenger.hh \
@@ -9067,13 +9068,11 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/__wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/__xlocale.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_abort.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_assert.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_ctermid.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_ctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_locale.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_mb_cur_max.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_printf.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_static_assert.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_stdlib.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/_string.h \
@@ -9101,7 +9100,6 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/arm/limits.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/arm/signal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/arm/types.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/assert.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__algorithm/adjacent_find.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__algorithm/all_of.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__algorithm/any_of.h \
@@ -9429,6 +9427,7 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__condition_variable/condition_variable.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__config_site \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__cxxabi_config.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__debug_utils/randomize_range.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__debug_utils/strict_weak_ordering_check.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__exception/exception.h \
@@ -9436,22 +9435,6 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__exception/nested_exception.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__exception/operations.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__exception/terminate.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/copy_options.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/directory_entry.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/directory_iterator.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/directory_options.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/file_status.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/file_time_type.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/file_type.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/filesystem_error.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/operations.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/path.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/path_iterator.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/perm_options.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/perms.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/space_info.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__filesystem/u8path.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__format/buffer.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__format/concepts.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__format/container_adaptor.h \
@@ -9853,6 +9836,7 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/bitset \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/cctype \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/cerrno \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/cfenv \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/chrono \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/climits \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/clocale \
@@ -9861,6 +9845,7 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/complex \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/concepts \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/condition_variable \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/csignal \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/cstdarg \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/cstddef \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/cstdint \
@@ -9871,14 +9856,14 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/ctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/cwchar \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/cwctype \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/cxxabi.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/deque \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/errno.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/exception \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/execution \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/filesystem \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/fenv.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/format \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/forward_list \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/future \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/initializer_list \
@@ -9889,6 +9874,7 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/istream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/iterator \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/limits \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/list \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/locale \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/locale.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/map \
@@ -9901,6 +9887,7 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/print \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/queue \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/ratio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/regex \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/set \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/sstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/stack \
@@ -9927,6 +9914,9 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/ctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/execinfo.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/fenv.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/gethostuuid.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/libkern/_OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/libkern/arm/_OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/limits.h \
@@ -9945,12 +9935,15 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/malloc/_ptrcheck.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/nl_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/os/availability.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/os/base.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/pthread.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/pthread/pthread_impl.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/pthread/qos.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/pthread/sched.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/runetype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sched.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/signal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/stdint.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/stdlib.h \
@@ -9969,6 +9962,7 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_pthread/_pthread_rwlockattr_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_pthread/_pthread_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_pthread/_pthread_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_select.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_symbol_aliasing.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_blkcnt_t.h \
@@ -10006,6 +10000,7 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_null.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_off_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_pid_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_posix_vdisable.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_rsize_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_rune_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_seek_set.h \
@@ -10028,6 +10023,7 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_uid_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_uintptr_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_useconds_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_uuid_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_va_list.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_wchar_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_wint_t.h \
@@ -10036,13 +10032,16 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/errno.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/qos.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/resource.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/select.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/signal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/syslimits.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/unistd.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/wait.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/time.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/unistd.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/uuid/uuid.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/wchar.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/xlocale.h \
@@ -10074,396 +10073,58 @@ CMakeFiles/MuravesSim.dir/src/PhysicsList.cc.o: /Users/dorageeraerts/Documents/P
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdint.h \
   /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/PhysicsList.hh \
-  /usr/local/include/Geant4/CLHEP/Geometry/BasicVector3D.h \
-  /usr/local/include/Geant4/CLHEP/Geometry/Normal3D.h \
-  /usr/local/include/Geant4/CLHEP/Geometry/Point3D.h \
-  /usr/local/include/Geant4/CLHEP/Geometry/Transform3D.h \
-  /usr/local/include/Geant4/CLHEP/Geometry/Transform3D.icc \
-  /usr/local/include/Geant4/CLHEP/Geometry/Vector3D.h \
-  /usr/local/include/Geant4/CLHEP/Random/DualRand.h \
-  /usr/local/include/Geant4/CLHEP/Random/JamesRandom.h \
-  /usr/local/include/Geant4/CLHEP/Random/MTwistEngine.h \
-  /usr/local/include/Geant4/CLHEP/Random/MixMaxRng.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandBinomial.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandBinomial.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandBit.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandBit.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandBreitWigner.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandBreitWigner.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandChiSquare.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandChiSquare.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandExpZiggurat.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandExponential.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandExponential.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandFlat.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandFlat.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandGamma.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandGamma.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandGauss.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandGauss.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandGaussQ.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandGaussQ.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandGaussZiggurat.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandGeneral.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandGeneral.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandLandau.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandLandau.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandPoisson.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandPoisson.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandPoissonQ.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandPoissonQ.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandStudentT.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandStudentT.icc \
-  /usr/local/include/Geant4/CLHEP/Random/Random.h \
-  /usr/local/include/Geant4/CLHEP/Random/Random.icc \
-  /usr/local/include/Geant4/CLHEP/Random/RandomEngine.h \
-  /usr/local/include/Geant4/CLHEP/Random/RandomEngine.icc \
-  /usr/local/include/Geant4/CLHEP/Random/Randomize.h \
-  /usr/local/include/Geant4/CLHEP/Random/RanecuEngine.h \
-  /usr/local/include/Geant4/CLHEP/Random/Ranlux64Engine.h \
-  /usr/local/include/Geant4/CLHEP/Random/RanluxEngine.h \
-  /usr/local/include/Geant4/CLHEP/Random/RanluxppEngine.h \
-  /usr/local/include/Geant4/CLHEP/Random/RanshiEngine.h \
   /usr/local/include/Geant4/CLHEP/Units/PhysicalConstants.h \
   /usr/local/include/Geant4/CLHEP/Units/SystemOfUnits.h \
   /usr/local/include/Geant4/CLHEP/Utility/defs.h \
-  /usr/local/include/Geant4/CLHEP/Utility/memory.h \
-  /usr/local/include/Geant4/CLHEP/Utility/thread_local.h \
-  /usr/local/include/Geant4/CLHEP/Vector/AxisAngle.h \
-  /usr/local/include/Geant4/CLHEP/Vector/AxisAngle.icc \
-  /usr/local/include/Geant4/CLHEP/Vector/Boost.h \
-  /usr/local/include/Geant4/CLHEP/Vector/Boost.icc \
-  /usr/local/include/Geant4/CLHEP/Vector/BoostX.h \
-  /usr/local/include/Geant4/CLHEP/Vector/BoostX.icc \
-  /usr/local/include/Geant4/CLHEP/Vector/BoostY.h \
-  /usr/local/include/Geant4/CLHEP/Vector/BoostY.icc \
-  /usr/local/include/Geant4/CLHEP/Vector/BoostZ.h \
-  /usr/local/include/Geant4/CLHEP/Vector/BoostZ.icc \
-  /usr/local/include/Geant4/CLHEP/Vector/LorentzRotation.h \
-  /usr/local/include/Geant4/CLHEP/Vector/LorentzRotation.icc \
-  /usr/local/include/Geant4/CLHEP/Vector/LorentzVector.h \
-  /usr/local/include/Geant4/CLHEP/Vector/LorentzVector.icc \
-  /usr/local/include/Geant4/CLHEP/Vector/Rotation.h \
-  /usr/local/include/Geant4/CLHEP/Vector/Rotation.icc \
-  /usr/local/include/Geant4/CLHEP/Vector/RotationInterfaces.h \
-  /usr/local/include/Geant4/CLHEP/Vector/RotationInterfaces.icc \
-  /usr/local/include/Geant4/CLHEP/Vector/RotationX.h \
-  /usr/local/include/Geant4/CLHEP/Vector/RotationX.icc \
-  /usr/local/include/Geant4/CLHEP/Vector/RotationY.h \
-  /usr/local/include/Geant4/CLHEP/Vector/RotationY.icc \
-  /usr/local/include/Geant4/CLHEP/Vector/RotationZ.h \
-  /usr/local/include/Geant4/CLHEP/Vector/RotationZ.icc \
   /usr/local/include/Geant4/CLHEP/Vector/ThreeVector.h \
   /usr/local/include/Geant4/CLHEP/Vector/ThreeVector.icc \
-  /usr/local/include/Geant4/G4AffineTransform.hh \
-  /usr/local/include/Geant4/G4AffineTransform.icc \
-  /usr/local/include/Geant4/G4Allocator.hh \
-  /usr/local/include/Geant4/G4AllocatorPool.hh \
-  /usr/local/include/Geant4/G4Alpha.hh \
-  /usr/local/include/Geant4/G4AntiAlpha.hh \
-  /usr/local/include/Geant4/G4AntiBMesonZero.hh \
-  /usr/local/include/Geant4/G4AntiBsMesonZero.hh \
-  /usr/local/include/Geant4/G4AntiDMesonZero.hh \
-  /usr/local/include/Geant4/G4AntiDeuteron.hh \
-  /usr/local/include/Geant4/G4AntiHe3.hh \
-  /usr/local/include/Geant4/G4AntiKaonZero.hh \
-  /usr/local/include/Geant4/G4AntiLambda.hh \
-  /usr/local/include/Geant4/G4AntiLambdab.hh \
-  /usr/local/include/Geant4/G4AntiLambdacPlus.hh \
-  /usr/local/include/Geant4/G4AntiNeutrinoE.hh \
-  /usr/local/include/Geant4/G4AntiNeutrinoMu.hh \
-  /usr/local/include/Geant4/G4AntiNeutrinoTau.hh \
-  /usr/local/include/Geant4/G4AntiNeutron.hh \
-  /usr/local/include/Geant4/G4AntiOmegaMinus.hh \
-  /usr/local/include/Geant4/G4AntiOmegabMinus.hh \
-  /usr/local/include/Geant4/G4AntiOmegacZero.hh \
-  /usr/local/include/Geant4/G4AntiProton.hh \
-  /usr/local/include/Geant4/G4AntiSigmaMinus.hh \
-  /usr/local/include/Geant4/G4AntiSigmaPlus.hh \
-  /usr/local/include/Geant4/G4AntiSigmaZero.hh \
-  /usr/local/include/Geant4/G4AntiSigmabMinus.hh \
-  /usr/local/include/Geant4/G4AntiSigmabPlus.hh \
-  /usr/local/include/Geant4/G4AntiSigmabZero.hh \
-  /usr/local/include/Geant4/G4AntiSigmacPlus.hh \
-  /usr/local/include/Geant4/G4AntiSigmacPlusPlus.hh \
-  /usr/local/include/Geant4/G4AntiSigmacZero.hh \
-  /usr/local/include/Geant4/G4AntiTriton.hh \
-  /usr/local/include/Geant4/G4AntiXiMinus.hh \
-  /usr/local/include/Geant4/G4AntiXiZero.hh \
-  /usr/local/include/Geant4/G4AntiXibMinus.hh \
-  /usr/local/include/Geant4/G4AntiXibZero.hh \
-  /usr/local/include/Geant4/G4AntiXicPlus.hh \
-  /usr/local/include/Geant4/G4AntiXicZero.hh \
+  /usr/local/include/Geant4/FTFP_BERT.hh \
   /usr/local/include/Geant4/G4AutoLock.hh \
-  /usr/local/include/Geant4/G4AuxiliaryNavServices.hh \
-  /usr/local/include/Geant4/G4AuxiliaryNavServices.icc \
-  /usr/local/include/Geant4/G4BMesonMinus.hh \
-  /usr/local/include/Geant4/G4BMesonPlus.hh \
-  /usr/local/include/Geant4/G4BMesonZero.hh \
-  /usr/local/include/Geant4/G4BlockingList.hh \
-  /usr/local/include/Geant4/G4BlockingList.icc \
-  /usr/local/include/Geant4/G4BsMesonZero.hh \
-  /usr/local/include/Geant4/G4ChargedGeantino.hh \
-  /usr/local/include/Geant4/G4ComptonScattering.hh \
-  /usr/local/include/Geant4/G4CrossSectionDataStore.hh \
-  /usr/local/include/Geant4/G4DMesonMinus.hh \
-  /usr/local/include/Geant4/G4DMesonPlus.hh \
-  /usr/local/include/Geant4/G4DMesonZero.hh \
-  /usr/local/include/Geant4/G4DNAModelSubType.hh \
-  /usr/local/include/Geant4/G4DataVector.hh \
-  /usr/local/include/Geant4/G4DataVector.icc \
-  /usr/local/include/Geant4/G4DensityEffectCalculator.hh \
-  /usr/local/include/Geant4/G4Deuteron.hh \
-  /usr/local/include/Geant4/G4DsMesonMinus.hh \
-  /usr/local/include/Geant4/G4DsMesonPlus.hh \
-  /usr/local/include/Geant4/G4DynamicParticle.hh \
-  /usr/local/include/Geant4/G4DynamicParticle.icc \
-  /usr/local/include/Geant4/G4Electron.hh \
-  /usr/local/include/Geant4/G4ElectronOccupancy.hh \
-  /usr/local/include/Geant4/G4Element.hh \
-  /usr/local/include/Geant4/G4ElementTable.hh \
-  /usr/local/include/Geant4/G4ElementVector.hh \
-  /usr/local/include/Geant4/G4EmDataHandler.hh \
-  /usr/local/include/Geant4/G4EmElementSelector.hh \
-  /usr/local/include/Geant4/G4EmFluoDirectory.hh \
-  /usr/local/include/Geant4/G4EmModelManager.hh \
-  /usr/local/include/Geant4/G4EmParameters.hh \
-  /usr/local/include/Geant4/G4EmProcessSubType.hh \
-  /usr/local/include/Geant4/G4EmSaturation.hh \
-  /usr/local/include/Geant4/G4EmSecondaryParticleType.hh \
-  /usr/local/include/Geant4/G4EmTableType.hh \
-  /usr/local/include/Geant4/G4EnergyRangeManager.hh \
+  /usr/local/include/Geant4/G4Backtrace.hh \
+  /usr/local/include/Geant4/G4Cache.hh \
+  /usr/local/include/Geant4/G4CacheDetails.hh \
+  /usr/local/include/Geant4/G4EmStandardPhysics_option4.hh \
   /usr/local/include/Geant4/G4EnvironmentUtils.hh \
-  /usr/local/include/Geant4/G4Eta.hh \
-  /usr/local/include/Geant4/G4EtaPrime.hh \
-  /usr/local/include/Geant4/G4Etac.hh \
   /usr/local/include/Geant4/G4Exception.hh \
   /usr/local/include/Geant4/G4ExceptionSeverity.hh \
-  /usr/local/include/Geant4/G4ForceCondition.hh \
-  /usr/local/include/Geant4/G4GPILSelection.hh \
-  /usr/local/include/Geant4/G4Gamma.hh \
-  /usr/local/include/Geant4/G4GammaConversion.hh \
-  /usr/local/include/Geant4/G4Geantino.hh \
-  /usr/local/include/Geant4/G4GenericIon.hh \
   /usr/local/include/Geant4/G4GeomSplitter.hh \
   /usr/local/include/Geant4/G4GlobalConfig.hh \
-  /usr/local/include/Geant4/G4HadFinalState.hh \
-  /usr/local/include/Geant4/G4HadProjectile.hh \
-  /usr/local/include/Geant4/G4HadSecondary.hh \
-  /usr/local/include/Geant4/G4HadXSTypes.hh \
-  /usr/local/include/Geant4/G4HadronElastic.hh \
-  /usr/local/include/Geant4/G4HadronElasticProcess.hh \
-  /usr/local/include/Geant4/G4HadronInelasticProcess.hh \
-  /usr/local/include/Geant4/G4HadronicException.hh \
-  /usr/local/include/Geant4/G4HadronicInteraction.hh \
-  /usr/local/include/Geant4/G4HadronicProcess.hh \
-  /usr/local/include/Geant4/G4HadronicProcessType.hh \
-  /usr/local/include/Geant4/G4He3.hh \
-  /usr/local/include/Geant4/G4IonisParamElm.hh \
-  /usr/local/include/Geant4/G4IonisParamMat.hh \
-  /usr/local/include/Geant4/G4Ions.hh \
-  /usr/local/include/Geant4/G4Isotope.hh \
-  /usr/local/include/Geant4/G4IsotopeVector.hh \
-  /usr/local/include/Geant4/G4JPsi.hh \
-  /usr/local/include/Geant4/G4KaonMinus.hh \
-  /usr/local/include/Geant4/G4KaonPlus.hh \
-  /usr/local/include/Geant4/G4KaonZero.hh \
-  /usr/local/include/Geant4/G4KaonZeroLong.hh \
-  /usr/local/include/Geant4/G4KaonZeroShort.hh \
-  /usr/local/include/Geant4/G4LFission.hh \
-  /usr/local/include/Geant4/G4Lambda.hh \
-  /usr/local/include/Geant4/G4Lambdab.hh \
-  /usr/local/include/Geant4/G4LambdacPlus.hh \
-  /usr/local/include/Geant4/G4Log.hh \
-  /usr/local/include/Geant4/G4LogicalVolume.hh \
-  /usr/local/include/Geant4/G4LogicalVolume.icc \
-  /usr/local/include/Geant4/G4LorentzRotation.hh \
-  /usr/local/include/Geant4/G4LorentzVector.hh \
   /usr/local/include/Geant4/G4MCCIndexConversionTable.hh \
-  /usr/local/include/Geant4/G4Material.hh \
   /usr/local/include/Geant4/G4MaterialCutsCouple.hh \
-  /usr/local/include/Geant4/G4MaterialPropertiesIndex.hh \
-  /usr/local/include/Geant4/G4MaterialPropertiesTable.hh \
-  /usr/local/include/Geant4/G4MaterialPropertyVector.hh \
-  /usr/local/include/Geant4/G4MaterialTable.hh \
-  /usr/local/include/Geant4/G4MscStepLimitType.hh \
-  /usr/local/include/Geant4/G4MuBremsstrahlung.hh \
-  /usr/local/include/Geant4/G4MuIonisation.hh \
-  /usr/local/include/Geant4/G4MuMultipleScattering.hh \
-  /usr/local/include/Geant4/G4MuPairProduction.hh \
-  /usr/local/include/Geant4/G4MuonMinus.hh \
-  /usr/local/include/Geant4/G4MuonPlus.hh \
-  /usr/local/include/Geant4/G4NavigationHistory.hh \
-  /usr/local/include/Geant4/G4NavigationHistory.icc \
-  /usr/local/include/Geant4/G4NavigationHistoryPool.hh \
-  /usr/local/include/Geant4/G4NavigationLevel.hh \
-  /usr/local/include/Geant4/G4NavigationLevel.icc \
-  /usr/local/include/Geant4/G4NavigationLevelRep.hh \
-  /usr/local/include/Geant4/G4NavigationLevelRep.icc \
-  /usr/local/include/Geant4/G4NavigationLogger.hh \
-  /usr/local/include/Geant4/G4Navigator.hh \
-  /usr/local/include/Geant4/G4Navigator.icc \
-  /usr/local/include/Geant4/G4NeutrinoE.hh \
-  /usr/local/include/Geant4/G4NeutrinoMu.hh \
-  /usr/local/include/Geant4/G4NeutrinoTau.hh \
-  /usr/local/include/Geant4/G4Neutron.hh \
-  /usr/local/include/Geant4/G4NeutronCaptureProcess.hh \
-  /usr/local/include/Geant4/G4NeutronFissionProcess.hh \
-  /usr/local/include/Geant4/G4NeutronRadCapture.hh \
-  /usr/local/include/Geant4/G4NormalNavigation.hh \
-  /usr/local/include/Geant4/G4NormalNavigation.icc \
-  /usr/local/include/Geant4/G4NuclearFormfactorType.hh \
-  /usr/local/include/Geant4/G4NucleiProperties.hh \
-  /usr/local/include/Geant4/G4Nucleus.hh \
-  /usr/local/include/Geant4/G4OmegaMinus.hh \
-  /usr/local/include/Geant4/G4OmegabMinus.hh \
-  /usr/local/include/Geant4/G4OmegacZero.hh \
-  /usr/local/include/Geant4/G4OpticalPhoton.hh \
-  /usr/local/include/Geant4/G4OrderedTable.hh \
+  /usr/local/include/Geant4/G4OpticalParameters.hh \
+  /usr/local/include/Geant4/G4OpticalPhysics.hh \
   /usr/local/include/Geant4/G4PDefManager.hh \
-  /usr/local/include/Geant4/G4ParameterisedNavigation.hh \
-  /usr/local/include/Geant4/G4ParameterisedNavigation.icc \
-  /usr/local/include/Geant4/G4ParticleChange.hh \
-  /usr/local/include/Geant4/G4ParticleChange.icc \
-  /usr/local/include/Geant4/G4ParticleChangeForGamma.hh \
-  /usr/local/include/Geant4/G4ParticleChangeForLoss.hh \
-  /usr/local/include/Geant4/G4ParticleChangeForMSC.hh \
   /usr/local/include/Geant4/G4ParticleDefinition.hh \
   /usr/local/include/Geant4/G4ParticleDefinition.icc \
-  /usr/local/include/Geant4/G4ParticleMomentum.hh \
   /usr/local/include/Geant4/G4ParticleTable.hh \
   /usr/local/include/Geant4/G4ParticleTable.icc \
   /usr/local/include/Geant4/G4ParticleTableIterator.hh \
-  /usr/local/include/Geant4/G4ParticleTypes.hh \
-  /usr/local/include/Geant4/G4ParticleWithCuts.hh \
-  /usr/local/include/Geant4/G4PhotoElectricEffect.hh \
-  /usr/local/include/Geant4/G4PhysicsFreeVector.hh \
-  /usr/local/include/Geant4/G4PhysicsLogVector.hh \
+  /usr/local/include/Geant4/G4PhysicsListHelper.hh \
+  /usr/local/include/Geant4/G4PhysicsListOrderingParameter.hh \
   /usr/local/include/Geant4/G4PhysicsModelCatalog.hh \
-  /usr/local/include/Geant4/G4PhysicsTable.hh \
-  /usr/local/include/Geant4/G4PhysicsTable.icc \
-  /usr/local/include/Geant4/G4PhysicsVector.hh \
-  /usr/local/include/Geant4/G4PhysicsVector.icc \
-  /usr/local/include/Geant4/G4PhysicsVectorType.hh \
-  /usr/local/include/Geant4/G4PionMinus.hh \
-  /usr/local/include/Geant4/G4PionPlus.hh \
-  /usr/local/include/Geant4/G4PionZero.hh \
-  /usr/local/include/Geant4/G4PolarizedCompton.hh \
-  /usr/local/include/Geant4/G4Positron.hh \
-  /usr/local/include/Geant4/G4ProcessManager.hh \
-  /usr/local/include/Geant4/G4ProcessManager.icc \
-  /usr/local/include/Geant4/G4ProcessType.hh \
-  /usr/local/include/Geant4/G4ProcessVector.hh \
-  /usr/local/include/Geant4/G4ProcessVector.icc \
   /usr/local/include/Geant4/G4ProductionCuts.hh \
   /usr/local/include/Geant4/G4ProductionCutsTable.hh \
-  /usr/local/include/Geant4/G4Profiler.hh \
-  /usr/local/include/Geant4/G4Profiler.icc \
-  /usr/local/include/Geant4/G4Proton.hh \
-  /usr/local/include/Geant4/G4ReactionProduct.hh \
-  /usr/local/include/Geant4/G4ReactionProductVector.hh \
-  /usr/local/include/Geant4/G4ReferenceCountedHandle.hh \
   /usr/local/include/Geant4/G4Region.hh \
   /usr/local/include/Geant4/G4Region.icc \
-  /usr/local/include/Geant4/G4RegularNavigation.hh \
-  /usr/local/include/Geant4/G4ReplicaNavigation.hh \
-  /usr/local/include/Geant4/G4ReplicaNavigation.icc \
-  /usr/local/include/Geant4/G4RotationMatrix.hh \
-  /usr/local/include/Geant4/G4SafetyHelper.hh \
-  /usr/local/include/Geant4/G4SandiaTable.hh \
-  /usr/local/include/Geant4/G4SigmaMinus.hh \
-  /usr/local/include/Geant4/G4SigmaPlus.hh \
-  /usr/local/include/Geant4/G4SigmaZero.hh \
-  /usr/local/include/Geant4/G4SigmabMinus.hh \
-  /usr/local/include/Geant4/G4SigmabPlus.hh \
-  /usr/local/include/Geant4/G4SigmabZero.hh \
-  /usr/local/include/Geant4/G4SigmacPlus.hh \
-  /usr/local/include/Geant4/G4SigmacPlusPlus.hh \
-  /usr/local/include/Geant4/G4SigmacZero.hh \
-  /usr/local/include/Geant4/G4SmartVoxelHeader.hh \
-  /usr/local/include/Geant4/G4SmartVoxelHeader.icc \
-  /usr/local/include/Geant4/G4SmartVoxelNode.hh \
-  /usr/local/include/Geant4/G4SmartVoxelNode.icc \
-  /usr/local/include/Geant4/G4SmartVoxelProxy.hh \
-  /usr/local/include/Geant4/G4SmartVoxelProxy.icc \
-  /usr/local/include/Geant4/G4Step.hh \
-  /usr/local/include/Geant4/G4Step.icc \
-  /usr/local/include/Geant4/G4StepPoint.hh \
-  /usr/local/include/Geant4/G4StepPoint.icc \
-  /usr/local/include/Geant4/G4StepStatus.hh \
-  /usr/local/include/Geant4/G4SteppingControl.hh \
+  /usr/local/include/Geant4/G4StepLimiterPhysics.hh \
   /usr/local/include/Geant4/G4String.hh \
   /usr/local/include/Geant4/G4String.icc \
-  /usr/local/include/Geant4/G4TauMinus.hh \
-  /usr/local/include/Geant4/G4TauPlus.hh \
+  /usr/local/include/Geant4/G4SystemOfUnits.hh \
+  /usr/local/include/Geant4/G4ThreadLocalSingleton.hh \
   /usr/local/include/Geant4/G4Threading.hh \
   /usr/local/include/Geant4/G4ThreeVector.hh \
-  /usr/local/include/Geant4/G4TouchableHandle.hh \
-  /usr/local/include/Geant4/G4TouchableHistory.hh \
-  /usr/local/include/Geant4/G4TouchableHistory.icc \
-  /usr/local/include/Geant4/G4Track.hh \
-  /usr/local/include/Geant4/G4Track.icc \
-  /usr/local/include/Geant4/G4TrackStatus.hh \
-  /usr/local/include/Geant4/G4TrackVector.hh \
-  /usr/local/include/Geant4/G4Transform3D.hh \
-  /usr/local/include/Geant4/G4Triton.hh \
   /usr/local/include/Geant4/G4Types.hh \
-  /usr/local/include/Geant4/G4UnitsTable.hh \
-  /usr/local/include/Geant4/G4UnitsTable.icc \
-  /usr/local/include/Geant4/G4UnknownParticle.hh \
-  /usr/local/include/Geant4/G4Upsilon.hh \
-  /usr/local/include/Geant4/G4VContinuousDiscreteProcess.hh \
-  /usr/local/include/Geant4/G4VCrossSectionDataSet.hh \
-  /usr/local/include/Geant4/G4VDiscreteProcess.hh \
-  /usr/local/include/Geant4/G4VEmAngularDistribution.hh \
-  /usr/local/include/Geant4/G4VEmFluctuationModel.hh \
-  /usr/local/include/Geant4/G4VEmModel.hh \
-  /usr/local/include/Geant4/G4VEmProcess.hh \
-  /usr/local/include/Geant4/G4VEnergyLossProcess.hh \
-  /usr/local/include/Geant4/G4VExternalNavigation.hh \
-  /usr/local/include/Geant4/G4VMscModel.hh \
-  /usr/local/include/Geant4/G4VMultipleScattering.hh \
-  /usr/local/include/Geant4/G4VNavigation.hh \
-  /usr/local/include/Geant4/G4VPVParameterisation.hh \
-  /usr/local/include/Geant4/G4VParticleChange.hh \
-  /usr/local/include/Geant4/G4VParticleChange.icc \
-  /usr/local/include/Geant4/G4VPhysicalVolume.hh \
-  /usr/local/include/Geant4/G4VPhysicalVolume.icc \
-  /usr/local/include/Geant4/G4VProcess.hh \
-  /usr/local/include/Geant4/G4VSolid.hh \
-  /usr/local/include/Geant4/G4VSolid.icc \
-  /usr/local/include/Geant4/G4VTouchable.hh \
+  /usr/local/include/Geant4/G4VModularPhysicsList.hh \
+  /usr/local/include/Geant4/G4VPhysicsConstructor.hh \
   /usr/local/include/Geant4/G4VUPLSplitter.hh \
   /usr/local/include/Geant4/G4VUserPhysicsList.hh \
-  /usr/local/include/Geant4/G4VUserTrackInformation.hh \
-  /usr/local/include/Geant4/G4VVolumeMaterialScanner.hh \
-  /usr/local/include/Geant4/G4VoxelNavigation.hh \
-  /usr/local/include/Geant4/G4VoxelNavigation.icc \
-  /usr/local/include/Geant4/G4XiMinus.hh \
-  /usr/local/include/Geant4/G4XiZero.hh \
-  /usr/local/include/Geant4/G4XibMinus.hh \
-  /usr/local/include/Geant4/G4XibZero.hh \
-  /usr/local/include/Geant4/G4XicPlus.hh \
-  /usr/local/include/Geant4/G4XicZero.hh \
-  /usr/local/include/Geant4/G4eBremsstrahlung.hh \
-  /usr/local/include/Geant4/G4eIonisation.hh \
-  /usr/local/include/Geant4/G4eMultipleScattering.hh \
-  /usr/local/include/Geant4/G4eplusAnnihilation.hh \
-  /usr/local/include/Geant4/G4hIonisation.hh \
-  /usr/local/include/Geant4/G4hMultipleScattering.hh \
   /usr/local/include/Geant4/G4ios.hh \
-  /usr/local/include/Geant4/PTL/Globals.hh \
-  /usr/local/include/Geant4/PTL/Types.hh \
-  /usr/local/include/Geant4/PTL/Utility.hh \
-  /usr/local/include/Geant4/Randomize.hh \
-  /usr/local/include/Geant4/geomdefs.hh \
   /usr/local/include/Geant4/geomwdefs.hh \
   /usr/local/include/Geant4/globals.hh \
   /usr/local/include/Geant4/pwdefs.hh \
   /usr/local/include/Geant4/rundefs.hh \
   /usr/local/include/Geant4/templates.hh \
-  /usr/local/include/Geant4/tls.hh \
-  /usr/local/include/Geant4/trkdefs.hh
+  /usr/local/include/Geant4/tls.hh
 
 CMakeFiles/MuravesSim.dir/src/PrimaryGeneratorAction_CRY.cc.o: /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_CRY.cc \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/Availability.h \
@@ -18921,6 +18582,7 @@ CMakeFiles/MuravesSim.dir/src/RunAction.cc.o: /Users/dorageeraerts/Documents/PhD
   /usr/local/include/Geant4/G4TrajectoryContainer.hh \
   /usr/local/include/Geant4/G4Transform3D.hh \
   /usr/local/include/Geant4/G4Types.hh \
+  /usr/local/include/Geant4/G4UIcmdWithAString.hh \
   /usr/local/include/Geant4/G4UIcommand.hh \
   /usr/local/include/Geant4/G4UIdirectory.hh \
   /usr/local/include/Geant4/G4UImessenger.hh \
@@ -24960,6 +24622,8 @@ CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o: /Users/dorageeraerts/Document
 
 /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/src/PrimaryGeneratorAction_CRY.cc:
 
+/usr/local/include/Geant4/G4EmStandardPhysics_option4.hh:
+
 /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/src/MuravesMessenger.cc:
 
 /usr/local/include/Geant4/G4hMultipleScattering.hh:
@@ -25051,6 +24715,8 @@ CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o: /Users/dorageeraerts/Document
 /usr/local/include/Geant4/G4NeutronFissionVI.hh:
 
 /usr/local/include/Geant4/G4NeutronFissionProcess.hh:
+
+/usr/local/include/Geant4/G4OpticalPhysics.hh:
 
 /usr/local/include/Geant4/G4NeutronElasticXS.hh:
 
@@ -25224,8 +24890,6 @@ CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o: /Users/dorageeraerts/Document
 
 /usr/local/include/Geant4/tools/eqT:
 
-/usr/local/include/Geant4/G4PolarizedCompton.hh:
-
 /usr/local/include/Geant4/tools/forit:
 
 /usr/local/include/Geant4/tools/cids:
@@ -25296,6 +24960,8 @@ CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o: /Users/dorageeraerts/Document
 
 /usr/local/include/Geant4/G4VPrimitiveScorer.hh:
 
+/usr/local/include/Geant4/G4UserLimits.hh:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__random/random_device.h:
 
 /usr/local/include/Geant4/G4SDStructure.hh:
@@ -25325,6 +24991,10 @@ CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o: /Users/dorageeraerts/Document
 /usr/local/include/Geant4/G4VEmProcess.hh:
 
 /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/src/DetectorConstruction.cc:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__functional/hash.h:
+
+/usr/local/include/Geant4/G4UIcmdWithAString.hh:
 
 /Users/dorageeraerts/Documents/PhD/software/cry/src/CRYUtils.h:
 
@@ -25552,8 +25222,6 @@ CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o: /Users/dorageeraerts/Document
 
 /usr/local/include/Geant4/G4THitsMap.hh:
 
-/usr/local/include/Geant4/G4UserLimits.hh:
-
 /usr/local/include/Geant4/G4SubEventTrackStack.hh:
 
 /usr/local/include/Geant4/G4SteppingVerbose.hh:
@@ -25667,8 +25335,6 @@ CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o: /Users/dorageeraerts/Document
 /usr/local/include/Geant4/G4PhysicsTable.icc:
 
 /usr/local/include/Geant4/G4PhysicsModelCatalog.hh:
-
-/usr/local/include/Geant4/G4ParticleWithCuts.hh:
 
 /usr/local/include/Geant4/G4hPairProduction.hh:
 
@@ -27577,10 +27243,6 @@ CMakeFiles/MuravesSim.dir/src/TrackingAction.cc.o: /Users/dorageeraerts/Document
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__algorithm/pstl_find.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__algorithm/ranges_sort.h:
-
-/usr/local/include/Geant4/G4UIcmdWithAString.hh:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__functional/hash.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__algorithm/binary_search.h:
 
