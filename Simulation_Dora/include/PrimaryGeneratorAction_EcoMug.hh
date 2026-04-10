@@ -57,9 +57,11 @@ class PrimaryGeneratorAction_EcoMug : public G4VUserPrimaryGeneratorAction, publ
 
     G4double fSkySizeX = 1.*m;
     G4double fSkySizeY = 1.*m;
-    G4double fSkyCenterX = 0.;
-    G4double fSkyCenterY = 0.;
-    G4double fSkyCenterZ = 0.;
+    //G4double fSkyCenterX = 0.;
+    //G4double fSkyCenterY = 0.;
+    //G4double fSkyCenterZ = 0.;
+    std::array<G4double, 3> fSkyCenter; 
+    std::array<G4double, 2> fSkySize; 
 
     virtual std::string GetGeneratorName() const override {return "EcoMug";}
     virtual std::string GetInfoSummary() const override;

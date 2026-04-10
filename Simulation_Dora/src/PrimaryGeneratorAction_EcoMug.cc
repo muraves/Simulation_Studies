@@ -45,7 +45,7 @@ PrimaryGeneratorAction_EcoMug::PrimaryGeneratorAction_EcoMug(const std::string& 
 G4VUserPrimaryGeneratorAction(), fParticleGun(0), mu_plus(0), mu_minus(0),
   fMinTheta(0.), fMaxTheta(M_PI/2), fMinPhi(0.), fMaxPhi(2*M_PI),
   fMinPosTheta(0.), fMaxPosTheta(M_PI/2), fMinPosPhi(0.), fMaxPosPhi(2*M_PI), genHSphere(true), customFlux(true), fHorizontalRate(138*(EMUnits::hertz/EMUnits::m2)),
-  fHSphereRadius(150*cm), fHSphereCenter({56.45*cm,0*cm,-48.5*cm})
+  fHSphereRadius(150*cm), fHSphereCenter({56.45*cm,0*cm,-48.5*cm}), fSkyCenter({0.,0.,0.}), fSkySize({1.*m,1.*m})
 { 
 	const double DEG_TO_RAD = M_PI / 180.0;
 
@@ -78,8 +78,8 @@ void PrimaryGeneratorAction_EcoMug::Initialize() {
         fGenHSphere.SetHSphereCenterPosition(fHSphereCenter);
     } else {
         fGenHSphere.SetUseSky();
-		fGenHSphere.SetSkySize({{fSkySizeX, fSkySizeY}});
-		fGenHSphere.SetSkyCenterPosition({{fSkyCenterX, fSkyCenterY, fSkyCenterZ}});
+		fGenHSphere.SetSkySize(fSkySize);
+		fGenHSphere.SetSkyCenterPosition(fSkyCenter);
     }
 
 	fGenHSphere.SetSeed(seedEcomug);
@@ -220,33 +220,44 @@ std::string PrimaryGeneratorAction_EcoMug::GetInfoSummary() const {
 
     std::ostringstream oss;
     oss << "Generator: " << GetGeneratorName() <<
-	"\nCustom Flux: " << customFlux << 
-	"\nHemispherical Generation Surface: " << genHSphere << 
-	"\nfHSphereCenter (cm): ("
-    << fHSphereCenter[0] / cm << ", "
-    << fHSphereCenter[1] / cm << ", "
-    << fHSphereCenter[2] / cm << ")\n"
-        << "fHSphereRadius (cm): " << fHSphereRadius / cm
-		<< "\n\nTheta range: [" 
+    "\nGenerator seed: " << seedEcomug <<
+	"\nCustom flux (bool): " << customFlux <<
+    "\nSet horizontal rate (m-2 s-1): " << fGenHSphere.GetHorizontalRate() / (EMUnits::hertz/EMUnits::m2) << "\n";
+    if (genHSphere) {
+        oss << "\nGeneration surface: hemisphere" << 
+        "\nfHSphereCenter (cm): ("
+        << fHSphereCenter[0] / cm << ", "
+        << fHSphereCenter[1] / cm << ", "
+        << fHSphereCenter[2] / cm << ")\n"
+        << "fHSphereRadius (cm): " << fHSphereRadius / cm << "\n\n";}
+    else {
+        oss << "\nGeneration surface: flat sky" << 
+        "\nfSkyCenter (cm): ("
+        << fSkyCenter[0] / cm << ", "
+        << fSkyCenter[1] / cm << ", "
+        << fSkyCenter[2] / cm << ")\n"
+    << "\nfSkySize (cm x cm): ("
+        << fSkySize[0] / cm << " x "
+        << fSkySize[1] / cm << "\n\n";}
+    
+		oss << "Theta range (rad): [" 
 		<< fGenHSphere.GetMinimumTheta() << ", "
 		<< fGenHSphere.GetMaximumTheta() << "]\n"
-		<< "Phi range: [" 
+		<< "Phi range (rad): [" 
 		<< fGenHSphere.GetMinimumPhi() << ", "
 		<< fGenHSphere.GetMaximumPhi() << "]\n"
-		<< "\nThetaPos range: [" 
+		<< "\nThetaPos range (rad): [" 
 		<< fMinPosTheta << ", "
 		<< fMaxPosTheta << "]\n"
-		<< "PhiPos range: [" 
+		<< "PhiPos range (rad): [" 
 		<< fMinPosPhi << ", "
 		<< fMaxPosPhi << "]\n"
 		<< "\nMomentum range (GeV): [" 
 		<< fGenHSphere.GetMinimumMomentum() << ", "
 		<< fGenHSphere.GetMaximumMomentum() << "]\n"
-		<< "\nSet horizontal rate (m-2 s-1): " << fGenHSphere.GetHorizontalRate() / (EMUnits::hertz/EMUnits::m2)
 		<< "\nMuon generation rate (m-2 s-1): " << rateHSphere
 		<< "\nMuon generation rate error: " << errorHSphere
 		<< "\nGeneration surface area (m^2): " << genSurfaceArea / m2
-		<< "\nEcoMug generator seed: " << seedEcomug
 		;
     return oss.str();
 }
@@ -282,11 +293,11 @@ void PrimaryGeneratorAction_EcoMug::ReadConfigFile(const std::string& filename) 
 		else if (key == "hsphere_center_y") { fHSphereCenter[1] = val * cm; }
 		else if (key == "hsphere_center_z") { fHSphereCenter[2] = val * cm; }
 		else if (key == "hsphere_radius")   { fHSphereRadius = val * cm; }
-		else if (key == "sky_size_x")       { fSkySizeX = val * cm; }
-		else if (key == "sky_size_y")       { fSkySizeY = val * cm; }
-		else if (key == "sky_center_x")     { fSkyCenterX = val * cm; }
-		else if (key == "sky_center_y")     { fSkyCenterY = val * cm; }
-		else if (key == "sky_center_z")     { fSkyCenterZ = val * cm; }
+		else if (key == "sky_size_x")       { fSkySize[0] = val * cm; }
+		else if (key == "sky_size_y")       { fSkySize[1] = val * cm; }
+		else if (key == "sky_center_x")     { fSkyCenter[0] = val * cm; }
+		else if (key == "sky_center_y")     { fSkyCenter[1] = val * cm; }
+		else if (key == "sky_center_z")     { fSkyCenter[2] = val * cm; }
 	}
 
     infile.close();

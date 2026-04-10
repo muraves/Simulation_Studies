@@ -3,6 +3,7 @@
 #include "CLHEP/Random/Random.h"
 #include <fstream>
 #include <ctime>
+#include "DetectorConstruction.hh"
 
 void RunInformation::Write(const std::string& filename,
                                    const DetectorConstruction* det,
@@ -15,74 +16,17 @@ void RunInformation::Write(const std::string& filename,
 {
     std::ofstream out(filename);
 
+    const char* clusterId  = std::getenv("CLUSTER_ID");
+    const char* processId  = std::getenv("PROCESS_ID");
+
+    // Run info
     // Timestamp
+    out << "===== Run Info =====\n";
     std::time_t now = std::time(nullptr);
     out << "Run timestamp: " << std::ctime(&now) << "\n";
 
-    // Detector parameters
-    out << "===== Detector Parameters =====\n";
-    out << "nBars: " << det->GetNBars() << "\n";
-    out << "nModules: " << det->GetNModules() << "\n";
-    out << "nStations: " << det->GetNStations() << "\n";
-
-    out << "barLength (cm): " << det->GetBarLength()/cm << "\n";
-    out << "barHeight (cm): " << det->GetBarHeight()/cm << "\n";
-    out << "barBase (cm): " << det->GetBarBase()/cm << "\n";
-    out << "triangEffectiveBase (cm): "
-        << det->GetTriangEffectiveBase()/cm << "\n";
-
-    out << "Bar gap (mm): " << det->GetBarGap()/cm << "\n";
-    out << "stationSpacing (cm): " << det->GetStationSpacing()/cm << "\n";
-    //out << "looseAcceptanceCheck: " << det->GetLooseAccCheck() << "\n";
-    out << "detectorType: " << det->GetDetectorType() << "\n\n";
-
-    out << " X Station positioning (cm): ";
-    for (int i = 0; i < det->GetNStations(); i++)
-        out << det->GetZPosStationsX()[i]/cm << " ; ";
-    out << "\n";
-
-    out << " Y Station positioning (cm): ";
-    for (int i = 0; i < det->GetNStations(); i++)
-        out << det->GetZPosStationsY()[i]/cm << " ; ";
-    out << "\n";
-
-    out << " Station height w.r.t. z = 0 (cm): ";
-    G4double yPos3 = det->GetYPosStations()[3];
-    for (int i = 0; i < det->GetNStations(); i++)
-        out << (det->GetYPosStations()[i] - yPos3)/cm << " ; ";
-    out << "\n\n";
-
-
-    /*
-    // Generator parameters
-    out << "===== Generator Parameters =====\n";
-    //out << "Generator: " << mes->GetGeneratorName() << "\n";
-    //if (mes->GetGeneratorName() == "EcoMug") {
-    auto c = gen->GetHSphereCenter();
-    out << "HSphereRadius (cm): " << gen->GetHSphereRadius()/cm << "\n";
-    out << "HSphereCenter (cm): "
-        << c[0]/cm << " " << c[1]/cm << " " << c[2]/cm << "\n";
-    out << "ThetaMin: " << gen->GetMinTheta() << "\n";
-    out << "ThetaMax: " << gen->GetMaxTheta() << "\n";
-    out << "PhiMin: " << gen->GetMinPhi() << "\n";
-    out << "PhiMax: " << gen->GetMaxPhi() << "\n\n";
-    //}*/
-
-    // Generator parameters
-    if (!generatorSummary.empty()) {
-        out << "===== Generator Parameters =====\n";
-        out << generatorSummary << "\n\n";
-    }
-
-    // Run info
-    out << "===== Run Info =====\n";
-    out << "Number of events: " << nEvents << "\n";
+    out << "Number of events (/run/beamOn): " << nEvents << "\n";
     out << "CLHEP seed: " << seed << "\n";  
-
-    // Random seeds
-    //long seeds[2];
-    //CLHEP::HepRandom::getTheSeeds(seeds);
-    //out << "Random seeds: " << seeds[0] << " " << seeds[1] << "\n";
 
     // Runtime 
     if (total_ms >= 0) {
@@ -94,12 +38,57 @@ void RunInformation::Write(const std::string& filename,
         long long seconds = ms / 1000;
         long long milliseconds = ms % 1000;
 
-        out << "Time taken by program: "
+        out << "Runtime: "
             << hours << "h "
             << minutes << "m "
             << seconds << "s "
-            << milliseconds << "ms\n";
+            << milliseconds << "ms\n\n";
     }
+
+    out << "Cluster ID: " << (clusterId ? clusterId : "local run") << "\n";
+    out << "Job ID: " << (processId ? processId : "local run") << "\n\n";
+
+    // Detector parameters
+    out << "===== Detector Parameters =====\n";
+    out << "nBars: " << det->GetNBars() << "\n";
+    out << "nModules: " << det->GetNModules() << "\n";
+    out << "nStations: " << det->GetNStations() << "\n\n";
+
+    out << "barType: " << det->GetDetectorType() << "\n";
+    out << "barLength (cm): " << det->GetBarLength()/cm << "\n";
+    out << "barHeight (cm): " << det->GetBarHeight()/cm << "\n";
+    out << "barBase (cm): " << det->GetBarBase()/cm << "\n";
+    out << "triangEffectiveBase (cm): "
+        << det->GetTriangEffectiveBase()/cm << "\n";
+    out << "cornerCut (mm): "
+        << det->GetCornerCut()/cm << "\n\n";
+
+    out << "Layer thickness (cm): "
+        << det->GetLayerThickness()/cm << "\n";
+    out << "Bar gap (mm): " << det->GetBarGap()/mm << "\n";
+    out << "Station spacing (cm): " << det->GetStationSpacing()/cm << "\n\n";
+    //out << "looseAcceptanceCheck: " << det->GetLooseAccCheck() << "\n";
+    
+    const std::vector<double>& zPositions = det->GetZPosStations();
+    const std::vector<double>& yPositions = det->GetYPosStations();
+
+    out << " X station positioning (cm): ";
+    for (int i = 0; i < det->GetNStations(); i++)
+        out << zPositions[i]/cm - zPositions[1]/cm << " ; ";
+    out << "\n";
+
+    out << "Station height w.r.t. z = 0 (cm): ";
+    for (int i = 0; i < det->GetNStations(); i++)
+        out << (yPositions[i] - yPositions[3])/cm << " ; ";
+    out << "\n\n";
+
+
+    // Generator parameters
+    if (!generatorSummary.empty()) {
+        out << "===== Generator Parameters =====\n";
+        out << generatorSummary << "\n";
+    }
+
 
     out.close();
 }
