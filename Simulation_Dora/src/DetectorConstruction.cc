@@ -164,7 +164,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4cout << "[MuravesDetector::Construct] (_barBase + xySafety) * (_nBars/2) - xySafety = " << (_barBase + xySafety) * (_nBars/2) - xySafety << G4endl;
     G4cout << "[MuravesDetector::Construct] _halfContLengthXY = " << _halfContLengthXY << G4endl;
     // 2.1 compute the Z height of a layer, i.e. of a single view (X or Y) of a station -------------------
-    float layerThickness = _barHeight + (_barHeight / (_barBase / 2.) * ((_barBase - _triangEffectiveBase) / 2.)); // Z offset due to cut edges at the base
+    layerThickness = _barHeight + (_barHeight / (_barBase / 2.) * ((_barBase - _triangEffectiveBase) / 2.)); // Z offset due to cut edges at the base
      G4cout << "[MuravesDetector::Construct] layerThickness = " << layerThickness << G4endl;
      //layerThickness = _barHeight; // Z offset due to cut edges at the base
     std::cout << "[MuravesDetector::Construct] _barHeight=" << _barHeight << std::endl;
@@ -284,13 +284,15 @@ if (_detType == "triangular") {
     leftCornerLog = new G4LogicalVolume(leftCornerSolid, plastic_mat, "LeftCornerPlastic", NULL, NULL, NULL, false);
 }
 
-_triangEffectiveBase     += xySafety; // Add safety margin
+//_triangEffectiveBase     += xySafety; // Add safety margin
+//G4cout << " Construct triangEffectiveBase" << _triangEffectiveBase  << G4endl;
+//G4cout << " Construct _barBase" << _barBase  << G4endl;
 
     // 4. Build the stations -------------------
-    double posFirstBarMod0 = -((float) _nBars -0.5) * _triangEffectiveBase / 2.; //position of first bar (i.e., bar at most-negative coordinate)
-    G4cout << "[MuravesDetector::Construct] -((float) _nBars -0.5) * _triangEffectiveBase / 2. = " << -((float) _nBars -0.5) * _triangEffectiveBase / 2. << G4endl;
-    double posFirstBarMod1 = posFirstBarMod0 + (_nBars) * _triangEffectiveBase/2. ;
-    G4cout << "[MuravesDetector::Construct] posFirstBarMod0 + (_nBars) * _triangEffectiveBase/2. = " << -((float) _nBars -0.5) * _triangEffectiveBase / 2.+ (_nBars) * _triangEffectiveBase/2. << G4endl;
+    double posFirstBarMod0 = -((float) _nBars -0.5) * _barBase / 2.; //position of first bar (i.e., bar at most-negative coordinate)
+    G4cout << "[MuravesDetector::Construct] -((float) _nBars -0.5) * _barBase / 2. = " << -((float) _nBars -0.5) * _barBase / 2. << G4endl;
+    double posFirstBarMod1 = posFirstBarMod0 + (_nBars) * _barBase/2. ;
+    G4cout << "[MuravesDetector::Construct] posFirstBarMod0 + (_nBars) * _barBase/2. = " << -((float) _nBars -0.5) * _barBase / 2.+ (_nBars) * _barBase/2. << G4endl;
     
     // Is calculated automatically to be centered by method in lines above (gives same result)
     //double posFirstBarMod0 = -0.53625*m + _barBase/2;

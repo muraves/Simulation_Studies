@@ -48,12 +48,12 @@ RunAction::RunAction(EventAction* eventAction, PrimaryGeneratorInfo* generatorIn
   
   analysisManager->SetFileName("MuravesSim_Data"); 
 
-  fDataPath = "../../../MuravesSim_Data";  // fallback (command will overwrite this)
+  fDataPath = ".";  // fallback (command will overwrite this)
 
   fDataPathCmd = new G4UIcmdWithAString("/muraves/dataPath", this);
   fDataPathCmd->SetGuidance("Set the output data directory path");
   fDataPathCmd->SetParameterName("path", false);
-  fDataPathCmd->SetDefaultValue("../../../MuravesSim_Data"); 
+  fDataPathCmd->SetDefaultValue("."); 
 
 }
 
@@ -75,10 +75,23 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
                   G4RunManager::GetRunManager()->GetUserDetectorConstruction());
 
   fTimestamp = GetTimestamp();
+
+  const char* clusterId = std::getenv("CLUSTER_ID");
+  const char* processId = std::getenv("PROCESS_ID");
+  fIsHTCondor = (clusterId && processId);
+
+  fClusterId = clusterId ? clusterId : "local";
+fProcessId = processId ? processId : "local";
   
   //std::string configFilename = "../../../Muraves_SimData/run_config_" + timestamp + ".txt";
   //std::string runFilename = "../../../MuravesSim_Data/MuravesSim_Data_" + fTimestamp;
-  std::string runFilename    = std::string(fDataPath) + "/MuravesSim_Data_" + fTimestamp + "_FS_UR";
+  //std::string runFilename    = std::string(fDataPath) + "/MuravesSim_Data_" + fTimestamp + "_FS_UR";
+  std::string runFilename;
+  if (fIsHTCondor) {
+    runFilename = std::string(fDataPath) + "/musimData_c" + fClusterId + "_p" + fProcessId;
+} else {
+     runFilename = std::string(fDataPath) + "/musimData_" + fTimestamp;
+}
 
   auto analysisManager = G4AnalysisManager::Instance();
   analysisManager->SetVerboseLevel(1);
@@ -211,7 +224,14 @@ void RunAction::EndOfRunAction(const G4Run* /*run*/)
 
     // Generate filename
     //std::string configFilename = "../../../MuravesSim_Data/run_config_" + fTimestamp + ".txt";
-    std::string configFilename = std::string(fDataPath) + "/run_config_" + fTimestamp + "_FS_UR.txt";
+    //std::string configFilename = std::string(fDataPath) + "/run_config_" + fTimestamp + "_FS_UR.txt";
+
+    std::string configFilename ;
+    if (fIsHTCondor) {
+    configFilename = std::string(fDataPath) + "/musimLog_c" + fClusterId + "_p" + fProcessId;
+    } else {
+       configFilename = std::string(fDataPath) + "/musimLog_" + fTimestamp;
+    }
 
     // Write all run info including runtime
       if (!generatorSummary.empty()) {

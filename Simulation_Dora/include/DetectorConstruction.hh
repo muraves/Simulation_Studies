@@ -43,13 +43,15 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     G4double GetTriangEffectiveBase() const { return _triangEffectiveBase; }
     G4double GetStationSpacing() const { return zSafety; }
     G4double GetBarGap() const { return xySafety; }
+    G4double GetLayerThickness() const { return layerThickness; }
+    G4double GetCornerCut() const {return _cornerCut; }
 
     G4double GetLooseAccCheck() const { return _looseAccCheck; }
     std::string GetDetectorType() const { return _detType; }
 
-    const float* GetZPosStationsX() const { return zPosStationX; }
-    const float* GetZPosStationsY() const { return zPosStationY; }
-    const float* GetYPosStations() const { return yPosStation; }
+    const std::vector<double>& GetZPosStations() const { return _zPosStations; }
+    //const float* GetZPosStationsY() const { return zPosStationY; }
+    const std::vector<double>& GetYPosStations() const { return _yPosStations; }
 
   private:
     G4GenericMessenger* _messenger;
@@ -100,6 +102,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 
     // Acceptance check
     float _looseAccCheck;
+    G4double layerThickness;
 
     // Detector type
     std::string _detType;
