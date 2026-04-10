@@ -1078,6 +1078,11 @@ CMakeFiles/MuravesSim.dir/src/DetectorConstruction.cc.o: \
   /usr/local/include/Geant4/G4VPhysicalVolume.icc \
   /usr/local/include/Geant4/G4Cache.hh \
   /usr/local/include/Geant4/G4CacheDetails.hh \
+  /usr/local/include/Geant4/G4UIcmdWithAString.hh \
+  /usr/local/include/Geant4/G4UIcommand.hh \
+  /usr/local/include/Geant4/G4ApplicationState.hh \
+  /usr/local/include/Geant4/G4UIparameter.hh \
+  /usr/local/include/Geant4/G4UItokenNum.hh \
   /usr/local/include/Geant4/G4Box.hh \
   /usr/local/include/Geant4/G4GeomTypes.hh \
   /usr/local/include/Geant4/G4GeomConfig.hh \
@@ -1107,10 +1112,6 @@ CMakeFiles/MuravesSim.dir/src/DetectorConstruction.cc.o: \
   /usr/local/include/Geant4/G4GenericMessenger.hh \
   /usr/local/include/Geant4/G4AnyMethod.hh \
   /usr/local/include/Geant4/G4AnyType.hh \
-  /usr/local/include/Geant4/G4UIcommand.hh \
-  /usr/local/include/Geant4/G4ApplicationState.hh \
-  /usr/local/include/Geant4/G4UIparameter.hh \
-  /usr/local/include/Geant4/G4UItokenNum.hh \
   /usr/local/include/Geant4/G4UImessenger.hh \
   /usr/local/include/Geant4/G4UIdirectory.hh \
   /usr/local/include/Geant4/G4LogicalVolume.hh \

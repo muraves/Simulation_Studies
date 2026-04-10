@@ -44,7 +44,8 @@ using namespace chrono;
 PrimaryGeneratorAction_EcoMug::PrimaryGeneratorAction_EcoMug(const std::string& inputFile): 
 G4VUserPrimaryGeneratorAction(), fParticleGun(0), mu_plus(0), mu_minus(0),
   fMinTheta(0.), fMaxTheta(M_PI/2), fMinPhi(0.), fMaxPhi(2*M_PI),
-  fMinPosTheta(0.), fMaxPosTheta(M_PI/2), fMinPosPhi(0.), fMaxPosPhi(2*M_PI), genHSphere(true), customFlux(true), fHorizontalRate(138*(EMUnits::hertz/EMUnits::m2))
+  fMinPosTheta(0.), fMaxPosTheta(M_PI/2), fMinPosPhi(0.), fMaxPosPhi(2*M_PI), genHSphere(true), customFlux(true), fHorizontalRate(138*(EMUnits::hertz/EMUnits::m2)),
+  fHSphereRadius(150*cm), fHSphereCenter({56.45*cm,0*cm,-48.5*cm})
 { 
 	const double DEG_TO_RAD = M_PI / 180.0;
 

@@ -1084,14 +1084,15 @@ CMakeFiles/MuravesSim.dir/src/ScintBarHit.cc.o: \
   /usr/local/include/Geant4/G4VPhysicalVolume.icc \
   /usr/local/include/Geant4/G4Cache.hh \
   /usr/local/include/Geant4/G4CacheDetails.hh \
-  /usr/local/include/Geant4/G4AttDefStore.hh \
-  /usr/local/include/Geant4/G4AttDef.hh \
-  /usr/local/include/Geant4/G4TypeKey.hh \
-  /usr/local/include/Geant4/G4AttValue.hh \
+  /usr/local/include/Geant4/G4UIcmdWithAString.hh \
   /usr/local/include/Geant4/G4UIcommand.hh \
   /usr/local/include/Geant4/G4ApplicationState.hh \
   /usr/local/include/Geant4/G4UIparameter.hh \
   /usr/local/include/Geant4/G4UItokenNum.hh \
+  /usr/local/include/Geant4/G4AttDefStore.hh \
+  /usr/local/include/Geant4/G4AttDef.hh \
+  /usr/local/include/Geant4/G4TypeKey.hh \
+  /usr/local/include/Geant4/G4AttValue.hh \
   /usr/local/include/Geant4/G4UnitsTable.hh \
   /usr/local/include/Geant4/G4UnitsTable.icc \
   /usr/local/include/Geant4/G4SystemOfUnits.hh

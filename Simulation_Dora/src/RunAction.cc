@@ -78,7 +78,7 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
   
   //std::string configFilename = "../../../Muraves_SimData/run_config_" + timestamp + ".txt";
   //std::string runFilename = "../../../MuravesSim_Data/MuravesSim_Data_" + fTimestamp;
-  std::string runFilename    = std::string(fDataPath) + "/MuravesSim_Data_" + fTimestamp + "FS_UR";
+  std::string runFilename    = std::string(fDataPath) + "/MuravesSim_Data_" + fTimestamp + "_FS_UR";
 
   auto analysisManager = G4AnalysisManager::Instance();
   analysisManager->SetVerboseLevel(1);
@@ -207,7 +207,7 @@ void RunAction::EndOfRunAction(const G4Run* /*run*/)
 
     // Generate filename
     //std::string configFilename = "../../../MuravesSim_Data/run_config_" + fTimestamp + ".txt";
-    std::string configFilename = std::string(fDataPath) + "/run_config_" + fTimestamp + "FS_UR.txt";
+    std::string configFilename = std::string(fDataPath) + "/run_config_" + fTimestamp + "_FS_UR.txt";
 
     // Write all run info including runtime
        if (!generatorSummary.empty()) {

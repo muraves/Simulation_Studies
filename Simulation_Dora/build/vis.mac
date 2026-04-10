@@ -12,6 +12,7 @@
 /vis/viewer/set/autoRefresh false
 /vis/verbose errors
 #
+#/muraves/nStations 1
 # Draw geometry:
 /vis/drawVolume
 #
@@ -64,3 +65,4 @@
 # Set visualization to accumulate events into one picture
 #
 /vis/scene/endOfEventAction accumulate
+#/control/execute geometry.mac

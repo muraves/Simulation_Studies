@@ -1079,6 +1079,11 @@ CMakeFiles/MuravesSim.dir/src/RunInformation.cc.o: \
   /usr/local/include/Geant4/G4VPhysicalVolume.icc \
   /usr/local/include/Geant4/G4Cache.hh \
   /usr/local/include/Geant4/G4CacheDetails.hh \
+  /usr/local/include/Geant4/G4UIcmdWithAString.hh \
+  /usr/local/include/Geant4/G4UIcommand.hh \
+  /usr/local/include/Geant4/G4ApplicationState.hh \
+  /usr/local/include/Geant4/G4UIparameter.hh \
+  /usr/local/include/Geant4/G4UItokenNum.hh \
   /Users/dorageeraerts/Documents/PhD/simulation/Muraves/Simulation_Studies/Simulation_Dora/include/PrimaryGeneratorAction_EcoMug.hh \
   /usr/local/include/Geant4/G4VUserPrimaryGeneratorAction.hh \
   /usr/local/include/Geant4/G4ParticleGun.hh \
