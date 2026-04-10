@@ -1080,6 +1080,11 @@ CMakeFiles/MuravesSim.dir/MuravesSim.cc.o: \
   /usr/local/include/Geant4/G4VPhysicalVolume.icc \
   /usr/local/include/Geant4/G4Cache.hh \
   /usr/local/include/Geant4/G4CacheDetails.hh \
+  /usr/local/include/Geant4/G4UIcmdWithAString.hh \
+  /usr/local/include/Geant4/G4UIcommand.hh \
+  /usr/local/include/Geant4/G4ApplicationState.hh \
+  /usr/local/include/Geant4/G4UIparameter.hh \
+  /usr/local/include/Geant4/G4UItokenNum.hh \
   /usr/local/include/Geant4/FTFP_BERT.hh \
   /usr/local/include/Geant4/G4VModularPhysicsList.hh \
   /usr/local/include/Geant4/G4VPhysicsConstructor.hh \
@@ -1295,10 +1300,6 @@ CMakeFiles/MuravesSim.dir/MuravesSim.cc.o: \
   /usr/local/include/Geant4/G4TrackingMessenger.hh \
   /usr/local/include/Geant4/G4UImessenger.hh \
   /usr/local/include/Geant4/G4UIdirectory.hh \
-  /usr/local/include/Geant4/G4UIcommand.hh \
-  /usr/local/include/Geant4/G4ApplicationState.hh \
-  /usr/local/include/Geant4/G4UIparameter.hh \
-  /usr/local/include/Geant4/G4UItokenNum.hh \
   /usr/local/include/Geant4/G4UserTrackingAction.hh \
   /usr/local/include/Geant4/G4RunManagerKernel.hh \
   /usr/local/include/Geant4/G4TaskRunManager.hh \

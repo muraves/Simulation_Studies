@@ -11,6 +11,7 @@
 #include "G4Material.hh"
 #include "G4VPhysicalVolume.hh"
 #include "G4Cache.hh"
+#include "G4UIcmdWithAString.hh"
 
 class G4VPhysicalVolume;
 class G4GenericMessenger;
@@ -53,6 +54,13 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   private:
     G4GenericMessenger* _messenger;
     G4LogicalVolume* barLog = nullptr;
+    G4LogicalVolume* topCornerLog = nullptr;
+    G4LogicalVolume* leftCornerLog = nullptr;
+    G4LogicalVolume* rightCornerLog = nullptr;
+
+    G4ThreeVector _topCornerOffset;
+    G4ThreeVector _rightCornerOffset;
+    G4ThreeVector _leftCornerOffset;
 
     // Detector properties
     G4int _nBars;
@@ -65,10 +73,13 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     G4double _barHeight;
     G4double _barBase;
     G4double _triangEffectiveBase;
+    G4double _cornerCut;
 
     // Configuration properties
     G4double xySafety;
     G4double zSafety;
+    std::vector<double> _zPosStations; 
+    std::vector<double> _yPosStations;
 
     // Station positions
     float zPosStationX[4];

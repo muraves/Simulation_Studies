@@ -33,8 +33,8 @@ class PrimaryGeneratorAction_EcoMug : public G4VUserPrimaryGeneratorAction, publ
     // method to access particle gun
     const G4ParticleGun* GetParticleGun() const { return fParticleGun; }
 
-    G4double fHSphereRadius = 1*m;
-    std::array<G4double, 3> fHSphereCenter = {0, 0, 0}; // use std::array, EcoMug cannot take G4ThreeVector as input
+    G4double fHSphereRadius;
+    std::array<G4double, 3> fHSphereCenter; // use std::array, EcoMug cannot take G4ThreeVector as input
     G4double fMinTheta, fMaxTheta;
     G4double fMinPosTheta, fMaxPosTheta;
     G4double fMinPhi, fMaxPhi;
