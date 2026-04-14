@@ -108,7 +108,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //G4Material* polystyrene_mat = FindMaterial(Materials::kPOLYSTYRENE); // with costum scintillator properties
 
 
-  G4bool checkOverlaps = true; // Option to switch on/off checking of volumes overlaps
+  G4bool checkOverlaps = false; // Option to switch on/off checking of volume overlaps
 
        
     // ------------------- World -------------------

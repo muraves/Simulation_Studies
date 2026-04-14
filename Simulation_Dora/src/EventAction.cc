@@ -75,6 +75,11 @@ void EventAction::BeginOfEventAction(const G4Event* event)
 
 void EventAction::EndOfEventAction(const G4Event* event)
 {
+  const char* clusterId = std::getenv("CLUSTER_ID");
+  const char* processId = std::getenv("PROCESS_ID");
+  G4int clusterIdInt = clusterId ? std::atoi(clusterId) : -1;
+  G4int processIdInt = processId ? std::atoi(processId) : -1;
+
   if (event->IsAborted()) {
         std::cout << "Event " << event->GetEventID() << " was aborted, skipping save." << std::endl;
         return;  // don't save anything
@@ -132,6 +137,8 @@ void EventAction::EndOfEventAction(const G4Event* event)
       analysisManager->FillNtupleIColumn(1, 9, hit->GetBarID());
       analysisManager->FillNtupleIColumn(1, 10, hit->GetPDGcode());
       analysisManager->FillNtupleIColumn(1, 11, hit->GetTrackID());
+      analysisManager->FillNtupleIColumn(1, 12, clusterIdInt);
+      analysisManager->FillNtupleIColumn(1, 13, processIdInt);
     
       analysisManager->AddNtupleRow(1);
     }
@@ -148,7 +155,9 @@ void EventAction::EndOfEventAction(const G4Event* event)
         analysisManager->FillNtupleDColumn(0, 4, primary->GetTotalEnergy());
         analysisManager->FillNtupleDColumn(0, 5, primary->GetMomentumDirection().theta());
         analysisManager->FillNtupleDColumn(0, 6, primary->GetMomentumDirection().phi()); 
-        analysisManager->FillNtupleIColumn(0, 7, event->IsAborted()); 
+        analysisManager->FillNtupleIColumn(0, 7, event->IsAborted());
+        analysisManager->FillNtupleIColumn(0, 8, clusterIdInt);
+        analysisManager->FillNtupleIColumn(0, 9, processIdInt); 
         //analysisManager->FillNtupleIColumn(0, 8, fTouchedRock); 
       }    
       analysisManager->AddNtupleRow(0);

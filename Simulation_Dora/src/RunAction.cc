@@ -81,14 +81,14 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
   fIsHTCondor = (clusterId && processId);
 
   fClusterId = clusterId ? clusterId : "local";
-fProcessId = processId ? processId : "local";
+  fProcessId = processId ? processId : "local";
   
   //std::string configFilename = "../../../Muraves_SimData/run_config_" + timestamp + ".txt";
   //std::string runFilename = "../../../MuravesSim_Data/MuravesSim_Data_" + fTimestamp;
   //std::string runFilename    = std::string(fDataPath) + "/MuravesSim_Data_" + fTimestamp + "_FS_UR";
   std::string runFilename;
   if (fIsHTCondor) {
-    runFilename = std::string(fDataPath) + "/musimData_c" + fClusterId + "_p" + fProcessId;
+    runFilename = std::string(fDataPath) + "/musimData_c" + fClusterId + "_p" + fProcessId + ".txt";
 } else {
      runFilename = std::string(fDataPath) + "/musimData_" + fTimestamp;
 }
@@ -114,6 +114,8 @@ fProcessId = processId ? processId : "local";
     analysisManager->CreateNtupleDColumn("GenPartTheta"); // column Id = 5  
     analysisManager->CreateNtupleDColumn("GenPartPhi"); // column Id = 6
     analysisManager->CreateNtupleIColumn("Aborted"); // column Id = 7
+    analysisManager->CreateNtupleIColumn("ClusterID");     // 8  
+    analysisManager->CreateNtupleIColumn("ProcessID");     // 9  
     //analysisManager->CreateNtupleIColumn("touchedRock"); // column Id = 8
     
     analysisManager->FinishNtuple();
@@ -134,6 +136,8 @@ fProcessId = processId ? processId : "local";
     analysisManager->CreateNtupleIColumn("ScintHitBar"); // column Id = 9
     analysisManager->CreateNtupleIColumn("ScintHitPDG"); // column Id = 10
     analysisManager->CreateNtupleIColumn("ScintHitTrackID"); // column Id = 11
+    analysisManager->CreateNtupleIColumn("ClusterID");         // 12 
+    analysisManager->CreateNtupleIColumn("ProcessID");         // 13 
   
     analysisManager->FinishNtuple();
 
