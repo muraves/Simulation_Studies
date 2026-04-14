@@ -78,17 +78,19 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
 
   const char* clusterId = std::getenv("CLUSTER_ID");
   const char* processId = std::getenv("PROCESS_ID");
+  const char* nameFlag = std::getenv("NAME_FLAG");
   fIsHTCondor = (clusterId && processId);
 
   fClusterId = clusterId ? clusterId : "local";
   fProcessId = processId ? processId : "local";
+  fNameFlag = nameFlag ? nameFlag : "local";
   
   //std::string configFilename = "../../../Muraves_SimData/run_config_" + timestamp + ".txt";
   //std::string runFilename = "../../../MuravesSim_Data/MuravesSim_Data_" + fTimestamp;
   //std::string runFilename    = std::string(fDataPath) + "/MuravesSim_Data_" + fTimestamp + "_FS_UR";
   std::string runFilename;
   if (fIsHTCondor) {
-    runFilename = std::string(fDataPath) + "/musimData_c" + fClusterId + "_p" + fProcessId + ".txt";
+    runFilename = std::string(fDataPath) + "/musimData_c" + fClusterId + "_p" + fProcessId + "_" + fNameFlag;
 } else {
      runFilename = std::string(fDataPath) + "/musimData_" + fTimestamp;
 }
@@ -232,9 +234,9 @@ void RunAction::EndOfRunAction(const G4Run* /*run*/)
 
     std::string configFilename ;
     if (fIsHTCondor) {
-    configFilename = std::string(fDataPath) + "/musimLog_c" + fClusterId + "_p" + fProcessId;
+    configFilename = std::string(fDataPath) + "/musimLog_c" + fClusterId + "_p" + fProcessId + "_" + fNameFlag + ".txt";
     } else {
-       configFilename = std::string(fDataPath) + "/musimLog_" + fTimestamp;
+       configFilename = std::string(fDataPath) + "/musimLog_" + fTimestamp + ".txt";
     }
 
     // Write all run info including runtime
