@@ -24,6 +24,9 @@ class RunAction : public G4UserRunAction, public G4UImessenger
     void EndOfRunAction(const G4Run*) override;
     void SetNewValue(G4UIcommand* cmd, G4String val) override;
 
+    std::string fClusterId;
+    std::string fProcessId;
+
   private:
     EventAction* fEventAction = nullptr;
     PrimaryGeneratorInfo* fGeneratorInfo; 
@@ -32,8 +35,6 @@ class RunAction : public G4UserRunAction, public G4UImessenger
     std::chrono::high_resolution_clock::time_point endTime; 
     long fSeed;
     std::string fTimestamp;
-    std::string fClusterId;
-    std::string fProcessId;
     bool fIsHTCondor;
 
     //G4UImessenger*      fMessenger; // can be commented out since RunAction inhertics already from G4UIMessenger
