@@ -68,9 +68,11 @@ int main(int argc, char** argv)
     //}
 
   G4UIExecutive* ui = nullptr;
-  if (argc == 1) {
+  bool openUI = (argc == 1);
+  
+  /*if (argc == 1) {
     ui = new G4UIExecutive(argc, argv);
-  }
+  }*/
   auto theMessenger = new MuravesMessenger();
 
   long seed = std::chrono::system_clock::now().time_since_epoch().count();
@@ -95,14 +97,15 @@ int main(int argc, char** argv)
   // --- Command-line arguments (needs to be improved) ---
   G4String inputfile="";
   
-  G4int iarg = 1;
+G4int iarg = 1;
   if (argc > 1) {
     while ( iarg < argc ) {
       if (G4String(argv[iarg]).compare("--generator") == 0) {
 	if ( ++iarg < argc ) {
-	  if ( (G4String(argv[iarg]).compare("CRY") == 0)
-	       || (G4String(argv[iarg]).compare("PartGun") == 0)
-	       || (G4String(argv[iarg]).compare("GPS") == 0) ) {
+	  if ( //(G4String(argv[iarg]).compare("CRY") == 0) // leave CRY out for now
+	       (G4String(argv[iarg]).compare("PG") == 0)
+	       || (G4String(argv[iarg]).compare("GPS") == 0)  
+         || (G4String(argv[iarg]).compare("EcoMug") == 0) ) {
 	    theMessenger->SetPrimaryGenerator(G4String(argv[iarg]));
 	    iarg++;
 	  }
@@ -115,30 +118,33 @@ int main(int argc, char** argv)
 	  return EXIT_FAILURE;
 	}
       }
-      else if (G4String(argv[iarg]).compare("--inputfile") == 0) {
-	if ( ++iarg < argc ) {
-	  inputfile = G4String(argv[iarg]);
-	  iarg++;
-	} else {
-	  G4cout << "Missing inputfile" << G4endl;
-	  return EXIT_FAILURE;
-	}
-      }
       else if (G4String(argv[iarg]).compare("--m") == 0) {
-      if (++iarg < argc) {
+        if (++iarg < argc) {
+          inputfile = G4String(argv[iarg]);
+          iarg++;
+        } else {
+          G4cout << "Missing macro file" << G4endl;
+          return EXIT_FAILURE;
+        }
+      }
+      else if (G4String(argv[iarg]).compare("--ui") == 0) {
+        openUI = true;
+        iarg++;
+      }
+      else if (G4String(argv[iarg])[0] != '-') {
         inputfile = G4String(argv[iarg]);
         iarg++;
-      } else {
-        G4cout << "Missing macro file" << G4endl;
+      }
+      else {
+        G4cout << "Unknown option " << argv[iarg] << G4endl;
         return EXIT_FAILURE;
       }
-    }
-      else {
-	G4cout << "Unknown option " << argv[iarg] << G4endl;
-	return EXIT_FAILURE;
-      }      
     } 
   }
+
+    if (openUI) {
+  ui = new G4UIExecutive(argc, argv);
+}
 
   // Run manager
   //------------ no need to switch between MT and single-threaded, G4RunManagerType::Default automatically picks the right case
@@ -186,21 +192,21 @@ int main(int argc, char** argv)
   //------------------
   G4UImanager* UImanager = G4UImanager::GetUIpointer();  
 
-  if (!ui && inputfile != "") {
-    // execute an argument macro file if exist
-    G4String command = "/control/execute ";
-    //G4String fileName = argv[1];
-    UImanager->ApplyCommand(command + inputfile);
+  if (ui) {
+  UImanager->ApplyCommand("/control/execute init_vis.mac");
+  if (ui->IsGUI()) {
+    UImanager->ApplyCommand("/control/execute gui.mac");
   }
-  else {
-    UImanager->ApplyCommand("/control/execute init_vis.mac");
-    if (ui->IsGUI()) { 
-      UImanager->ApplyCommand("/control/execute gui.mac");
-    }
-    // start interactive session
-    ui->SessionStart();
-    delete ui;
-  }
+  ui->SessionStart();
+  delete ui;
+}
+else if (inputfile != "") {
+  G4String command = "/control/execute ";
+  UImanager->ApplyCommand(command + inputfile);
+}
+else {
+  G4cout << "No macro file specified." << G4endl;
+}
 
   auto end = high_resolution_clock::now();
 
