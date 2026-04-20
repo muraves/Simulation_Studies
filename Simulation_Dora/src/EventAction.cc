@@ -80,10 +80,10 @@ void EventAction::EndOfEventAction(const G4Event* event)
   G4int clusterIdInt = clusterId ? std::atoi(clusterId) : -1;
   G4int processIdInt = processId ? std::atoi(processId) : -1;
 
-  if (event->IsAborted()) {
+  /*if (event->IsAborted()) {
         std::cout << "Event " << event->GetEventID() << " was aborted, skipping save." << std::endl;
         return;  // don't save anything
-    }
+    }*/
   
   // ------------------- Fill histograms & ntuple -------------------
   
@@ -163,6 +163,16 @@ void EventAction::EndOfEventAction(const G4Event* event)
       analysisManager->AddNtupleRow(0);
     }
   }
+
+  if (event->IsAborted()) {
+    G4cout << "[ABORT] Event " << eventID
+           << " | steps: "    << GetAbortSteps()
+           << " | particle: " << GetAbortParticle()
+           << " | physics process: "  << GetAbortProcess()
+           << " | volume: "   << GetAbortVolume()
+           << G4endl;
+}
+
   /*else { //return;   
     for ( unsigned long i = 0; i < nhit; i++ ) {
       auto hit = static_cast<ScintbarHit*>(hc->GetHit(i));

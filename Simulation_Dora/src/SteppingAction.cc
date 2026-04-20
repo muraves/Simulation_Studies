@@ -21,7 +21,6 @@ void MySteppingAction::UserSteppingAction(const G4Step* step) {
         fSteps = 0;
         fLastEventID = eventID;
     }
-
     /*G4String volumeName = step->GetPreStepPoint()
                               ->GetTouchableHandle()
                               ->GetVolume()
@@ -32,21 +31,40 @@ void MySteppingAction::UserSteppingAction(const G4Step* step) {
         fEventAction->SetTouchedRock();
     }*/
 
-    if (++fSteps % 300'000 == 0) {
+    /*if (++fSteps % 300'000 == 0) {
         G4cout << "Event " << eventID
                   << " | steps: "    << fSteps
                   << " | particle: " << step->GetTrack()->GetDefinition()->GetParticleName()
                   << " | process: "  << step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName()
                   << " | KE: "       << step->GetPreStepPoint()->GetKineticEnergy()
                   << G4endl;
-    }
+    }*/
 
-    if (fSteps > 2'000'000) {
-        G4cout << "WARNING: Aborting runaway event " << eventID
+    if (++fSteps > 2'000'000) { 
+        /*G4cout << "WARNING: Aborting runaway event " << eventID
                   << " | steps: "    << fSteps
                   << " | particle: " << step->GetTrack()->GetDefinition()->GetParticleName()
                   << " | process: "  << step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName()
-                  << G4endl;
+                  << G4endl;*/
+
+        // diagnostics
+        auto track   = step->GetTrack();
+        auto postSP  = step->GetPostStepPoint();
+
+        G4String particle = track->GetDefinition()->GetParticleName();
+        G4String process  = postSP->GetProcessDefinedStep()
+                                ? postSP->GetProcessDefinedStep()->GetProcessName()
+                                : "unknown";
+        G4String volume   = track->GetVolume()
+                                ? track->GetVolume()->GetName()
+                                : "unknown";
+
+        // Write into EventAction so EndOfEventAction can save it
+        fEventAction->SetAbortDiagnostics(fSteps, particle, process, volume);
+
+        G4RunManager::GetRunManager()->AbortEvent();
+        fSteps = 0;
+        
         G4RunManager::GetRunManager()->AbortEvent();
         fSteps = 0;
     }

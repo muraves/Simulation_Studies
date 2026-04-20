@@ -10,9 +10,9 @@
 # configuration
 /control/execute geometry.mac
 /muraves/dataPath /Users/dorageeraerts/Documents/PhD/simulation/Muraves/MuravesSim_Data/runs/tests
-/EcoMug/readConfig ecomug_config.txt
+#/EcoMug/readConfig ecomug_config.txt
 
 # Initialize and beam on
 /run/initialize
 /run/printProgress 0
-/run/beamOn 1000
+/run/beamOn 5
