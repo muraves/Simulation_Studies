@@ -1386,4 +1386,34 @@ CMakeFiles/MuravesSim.dir/src/RunAction.cc.o: \
   /usr/local/include/Geant4/G4RunManagerKernel.hh \
   /usr/local/include/Geant4/rundefs.hh \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/list \
-  /usr/local/include/Geant4/G4Run.hh
+  /usr/local/include/Geant4/G4Run.hh \
+  /usr/local/include/Geant4/G4VModularPhysicsList.hh \
+  /usr/local/include/Geant4/G4VPhysicsConstructor.hh \
+  /usr/local/include/Geant4/G4PhysicsListHelper.hh \
+  /usr/local/include/Geant4/G4PhysicsListOrderingParameter.hh \
+  /usr/local/include/Geant4/G4ThreadLocalSingleton.hh \
+  /usr/local/include/Geant4/G4Backtrace.hh \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/cxxabi.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__cxxabi_config.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/execinfo.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/os/base.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/os/availability.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/uuid/uuid.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_uuid_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/unistd.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_types/_posix_vdisable.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/select.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/sys/_select.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/gethostuuid.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/cfenv \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/fenv.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/fenv.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/csignal \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/signal.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/regex \
+  /usr/local/include/Geant4/G4VUPLSplitter.hh \
+  /usr/local/include/Geant4/G4VUserPhysicsList.hh \
+  /usr/local/include/Geant4/G4ProductionCutsTable.hh \
+  /usr/local/include/Geant4/G4MaterialCutsCouple.hh \
+  /usr/local/include/Geant4/G4ProductionCuts.hh \
+  /usr/local/include/Geant4/G4MCCIndexConversionTable.hh

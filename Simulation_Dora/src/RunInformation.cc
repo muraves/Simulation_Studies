@@ -27,6 +27,7 @@ void RunInformation::Write(const std::string& filename,
 
     out << "Number of events (/run/beamOn): " << nEvents << "\n";
     out << "CLHEP seed: " << seed << "\n";  
+    out << "Physics list: FTFP_BERT" << "\n";
 
     // Runtime 
     if (total_ms >= 0) {

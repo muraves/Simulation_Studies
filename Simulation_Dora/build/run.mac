@@ -7,12 +7,12 @@
 #/mpi/verbose 0
 /process/verbose 0
 
-# configuration
+# Configuration
 /control/execute geometry.mac
 /muraves/dataPath /Users/dorageeraerts/Documents/PhD/simulation/Muraves/MuravesSim_Data/runs/tests
 #/EcoMug/readConfig ecomug_config.txt
 
-# Initialize and beam on
+# Start run
 /run/initialize
 /run/printProgress 0
 /run/beamOn 5
