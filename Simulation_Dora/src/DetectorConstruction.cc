@@ -134,7 +134,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     
     //------------------- Aluminum foil -------------------
     
-    G4double _AlFoilThickness = 0.1*mm;
+    G4double _AlFoilThickness = 2*mm;
 
     G4Box* solidAlFoil = new G4Box("AlFoil", 0.5*_barLength, 0.5*_barLength, 0.5*_AlFoilThickness); 
 
@@ -220,7 +220,7 @@ if (_detType == "triangular") {
     G4ExtrudedSolid* barCutSolid = new G4ExtrudedSolid("barCutSolid", barPoly,
         halfLen, G4TwoVector(0,0), 1.0, G4TwoVector(0,0), 1.0);
 
-     G4double holeRadius = 1.8/2. * mm;
+     G4double holeRadius = 1.6/2. * mm;
 
     // If we want an actual hole in triangular bar:
     /*G4Tubs* holeTubs = new G4Tubs("hole", 
