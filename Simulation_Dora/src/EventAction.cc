@@ -139,6 +139,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
       analysisManager->FillNtupleIColumn(1, 11, hit->GetTrackID());
       analysisManager->FillNtupleIColumn(1, 12, clusterIdInt);
       analysisManager->FillNtupleIColumn(1, 13, processIdInt);
+      analysisManager->FillNtupleDColumn(1, 14, hit->GetHitTime());
     
       analysisManager->AddNtupleRow(1);
     }
@@ -146,10 +147,13 @@ void EventAction::EndOfEventAction(const G4Event* event)
     // Loop over primaries
     analysisManager->FillNtupleIColumn(0, 0, eventID);
     for ( int i = 0; i < event->GetNumberOfPrimaryVertex(); i++ ) {
+
+      G4ThreeVector vertexPos = event->GetPrimaryVertex(i)->GetPosition();
+
       for ( int q = 0; q < event->GetPrimaryVertex(i)->GetNumberOfParticle(); q++ ) {
                   
         auto primary = event->GetPrimaryVertex(i)->GetPrimary(q);
-                  
+     
         analysisManager->FillNtupleIColumn(0, 2, primary->GetTrackID());
         analysisManager->FillNtupleIColumn(0, 3, primary->GetG4code()->GetPDGEncoding());
         analysisManager->FillNtupleDColumn(0, 4, primary->GetTotalEnergy());
@@ -158,7 +162,9 @@ void EventAction::EndOfEventAction(const G4Event* event)
         analysisManager->FillNtupleIColumn(0, 7, event->IsAborted());
         analysisManager->FillNtupleIColumn(0, 8, clusterIdInt);
         analysisManager->FillNtupleIColumn(0, 9, processIdInt); 
-        //analysisManager->FillNtupleIColumn(0, 8, fTouchedRock); 
+        analysisManager->FillNtupleDColumn(0, 10, vertexPos.x() / mm);
+        analysisManager->FillNtupleDColumn(0, 11, vertexPos.y() / mm);
+        analysisManager->FillNtupleDColumn(0, 12, vertexPos.z() / mm);
       }    
       analysisManager->AddNtupleRow(0);
     }
