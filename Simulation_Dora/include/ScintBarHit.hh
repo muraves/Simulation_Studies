@@ -74,11 +74,15 @@ class ScintbarHit : public G4VHit
     void SetPDGcode( G4int c ) { fPDGcode = c; };
     G4int GetPDGcode() const { return fPDGcode; };
 
+    void SetHitTime( G4double c ) { fHitTime = c; };
+    G4double GetHitTime() const { return fHitTime; };
+
   private:
     G4int fStationID;
     G4int fModuleID;
     G4int fBarID;
     G4double fEdep;
+    G4double fHitTime;
     G4ThreeVector fPos;
     G4int fTrackID;
     G4int fPDGcode;
