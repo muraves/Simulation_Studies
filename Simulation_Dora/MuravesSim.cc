@@ -158,15 +158,10 @@ G4int iarg = 1;
 
   // Run manager
   //------------ no need to switch between MT and single-threaded, G4RunManagerType::Default automatically picks the right case
-  auto theRunManager = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
-
-  // Pick number of threads (example)
-  /*if (argc == 3)
-    theRunManager->SetNumberOfThreads(atoi(argv[2]));
-  else
-    theRunManager->SetNumberOfThreads(2);*/
-    theRunManager->SetNumberOfThreads(nThreads);
-
+  auto theRunManager = G4RunManagerFactory::CreateRunManager(
+  nThreads > 1 ? G4RunManagerType::MTOnly : G4RunManagerType::Serial
+);
+theRunManager->SetNumberOfThreads(nThreads);
   // UserInitialization classes
   //---------------------------
   //DetectorConstruction* theDetector = new DetectorConstruction("scintillator");
