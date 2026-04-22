@@ -67,6 +67,7 @@ int main(int argc, char** argv)
         //std::cout << "argv[" << i << "] = " << argv[i] << std::endl;
     //}
 
+  G4int nThreads = 1;
   G4UIExecutive* ui = nullptr;
   bool openUI = (argc == 1);
   
@@ -135,6 +136,15 @@ G4int iarg = 1;
         inputfile = G4String(argv[iarg]);
         iarg++;
       }
+      else if (G4String(argv[iarg]).compare("--threads") == 0) {
+  if (++iarg < argc) {
+    nThreads = std::stoi(argv[iarg]);
+    iarg++;
+  } else {
+    G4cout << "Missing thread count" << G4endl;
+    return EXIT_FAILURE;
+  }
+}
       else {
         G4cout << "Unknown option " << argv[iarg] << G4endl;
         return EXIT_FAILURE;
@@ -155,7 +165,7 @@ G4int iarg = 1;
     theRunManager->SetNumberOfThreads(atoi(argv[2]));
   else
     theRunManager->SetNumberOfThreads(2);*/
-    theRunManager->SetNumberOfThreads(1);
+    theRunManager->SetNumberOfThreads(nThreads);
 
   // UserInitialization classes
   //---------------------------

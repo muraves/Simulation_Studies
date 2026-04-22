@@ -70,6 +70,7 @@ G4bool ScintbarSD::ProcessHits(G4Step* step, G4TouchableHistory* history)
   G4int BarNo = (BarCopyNo & 0xFF);
   G4int ModuleNo = (BarCopyNo >> 8) & 0xF; 
   G4int StationNo = (BarCopyNo >> 12) & 0xF;
+  G4double HitTime = prestep->GetGlobalTime();
 
   //auto StationNo = touchable->GetVolume(1)->GetCopyNo();
   //auto ModuleNo = touchable->GetCopyNumber(3);
@@ -113,6 +114,7 @@ else {
   hit->SetTrackID(trackID);
   hit->SetPDGcode(track->GetDefinition()->GetPDGEncoding());
   hit->SetParentId(track->GetParentID());
+  hit->SetHitTime(HitTime);
   
   fHitsCollection->insert(hit);
 }

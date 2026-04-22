@@ -123,6 +123,9 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
     analysisManager->CreateNtupleIColumn("Aborted"); // column Id = 7
     analysisManager->CreateNtupleIColumn("ClusterID");     // 8  
     analysisManager->CreateNtupleIColumn("ProcessID");     // 9  
+    analysisManager->CreateNtupleDColumn("GenPosX"); // 10
+    analysisManager->CreateNtupleDColumn("GenPosY"); // 11
+    analysisManager->CreateNtupleDColumn("GenPosZ"); // 12
     //analysisManager->CreateNtupleIColumn("touchedRock"); // column Id = 8
     
     analysisManager->FinishNtuple();
@@ -144,7 +147,8 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
     analysisManager->CreateNtupleIColumn("ScintHitPDG"); // column Id = 10
     analysisManager->CreateNtupleIColumn("ScintHitTrackID"); // column Id = 11
     analysisManager->CreateNtupleIColumn("ClusterID");         // 12 
-    analysisManager->CreateNtupleIColumn("ProcessID");         // 13 
+    analysisManager->CreateNtupleIColumn("ProcessID");         // 13
+    analysisManager->CreateNtupleDColumn("ScintHitTime");   // 14
   
     analysisManager->FinishNtuple();
 

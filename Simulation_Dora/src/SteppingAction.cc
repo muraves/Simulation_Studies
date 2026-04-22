@@ -41,12 +41,6 @@ void MySteppingAction::UserSteppingAction(const G4Step* step) {
     }*/
 
     if (++fSteps > 2'000'000) { 
-        /*G4cout << "WARNING: Aborting runaway event " << eventID
-                  << " | steps: "    << fSteps
-                  << " | particle: " << step->GetTrack()->GetDefinition()->GetParticleName()
-                  << " | process: "  << step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName()
-                  << G4endl;*/
-
         // diagnostics
         auto track   = step->GetTrack();
         auto postSP  = step->GetPostStepPoint();
@@ -59,12 +53,16 @@ void MySteppingAction::UserSteppingAction(const G4Step* step) {
                                 ? track->GetVolume()->GetName()
                                 : "unknown";
 
-        // Write into EventAction so EndOfEventAction can save it
-        fEventAction->SetAbortDiagnostics(fSteps, particle, process, volume);
+        // Can be written to EventAction if we ever want to save this info (e.g. study on aborted events...)
+        //fEventAction->SetAbortDiagnostics(fSteps, particle, process, volume);
 
-        G4RunManager::GetRunManager()->AbortEvent();
-        fSteps = 0;
-        
+    G4cout << "[ABORT] Runaway event " << eventID
+           << " | steps: "    << fSteps
+           << " | particle: " << particle
+           << " | physics process: "  << process
+           << " | volume: "   << volume
+           << G4endl;
+
         G4RunManager::GetRunManager()->AbortEvent();
         fSteps = 0;
     }
