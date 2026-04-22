@@ -33,12 +33,6 @@
 #include "ScintBarSD.hh"
 #include "Materials.hh"
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-//G4ThreadLocal G4FieldManager* DetectorConstruction::fFieldMgr = nullptr;
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 DetectorConstruction::DetectorConstruction(const char *detectorName)
   : G4VUserDetectorConstruction(),
     _nBars(32), _nModules(2), _nStations(4), _stationSpacing(50 * cm), _barLength(1070 * mm), _barHeight(17 * mm),
@@ -95,16 +89,16 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 {
   //sfMaterials = Materials::GetInstance();
 
-  xySafety = _barBase - _triangEffectiveBase;
+  xySafety = _barBase - _triangEffectiveBase; //  XY shift for gap inbetween bars
   G4cout << "[MuravesDetector::Construct] xySafety = " << xySafety << G4endl;
-  //xySafety = 0.5 * mm; //  XY shift to separate bars apart
-  zSafety = 5.5 * cm; //  Z shift to separate layers apart
+  zSafety = 5.5 * cm; //  distance between X and Y layer
   
   G4NistManager* nist = G4NistManager::Instance();
   G4Material* air_mat = nist->FindOrBuildMaterial("G4_AIR");
   G4Material* Aluminum_mat = nist->FindOrBuildMaterial("G4_Al");
   G4Material* polystyrene_mat = nist->FindOrBuildMaterial("G4_POLYSTYRENE"); // standard polystyrene
   G4Material* rock_mat = new G4Material("StandardRock", 11.0, 22.0*g/mole, 2.65*g/cm3);
+  G4Material* plastic_mat = nist->FindOrBuildMaterial("G4_POLYVINYL_CHLORIDE"); // PVC plastic
   //G4Material* polystyrene_mat = FindMaterial(Materials::kPOLYSTYRENE); // with costum scintillator properties
 
 
@@ -132,11 +126,14 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                 checkOverlaps);        //overlaps checking
       
     
-    //------------------- Aluminum foil -------------------
+    //------------------- Aluminum foil (plates) -------------------
     
     G4double _AlFoilThickness = 2*mm;
 
-    G4Box* solidAlFoil = new G4Box("AlFoil", 0.5*_barLength, 0.5*_barLength, 0.5*_AlFoilThickness); 
+    G4Box* solidAlFoil = new G4Box("AlFoil", 
+    0.5 * (_nBars/2 * _barBase),   // covers one module width
+    0.5 * _barLength,               // full bar length
+    0.5 * _AlFoilThickness);
 
     G4LogicalVolume* logicAlFoil = new G4LogicalVolume(solidAlFoil, Aluminum_mat, "AlFoil");  
 
@@ -148,28 +145,19 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
     G4LogicalVolume* logicTEC = new G4LogicalVolume(solidTEC, Aluminum_mat, "TEC");  
     
-   // ------------------- Aluminum tape (cover side of modules) -------------------
+   // ------------------- Aluminum tape (covers left and right edge of modules) -------------------
 
-  G4double tapeThickness  = 0.1 * mm;                    // thin adhesive tape
-  G4double tapeHalfLen    = _barLength / 2.;               // along bar length
-  // Height: cover both upper+lower rows plus the zOffset gap between them
-  G4double tapeHalfHeight = sqrt(_barHeight*_barHeight + (_triangEffectiveBase/2.)*(_triangEffectiveBase/2.) )/2.; /// 2.; //+ std::abs(zOffset); // generous Z span
+  G4double tapeThickness  = 0.1 * mm;                    
+  G4double tapeHalfLen    = _barLength / 2.;              
+  G4double tapeHalfHeight = sqrt(_barHeight*_barHeight + (_triangEffectiveBase/2.)*(_triangEffectiveBase/2.) )/2.;
   G4double slopeAngle = std::atan2(_triangEffectiveBase/ 2., _barHeight);
-  G4cout << "[Construct: slopeAngle]" << slopeAngle << G4endl;
-  
-  G4Material* tape_mat = Aluminum_mat;
 
-  // One G4Box solid covers both sides (same shape, placed at different positions)
-  G4Box* tapeSolid = new G4Box("EdgeTape",
-      tapeThickness / 2.,   // thin in X (world X = bar-local X axis)
-      tapeHalfHeight,          // along bar length (world Y after rotX)
-      tapeHalfLen);      // spans upper+lower rows
+  G4Box* tapeSolid = new G4Box("AlTape",
+      tapeThickness / 2.,   
+      tapeHalfHeight,         
+      tapeHalfLen);     
 
-  G4LogicalVolume* tapeLog = new G4LogicalVolume(tapeSolid, tape_mat, "EdgeTape");
-
-  auto tapeVis = new G4VisAttributes(G4Colour(1.0, 1.0, 0.0, 0.3)); // yellow
-  tapeVis->SetForceSolid(true);
-  tapeLog->SetVisAttributes(tapeVis);
+  G4LogicalVolume* tapeLog = new G4LogicalVolume(tapeSolid, Aluminum_mat, "AlTape");
 
     //------------------- Scintillator bar -------------------
     
@@ -181,26 +169,22 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
         _triangEffectiveBase = _barBase;
     // 2. Build the logical box containing the detector -------------------
     _halfContLengthXY = (std::max(_barLength, (_barBase + xySafety) * (_nBars + 0.5))) / 2.;
+    layerThickness = _barHeight + (_barHeight / (_barBase / 2.) * ((_barBase - _triangEffectiveBase) / 2.)); // Z offset due to cut edges at the base
+    _halfContLengthZ = (float) (_nStations - 1) / 2 * _stationSpacing + (layerThickness + zSafety / 2);
+
+    /* // ------ Some diagnostics ------
     G4cout << "[MuravesDetector::Construct] (_barBase + xySafety) * (_nBars + 0.5) / 2. = " << (_barBase + xySafety) * (_nBars + 0.5) / 2. << G4endl;
     G4cout << "[MuravesDetector::Construct] ((_barBase + xySafety) * (_nBars + 0.5)-xySafety) / 2. = " << ((_barBase + xySafety) * (_nBars + 0.5)-xySafety) / 2. << G4endl;
     G4cout << "[MuravesDetector::Construct] (_barBase + xySafety) * (_nBars/2 + 0.5) - xySafety/2 = " << (_barBase + xySafety) * (_nBars/2 + 0.5) - xySafety/2 << G4endl;
     G4cout << "[MuravesDetector::Construct] (_barBase + xySafety) * (_nBars/2) - xySafety = " << (_barBase + xySafety) * (_nBars/2) - xySafety << G4endl;
     G4cout << "[MuravesDetector::Construct] _halfContLengthXY = " << _halfContLengthXY << G4endl;
-    // 2.1 compute the Z height of a layer, i.e. of a single view (X or Y) of a station -------------------
-    layerThickness = _barHeight + (_barHeight / (_barBase / 2.) * ((_barBase - _triangEffectiveBase) / 2.)); // Z offset due to cut edges at the base
-     G4cout << "[MuravesDetector::Construct] layerThickness = " << layerThickness << G4endl;
-     //layerThickness = _barHeight; // Z offset due to cut edges at the base
-    std::cout << "[MuravesDetector::Construct] _barHeight=" << _barHeight << std::endl;
-    std::cout << "[MuravesDetector::Construct] _barBase=" << _barBase << std::endl;
-    std::cout << "[MuravesDetector::Construct] __triangEffectiveBase=" << _triangEffectiveBase << std::endl;
-    std::cout << "[MuravesDetector::Construct] layerThickness=" << layerThickness << std::endl;
-    _halfContLengthZ = (float) (_nStations - 1) / 2 * _stationSpacing + (layerThickness + zSafety / 2);
-
-    std::cout << "[MuravesDetector::Construct] _halContLengthZ=" << _halfContLengthZ << std::endl;
-
-    //------------------- Aluminum shell -------------------
+    G4cout << "[MuravesDetector::Construct] layerThickness = " << layerThickness << G4endl;
+    G4cout << "[MuravesDetector::Construct] layerThickness=" << layerThickness << G4cout;
+    G4cout << "[MuravesDetector::Construct] _halContLengthZ=" << _halfContLengthZ << G4cout ;
+    */
+   
+    //------------------- Aluminum cask -------------------
   
-    //G4double _AlShellHeight = layerThickness + zSafety; // Thickness (height) of aluminum shell box
     G4double _AlShellHeight = zSafety;
     G4double AlShellThickness = 1.2*m;
     
@@ -210,23 +194,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
     G4LogicalVolume* logicAlShell = new G4LogicalVolume(solidAlShell, Aluminum_mat, "AlShell");   
 
-    // 3. Build the scintillating bar -------------------
-    std::vector<G4TwoVector> vertices;
-    vertices.push_back(G4TwoVector(0, _barHeight / 2.)); //0
-    vertices.push_back(G4TwoVector(_barBase / 2, -_barHeight / 2.)); //1
-    vertices.push_back(G4TwoVector(-_barBase / 2, -_barHeight / 2.)); //2
-    vertices.push_back(G4TwoVector(0, _barHeight / 2.));  //3
-    vertices.push_back(G4TwoVector(0, _barHeight / 2.)); //4
-    vertices.push_back(G4TwoVector(_barBase / 2, -_barHeight / 2.)); //5
-    vertices.push_back(G4TwoVector(-_barBase / 2, -_barHeight / 2.)); //6
-    vertices.push_back(G4TwoVector(0, _barHeight / 2.)); //7
-
-   
 if (_detType == "triangular") {
-    //G4double c = (_barBase - _triangEffectiveBase)/2 * mm;
-    //G4double sc = 1.1*mm; //sidecut
     G4double H = _barHeight;
-    G4double B = _triangEffectiveBase;//(_triangEffectiveBase < _barBase) ? _triangEffectiveBase : _barBase;
+    G4double B = _triangEffectiveBase;
     G4double s = 2.*(H / B);
 
     G4double halfLen = _barLength / 2.;
@@ -253,14 +223,13 @@ if (_detType == "triangular") {
         0.,           // start angle
         360.*deg);    // full circle
 
-    // Hole centered at (0, 0, 0) in bar local frame — adjust X,Y if needed
+    // Hole centered at (0, 0, 0) in bar local frame
     G4SubtractionSolid* barWithHole = new G4SubtractionSolid("barWithHole",
         barCutSolid, holeTubs, 0, G4ThreeVector(0., 0., 0.));*/
 
     barLog = new G4LogicalVolume(barCutSolid, polystyrene_mat, "BARSH2E", NULL, NULL, NULL, false);
 
-    G4Material* plastic_mat = nist->FindOrBuildMaterial("G4_POLYVINYL_CHLORIDE");
-
+    // --- Model WLS holes as PVC rods, daughter of bar --- (hits will not be processed for daughter volumes -> just what we want: we don't record Edep in these WLS holes, only in scintillator bar)
     G4Tubs* rodSolid = new G4Tubs("rod",
     0.,
     holeRadius,
@@ -276,7 +245,7 @@ if (_detType == "triangular") {
 
     new G4PVPlacement(0, G4ThreeVector(0., 0., 0.), rodLog, "Rod", barLog, false, 0, checkOverlaps);
 
-    // --- Top corner: the original apex cut off ---
+    // --- Top corner: model apex as PVC ---
     std::vector<G4TwoVector> topPoly = {
         G4TwoVector( 0.,   H/2.),       // original apex
         G4TwoVector( _cornerCut/s,  H/2. - _cornerCut),
@@ -284,9 +253,9 @@ if (_detType == "triangular") {
     };
     G4ExtrudedSolid* topCornerSolid = new G4ExtrudedSolid("topCornerSolid", topPoly,
         halfLen, G4TwoVector(0,0), 1.0, G4TwoVector(0,0), 1.0);
-    topCornerLog = new G4LogicalVolume(topCornerSolid, plastic_mat, "TopCornerPlastic", NULL, NULL, NULL, false);
+    topCornerLog = new G4LogicalVolume(topCornerSolid, plastic_mat, "TopCornerLog", NULL, NULL, NULL, false);
 
-    // --- Right corner ---
+    // --- Right corner as PVC ---
     std::vector<G4TwoVector> rightPoly = {
         G4TwoVector( B/2.,     -H/2.),      // original corner
         G4TwoVector( B/2.-_cornerCut,   -H/2.),
@@ -294,9 +263,9 @@ if (_detType == "triangular") {
     };
     G4ExtrudedSolid* rightCornerSolid = new G4ExtrudedSolid("rightCornerSolid", rightPoly,
         halfLen, G4TwoVector(0,0), 1.0, G4TwoVector(0,0), 1.0);
-    rightCornerLog = new G4LogicalVolume(rightCornerSolid, plastic_mat, "RightCornerPlastic", NULL, NULL, NULL, false);
+    rightCornerLog = new G4LogicalVolume(rightCornerSolid, plastic_mat, "RightCornerLog", NULL, NULL, NULL, false);
 
-    // --- Left corner ---
+    // --- Left corner as PVC---
     std::vector<G4TwoVector> leftPoly = {
         G4TwoVector(-B/2.,     -H/2.),      // original corner
         G4TwoVector(-B/2.+_cornerCut, -H/2.+_cornerCut*s),
@@ -304,25 +273,18 @@ if (_detType == "triangular") {
     };
     G4ExtrudedSolid* leftCornerSolid = new G4ExtrudedSolid("leftCornerSolid", leftPoly,
         halfLen, G4TwoVector(0,0), 1.0, G4TwoVector(0,0), 1.0);
-    leftCornerLog = new G4LogicalVolume(leftCornerSolid, plastic_mat, "LeftCornerPlastic", NULL, NULL, NULL, false);
+    leftCornerLog = new G4LogicalVolume(leftCornerSolid, plastic_mat, "LeftCornerLog", NULL, NULL, NULL, false);
 }
-
-//_triangEffectiveBase     += xySafety; // Add safety margin
-//G4cout << " Construct triangEffectiveBase" << _triangEffectiveBase  << G4endl;
-//G4cout << " Construct _barBase" << _barBase  << G4endl;
 
     // 4. Build the stations -------------------
     double posFirstBarMod0 = -((float) _nBars -0.5) * _barBase / 2.; //position of first bar (i.e., bar at most-negative coordinate)
-    G4cout << "[MuravesDetector::Construct] -((float) _nBars -0.5) * _barBase / 2. = " << -((float) _nBars -0.5) * _barBase / 2. << G4endl;
+    //G4cout << "[MuravesDetector::Construct] -((float) _nBars -0.5) * _barBase / 2. = " << -((float) _nBars -0.5) * _barBase / 2. << G4endl;
     double posFirstBarMod1 = posFirstBarMod0 + (_nBars) * _barBase/2. ;
-    G4cout << "[MuravesDetector::Construct] posFirstBarMod0 + (_nBars) * _barBase/2. = " << -((float) _nBars -0.5) * _barBase / 2.+ (_nBars) * _barBase/2. << G4endl;
+    //G4cout << "[MuravesDetector::Construct] posFirstBarMod0 + (_nBars) * _barBase/2. = " << -((float) _nBars -0.5) * _barBase / 2.+ (_nBars) * _barBase/2. << G4endl;
     
-    // Is calculated automatically to be centered by method in lines above (gives same result)
-    //double posFirstBarMod0 = -0.53625*m + _barBase/2;
-    //double posFirstBarMod1 =-0.00825*m + _barBase/2;
-
     double posFirstBar[] = {posFirstBarMod0,posFirstBarMod1};
 
+    // to name the individual bars:
     std::stringstream barName;
     std::stringstream moduleName;
     std::stringstream planeName;
@@ -360,48 +322,29 @@ if (_detType == "triangular") {
     _zPosStations[1] += offset_zPos; 
     _zPosStations[2] += offset_zPos;
     _zPosStations[3] += offset_zPos; 
-    G4cout << "_zPosStations[0]" << _zPosStations[0] << G4endl;
-    G4cout << "_zPosStations[1]" << _zPosStations[1] << G4endl;
-    G4cout << "_zPosStations[2]" << _zPosStations[2] << G4endl;
-    G4cout << "_zPosStations[3]" << _zPosStations[3] << G4endl;
-
-    //zPosStation[] = {zPosStation0, zPosStation1, zPosStation2, zPosStation3};
-    //zPosStation[0] = zPosStation0;
-    //zPosStation[1] = zPosStation1;
-    //zPosStation[2] = zPosStation2;
-    //zPosStation[3] = zPosStation3;
-    
-    // y positions are wrt second station
-    /*float offSet_yPos = 24*cm; // position of station 2
-    float yPosStation1 = 24*cm - offSet; // y position of X station 2
-    float yPosStation0 = 28*cm - offSet; // y position of X station 1 (closest to Vesuvius)
-    float yPosStation2 = 19.5*cm - offSet; // y position of X station 3
-    float yPosStation3 = - offSet; // y position of X station 4*/
-
+   
     float offset_yPos = _yPosStations[1];
     _yPosStations[0] -= offset_yPos;
     _yPosStations[1] -= offset_yPos; 
     _yPosStations[2] -= offset_yPos; 
     _yPosStations[3] -= offset_yPos; 
 
+    /*// --- Diagnostics ---
+     G4cout << "_zPosStations[0]" << _zPosStations[0] << G4endl;
+    G4cout << "_zPosStations[1]" << _zPosStations[1] << G4endl;
+    G4cout << "_zPosStations[2]" << _zPosStations[2] << G4endl;
+    G4cout << "_zPosStations[3]" << _zPosStations[3] << G4endl;
     G4cout << "_yPosStations[0]" << _yPosStations[0] << G4endl;
     G4cout << "_yPosStations[1]" << _yPosStations[1] << G4endl;
     G4cout << "_yPosStations[2]" << _yPosStations[2] << G4endl;
     G4cout << "_yPosStations[3]" << _yPosStations[3] << G4endl;
-
-    //float yPosStation[] = {yPosStation0, yPosStation1, yPosStation2, yPosStation3};
-    /*yPosStation[0] = yPosStation0;
-    yPosStation[1] = yPosStation1;
-    yPosStation[2] = yPosStation2;
-    yPosStation[3] = yPosStation3;*/
+    */
 
     _halfContLengthXY = 0.75*m;
     G4double detectorBottom = _yPosStations[3] - 0.5*AlShellThickness;  // = -0.85 m
   // Top of highest shell in detector frame
   G4double detectorTop = _yPosStations[0] + 0.5*AlShellThickness; 
     _halfContLengthXY  = std::max(std::abs(detectorBottom), std::abs(detectorTop));
-    //_halfContLengthXY = ;
-    //_halfContLengthZ = 1*m;
     G4Box *detContainerSolid = 
         new G4Box("Detector",
                 _halfContLengthXY,
@@ -417,7 +360,7 @@ if (_detType == "triangular") {
                 NULL,
                 false);
 
-    // Rotation such that: x-axis = perpendicular to planes, pointing from first plane to last plane & z-axis = pointing upwards
+    // Rotation such that: x-axis = perpendicular to detector planes, pointing from first plane to last plane & z-axis = pointing upwards (wrt ground)
     G4ThreeVector axis(1., 1., 1.);
     axis = axis.unit();
     G4RotationMatrix* rotDet = new G4RotationMatrix();
@@ -457,15 +400,18 @@ if (_detType == "triangular") {
       for (G4int iModule = 0; iModule < _nModules;iModule++){
         moduleName << iModule;
 
-        G4VPhysicalVolume* physAlFoil = 
-          new G4PVPlacement(0,                     //no rotation
-                G4ThreeVector(0,_yPosStations[iStation], _zPosStations[iStation] + (std::pow(-1,iModule))*((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),       //at (0,0,0)
-                logicAlFoil,            //its logical volume
-                "AlFoilX",               //its name
-                detContainerLog,                     //its mother  volume
-                false,                 //no boolean operation
-                2,                     //copy number
-                checkOverlaps);        //overlaps checking
+        G4double foilCenterUpper = posFirstBar[iModule] + (_nBars/2 - 1) * _barBase / 2.;
+        G4double foilCenterLower = posFirstBar[iModule] + _nBars/2 * _barBase / 2.;
+
+        new G4PVPlacement(0,
+            G4ThreeVector(foilCenterUpper, _yPosStations[iStation],
+                _zPosStations[iStation] + ((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),
+            logicAlFoil, "AlFoilX", detContainerLog, false, iModule*2, checkOverlaps);
+
+        new G4PVPlacement(0,
+            G4ThreeVector(foilCenterLower, _yPosStations[iStation],
+                _zPosStations[iStation] - ((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),
+            logicAlFoil, "AlFoilX", detContainerLog, false, iModule*2+1, checkOverlaps);
 
         for (G4int iBar = 0; iBar < _nBars/2; iBar++) {
           barName << 2 * iBar;
@@ -485,28 +431,14 @@ if (_detType == "triangular") {
           
           barName.str("");
 
-          
-
           G4ThreeVector barPos(posFirstBar[iModule] + iBar * (_barBase),
                      _yPosStations[iStation],
                      _zPosStations[iStation] + zOffset);
 
-                     //new G4PVPlacement(_rotUpperX, barPos, barLog, "stationX"+ ..., detContainerLog, false, BarCopyNo, checkOverlaps);
-new G4PVPlacement(_rotUpperX, barPos, topCornerLog,   "TopCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),   detContainerLog, false, BarCopyNo, checkOverlaps);
-new G4PVPlacement(_rotUpperX, barPos, rightCornerLog, "RightCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(), detContainerLog, false, BarCopyNo, checkOverlaps);
-new G4PVPlacement(_rotUpperX, barPos, leftCornerLog,  "LeftCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),  detContainerLog, false, BarCopyNo, checkOverlaps);
-
-/*new G4PVPlacement(_rotUpperX, barPos, topCornerLog,
-    "TopCorner_X" + stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),
-    detContainerLog, false, BarCopyNo, checkOverlaps);
-
-new G4PVPlacement(_rotUpperX, barPos, rightCornerLog,
-    "RightCorner_X" + stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),
-    detContainerLog, false, BarCopyNo, checkOverlaps);
-
-new G4PVPlacement(_rotUpperX, barPos, leftCornerLog,
-    "LeftCorner_X" + stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),
-    detContainerLog, false, BarCopyNo, checkOverlaps);*/
+          // ---- Place PVC corners ----     
+          new G4PVPlacement(_rotUpperX, barPos, topCornerLog,   "TopCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),   detContainerLog, false, BarCopyNo, checkOverlaps);
+          new G4PVPlacement(_rotUpperX, barPos, rightCornerLog, "RightCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(), detContainerLog, false, BarCopyNo, checkOverlaps);
+          new G4PVPlacement(_rotUpperX, barPos, leftCornerLog,  "LeftCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),  detContainerLog, false, BarCopyNo, checkOverlaps);
         }
 
         for (G4int iBar = 0; iBar < _nBars/2; iBar++) {
@@ -528,48 +460,26 @@ new G4PVPlacement(_rotUpperX, barPos, leftCornerLog,
 
         G4ThreeVector barPos(posFirstBar[iModule] + (iBar + 0.5) * (_barBase),_yPosStations[iStation],_zPosStations[iStation] - zOffset);
 
-                     //new G4PVPlacement(_rotUpperX, barPos, barLog, "stationX"+ ..., detContainerLog, false, BarCopyNo, checkOverlaps);
-new G4PVPlacement(_rotLowerX, barPos, topCornerLog,   "TopCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),   detContainerLog, false, BarCopyNo, checkOverlaps);
-new G4PVPlacement(_rotLowerX, barPos, rightCornerLog, "RightCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(), detContainerLog, false, BarCopyNo, checkOverlaps);
-new G4PVPlacement(_rotLowerX, barPos, leftCornerLog,  "LeftCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),  detContainerLog, false, BarCopyNo, checkOverlaps);
+                  
+        new G4PVPlacement(_rotLowerX, barPos, topCornerLog,   "TopCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),   detContainerLog, false, BarCopyNo, checkOverlaps);
+        new G4PVPlacement(_rotLowerX, barPos, rightCornerLog, "RightCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(), detContainerLog, false, BarCopyNo, checkOverlaps);
+        new G4PVPlacement(_rotLowerX, barPos, leftCornerLog,  "LeftCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),  detContainerLog, false, BarCopyNo, checkOverlaps);
         }
 	    moduleName.str("");
 
-      // ─── X-plane edge tapes ──────────────────────────────────────────────────────
-{
+      // -------- module edge tape --------
     G4double B = _triangEffectiveBase;
 
-    G4double tapeHalfExtentX = (tapeThickness/2.) * std::cos(slopeAngle) 
-                          + tapeHalfHeight     * std::sin(slopeAngle);
+    G4double eps = 0.103 * mm; // place as close as possible to the bar (unfortunately do manually...)
 
-    G4double eps = 0.103 * mm;
-    // Left edge of module: left slope of upper bar 0
-    // Upper bar 0 center X = posFirstBar[iModule]
-    // Left edge of bar in local-X = -B/2  →  world X = posFirstBar[iModule] - B/2
-    //G4double xLeft  = posFirstBar[iModule] - B/2. - tapeThickness/2.;
     G4double xLeft = posFirstBar[iModule] - B/4. - (tapeThickness/2.) + eps;
-
-    // Right edge of module: right slope of lower bar 15
-    // Lower bar 15 center X = posFirstBar[iModule] + 15.5 * _barBase
-    // Right edge in local-X = +B/2  →  world X = that + B/2
-    //G4double xRight = posFirstBar[iModule] + (_nBars/2 - 0.5) * _barBase + B/2. + tapeThickness/2.;
     G4double xRight = posFirstBar[iModule] + (_nBars/2 - 0.5)*_barBase + B/4. + (tapeThickness/2.) -eps;
 
-    // Z center: midpoint between upper row (+zOffset) and lower row (-zOffset)
-    // = _zPosStations[iStation] + 0  (they're symmetric around station Z)
-    G4double zCenter = _zPosStations[iStation] ; // zOffset cancels by symmetry
+    G4double zCenter = _zPosStations[iStation] ; 
     G4double yCenter = _yPosStations[iStation];
-
-    // The tape box halfZ should span from -zOffset-barHeight/2 to +zOffset+barHeight/2
-    // tapeHalfHeight defined above already accounts for this
-
-    //_rotTape= new G4RotationMatrix();
 
     G4RotationMatrix* rotTapeLeftX  = new G4RotationMatrix(*_rotUpperX);
     rotTapeLeftX->rotateZ(+slopeAngle);  // tilt to match left slope, then rotUpperX
-
-    G4RotationMatrix* rotTapeRightX = new G4RotationMatrix(*_rotUpperX);
-    rotTapeRightX->rotateZ(-slopeAngle); 
 
     new G4PVPlacement(rotTapeLeftX,
         G4ThreeVector(xLeft, yCenter, zCenter),
@@ -582,29 +492,16 @@ new G4PVPlacement(_rotLowerX, barPos, leftCornerLog,  "LeftCorner_X"+stationName
         tapeLog,
         "TapeRight_X" + stationName.str() + "mod" + moduleName.str(),
         detContainerLog, false, 0, checkOverlaps);
-}
       }
     stationName.str("");
     }
 
-    // zPosStation0 = - layerThickness / 2. - layerThickness - zSafety; // old: caused overlap
-    //zPosStation0 = - layerThickness / 2. - _AlShellHeight; // Z position of upper Y station
-    //zPosStation1 = zPosStation0 - 25*cm ; // Z position of upper Y station
-    //zPosStation2 = zPosStation0 + 25*cm ; // Z position of upper Y station
-    //zPosStation3 = zPosStation0 + 145*cm ; // Z position of upper Y station
-
     // shift Z stations 1 shell thickness
-    _zPosStations[0] -= _AlShellHeight; // Z position of upper Y station 
-    _zPosStations[1] -= _AlShellHeight;; // Z position of upper Y station
-    _zPosStations[2] -= _AlShellHeight;  ; // Z position of upper Y station
-    _zPosStations[3] -= _AlShellHeight;  ; // Z position of upper Y station
-  
-    //float zPosStationY[] = {zPosStation0, zPosStation1, zPosStation2, zPosStation3};
+    _zPosStations[0] -= _AlShellHeight; 
+    _zPosStations[1] -= _AlShellHeight;; 
+    _zPosStations[2] -= _AlShellHeight; 
+    _zPosStations[3] -= _AlShellHeight; 
 
-    /*zPosStationY[0] = _zPosStations[0];
-    zPosStationY[1] = _zPosStations[1];
-    zPosStationY[2] = _zPosStations[2];
-    zPosStationY[3] = _zPosStations[3];*/
 
     // 4.2 Y view -------------------
     for (G4int iStation=0; iStation<_nStations;iStation++){
@@ -632,15 +529,21 @@ new G4PVPlacement(_rotLowerX, barPos, leftCornerLog,  "LeftCorner_X"+stationName
       for (G4int iModule = 0; iModule < _nModules;iModule++){
         moduleName << iModule;
 
-        G4VPhysicalVolume* physAlFoil = 
-          new G4PVPlacement(0,                     
-                G4ThreeVector(0,_yPosStations[iStation],_zPosStations[iStation] + (std::pow(-1,iModule))*((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),       
-                logicAlFoil,            
-                "AlFoilY",               
-                detContainerLog,                     
-                false,                 
-                2,                     
-                checkOverlaps);
+              G4RotationMatrix* rotFoilY = new G4RotationMatrix();
+        rotFoilY->rotateZ(90.*deg);
+
+        G4double foilCenterUpper = posFirstBar[iModule] + (_nBars/2 - 1) * _barBase / 2. + _yPosStations[iStation];
+        G4double foilCenterLower = posFirstBar[iModule] + _nBars/2 * _barBase / 2. + _yPosStations[iStation];
+
+        new G4PVPlacement(rotFoilY,
+            G4ThreeVector(0, foilCenterUpper,
+                _zPosStations[iStation] + ((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),
+            logicAlFoil, "AlFoilY", detContainerLog, false, iModule*2, checkOverlaps);
+
+        new G4PVPlacement(rotFoilY,
+            G4ThreeVector(0, foilCenterLower,
+                _zPosStations[iStation] - ((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),
+            logicAlFoil, "AlFoilY", detContainerLog, false, iModule*2+1, checkOverlaps);
 
         for (G4int iBar = 0; iBar <_nBars/2; iBar++) {
           barName << 2 * iBar;
@@ -659,12 +562,11 @@ new G4PVPlacement(_rotLowerX, barPos, leftCornerLog,  "LeftCorner_X"+stationName
           barName.str("");
 
            G4ThreeVector barPos(0, posFirstBar[iModule] + iBar * _barBase +_yPosStations[iStation], _zPosStations[iStation] + zOffset);
-
-                     //new G4PVPlacement(_rotUpperX, barPos, barLog, "stationX"+ ..., detContainerLog, false, BarCopyNo, checkOverlaps);
-new G4PVPlacement(_rotUpperY, barPos, topCornerLog,   "TopCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),   detContainerLog, false, BarCopyNo, checkOverlaps);
-new G4PVPlacement(_rotUpperY, barPos, rightCornerLog, "RightCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(), detContainerLog, false, BarCopyNo, checkOverlaps);
-new G4PVPlacement(_rotUpperY, barPos, leftCornerLog,  "LeftCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),  detContainerLog, false, BarCopyNo, checkOverlaps);
-          
+           
+          new G4PVPlacement(_rotUpperY, barPos, topCornerLog,   "TopCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),   detContainerLog, false, BarCopyNo, checkOverlaps);
+          new G4PVPlacement(_rotUpperY, barPos, rightCornerLog, "RightCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(), detContainerLog, false, BarCopyNo, checkOverlaps);
+          new G4PVPlacement(_rotUpperY, barPos, leftCornerLog,  "LeftCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),  detContainerLog, false, BarCopyNo, checkOverlaps);
+                    
               }
 
         for (G4int iBar = 0; iBar < _nBars/2; iBar++) {
@@ -685,45 +587,22 @@ new G4PVPlacement(_rotUpperY, barPos, leftCornerLog,  "LeftCorner_X"+stationName
 
         G4ThreeVector barPos(0, posFirstBar[iModule] + (iBar + 0.5) * _barBase +_yPosStations[iStation], _zPosStations[iStation] - zOffset);
 
-                     //new G4PVPlacement(_rotUpperX, barPos, barLog, "stationX"+ ..., detContainerLog, false, BarCopyNo, checkOverlaps);
-new G4PVPlacement(_rotLowerY, barPos, topCornerLog,   "TopCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),   detContainerLog, false, BarCopyNo, checkOverlaps);
-new G4PVPlacement(_rotLowerY, barPos, rightCornerLog, "RightCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(), detContainerLog, false, BarCopyNo, checkOverlaps);
-new G4PVPlacement(_rotLowerY, barPos, leftCornerLog,  "LeftCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),  detContainerLog, false, BarCopyNo, checkOverlaps);
+                    
+        new G4PVPlacement(_rotLowerY, barPos, topCornerLog,   "TopCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),   detContainerLog, false, BarCopyNo, checkOverlaps);
+        new G4PVPlacement(_rotLowerY, barPos, rightCornerLog, "RightCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(), detContainerLog, false, BarCopyNo, checkOverlaps);
+        new G4PVPlacement(_rotLowerY, barPos, leftCornerLog,  "LeftCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),  detContainerLog, false, BarCopyNo, checkOverlaps);
         }
       moduleName.str("");
 
-            // ─── Y-plane edge tapes ──────────────────────────────────────────────────────
-{
+            // ------- module edge tape ----------
     G4double B = _triangEffectiveBase;
 
-    G4double tapeHalfExtentX = (tapeThickness/2.) * std::cos(slopeAngle) 
-                          + tapeHalfHeight     * std::sin(slopeAngle);
-
     G4double eps = 0.103 * mm;
-    // Left edge of module: left slope of upper bar 0
-    // Upper bar 0 center X = posFirstBar[iModule]
-    // Left edge of bar in local-X = -B/2  →  world X = posFirstBar[iModule] - B/2
-    //G4double xLeft  = posFirstBar[iModule] - B/2. - tapeThickness/2.;
+  
     G4double yLeft = posFirstBar[iModule] - B/4. - (tapeThickness/2.) +_yPosStations[iStation] + eps;
-
-    // Right edge of module: right slope of lower bar 15
-    // Lower bar 15 center X = posFirstBar[iModule] + 15.5 * _barBase
-    // Right edge in local-X = +B/2  →  world X = that + B/2
-    //G4double xRight = posFirstBar[iModule] + (_nBars/2 - 0.5) * _barBase + B/2. + tapeThickness/2.;
     G4double yRight = posFirstBar[iModule] + (_nBars/2 - 0.5)*_barBase + B/4. + (tapeThickness/2.) +_yPosStations[iStation] - eps;
-
-    // Z center: midpoint between upper row (+zOffset) and lower row (-zOffset)
-    // = _zPosStations[iStation] + 0  (they're symmetric around station Z)
-    G4double zCenter = _zPosStations[iStation] ; // zOffset cancels by symmetry
+    G4double zCenter = _zPosStations[iStation]; 
     G4double xCenter = 0;
-
-    // The tape box halfZ should span from -zOffset-barHeight/2 to +zOffset+barHeight/2
-    // tapeHalfHeight defined above already accounts for this
-
-    //_rotTape= new G4RotationMatrix();
-
-    G4RotationMatrix* rotTapeLeftY  = new G4RotationMatrix(*_rotUpperY);
-    rotTapeLeftY->rotateZ(+slopeAngle);  // tilt to match left slope, then rotUpperX
 
     G4RotationMatrix* rotTapeRightY = new G4RotationMatrix(*_rotUpperY);
     rotTapeRightY->rotateZ(-slopeAngle); 
@@ -731,15 +610,14 @@ new G4PVPlacement(_rotLowerY, barPos, leftCornerLog,  "LeftCorner_X"+stationName
     new G4PVPlacement(rotTapeRightY,
         G4ThreeVector(xCenter, yLeft, zCenter),
         tapeLog,
-        "TapeLeft_X" + stationName.str() + "mod" + moduleName.str(),
+        "TapeLeft_Y" + stationName.str() + "mod" + moduleName.str(),
         detContainerLog, false, 0, checkOverlaps);
 
     new G4PVPlacement(rotTapeRightY,
         G4ThreeVector(xCenter, yRight, zCenter),
         tapeLog,
-        "TapeRight_X" + stationName.str() + "mod" + moduleName.str(),
+        "TapeRight_Y" + stationName.str() + "mod" + moduleName.str(),
         detContainerLog, false, 0, checkOverlaps);
-}
 
       }
     stationName.str("");
@@ -748,7 +626,7 @@ new G4PVPlacement(_rotLowerY, barPos, leftCornerLog,  "LeftCorner_X"+stationName
       //construct Lead block
     G4Material* lead_mat = nist->FindOrBuildMaterial("G4_Pb");
 
-    G4ThreeVector posLead = G4ThreeVector(0*cm, _yPosStations[3], (_zPosStations[1] + _AlShellHeight + (96.2*cm))); // + AlShellHeight to position lead block w.r.t. Aluminum shell going through origin
+    G4ThreeVector posLead = G4ThreeVector(0*cm, _yPosStations[3], (_zPosStations[1] + _AlShellHeight + (96.2*cm))); // + AlShellHeight to position lead block w.r.t. Aluminum cask of second station (origin station)
 
     G4Box *leadSolid = new G4Box("LeadBlock", (120/2)*cm, (120/2)*cm, (60/2)*cm);
 
@@ -786,7 +664,7 @@ G4LogicalVolume* logicGround = new G4LogicalVolume(solidGround, rock_mat, "logGr
 new G4PVPlacement(0,
     G4ThreeVector(0, 0, groundCenterZ),
     logicGround, "physGround",
-    logicWorld,   // in world, not detContainerLog
+    logicWorld,   
     false, 0, checkOverlaps);
     
     new G4PVPlacement(rotDet,                       //no rotation
@@ -809,7 +687,7 @@ new G4PVPlacement(0,
     G4VisAttributes* orangecol = new G4VisAttributes(G4Colour(0.8,0.5,0.));
     G4VisAttributes* yellowcol = new G4VisAttributes(G4Colour(1.0,1.0,0.));
     G4VisAttributes* greencol = new G4VisAttributes(G4Colour(0.,1.0,0.,0.4));
-    G4VisAttributes* bluecol = new G4VisAttributes(G4Colour(0.,0.,0.8));
+    G4VisAttributes* bluecol = new G4VisAttributes(G4Colour(0.,0.,0.8,0.5));
 
     //logicAlFoil->SetVisAttributes(bluecol);
     logicAlShell->SetVisAttributes(cyancol);
@@ -821,6 +699,10 @@ new G4PVPlacement(0,
   auto barVis = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.4)); 
   barVis->SetForceSolid(true);  // fill volume color
   barLog->SetVisAttributes(barVis);
+
+  auto tapeVis = new G4VisAttributes(G4Colour(1.0, 1.0, 0.0, 0.3)); // yellow
+  tapeVis->SetForceSolid(true);
+  tapeLog->SetVisAttributes(bluecol);
 
   // ------------------- Return world -------------------
   return physWorld;
