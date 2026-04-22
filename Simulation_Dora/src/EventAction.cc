@@ -168,15 +168,6 @@ void EventAction::EndOfEventAction(const G4Event* event)
       }    
       analysisManager->AddNtupleRow(0);
     }
-  }
-
-  if (event->IsAborted()) {
-    G4cout << "[ABORT] Event " << eventID
-           << " | steps: "    << GetAbortSteps()
-           << " | particle: " << GetAbortParticle()
-           << " | physics process: "  << GetAbortProcess()
-           << " | volume: "   << GetAbortVolume()
-           << G4endl;
 }
 
   /*else { //return;   
