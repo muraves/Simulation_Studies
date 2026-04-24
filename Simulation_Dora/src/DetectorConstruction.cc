@@ -37,7 +37,7 @@ DetectorConstruction::DetectorConstruction(const char *detectorName)
   : G4VUserDetectorConstruction(),
     _nBars(32), _nModules(2), _nStations(4), _stationSpacing(50 * cm), _barLength(1070 * mm), _barHeight(17 * mm),
     _barBase(33. * mm), _triangEffectiveBase(32.5 * mm), _rotUpperX(NULL), _rotLowerX(NULL), _rotUpperY(NULL), _rotLowerY(NULL),
-    _halfContLengthZ(0.), _halfContLengthXY(0.), _looseAccCheck(0.), _detType("triangular"), _cornerCut(1.*mm), _zPosStations({-0.26*m,0*m,0.262*m,1.492*m}), _yPosStations({0.289*m,0.249*m,0.207*m,0*m})
+    _halfContLengthZ(0.), _halfContLengthXY(0.), _looseAccCheck(0.), _detType("triangular"), _cornerCut(1.*mm), _zPosStations({-0.26*m,0.*m,0.262*m,1.492*m}), _yPosStations({0.289*m,0.249*m,0.207*m,0*m})
 {
   _messenger = new G4GenericMessenger(this, std::string("/muraves/").append(detectorName).append("/"));
   _messenger->DeclareProperty("nBars", _nBars, "Set the number of scintillating bars per module");
@@ -102,7 +102,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //G4Material* polystyrene_mat = FindMaterial(Materials::kPOLYSTYRENE); // with costum scintillator properties
 
 
-  G4bool checkOverlaps = true; // Option to switch on/off checking of volume overlaps
+  G4bool checkOverlaps = false; // Option to switch on/off checking of volume overlaps
 
        
     // ------------------- World -------------------
@@ -316,7 +316,7 @@ if (_detType == "triangular") {
     _rotZ->rotateZ(90* deg);
 
     float zOffset = layerThickness / 2. - _barHeight / 2.;
-
+    
     float offset_zPos = - layerThickness / 2.;
     _zPosStations[0] += offset_zPos; 
     _zPosStations[1] += offset_zPos; 
@@ -668,7 +668,7 @@ new G4PVPlacement(0,
     false, 0, checkOverlaps);
     
     new G4PVPlacement(rotDet,                       //no rotation
-      G4ThreeVector(0.5*_AlShellHeight+0.5*layerThickness,0,0),  // centered in middle of station 1
+      G4ThreeVector(0.5*_AlShellHeight+0.5*layerThickness -(_zPosStations[1]+_AlShellHeight)-0.5*layerThickness,0,0),  // centered in middle of station 1
       detContainerLog,             //its logical volume
       "DetectorMother",                //its name
       logicWorld,                //its mother  volume
