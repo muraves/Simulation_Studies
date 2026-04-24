@@ -150,7 +150,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double tapeThickness  = 0.1 * mm;                    
   G4double tapeHalfLen    = _barLength / 2.;              
   G4double tapeHalfHeight = sqrt(_barHeight*_barHeight + (_triangEffectiveBase/2.)*(_triangEffectiveBase/2.) )/2.;
-  G4double slopeAngle = std::atan2(_triangEffectiveBase/ 2., _barHeight);
+  //G4double slopeAngle = std::atan2(_triangEffectiveBase/ 2., _barHeight);
+  //G4double slopeAngle = std::atan2(-2*_barHeight, _triangEffectiveBase);
+  G4double slopeAngle = std::atan2(_triangEffectiveBase, 2*_barHeight);
+
 
   G4Box* tapeSolid = new G4Box("AlTape",
       tapeThickness / 2.,   
@@ -405,12 +408,12 @@ if (_detType == "triangular") {
 
         new G4PVPlacement(0,
             G4ThreeVector(foilCenterUpper, _yPosStations[iStation],
-                _zPosStations[iStation] + ((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),
+                _zPosStations[iStation] - ((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),
             logicAlFoil, "AlFoilX", detContainerLog, false, iModule*2, checkOverlaps);
 
         new G4PVPlacement(0,
             G4ThreeVector(foilCenterLower, _yPosStations[iStation],
-                _zPosStations[iStation] - ((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),
+                _zPosStations[iStation] + ((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),
             logicAlFoil, "AlFoilX", detContainerLog, false, iModule*2+1, checkOverlaps);
 
         for (G4int iBar = 0; iBar < _nBars/2; iBar++) {
@@ -420,7 +423,7 @@ if (_detType == "triangular") {
           // 4.1.1 upper half-layer -------------------
           // Bar 0 is at most-negative X coordinates
           new G4PVPlacement(_rotUpperX,
-                G4ThreeVector(posFirstBar[iModule] + iBar * (_barBase), _yPosStations[iStation], _zPosStations[iStation] + zOffset),                
+                G4ThreeVector(posFirstBar[iModule] + (iBar+0.5) * (_barBase), _yPosStations[iStation], _zPosStations[iStation] + zOffset),                
                 barLog,
                 "stationX" + stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),      
                 detContainerLog,
@@ -431,7 +434,7 @@ if (_detType == "triangular") {
           
           barName.str("");
 
-          G4ThreeVector barPos(posFirstBar[iModule] + iBar * (_barBase),
+          G4ThreeVector barPos(posFirstBar[iModule] + (iBar+0.5) * (_barBase),
                      _yPosStations[iStation],
                      _zPosStations[iStation] + zOffset);
 
@@ -447,7 +450,7 @@ if (_detType == "triangular") {
 
           // 4.1.2 lower half-layer -------------------
           new G4PVPlacement(_rotLowerX,
-                G4ThreeVector(posFirstBar[iModule] + (iBar + 0.5) * (_barBase),_yPosStations[iStation],_zPosStations[iStation] - zOffset),
+                G4ThreeVector(posFirstBar[iModule] + (iBar) * (_barBase),_yPosStations[iStation],_zPosStations[iStation] - zOffset),
                 barLog,
                 "stationX" + stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),
                 detContainerLog,
@@ -458,7 +461,7 @@ if (_detType == "triangular") {
           
         barName.str("");
 
-        G4ThreeVector barPos(posFirstBar[iModule] + (iBar + 0.5) * (_barBase),_yPosStations[iStation],_zPosStations[iStation] - zOffset);
+        G4ThreeVector barPos(posFirstBar[iModule] + (iBar) * (_barBase),_yPosStations[iStation],_zPosStations[iStation] - zOffset);
 
                   
         new G4PVPlacement(_rotLowerX, barPos, topCornerLog,   "TopCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),   detContainerLog, false, BarCopyNo, checkOverlaps);
@@ -478,8 +481,11 @@ if (_detType == "triangular") {
     G4double zCenter = _zPosStations[iStation] ; 
     G4double yCenter = _yPosStations[iStation];
 
-    G4RotationMatrix* rotTapeLeftX  = new G4RotationMatrix(*_rotUpperX);
-    rotTapeLeftX->rotateZ(+slopeAngle);  // tilt to match left slope, then rotUpperX
+    //G4RotationMatrix* rotTapeLeftX  = new G4RotationMatrix(*_rotUpperX);
+    //rotTapeLeftX->rotateZ(+slopeAngle);  // tilt to match left slope, then rotUpperX       
+
+G4RotationMatrix* rotTapeLeftX  = new G4RotationMatrix(*_rotUpperX);
+rotTapeLeftX->rotateZ(-slopeAngle);
 
     new G4PVPlacement(rotTapeLeftX,
         G4ThreeVector(xLeft, yCenter, zCenter),
@@ -537,12 +543,12 @@ if (_detType == "triangular") {
 
         new G4PVPlacement(rotFoilY,
             G4ThreeVector(0, foilCenterUpper,
-                _zPosStations[iStation] + ((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),
+                _zPosStations[iStation] - ((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),
             logicAlFoil, "AlFoilY", detContainerLog, false, iModule*2, checkOverlaps);
 
         new G4PVPlacement(rotFoilY,
             G4ThreeVector(0, foilCenterLower,
-                _zPosStations[iStation] - ((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),
+                _zPosStations[iStation] + ((layerThickness/2)+(zOffset/2)+(_AlFoilThickness/2)+xySafety)),
             logicAlFoil, "AlFoilY", detContainerLog, false, iModule*2+1, checkOverlaps);
 
         for (G4int iBar = 0; iBar <_nBars/2; iBar++) {
@@ -552,7 +558,7 @@ if (_detType == "triangular") {
           // 4.2.1 upper half-layer -------------------
           //       Bar 0 is at most-negative Y coordinates
           new G4PVPlacement(_rotUpperY,
-                G4ThreeVector(0, posFirstBar[iModule] + iBar * _barBase +_yPosStations[iStation], _zPosStations[iStation] + zOffset ),
+                G4ThreeVector(0, posFirstBar[iModule] + (iBar+0.5) * _barBase +_yPosStations[iStation], _zPosStations[iStation] + zOffset ),
                 barLog,
                 "stationY" + stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),
                 detContainerLog,
@@ -561,7 +567,7 @@ if (_detType == "triangular") {
                 BarCopyNo);
           barName.str("");
 
-           G4ThreeVector barPos(0, posFirstBar[iModule] + iBar * _barBase +_yPosStations[iStation], _zPosStations[iStation] + zOffset);
+           G4ThreeVector barPos(0, posFirstBar[iModule] + (iBar+0.5) * _barBase +_yPosStations[iStation], _zPosStations[iStation] + zOffset);
            
           new G4PVPlacement(_rotUpperY, barPos, topCornerLog,   "TopCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),   detContainerLog, false, BarCopyNo, checkOverlaps);
           new G4PVPlacement(_rotUpperY, barPos, rightCornerLog, "RightCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(), detContainerLog, false, BarCopyNo, checkOverlaps);
@@ -575,7 +581,7 @@ if (_detType == "triangular") {
 
           // 4.2.2 lower half-layer -------------------
           new G4PVPlacement(_rotLowerY,
-                G4ThreeVector(0, (posFirstBar[iModule] + (iBar + 0.5) * _barBase)+_yPosStations[iStation], _zPosStations[iStation] - zOffset ),
+                G4ThreeVector(0, (posFirstBar[iModule] + (iBar) * _barBase)+_yPosStations[iStation], _zPosStations[iStation] - zOffset ),
                 barLog,
                 "stationY" + stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),
                 detContainerLog,
@@ -585,7 +591,7 @@ if (_detType == "triangular") {
           
         barName.str("");
 
-        G4ThreeVector barPos(0, posFirstBar[iModule] + (iBar + 0.5) * _barBase +_yPosStations[iStation], _zPosStations[iStation] - zOffset);
+        G4ThreeVector barPos(0, posFirstBar[iModule] + (iBar) * _barBase +_yPosStations[iStation], _zPosStations[iStation] - zOffset);
 
                     
         new G4PVPlacement(_rotLowerY, barPos, topCornerLog,   "TopCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),   detContainerLog, false, BarCopyNo, checkOverlaps);
@@ -605,7 +611,7 @@ if (_detType == "triangular") {
     G4double xCenter = 0;
 
     G4RotationMatrix* rotTapeRightY = new G4RotationMatrix(*_rotUpperY);
-    rotTapeRightY->rotateZ(-slopeAngle); 
+rotTapeRightY->rotateZ(+slopeAngle);
 
     new G4PVPlacement(rotTapeRightY,
         G4ThreeVector(xCenter, yLeft, zCenter),
@@ -666,7 +672,7 @@ new G4PVPlacement(0,
     logicGround, "physGround",
     logicWorld,   
     false, 0, checkOverlaps);
-    
+    //rotDet
     new G4PVPlacement(rotDet,                       //no rotation
       G4ThreeVector(0.5*_AlShellHeight+0.5*layerThickness -(_zPosStations[1]+_AlShellHeight)-0.5*layerThickness,0,0),  // centered in middle of station 1
       detContainerLog,             //its logical volume
