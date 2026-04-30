@@ -108,8 +108,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     // ------------------- World -------------------
     
     G4double world_sizeX = 5.*m;
-    G4double world_sizeY = 2.*m;
-    G4double world_sizeZ  = 3.*m;
+    G4double world_sizeY = 4.*m;
+    G4double world_sizeZ  = 3.5*m;
     
     G4Box* solidWorld = new G4Box("World", 0.5*world_sizeX, 0.5*world_sizeY, 0.5*world_sizeZ);    
 
@@ -706,9 +706,9 @@ new G4PVPlacement(0,
   barVis->SetForceSolid(true);  // fill volume color
   barLog->SetVisAttributes(barVis);
 
-  auto tapeVis = new G4VisAttributes(G4Colour(1.0, 1.0, 0.0, 0.3)); // yellow
+  auto tapeVis = new G4VisAttributes(G4Colour(1.0, 1.0, 0.0, 0.5)); // yellow
   tapeVis->SetForceSolid(true);
-  tapeLog->SetVisAttributes(bluecol);
+  tapeLog->SetVisAttributes(tapeVis);
 
   // ------------------- Return world -------------------
   return physWorld;
