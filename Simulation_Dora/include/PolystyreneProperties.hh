@@ -5,7 +5,7 @@
 #define PolystyreneProperties_h 1
 
 namespace Materials {
-    static const G4String kPOLYSTYRENE = "polystyrene";
+    static const G4String kPOLYSTYRENE = "G4_POLYSTYRENE";
     static const G4double POLYSTYRENE_DENSITY = 1.06 * g / cm3;
     static constexpr G4int H_NATOMS = 8;
     static constexpr G4int C_NATOMS = 8;
