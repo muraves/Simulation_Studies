@@ -417,7 +417,7 @@ if (_detType == "triangular") {
             logicAlFoil, "AlFoilX", detContainerLog, false, iModule*2+1, checkOverlaps);
 
         for (G4int iBar = 0; iBar < _nBars/2; iBar++) {
-          barName << 2 * iBar;
+          barName << 2 * iBar + 1;
           BarCopyNo = ((iStation & 0xF) << 12) + ((iModule & 0xF) << 8) + (2*iBar & 0xFF);
 
           // 4.1.1 upper half-layer -------------------
@@ -445,7 +445,7 @@ if (_detType == "triangular") {
         }
 
         for (G4int iBar = 0; iBar < _nBars/2; iBar++) {
-          barName << 2 * iBar + 1;
+          barName << 2 * iBar;
           BarCopyNo = ((iStation & 0xF) << 12) + ((iModule & 0xF) << 8) + (2*iBar+1 & 0xFF);
 
           // 4.1.2 lower half-layer -------------------
@@ -552,7 +552,7 @@ rotTapeLeftX->rotateZ(-slopeAngle);
             logicAlFoil, "AlFoilY", detContainerLog, false, iModule*2+1, checkOverlaps);
 
         for (G4int iBar = 0; iBar <_nBars/2; iBar++) {
-          barName << 2 * iBar;
+          barName << 2 * iBar + 1;
           BarCopyNo = (0x1 << 15) + ((iStation & 0xF) << 12) + ((iModule & 0xF) << 8) + (2*iBar & 0xFF);
 
           // 4.2.1 upper half-layer -------------------
@@ -576,7 +576,7 @@ rotTapeLeftX->rotateZ(-slopeAngle);
               }
 
         for (G4int iBar = 0; iBar < _nBars/2; iBar++) {
-          barName << 2 * iBar + 1;
+          barName << 2 * iBar;
           BarCopyNo = (0x1 << 15) + ((iStation & 0xF) << 12) + ((iModule & 0xF) << 8) + (2*iBar+1 & 0xFF);
 
           // 4.2.2 lower half-layer -------------------
