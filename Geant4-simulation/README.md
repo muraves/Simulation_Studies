@@ -41,7 +41,7 @@ The command-line arguments are:
 
 # B. On T2B cluster
 
-The steps of building and running the application are the same as in A. However, in this case, the simulation has to be run in a container with Geant4 and other dependencies (e.g., CRY) installed. 
+The steps of building and running the application are the same as in A. However, in this case, the simulation has to be build (using CRY_PATH=/opt/CRY) and run in a container with Geant4 and other dependencies (e.g., CRY) installed. 
 An image of this container can be found in /group/Muography/container/simulation_container/muraves-sim-latest.sif
 In the container, no visualisation is possible, however, it is still possible to use the application in interactive mode. 
 A container can be opened by running: 
