@@ -1,0 +1,13 @@
+universe         = vanilla
+executable       = /user/dgeeraer/MURAVES/Simulation_Studies/Simulation_Dora/HTCondor/run_test.sh
+arguments = $(ProcId)
+
+output           = /user/dgeeraer/logs/test_$(ClusterId)_$(ProcId).out
+error            = /user/dgeeraer/logs/test_$(ClusterId)_$(ProcId).err
+log              = /user/dgeeraer/logs/test_$(ClusterId).log
+
+request_cpus     = 1
+request_memory   = 1GB
+request_disk     = 1GB
+
+queue 1
