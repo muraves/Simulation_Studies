@@ -77,6 +77,16 @@ class ScintbarHit : public G4VHit
     void SetHitTime( G4double c ) { fHitTime = c; };
     G4double GetHitTime() const { return fHitTime; };
 
+    void AddPathLength(G4double len)   { fPathLength += len; }
+    G4double GetPathLength() const { return fPathLength; };
+
+    void SetEntryPoint(G4ThreeVector p) { fEntryPoint = p; }
+    G4ThreeVector GetEntryPoint() const { return fEntryPoint; };
+
+    void SetExitPoint(G4ThreeVector p)  { fExitPoint = p; }
+    G4ThreeVector GetExitPoint() const { return fExitPoint; };
+
+
   private:
     G4int fStationID;
     G4int fModuleID;
@@ -87,6 +97,9 @@ class ScintbarHit : public G4VHit
     G4int fTrackID;
     G4int fPDGcode;
     G4int fParentId;
+    G4double      fPathLength;
+    G4ThreeVector fEntryPoint;
+    G4ThreeVector fExitPoint;
 };
 
 typedef G4THitsCollection<ScintbarHit> ScintbarHitsCollection;

@@ -32,6 +32,7 @@ void ScintbarSD::Initialize(G4HCofThisEvent* hce)
   }
   hce->AddHitsCollection(fHCID, fHitsCollection);
   fHitCount = 0;
+  fEntryPointMap.clear();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -50,6 +51,7 @@ G4bool ScintbarSD::ProcessHits(G4Step* step, G4TouchableHistory* history)
     }*/
   // geometry info from PreStepPoint
   auto prestep = step->GetPreStepPoint();
+  auto poststep = step->GetPostStepPoint(); 
   auto touchable = step->GetPreStepPoint()->GetTouchable();
   auto track = step->GetTrack();
   
@@ -60,7 +62,9 @@ G4bool ScintbarSD::ProcessHits(G4Step* step, G4TouchableHistory* history)
                             .TransformPoint(prestep->GetPosition());*/
   
   G4double edep = step->GetTotalEnergyDeposit();
-  if ( edep == 0. ) return false;
+  G4double stepLen = step->GetStepLength();
+
+  //if ( edep == 0. ) return false;
 
   // StationNo X0: 0; Y0: 8;
   //           X1: 1; Y1: 9;
@@ -94,58 +98,43 @@ for (size_t i = 0; i < fHitsCollection->entries(); i++) {
   }
 }
 
-// If hit already exists → accumulate
-if (hit) {
-  hit->AddEdep(edep);
-}
+if (!hit) { // Particle has no entry yet for that certain bar-module-station combination yet
+    if (edep == 0.) { // If no energy is deposited yet in this bar, just save entry point for later but don't create new hit/entry
+      fEntryPointMap[{trackID, BarCopyNo}] = prestep->GetPosition();
+      return false;
+    }
 
-// Otherwise create new hit
-else {
-  hit = new ScintbarHit();
+    hit = new ScintbarHit();
+    hit->SetBarID(BarNo);
+    hit->SetModuleID(ModuleNo);
+    hit->SetStationID(StationNo);
+    hit->SetTrackID(trackID);
+    hit->SetPDGcode(track->GetDefinition()->GetPDGEncoding());
+    hit->SetParentId(track->GetParentID());
+    hit->SetHitTime(prestep->GetGlobalTime());
+    //hit->SetPos(prestep->GetPosition());
 
-  hit->SetEdep(edep);
-  hit->SetPos(pos);
-  hit->SetBarID(BarNo);
-  hit->SetModuleID(ModuleNo);
-  //G4cout << "StationNo: " << StationNo << G4endl;
-  //G4cout << "ModuleNo: " << ModuleNo << G4endl;
-  //G4cout << "BarNo: " << BarNo << G4endl;
-  hit->SetStationID(StationNo);
-  hit->SetTrackID(trackID);
-  hit->SetPDGcode(track->GetDefinition()->GetPDGEncoding());
-  hit->SetParentId(track->GetParentID());
-  hit->SetHitTime(HitTime);
-  
-  fHitsCollection->insert(hit);
-}
-/*
-  // check if it is first touch
-  if ( hit->GetStationID() < 0 ) {
-    hit->SetColumnID(columnNo);
-    hit->SetRowID(rowNo);
-    auto depth = touchable->GetHistory()->GetDepth();
-    auto transform = touchable->GetHistory()->GetTransform(depth-2);
-    transform.Invert();
-    hit->SetRot(transform.NetRotation());
-    hit->SetPos(transform.NetTranslation());
+    auto key = std::make_pair(trackID, BarCopyNo);
+    if (fEntryPointMap.count(key)) {
+      hit->SetEntryPoint(fEntryPointMap[key]);  // true geometric entry
+      fEntryPointMap.erase(key);                // clean up
+    } else {
+      hit->SetEntryPoint(prestep->GetPosition()); 
+    }
+    
+    fHitsCollection->insert(hit);
   }
-  // add energy deposition
-  hit->AddEdep(edep);
 
+hit->AddEdep(edep);
+hit->AddPathLength(stepLen);
+// Keep overwriting exit point 
+hit->SetExitPoint(poststep->GetPosition());
 
-  auto hit = new ScintbarHit();
-  hit->SetEdep(edep);
-  hit->SetPos(pos);
-  hit->SetBarID(BarNo);
-  hit->SetModuleID(ModuleNo);
-  hit->SetStationID(StationNo);
-  hit->SetTrackID(track->GetTrackID());
-  hit->SetPDGcode(track->GetDefinition()->GetPDGEncoding());
-  
-  //G4cout << "BarCopyNo: " << BarCopyNo << G4endl;
-  hit->Print();
-  
-  fHitsCollection->insert(hit);*/
+// Have to check if this condition works
+/*if (poststep->GetStepStatus() == fGeomBoundary ||
+    track->GetTrackStatus()   != fAlive) {
+  hit->SetExitPoint(poststep->GetPosition());
+}*/
 
   return true;
 }

@@ -114,19 +114,19 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
 
     analysisManager->CreateNtupleIColumn("Event"); // column Id = 0
     
-    analysisManager->CreateNtupleIColumn("NGenPart"); // column Id = 1
-    analysisManager->CreateNtupleIColumn("GenPartID");  // column Id = 2
-    analysisManager->CreateNtupleIColumn("GenPartPDG");  // column Id = 3
-    analysisManager->CreateNtupleDColumn("GenPartE"); // column Id = 4   
-    analysisManager->CreateNtupleDColumn("GenPartTheta"); // column Id = 5  
-    analysisManager->CreateNtupleDColumn("GenPartPhi"); // column Id = 6
-    analysisManager->CreateNtupleIColumn("Aborted"); // column Id = 7
-    analysisManager->CreateNtupleIColumn("ClusterID");     // 8  
-    analysisManager->CreateNtupleIColumn("ProcessID");     // 9  
-    analysisManager->CreateNtupleDColumn("GenPosX"); // 10
-    analysisManager->CreateNtupleDColumn("GenPosY"); // 11
-    analysisManager->CreateNtupleDColumn("GenPosZ"); // 12
-    //analysisManager->CreateNtupleIColumn("touchedRock"); // column Id = 8
+    //analysisManager->CreateNtupleIColumn("NGenPart"); 
+    analysisManager->CreateNtupleIColumn("GenPartID");  // column Id = 1
+    analysisManager->CreateNtupleIColumn("GenPartPDG");  // column Id = 2
+    analysisManager->CreateNtupleDColumn("GenPartE"); // column Id = 3   
+    analysisManager->CreateNtupleDColumn("GenPartTheta"); // column Id = 4  
+    analysisManager->CreateNtupleDColumn("GenPartPhi"); // column Id = 5
+    analysisManager->CreateNtupleIColumn("Aborted"); // column Id = 6
+    analysisManager->CreateNtupleIColumn("ClusterID");     // 7  
+    analysisManager->CreateNtupleIColumn("ProcessID");     // 8  
+    analysisManager->CreateNtupleDColumn("GenPosX"); // 9
+    analysisManager->CreateNtupleDColumn("GenPosY"); // 10
+    analysisManager->CreateNtupleDColumn("GenPosZ"); // 11
+    //analysisManager->CreateNtupleIColumn("touchedRock"); // column Id = 12
     
     analysisManager->FinishNtuple();
 
@@ -135,20 +135,24 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
 
     analysisManager->CreateNtupleIColumn("Event"); // column Id = 0
     
-    analysisManager->CreateNtupleIColumn("NScintHit"); // column Id = 1
-    analysisManager->CreateNtupleIColumn("ScintHitParentID"); // column Id = 2
-    analysisManager->CreateNtupleDColumn("ScintHitE"); // column Id = 3
-    analysisManager->CreateNtupleDColumn("ScintHitPosX"); // column Id = 4
-    analysisManager->CreateNtupleDColumn("ScintHitPosY"); // column Id = 5
-    analysisManager->CreateNtupleDColumn("ScintHitPosZ"); // column Id = 6
-    analysisManager->CreateNtupleIColumn("ScintHitStation"); // column Id = 7
-    analysisManager->CreateNtupleIColumn("ScintHitModule"); // column Id = 8
-    analysisManager->CreateNtupleIColumn("ScintHitBar"); // column Id = 9
-    analysisManager->CreateNtupleIColumn("ScintHitPDG"); // column Id = 10
-    analysisManager->CreateNtupleIColumn("ScintHitTrackID"); // column Id = 11
-    analysisManager->CreateNtupleIColumn("ClusterID");         // 12 
-    analysisManager->CreateNtupleIColumn("ProcessID");         // 13
-    analysisManager->CreateNtupleDColumn("ScintHitTime");   // 14
+    //analysisManager->CreateNtupleIColumn("NScintHit"); 
+    analysisManager->CreateNtupleIColumn("ScintHitParentID"); // column Id = 1
+    analysisManager->CreateNtupleDColumn("ScintHitE"); // column Id = 2
+    analysisManager->CreateNtupleDColumn("ScintHitEntryX"); // column Id = 3
+    analysisManager->CreateNtupleDColumn("ScintHitEntryY"); // column Id = 4
+    analysisManager->CreateNtupleDColumn("ScintHitEntryZ"); // column Id = 5
+    analysisManager->CreateNtupleDColumn("ScintHitExitX"); // column Id = 6
+    analysisManager->CreateNtupleDColumn("ScintHitExitY"); // column Id = 7
+    analysisManager->CreateNtupleDColumn("ScintHitExitZ"); // column Id = 8
+    analysisManager->CreateNtupleDColumn("ScintHitPathLength"); // column Id = 9
+    analysisManager->CreateNtupleIColumn("ScintHitStation"); // column Id = 10
+    analysisManager->CreateNtupleIColumn("ScintHitModule"); // column Id = 11
+    analysisManager->CreateNtupleIColumn("ScintHitBar"); // column Id = 12
+    analysisManager->CreateNtupleIColumn("ScintHitPDG"); // column Id = 13
+    analysisManager->CreateNtupleIColumn("ScintHitTrackID"); // column Id = 14
+    analysisManager->CreateNtupleIColumn("ClusterID");         // 15 
+    analysisManager->CreateNtupleIColumn("ProcessID");         // 16
+    analysisManager->CreateNtupleDColumn("ScintHitTime");   // 17
   
     analysisManager->FinishNtuple();
 

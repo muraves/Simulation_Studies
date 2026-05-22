@@ -1,0 +1,17 @@
+universe         = vanilla
+executable       = /user/dgeeraer/MURAVES/Simulation_Studies/Simulation_Dora/HTCondor/run_muraves.sh
+arguments = $(ClusterId) $(ProcId)
+
+output           = /user/dgeeraer/MURAVES/output_simulation/output_htcondor/$(ClusterId)_$(ProcId).out
+error            = /user/dgeeraer/MURAVES/output_simulation/output_htcondor/$(ClusterId)_$(ProcId).err
+log              = /user/dgeeraer/MURAVES/output_simulation/output_htcondor/$(ClusterId).log
+
+request_cpus     = 1
+request_memory   = 1GB
+request_disk     = 1GB
+
+should_transfer_files = NO
+
+max_idle = 200
+
+queue 100

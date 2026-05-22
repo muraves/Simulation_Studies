@@ -123,23 +123,28 @@ void EventAction::EndOfEventAction(const G4Event* event)
     // Loop over hits
     for ( unsigned long i = 0; i < nhit; i++ ) {
       auto hit = static_cast<ScintbarHit*>(hc->GetHit(i));
-      auto pos = hit->GetPos();
+      auto entrypoint = hit->GetEntryPoint();
+      auto exitpoint = hit->GetExitPoint();
 
       analysisManager->FillNtupleIColumn(1, 0, eventID);
-      analysisManager->FillNtupleIColumn(1, 1, nhit); // not really necessary
-      analysisManager->FillNtupleIColumn(1, 2, hit->GetParentId());
-      analysisManager->FillNtupleDColumn(1, 3, hit->GetEdep());
-      analysisManager->FillNtupleDColumn(1, 4, pos.x());
-      analysisManager->FillNtupleDColumn(1, 5, pos.y());
-      analysisManager->FillNtupleDColumn(1, 6, pos.z());
-      analysisManager->FillNtupleIColumn(1, 7, hit->GetStationID());
-      analysisManager->FillNtupleIColumn(1, 8, hit->GetModuleID());
-      analysisManager->FillNtupleIColumn(1, 9, hit->GetBarID());
-      analysisManager->FillNtupleIColumn(1, 10, hit->GetPDGcode());
-      analysisManager->FillNtupleIColumn(1, 11, hit->GetTrackID());
-      analysisManager->FillNtupleIColumn(1, 12, clusterIdInt);
-      analysisManager->FillNtupleIColumn(1, 13, processIdInt);
-      analysisManager->FillNtupleDColumn(1, 14, hit->GetHitTime());
+      //analysisManager->FillNtupleIColumn(1, 1, nhit); // not really necessary
+      analysisManager->FillNtupleIColumn(1, 1, hit->GetParentId());
+      analysisManager->FillNtupleDColumn(1, 2, hit->GetEdep());
+      analysisManager->FillNtupleDColumn(1, 3, entrypoint.x());
+      analysisManager->FillNtupleDColumn(1, 4, entrypoint.y());
+      analysisManager->FillNtupleDColumn(1, 5, entrypoint.z());
+      analysisManager->FillNtupleDColumn(1, 6, exitpoint.x());
+      analysisManager->FillNtupleDColumn(1, 7, exitpoint.y());
+      analysisManager->FillNtupleDColumn(1, 8, exitpoint.z());
+      analysisManager->FillNtupleDColumn(1, 9, hit->GetPathLength());
+      analysisManager->FillNtupleIColumn(1, 10, hit->GetStationID());
+      analysisManager->FillNtupleIColumn(1, 11, hit->GetModuleID());
+      analysisManager->FillNtupleIColumn(1, 12, hit->GetBarID());
+      analysisManager->FillNtupleIColumn(1, 13, hit->GetPDGcode());
+      analysisManager->FillNtupleIColumn(1, 14, hit->GetTrackID());
+      analysisManager->FillNtupleIColumn(1, 15, clusterIdInt);
+      analysisManager->FillNtupleIColumn(1, 16, processIdInt);
+      analysisManager->FillNtupleDColumn(1, 17, hit->GetHitTime());
     
       analysisManager->AddNtupleRow(1);
     }
@@ -154,17 +159,17 @@ void EventAction::EndOfEventAction(const G4Event* event)
                   
         auto primary = event->GetPrimaryVertex(i)->GetPrimary(q);
      
-        analysisManager->FillNtupleIColumn(0, 2, primary->GetTrackID());
-        analysisManager->FillNtupleIColumn(0, 3, primary->GetG4code()->GetPDGEncoding());
-        analysisManager->FillNtupleDColumn(0, 4, primary->GetTotalEnergy());
-        analysisManager->FillNtupleDColumn(0, 5, primary->GetMomentumDirection().theta());
-        analysisManager->FillNtupleDColumn(0, 6, primary->GetMomentumDirection().phi()); 
-        analysisManager->FillNtupleIColumn(0, 7, event->IsAborted());
-        analysisManager->FillNtupleIColumn(0, 8, clusterIdInt);
-        analysisManager->FillNtupleIColumn(0, 9, processIdInt); 
-        analysisManager->FillNtupleDColumn(0, 10, vertexPos.x() / mm);
-        analysisManager->FillNtupleDColumn(0, 11, vertexPos.y() / mm);
-        analysisManager->FillNtupleDColumn(0, 12, vertexPos.z() / mm);
+        analysisManager->FillNtupleIColumn(0, 1, primary->GetTrackID());
+        analysisManager->FillNtupleIColumn(0, 2, primary->GetG4code()->GetPDGEncoding());
+        analysisManager->FillNtupleDColumn(0, 3, primary->GetTotalEnergy());
+        analysisManager->FillNtupleDColumn(0, 4, primary->GetMomentumDirection().theta());
+        analysisManager->FillNtupleDColumn(0, 5, primary->GetMomentumDirection().phi()); 
+        analysisManager->FillNtupleIColumn(0, 6, event->IsAborted());
+        analysisManager->FillNtupleIColumn(0, 7, clusterIdInt);
+        analysisManager->FillNtupleIColumn(0, 8, processIdInt); 
+        analysisManager->FillNtupleDColumn(0, 9, vertexPos.x() / mm);
+        analysisManager->FillNtupleDColumn(0, 10, vertexPos.y() / mm);
+        analysisManager->FillNtupleDColumn(0, 11, vertexPos.z() / mm);
       }    
       analysisManager->AddNtupleRow(0);
     }
