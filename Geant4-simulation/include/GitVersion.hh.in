@@ -1,0 +1,8 @@
+#pragma once
+#include <string>
+
+namespace GitVersion {
+  static const std::string kDescribe   = "@GIT_DESCRIBE@";
+  static const std::string kCommitHash = "@GIT_COMMIT_HASH@";
+  static const std::string kBranch     = "@GIT_BRANCH@";
+}

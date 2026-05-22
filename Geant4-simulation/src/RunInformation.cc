@@ -4,6 +4,7 @@
 #include <fstream>
 #include <ctime>
 #include "DetectorConstruction.hh"
+#include "GitVersion.hh"
 
 void RunInformation::Write(const std::string& filename,
                                    const DetectorConstruction* det,
@@ -46,6 +47,9 @@ void RunInformation::Write(const std::string& filename,
             << milliseconds << "ms\n\n";
     }
 
+    out << "Git version : " << GitVersion::kDescribe   << "\n"
+    << "Commit      : " << GitVersion::kCommitHash << "\n"
+    << "Branch      : " << GitVersion::kBranch     << "\n";
     out << "Cluster ID: " << (clusterId ? clusterId : "local run") << "\n";
     out << "Job ID: " << (processId ? processId : "local run") << "\n\n";
 
