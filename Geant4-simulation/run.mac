@@ -1,0 +1,18 @@
+# run.mac
+/control/verbose 0
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+/particle/verbose 0
+#/mpi/verbose 0
+/process/verbose 0
+
+# Configuration
+/control/execute geometry.mac
+/muraves/dataPath /Users/dorageeraerts/Documents/PhD/simulation/Muraves/MuravesSim_Data/runs/tests
+#/EcoMug/readConfig ecomug_config.txt
+
+# Start run
+/run/initialize
+/run/printProgress 0
+/run/beamOn 1000

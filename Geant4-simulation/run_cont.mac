@@ -1,0 +1,15 @@
+# run.mac
+/control/verbose 0
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+
+# Initialize 
+/run/initialize
+/run/printProgress 0
+
+# Generation configuration
+
+
+# Run
+/run/beamOn 1
