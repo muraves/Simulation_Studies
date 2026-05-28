@@ -44,7 +44,6 @@ G4bool ScintbarSD::ProcessHits(G4Step* step, G4TouchableHistory* history)
   auto prestep  = step->GetPreStepPoint();
   auto poststep = step->GetPostStepPoint();
   auto touchable = prestep->GetTouchable();
-  if (std::abs(track->GetDefinition()->GetPDGEncoding()) != 13) return false;
 
   G4double edep    = step->GetTotalEnergyDeposit();
   G4double stepLen = step->GetStepLength();
