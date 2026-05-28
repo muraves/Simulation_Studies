@@ -18,6 +18,10 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 
 #----------------------------------------------------------------------------
 # CRY stuff
+#set(CRY_PATH /Users/dorageeraerts/Documents/PhD/software/cry)
+#set(CRY_PATH /opt/CRY)
+
+# in terminal do: cmake -DCRY_PATH=/Users/dorageeraerts/Documents/PhD/software/cry ..
 #
 set(CRY_PATH "" CACHE PATH "Path to CRY installation")
 if(NOT CRY_PATH)
