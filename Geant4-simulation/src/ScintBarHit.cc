@@ -19,13 +19,29 @@ G4ThreadLocal G4Allocator<ScintbarHit>* ScintbarHitAllocator;
 
 ScintbarHit::ScintbarHit()
   : G4VHit(),
-    fStationID(-1), fModuleID(-1), fBarID(-1)
+    fStationID(-1), fModuleID(-1), fBarID(-1), fEdep(0.),
+    fHitTime(0.),
+    fPos(G4ThreeVector(0,0,0)),
+    fTrackID(-1),
+    fPDGcode(0),
+    fParentId(-1),
+    fPathLength(0.),        
+    fEntryPoint(G4ThreeVector(0,0,0)),
+    fExitPoint(G4ThreeVector(0,0,0))
 {}
 
 
 ScintbarHit::ScintbarHit( G4int iStationID, G4int iModuleID, G4int iBarID )
   : G4VHit(),
-    fStationID(iStationID), fModuleID(iModuleID), fBarID(iBarID)
+    fStationID(iStationID), fModuleID(iModuleID), fBarID(iBarID), fEdep(0.),
+    fHitTime(0.),
+    fPos(G4ThreeVector(0,0,0)),
+    fTrackID(-1),
+    fPDGcode(0),
+    fParentId(-1),
+    fPathLength(0.),      
+    fEntryPoint(G4ThreeVector(0,0,0)),
+    fExitPoint(G4ThreeVector(0,0,0))
 {}
 
 ScintbarHit::~ScintbarHit()
