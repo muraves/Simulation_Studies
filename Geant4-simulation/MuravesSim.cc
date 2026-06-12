@@ -141,10 +141,20 @@ G4int iarg = 1;
     nThreads = std::stoi(argv[iarg]);
     iarg++;
   } else {
+    G4cout << "Missing seed" << G4endl;
+    return EXIT_FAILURE;
+  }
+}
+else if (G4String(argv[iarg]).compare("--seed") == 0) {
+  if (++iarg < argc) {
+    seed = std::stoi(argv[iarg]);
+    iarg++;
+  } else {
     G4cout << "Missing thread count" << G4endl;
     return EXIT_FAILURE;
   }
 }
+
       else {
         G4cout << "Unknown option " << argv[iarg] << G4endl;
         return EXIT_FAILURE;
