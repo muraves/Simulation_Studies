@@ -75,9 +75,7 @@ int main(int argc, char** argv)
     ui = new G4UIExecutive(argc, argv);
   }*/
   auto theMessenger = new MuravesMessenger();
-
   long seed = std::chrono::system_clock::now().time_since_epoch().count();
-  G4Random::setTheSeed(seed);
   // --- Set the seed ---
   //int seed = std::stoi(argv[2]);
   //CLHEP::HepRandom::setTheSeed(seed);
@@ -141,16 +139,16 @@ G4int iarg = 1;
     nThreads = std::stoi(argv[iarg]);
     iarg++;
   } else {
-    G4cout << "Missing seed" << G4endl;
+    G4cout << "Missing thread count" << G4endl;
     return EXIT_FAILURE;
   }
 }
 else if (G4String(argv[iarg]).compare("--seed") == 0) {
   if (++iarg < argc) {
-    seed = std::stoi(argv[iarg]);
+    seed = std::stol(argv[iarg]);
     iarg++;
   } else {
-    G4cout << "Missing thread count" << G4endl;
+    G4cout << "Missing seed" << G4endl;
     return EXIT_FAILURE;
   }
 }
@@ -165,6 +163,7 @@ else if (G4String(argv[iarg]).compare("--seed") == 0) {
     if (openUI) {
   ui = new G4UIExecutive(argc, argv);
 }
+G4Random::setTheSeed(seed);
 
   // Run manager
   //------------ no need to switch between MT and single-threaded, G4RunManagerType::Default automatically picks the right case
