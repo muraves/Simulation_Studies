@@ -45,7 +45,7 @@ PrimaryGeneratorAction_EcoMug::PrimaryGeneratorAction_EcoMug(const std::string& 
 G4VUserPrimaryGeneratorAction(), fParticleGun(0), mu_plus(0), mu_minus(0),
   fMinTheta(0.), fMaxTheta(M_PI/2), fMinPhi(0.), fMaxPhi(2*M_PI),
   fMinPosTheta(0.), fMaxPosTheta(M_PI/2), fMinPosPhi(0.), fMaxPosPhi(2*M_PI), genHSphere(true), customFlux(true), fHorizontalRate(138*(EMUnits::hertz/EMUnits::m2)),
-  fHSphereRadius(150*cm), fHSphereCenter({56.45*cm,0*cm,-48.5*cm}), fSkyCenter({0.,0.,0.}), fSkySize({1.*m,1.*m})
+  fHSphereRadius(150*cm), fHSphereCenter({56.45*cm,0*cm,-48.5*cm}), fSkyCenter({0.,0.,0.}), fSkySize({1.*m,1.*m}), seedEcomug(-1)
 { 
 	const double DEG_TO_RAD = M_PI / 180.0;
 
@@ -55,7 +55,9 @@ G4VUserPrimaryGeneratorAction(), fParticleGun(0), mu_plus(0), mu_minus(0),
         ReadConfigFile(inputFile);
     }
 
+    if (seedEcomug == -1) {
 	seedEcomug = std::chrono::system_clock::now().time_since_epoch().count();
+    }
 
 	G4int n_particle = 1;
 	fParticleGun  = new G4ParticleGun(n_particle);
@@ -271,34 +273,40 @@ void PrimaryGeneratorAction_EcoMug::ReadConfigFile(const std::string& filename) 
     }
 	
 	std::string line;
-	while (std::getline(infile, line)) {
-		if (line.empty() || line[0] == '#') continue; // skip blank lines and comments
-		std::istringstream iss(line);
-		std::string key;
-		double val;
-		if (!(iss >> key >> val)) continue; // skip malformed lines
-		if (key == "theta_min") { fMinTheta = val; }
-        else if (key == "theta_max") { fMaxTheta = val; }
-        else if (key == "phi_min") { fMinPhi = val; }
-        else if (key == "phi_max") { fMaxPhi = val; }
-        else if (key == "pos_theta_min") { fMinPosTheta = val; }
-        else if (key == "pos_theta_max") { fMaxPosTheta = val; }
-        else if (key == "pos_phi_min") { fMinPosPhi = val; }
-        else if (key == "pos_phi_max") { fMaxPosPhi = val; }
-        else if (key == "seed")          { seedEcomug = static_cast<long>(val); }
-        else if (key == "horizontal_rate") { fHorizontalRate = val; }
-        else if (key == "gen_hsphere")   { genHSphere = static_cast<bool>(val); }
-        else if (key == "custom_flux")   { customFlux = static_cast<bool>(val); }
-		else if (key == "hsphere_center_x") { fHSphereCenter[0] = val * cm; }
-		else if (key == "hsphere_center_y") { fHSphereCenter[1] = val * cm; }
-		else if (key == "hsphere_center_z") { fHSphereCenter[2] = val * cm; }
-		else if (key == "hsphere_radius")   { fHSphereRadius = val * cm; }
-		else if (key == "sky_size_x")       { fSkySize[0] = val * cm; }
-		else if (key == "sky_size_y")       { fSkySize[1] = val * cm; }
-		else if (key == "sky_center_x")     { fSkyCenter[0] = val * cm; }
-		else if (key == "sky_center_y")     { fSkyCenter[1] = val * cm; }
-		else if (key == "sky_center_z")     { fSkyCenter[2] = val * cm; }
-	}
+    while (std::getline(infile, line)) {
+    if (line.empty() || line[0] == '#') continue; // skip blank lines and comments
+    std::istringstream iss(line);
+    std::string key;
+    if (!(iss >> key)) continue; // skip malformed lines
+
+    if (key == "seed") {
+        long seedVal;
+        if (iss >> seedVal) { seedEcomug = seedVal; }
+    } else {
+        double val;
+        if (!(iss >> val)) continue; 
+        if      (key == "theta_min")        { fMinTheta = val; }
+        else if (key == "theta_max")        { fMaxTheta = val; }
+        else if (key == "phi_min")          { fMinPhi = val; }
+        else if (key == "phi_max")          { fMaxPhi = val; }
+        else if (key == "pos_theta_min")    { fMinPosTheta = val; }
+        else if (key == "pos_theta_max")    { fMaxPosTheta = val; }
+        else if (key == "pos_phi_min")      { fMinPosPhi = val; }
+        else if (key == "pos_phi_max")      { fMaxPosPhi = val; }
+        else if (key == "horizontal_rate")  { fHorizontalRate = val; }
+        else if (key == "gen_hsphere")      { genHSphere = static_cast<bool>(val); }
+        else if (key == "custom_flux")      { customFlux = static_cast<bool>(val); }
+        else if (key == "hsphere_center_x") { fHSphereCenter[0] = val * cm; }
+        else if (key == "hsphere_center_y") { fHSphereCenter[1] = val * cm; }
+        else if (key == "hsphere_center_z") { fHSphereCenter[2] = val * cm; }
+        else if (key == "hsphere_radius")   { fHSphereRadius = val * cm; }
+        else if (key == "sky_size_x")       { fSkySize[0] = val * cm; }
+        else if (key == "sky_size_y")       { fSkySize[1] = val * cm; }
+        else if (key == "sky_center_x")     { fSkyCenter[0] = val * cm; }
+        else if (key == "sky_center_y")     { fSkyCenter[1] = val * cm; }
+        else if (key == "sky_center_z")     { fSkyCenter[2] = val * cm; }
+    }
+}
 
     infile.close();
     G4cout << "EcoMug configuration loaded from " << filename << G4endl;

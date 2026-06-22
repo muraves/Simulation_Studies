@@ -1,0 +1,43 @@
+name: Geant4 CI
+
+# When does this run?
+on:
+  pull_request:        # when a PR is opened or updated
+  push:
+    branches:
+      - main           # when a PR is merged into main
+  workflow_dispatch:   # lets you press "Run workflow" manually in GitHub
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest   # GitHub provides this Linux machine for free
+
+    container:
+      image: dgeeraer/muraves-sim:latest
+      # ^^^ Replace with your actual Docker Hub image, e.g. jsmith/geant4-sim:latest
+      #
+      # If your image is PRIVATE, add this block:
+      # credentials:
+      #   username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #   password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # Then in your GitHub repo go to:
+      # Settings → Secrets and variables → Actions → New repository secret
+
+    steps:
+      # Step 1: download your code onto the CI machine
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: create a build folder (same as you do locally)
+      - name: Configure
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+
+      # Step 3: compile
+      - name: Build
+        run: |
+          cd build
+          make -j$(nproc)
