@@ -418,7 +418,7 @@ if (_detType == "triangular") {
 
         for (G4int iBar = 0; iBar < _nBars/2; iBar++) {
           barName << 2 * iBar + 1;
-          BarCopyNo = ((iStation & 0xF) << 12) + ((iModule & 0xF) << 8) + (2*iBar & 0xFF);
+          BarCopyNo = ((iStation & 0xF) << 12) + ((iModule & 0xF) << 8) + (2*iBar+1 & 0xFF);
 
           // 4.1.1 upper half-layer -------------------
           // Bar 0 is at most-negative X coordinates
@@ -434,6 +434,9 @@ if (_detType == "triangular") {
           
           barName.str("");
 
+          G4cout << "[CONSTRUCT: Bar boundaries]: Station" << iStation << ": " << _zPosStations[iStation] + zOffset << G4endl;
+          G4cout << "[CONSTRUCT: Bar boundaries]: Station" << iStation << ": " << _zPosStations[iStation] - zOffset << G4endl;
+
           G4ThreeVector barPos(posFirstBar[iModule] + (iBar+0.5) * (_barBase),
                      _yPosStations[iStation],
                      _zPosStations[iStation] + zOffset);
@@ -446,7 +449,7 @@ if (_detType == "triangular") {
 
         for (G4int iBar = 0; iBar < _nBars/2; iBar++) {
           barName << 2 * iBar;
-          BarCopyNo = ((iStation & 0xF) << 12) + ((iModule & 0xF) << 8) + (2*iBar+1 & 0xFF);
+          BarCopyNo = ((iStation & 0xF) << 12) + ((iModule & 0xF) << 8) + (2*iBar & 0xFF);
 
           // 4.1.2 lower half-layer -------------------
           new G4PVPlacement(_rotLowerX,
@@ -553,7 +556,7 @@ rotTapeLeftX->rotateZ(-slopeAngle);
 
         for (G4int iBar = 0; iBar <_nBars/2; iBar++) {
           barName << 2 * iBar + 1;
-          BarCopyNo = (0x1 << 15) + ((iStation & 0xF) << 12) + ((iModule & 0xF) << 8) + (2*iBar & 0xFF);
+          BarCopyNo = (0x1 << 15) + ((iStation & 0xF) << 12) + ((iModule & 0xF) << 8) + (2*iBar+1 & 0xFF);
 
           // 4.2.1 upper half-layer -------------------
           //       Bar 0 is at most-negative Y coordinates
@@ -567,6 +570,9 @@ rotTapeLeftX->rotateZ(-slopeAngle);
                 BarCopyNo);
           barName.str("");
 
+          G4cout << "[CONSTRUCT: Bar boundaries]: Station" << iStation << ": " << _zPosStations[iStation] + zOffset << G4endl;
+          G4cout << "[CONSTRUCT: Bar boundaries]: Station" << iStation << ": " << _zPosStations[iStation] - zOffset << G4endl;
+
            G4ThreeVector barPos(0, posFirstBar[iModule] + (iBar+0.5) * _barBase +_yPosStations[iStation], _zPosStations[iStation] + zOffset);
            
           new G4PVPlacement(_rotUpperY, barPos, topCornerLog,   "TopCorner_X"+stationName.str() + "mod" + moduleName.str() + "bar" + barName.str(),   detContainerLog, false, BarCopyNo, checkOverlaps);
@@ -577,7 +583,7 @@ rotTapeLeftX->rotateZ(-slopeAngle);
 
         for (G4int iBar = 0; iBar < _nBars/2; iBar++) {
           barName << 2 * iBar;
-          BarCopyNo = (0x1 << 15) + ((iStation & 0xF) << 12) + ((iModule & 0xF) << 8) + (2*iBar+1 & 0xFF);
+          BarCopyNo = (0x1 << 15) + ((iStation & 0xF) << 12) + ((iModule & 0xF) << 8) + (2*iBar & 0xFF);
 
           // 4.2.2 lower half-layer -------------------
           new G4PVPlacement(_rotLowerY,
@@ -681,6 +687,12 @@ new G4PVPlacement(0,
       false,                   //no boolean operation
       0,                       //copy number
       checkOverlaps);          //overlaps checking
+
+      G4cout << "[Construct: shift]" << _AlShellHeight << G4endl;
+      G4cout << "[Construct: shift]" << _zPosStations[1]<< G4endl;
+      G4cout << "[Construct: shift]" << 0.5*_AlShellHeight-(_zPosStations[1]+_AlShellHeight) << G4endl;
+      G4cout << "[Construct: shift]" << -(_zPosStations[1]) << G4endl;
+      G4cout << "[Construct: shift]" << 0.5*_AlShellHeight+0.5*layerThickness -(_zPosStations[1]+_AlShellHeight)-0.5*layerThickness << G4endl;
 
   // ------------------- visualization attributes -------------------
 
