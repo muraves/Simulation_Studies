@@ -8,36 +8,69 @@ on:
       - main           # when a PR is merged into main
   workflow_dispatch:   # lets you press "Run workflow" manually in GitHub
 
+env:
+  #FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  GEANT4_DATA_DIR: /opt/geant4/data 
+
 jobs:
   build:
-    name: Build
-    runs-on: ubuntu-latest   # GitHub provides this Linux machine for free
+    name: Build and Test
+    runs-on: ubuntu-latest
 
     container:
       image: dgeeraer/muraves-sim:latest
-      # ^^^ Replace with your actual Docker Hub image, e.g. jsmith/geant4-sim:latest
-      #
-      # If your image is PRIVATE, add this block:
-      # credentials:
-      #   username: ${{ secrets.DOCKERHUB_USERNAME }}
-      #   password: ${{ secrets.DOCKERHUB_TOKEN }}
-      # Then in your GitHub repo go to:
-      # Settings → Secrets and variables → Actions → New repository secret
 
     steps:
       # Step 1: download your code onto the CI machine
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
+
+      - name: Cache Geant4 datasets
+        id: cache-geant4-data
+        uses: actions/cache@v4
+        with:
+          path: /opt/geant4/data
+          key: geant4-data-11.4.0-ftfp-bert
+
+      - name: Download Geant4 datasets (cache miss only)
+        if: steps.cache-geant4-data.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p /opt/geant4/data
+          BASE=https://cern.ch/geant4-data/datasets
+          cd /opt/geant4/data
+          for dataset in \
+            G4EMLOW.8.8 \
+            G4PhotonEvaporation.6.1.2 \
+            G4RadioactiveDecay.6.1.2 \
+            G4PARTICLEXS.4.2 \
+            G4SAIDDATA.2.0 \
+            G4ENSDFSTATE.3.0
+          do
+            echo "Downloading $dataset..."
+            curl -L $BASE/$dataset.tar.gz | tar -xz
+          done
 
       # Step 2: create a build folder (same as you do locally)
       - name: Configure
         run: |
-          mkdir build
-          cd build
-          cmake ..
+          mkdir Geant4-simulation/build
+          cd Geant4-simulation/build
+          cmake -DCRY_PATH=/opt/CRY ..
 
       # Step 3: compile
       - name: Build
         run: |
-          cd build
-          make -j$(nproc)
+          cd Geant4-simulation/build
+          make
+          
+      - name: Run simulation test
+        run: |
+          cd Geant4-simulation/build
+          ./MuravesSim ../run_ci_test.mac
+        env:
+          G4LEDATA: /opt/geant4/data/G4EMLOW8.8
+          G4LEVELGAMMADATA: /opt/geant4/data/PhotonEvaporation6.1.2
+          G4RADIOACTIVEDATA: /opt/geant4/data/RadioactiveDecay6.1.2
+          G4PARTICLEXSDATA: /opt/geant4/data/G4PARTICLEXS4.2
+          G4SAIDXSDATA: /opt/geant4/data/G4SAIDDATA2.0
+          G4ENSDFSTATEDATA: /opt/geant4/data/G4ENSDFSTATE3.0
