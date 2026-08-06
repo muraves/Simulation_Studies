@@ -188,9 +188,6 @@ with open(outfile, "w") as ffile:
             # No geometry
             # --------------------------------------------------
 
-            # Let us recall that, by default, the fluxmeter is configured in continuous
-            # mode, which we will use for this example. This is usually a good approximation
-            # for opensky geometries, owing to the low density of the atmosphere.
             flux_open_E = fluxmeter.reference.flux(s_obs)
 
 
@@ -198,7 +195,7 @@ with open(outfile, "w") as ffile:
 
 
             # --------------------------------------------------
-            # ROCK TRANSMISSION
+            # ROCK FLUX
             # --------------------------------------------------
 
             s_ref = fluxmeter.transport(s_obs, events=N_EVENTS) # topology enters here
