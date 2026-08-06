@@ -1,0 +1,19 @@
+universe   = vanilla
+executable = /user/dgeeraer/MURAVES/Simulation_Studies/PUMAS-and-TURTLE/Mulder/HTCondor/run_bin_job.sh
+arguments  = $(az_start) $(az_end) $(el) $(job) $(Cluster) __DPHI__ __DEL__ __RHO__ __N_E__ __NEVENTS__ __RUN_TAG__
+
+log    = /user/dgeeraer/MURAVES/output_mulder/output_htcondor/__RUN_TAG__/$(Cluster).log
+output = /user/dgeeraer/MURAVES/output_mulder/output_htcondor/__RUN_TAG__/$(Cluster).$(ProcId).out
+error  = /user/dgeeraer/MURAVES/output_mulder/output_htcondor/__RUN_TAG__/$(Cluster).$(ProcId).err
+
+request_cpus     = 1
+request_memory   = 1GB
+request_disk     = 1GB
+
+should_transfer_files   = NO
+
+max_idle = __MAX_IDLE__
+
+queue az_start,az_end,el,job from all_jobs.txt
+
+

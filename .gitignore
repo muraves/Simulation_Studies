@@ -1,3 +1,10 @@
 build/
 build-cont/
 build-cont-t2b/
+*.txt
+generated_submit.condor
+*.log
+*.err
+*.png
+*.xml
+*.env

@@ -16,7 +16,8 @@ stored under data/GMRT.asc.
 
 import matplotlib.pyplot as plot
 from mulder import Grid, Layer
-from mulder.matplotlib import LightSource, set_cursor_data
+#from mulder.matplotlib import LightSource, set_cursor_data
+from matplotlib.colors import LightSource
 import numpy
 
 
