@@ -1,0 +1,14 @@
+# ROOT data files
+*.root
+
+# ACLiC compile artifacts
+*_C.so
+*_C.d
+*_C_ACLiC_dict_rdict.pcm
+
+# output of the pipeline stages -- keep the calibration .cfg tables (small,
+# human-readable results), ignore the rest (.root diagnostics, .png plots)
+output/**
+!output/**/
+!output/**/.gitkeep
+!output/**/*.cfg
